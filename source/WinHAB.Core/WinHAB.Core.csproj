@@ -34,6 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Mvvm\ConstructorParameters.cs" />
+    <Compile Include="Mvvm\INavigationService.cs" />
     <Compile Include="Mvvm\ViewModel.cs" />
     <Compile Include="Mvvm\WaiterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
