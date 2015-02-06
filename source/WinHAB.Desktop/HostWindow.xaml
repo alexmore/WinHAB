@@ -1,8 +1,12 @@
-﻿<Window x:Class="WinHAB.Desktop.HostWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="HostWindow" Height="350" Width="525">
+﻿<mui:ModernWindow x:Class="WinHAB.Desktop.HostWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  Width="1200" Height="708"
+                  WindowStartupLocation="CenterScreen"
+                  Style="{StaticResource HostWindowStyle}"
+                  Padding="0" >
     <Grid>
         
     </Grid>
-</Window>
+</mui:ModernWindow>
