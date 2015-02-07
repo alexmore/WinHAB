@@ -2,11 +2,11 @@
 
 namespace WinHAB.Core.Configuration
 {
-  public class Configuration
+  public class AppConfiguration
   {
     private readonly IConfigurationProvider _provider;
 
-    public Configuration(IConfigurationProvider provider)
+    public AppConfiguration(IConfigurationProvider provider)
     {
       _provider = provider;
     }
