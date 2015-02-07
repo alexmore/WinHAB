@@ -5,6 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Ninject;
+using WinHAB.Desktop.Configuration;
+using CoreCfg = WinHAB.Core.Configuration;
 
 namespace WinHAB.Desktop
 {
@@ -13,5 +16,15 @@ namespace WinHAB.Desktop
   /// </summary>
   public partial class App : Application
   {
+    private async void App_OnStartup(object sender, StartupEventArgs e)
+    {
+      var kernel = new StandardKernel(new DefaultModule());
+
+      var cfg = kernel.Get<CoreCfg.AppConfiguration>();
+      await cfg.LoadAsync();
+
+      MainWindow = new HostWindow();
+      MainWindow.Show();
+    }
   }
 }
