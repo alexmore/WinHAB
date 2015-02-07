@@ -79,13 +79,8 @@ namespace WinHAB.Tests.Core.Mvvm
       var factory = new ImplementationOfAbstractViewModelViewFactoryForTests();
 
       Assert.IsInstanceOfType(factory.CreateViewModel(typeof(ViewModel2)), typeof(ViewModel2));
-      Assert.IsInstanceOfType(factory.CreateViewModel<ViewModel2>(), typeof(ViewModel2));
 
       var vm = factory.CreateViewModel(typeof (ViewModel1), x => x.Add("p1", 10));
-      Assert.IsInstanceOfType(vm, typeof(ViewModel1));
-      Assert.AreEqual(10, (vm as ViewModel1).Parameter1);
-
-      vm = factory.CreateViewModel<ViewModel1>(x => x.Add("p1", 10));
       Assert.IsInstanceOfType(vm, typeof(ViewModel1));
       Assert.AreEqual(10, (vm as ViewModel1).Parameter1);
     }
@@ -95,7 +90,6 @@ namespace WinHAB.Tests.Core.Mvvm
     {
       var factory = new ImplementationOfAbstractViewModelViewFactoryForTests();
       Assert.IsInstanceOfType(factory.CreateView(typeof(View1)), typeof(View1));
-      Assert.IsInstanceOfType(factory.CreateView<View2>(), typeof(View2));
     }
 
     [TestMethod]
@@ -115,8 +109,7 @@ namespace WinHAB.Tests.Core.Mvvm
       factory.Map<ViewModel1, View1>();
       factory.Map<ViewModel2, View2>();
 
-      Assert.IsInstanceOfType(factory.CreateForViewModel(typeof(ViewModel1)), typeof(View1));
-      Assert.IsInstanceOfType(factory.CreateForViewModel<ViewModel1>(), typeof(View1));
+      Assert.IsInstanceOfType(factory.CreateViewByViewModelType(typeof(ViewModel1)), typeof(View1));
     }
 
 
