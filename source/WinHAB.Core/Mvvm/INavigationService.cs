@@ -5,10 +5,14 @@ namespace WinHAB.Core.Mvvm
 {
   public interface INavigationService
   {
-    void Navigate(ViewModel viewModel);
+    void Navigate(IView view); 
+    void Navigate(IViewModel viewModel);
+    
     ViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters);
-    T Navigate<T>() where T : ViewModel;
-    T Navigate<T>(Action<ConstructorParameters> ctorParameters) where T : ViewModel;
+    void Navigate(Type viewModelType);
+
+    T Navigate<T>(Action<ConstructorParameters> ctorParameters) where T : IViewModel;
+    T Navigate<T>() where T : IViewModel;
 
     void ClearHistory();
     bool CanGoBack();

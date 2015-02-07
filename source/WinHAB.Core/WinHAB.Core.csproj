@@ -36,6 +36,10 @@
   <ItemGroup>
     <Compile Include="Mvvm\ConstructorParameters.cs" />
     <Compile Include="Mvvm\INavigationService.cs" />
+    <Compile Include="Mvvm\IView.cs" />
+    <Compile Include="Mvvm\IViewFactory.cs" />
+    <Compile Include="Mvvm\IViewModel.cs" />
+    <Compile Include="Mvvm\IViewModelFactory.cs" />
     <Compile Include="Mvvm\ViewModel.cs" />
     <Compile Include="Mvvm\WaiterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

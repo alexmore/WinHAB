@@ -1,9 +1,10 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Views;
+﻿
+
+using GalaSoft.MvvmLight;
 
 namespace WinHAB.Core.Mvvm
 {
-  public class ViewModel : ViewModelBase
+  public class ViewModel : ViewModelBase, IViewModel
   {
     protected ViewModel(INavigationService navigationService)
     {
