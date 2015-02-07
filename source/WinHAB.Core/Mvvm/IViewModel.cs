@@ -1,6 +1,8 @@
-﻿namespace WinHAB.Core.Mvvm
+﻿using GalaSoft.MvvmLight;
+
+namespace WinHAB.Core.Mvvm
 {
-  public interface IViewModel
+  public interface IViewModel : ICleanup
   {
     INavigationService Navigation { get; }
   }

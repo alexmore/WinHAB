@@ -17,14 +17,5 @@ namespace WinHAB.Core.Mvvm
       Parameters.Add(new KeyValuePair<string, object>(name, value));
       return this;
     }
-
-    public static ConstructorParameters GetConstructorParameters(Action<ConstructorParameters> action)
-    {
-      if (action == null) return null;
-      
-      var ps = new ConstructorParameters();
-      action(ps);
-      return ps;
-    }
   }
 }

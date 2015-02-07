@@ -34,13 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Mvvm\AbstractViewFactory.cs" />
+    <Compile Include="Mvvm\AbstractViewModelViewFactory.cs" />
     <Compile Include="Mvvm\ConstructorParameters.cs" />
     <Compile Include="Mvvm\INavigationService.cs" />
     <Compile Include="Mvvm\IViewModelViewMapper.cs" />
     <Compile Include="Mvvm\IView.cs" />
     <Compile Include="Mvvm\IViewModelViewFactory.cs" />
     <Compile Include="Mvvm\IViewModel.cs" />
+    <Compile Include="Mvvm\MvvmExtensions.cs" />
     <Compile Include="Mvvm\ViewModel.cs" />
     <Compile Include="Mvvm\WaiterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
