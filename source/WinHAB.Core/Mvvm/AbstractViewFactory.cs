@@ -4,36 +4,53 @@ using System.Linq;
 
 namespace WinHAB.Core.Mvvm
 {
-  public abstract class AbstractViewFactory : IViewFactory
+  public abstract class AbstractViewFactory : IViewModelViewFactory
   {
     private readonly List<KeyValuePair<Type, Type>> _map = new List<KeyValuePair<Type, Type>>();
 
-    public IViewBinder Bind<TViewModel, TView>() where TViewModel : IViewModel where TView : IView
+    public IViewModelViewMapper Map<TViewModel, TView>() where TViewModel : IViewModel where TView : IView
     {
-      _map.Add(new KeyValuePair<Type, Type>(typeof (TViewModel), typeof (TView)));
-      
+      _map.Add(new KeyValuePair<Type, Type>(typeof(TViewModel), typeof(TView)));
+
       return this;
     }
 
-    public abstract IView Create(Type viewType);
+    public abstract IViewModel CreateViewModel(Type viewModelType, Action<ConstructorParameters> ctorParameters);
 
-    public virtual T Create<T>() where T : IView
+    public virtual IViewModel CreateViewModel(Type viewModelType)
     {
-      return (T)Create(typeof (T));
+      return CreateViewModel(viewModelType, null);
     }
 
-    public virtual IView CreateForViewModel(Type viewModelType)
+    public virtual T CreateViewModel<T>() where T : IViewModel
     {
-      var viewType = _map.Where(x => x.Key == viewModelType).Select(x=>x.Value).FirstOrDefault();
-      if (viewType != null) return Create(viewType);
+      return (T)CreateViewModel(typeof (T));
+    }
 
-      return null;
+    public virtual T CreateViewModel<T>(Action<ConstructorParameters> ctorParameters)
+    {
+      return (T)CreateViewModel(typeof (T), ctorParameters);
+    }
+
+    public abstract IView CreateView(Type viewType);
+
+    public virtual T CreateView<T>() where T : IView
+    {
+      return (T)CreateView(typeof (T));
+    }
+
+    public IView CreateForViewModel(Type viewModelType)
+    {
+      var viewType = _map.Where(x => x.Key == viewModelType).Select(x => x.Value).FirstOrDefault();
+
+      if (viewType == null) return null;
+
+      return CreateView(viewType);
     }
 
     public virtual IView CreateForViewModel<TViewModel>() where TViewModel : IViewModel
     {
       return CreateForViewModel(typeof (TViewModel));
     }
-
   }
 }
