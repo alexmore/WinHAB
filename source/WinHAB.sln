@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinHAB.Desktop", "WinHAB.De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinHAB.Core", "WinHAB.Core\WinHAB.Core.csproj", "{0E01F4B2-4524-4286-92D5-190BB7EE5CF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinHAB.Tests", "WinHAB.Tests\WinHAB.Tests.csproj", "{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,16 @@ Global
 		{0E01F4B2-4524-4286-92D5-190BB7EE5CF8}.Release|ARM.ActiveCfg = Release|Any CPU
 		{0E01F4B2-4524-4286-92D5-190BB7EE5CF8}.Release|x64.ActiveCfg = Release|Any CPU
 		{0E01F4B2-4524-4286-92D5-190BB7EE5CF8}.Release|x86.ActiveCfg = Release|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Release|x64.ActiveCfg = Release|Any CPU
+		{8F66C63E-A1B6-4C77-8EEF-D39848038B7E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
