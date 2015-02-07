@@ -17,9 +17,6 @@ namespace WinHAB.Desktop.Configuration
 
     public override void Load()
     {
-      if (!Directory.Exists(AppConstants.ConfigurationFolder))
-        Directory.CreateDirectory(AppConstants.ConfigurationFolder);
-
       Bind<INavigationHost>().ToConstant(_navigationHost).InSingletonScope();
 
       Bind<string>().ToConstant(AppConstants.ConfigurationFile).WhenInjectedInto<JsonConfigurationProvider>();

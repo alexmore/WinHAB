@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,6 +19,9 @@ namespace WinHAB.Desktop
   {
     private async void App_OnStartup(object sender, StartupEventArgs e)
     {
+      if (!Directory.Exists(AppConstants.ConfigurationFolder))
+        Directory.CreateDirectory(AppConstants.ConfigurationFolder);
+
       MainWindow = new HostWindow();
       
       var kernel = new StandardKernel(new DefaultModule(MainWindow as HostWindow));
