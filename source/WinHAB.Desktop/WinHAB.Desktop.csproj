@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Configuration\AppConstants.cs" />
     <Compile Include="Configuration\DefaultModule.cs" />
+    <Compile Include="Configuration\DesktopViewModelViewFactory.cs" />
     <Compile Include="Configuration\JsonConfigurationProvider.cs" />
     <Compile Include="DesktopNavigationService.cs" />
     <Compile Include="HostWindow.xaml.cs">

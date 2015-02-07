@@ -18,12 +18,13 @@ namespace WinHAB.Desktop
   {
     private async void App_OnStartup(object sender, StartupEventArgs e)
     {
-      var kernel = new StandardKernel(new DefaultModule());
+      MainWindow = new HostWindow();
+      
+      var kernel = new StandardKernel(new DefaultModule(MainWindow as HostWindow));
 
       var cfg = kernel.Get<CoreCfg.AppConfiguration>();
       await cfg.LoadAsync();
-
-      MainWindow = new HostWindow();
+      
       MainWindow.Show();
     }
   }
