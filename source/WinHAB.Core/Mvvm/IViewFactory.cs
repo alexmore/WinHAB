@@ -8,7 +8,7 @@ namespace WinHAB.Core.Mvvm
     T Create<T>() where T : IView;
 
     IView CreateForViewModel(Type viewModelType);
-    IView CreateForViewModel<TViewModel>();
+    IView CreateForViewModel<TViewModel>() where TViewModel : IViewModel;
   }
 
   public interface IViewBinder
