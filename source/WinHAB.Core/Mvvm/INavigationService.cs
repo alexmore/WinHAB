@@ -8,8 +8,8 @@ namespace WinHAB.Core.Mvvm
     void Navigate(IView view); 
     void Navigate(IViewModel viewModel);
     
-    ViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters);
-    void Navigate(Type viewModelType);
+    IViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters);
+    IViewModel Navigate(Type viewModelType);
 
     T Navigate<T>(Action<ConstructorParameters> ctorParameters) where T : IViewModel;
     T Navigate<T>() where T : IViewModel;
