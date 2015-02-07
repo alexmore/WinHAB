@@ -4,13 +4,19 @@ using System.Linq;
 
 namespace WinHAB.Core.Mvvm
 {
-  public abstract class AbstractViewFactory : IViewModelViewFactory
+  public abstract class AbstractViewModelViewFactory : IViewModelViewFactory
   {
-    private readonly List<KeyValuePair<Type, Type>> _map = new List<KeyValuePair<Type, Type>>();
+    protected readonly List<KeyValuePair<Type, Type>> MapList = new List<KeyValuePair<Type, Type>>();
+
+    public IViewModelViewMapper Map(Type viewModelType, Type viewType)
+    {
+      MapList.Add(new KeyValuePair<Type, Type>(viewModelType, viewType));
+      return this;
+    }
 
     public IViewModelViewMapper Map<TViewModel, TView>() where TViewModel : IViewModel where TView : IView
     {
-      _map.Add(new KeyValuePair<Type, Type>(typeof(TViewModel), typeof(TView)));
+      Map(typeof (TViewModel), typeof (TView));
 
       return this;
     }
@@ -41,7 +47,7 @@ namespace WinHAB.Core.Mvvm
 
     public IView CreateForViewModel(Type viewModelType)
     {
-      var viewType = _map.Where(x => x.Key == viewModelType).Select(x => x.Value).FirstOrDefault();
+      var viewType = MapList.Where(x => x.Key == viewModelType).Select(x => x.Value).FirstOrDefault();
 
       if (viewType == null) return null;
 
