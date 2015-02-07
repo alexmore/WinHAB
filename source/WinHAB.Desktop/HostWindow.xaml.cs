@@ -18,7 +18,7 @@ namespace WinHAB.Desktop
   /// <summary>
   /// Interaction logic for HostWindow.xaml
   /// </summary>
-  public partial class HostWindow
+  public partial class HostWindow : INavigationHost
   {
     public HostWindow()
     {
