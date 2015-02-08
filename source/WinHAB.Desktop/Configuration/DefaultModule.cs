@@ -25,6 +25,7 @@ namespace WinHAB.Desktop.Configuration
       var vmvFactory = Kernel.Get<DesktopViewModelViewFactory>();
       ConfigureVMVFactory(vmvFactory);
       Bind<IViewModelViewFactory>().ToConstant(vmvFactory).InSingletonScope();
+      Bind<INavigationService>().To<DesktopNavigationService>().InSingletonScope();
     }
 
     void ConfigureVMVFactory(IViewModelViewFactory f)
