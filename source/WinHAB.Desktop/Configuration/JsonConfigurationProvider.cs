@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Security.Principal;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WinHAB.Core.Configuration;
@@ -31,7 +32,7 @@ namespace WinHAB.Desktop.Configuration
       if (!f.Exists)
         await SaveAsync();
 
-      var fileContent = await f.ReadAllTextAsync();
+      var fileContent = await f.ReadAllTextAsync(Encoding.UTF8);
       _values = await Task.Run(() => JsonConvert.DeserializeObject<Dictionary<string, string>>(fileContent));
     }
 
@@ -43,7 +44,7 @@ namespace WinHAB.Desktop.Configuration
     public async Task SaveAsync()
     {
       var serialized = await Task.Run(() => JsonConvert.SerializeObject(_values));
-      await new FileInfo(_fileName).WriteAllTextAsync(serialized, FileMode.Create);
+      await new FileInfo(_fileName).WriteAllTextAsync(serialized, FileMode.Create, Encoding.UTF8);
     }
 
     public string Get(string key)
