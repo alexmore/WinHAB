@@ -29,6 +29,8 @@ namespace WinHAB.Desktop
       var cfg = kernel.Get<CoreCfg.AppConfiguration>();
       await cfg.LoadAsync();
       
+      System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(cfg.Language);
+      
       MainWindow.Show();
     }
   }
