@@ -59,5 +59,77 @@ namespace WinHAB.Desktop.Localizations {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        public static string Connect {
+            get {
+                return ResourceManager.GetString("Connect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Sitemap.
+        /// </summary>
+        public static string LaunchViewSelectSitemap {
+            get {
+                return ResourceManager.GetString("LaunchViewSelectSitemap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to load.
+        /// </summary>
+        public static string LaunchViewSelectSitemapToLoad {
+            get {
+                return ResourceManager.GetString("LaunchViewSelectSitemapToLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Homepage link missing in the selected Sitemap..
+        /// </summary>
+        public static string LaunchViewSelesiteMapHomepageLinkExcepton {
+            get {
+                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExcepton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading Sitemap.
+        /// </summary>
+        public static string LaunchViewSelesiteMapHomepageLinkExceptonTitle {
+            get {
+                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExceptonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your OpenHAB Server Url.
+        /// </summary>
+        public static string LaunchViewServerUrlTitle {
+            get {
+                return ResourceManager.GetString("LaunchViewServerUrlTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (e.g. http://localhost:8080/).
+        /// </summary>
+        public static string LaunchViewServerUrlTitleExample {
+            get {
+                return ResourceManager.GetString("LaunchViewServerUrlTitleExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Windows desktop client for OpenHAB.
+        /// </summary>
+        public static string WinHABDescription {
+            get {
+                return ResourceManager.GetString("WinHABDescription", resourceCulture);
+            }
+        }
     }
 }

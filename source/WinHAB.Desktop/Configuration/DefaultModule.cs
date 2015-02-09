@@ -1,8 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Ninject;
 using Ninject.Modules;
+using WinHAB.Core;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Mvvm;
+using WinHAB.Core.ViewModels;
+using WinHAB.Desktop.Views;
 
 namespace WinHAB.Desktop.Configuration
 {
@@ -21,6 +25,12 @@ namespace WinHAB.Desktop.Configuration
 
       Bind<string>().ToConstant(AppConstants.ConfigurationFile).WhenInjectedInto<JsonConfigurationProvider>();
       Bind<IConfigurationProvider>().To<JsonConfigurationProvider>();
+      Bind<AppConfiguration>().ToSelf().InSingletonScope();
+
+
+      Bind<string>().ToMethod(x => GetServerAddress(x.Kernel)).WhenInjectedInto<RestClientFactory>();
+      Bind<IRestClient>().To<RestClient>();
+      Bind<IRestClientFactory>().To<RestClientFactory>();
       
       var vmvFactory = Kernel.Get<DesktopViewModelViewFactory>();
       ConfigureVMVFactory(vmvFactory);
@@ -29,6 +39,24 @@ namespace WinHAB.Desktop.Configuration
     }
 
     void ConfigureVMVFactory(IViewModelViewFactory f)
-    { }
+    {
+      f.Map<LaunchViewModel, LaunchView>();
+      f.Map<MainViewModel, MainView>();
+    }
+
+    string GetServerAddress(IKernel kernel)
+    {
+      try
+      {
+        var cfg = kernel.Get<AppConfiguration>();
+        if (cfg != null && !string.IsNullOrWhiteSpace(cfg.Server))
+          return cfg.Server;
+      }
+      catch (Exception)
+      {
+      }
+
+      return string.Empty;
+    }
   }
 }

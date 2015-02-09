@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Ninject;
+using WinHAB.Core.Mvvm;
+using WinHAB.Core.ViewModels;
 using WinHAB.Desktop.Configuration;
 using CoreCfg = WinHAB.Core.Configuration;
 
@@ -32,6 +34,9 @@ namespace WinHAB.Desktop
       System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(cfg.Language);
       
       MainWindow.Show();
+
+      var navigation = kernel.Get<INavigationService>();
+      navigation.Navigate<LaunchViewModel>();
     }
   }
 }
