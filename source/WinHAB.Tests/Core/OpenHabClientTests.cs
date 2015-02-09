@@ -67,9 +67,9 @@ namespace WinHAB.Tests.Core
     public void OpenHabClientSetServerUriTest()
     {
       bool isSetBaseUriCalled = false;
-      _env.RestClientFactoryMock.Setup(x => x.SetBaseUri(It.IsAny<Uri>())).Callback(() => isSetBaseUriCalled = true);
+      _env.RestClientFactoryMock.Setup(x => x.SetBaseAddress(It.IsAny<string>())).Callback(() => isSetBaseUriCalled = true);
 
-      _env.Client.SetServerUri(new Uri("http://server"));
+      _env.Client.SetServerAddress("http://server");
       Assert.IsTrue(isSetBaseUriCalled);
     }
   }

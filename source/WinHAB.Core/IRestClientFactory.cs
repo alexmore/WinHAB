@@ -4,7 +4,7 @@ namespace WinHAB.Core
 {
   public interface IRestClientFactory
   {
-    void SetBaseUri(Uri newBaseAddress);
+    void SetBaseAddress(string newBaseAddress);
 
     IRestClient Create();
   }

@@ -15,9 +15,9 @@ namespace WinHAB.Core
       _factory = restClientFactory;
     }
 
-    public void SetServerUri(Uri serverUri)
+    public void SetServerAddress(string serverAddress)
     {
-      _factory.SetBaseUri(serverUri);
+      _factory.SetBaseAddress(serverAddress);
     }
 
     public async Task<List<SitemapData>> GetSitemapsAsync()

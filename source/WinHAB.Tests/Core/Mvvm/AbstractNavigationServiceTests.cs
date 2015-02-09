@@ -124,19 +124,15 @@ namespace WinHAB.Tests.Core.Mvvm
     {
       var viewMock = new Mock<IView>();
       viewMock.SetupAllProperties();
-      ConstructorParameters ctorParameters = null;
-
-      var isOnNavigatedToCalled = false;
+      
       var viewModelMock = new Mock<IViewModel>();
-      viewModelMock.Setup(x => x.OnNavigatedTo()).Callback(() => isOnNavigatedToCalled = true);
       int isCleanupCalledCount = 0;
       viewModelMock.Setup(x => x.Cleanup()).Callback(() => isCleanupCalledCount++);
 
       _env.ViewModelViewFactory.Map(viewModelMock.Object.GetType(), viewMock.Object.GetType());
       _env.ViewModelViewFactoryMock.Setup(x => x.CreateView(It.IsAny<Type>())).Returns(() => viewMock.Object);
       _env.ViewModelViewFactoryMock.Setup(x => x.CreateViewModel(It.IsAny<Type>(), It.IsAny<Action<ConstructorParameters>>()))
-        .Returns(() => viewModelMock.Object)
-        .Callback<Type, Action<ConstructorParameters>>((t, a) => ctorParameters = a.GetConstructorParameters());
+        .Returns(() => viewModelMock.Object);
 
       var nav = new TestNavigationService(_env.ViewModelViewFactory);
       

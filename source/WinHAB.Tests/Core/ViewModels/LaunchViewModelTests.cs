@@ -28,9 +28,9 @@ namespace WinHAB.Tests.Core.ViewModels
       _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
         .ReturnsAsync(JObject.Parse(_env.JsonSitemaps));
 
-      Uri factoryUri = null;
-      _env.RestClientFactoryMock.Setup(x => x.SetBaseUri(It.IsAny<Uri>()))
-        .Callback<Uri>(x => factoryUri = x);
+      string factoryAddress = null;
+      _env.RestClientFactoryMock.Setup(x => x.SetBaseAddress(It.IsAny<string>()))
+        .Callback<string>(x => factoryAddress = x);
       
       var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
 
@@ -42,7 +42,7 @@ namespace WinHAB.Tests.Core.ViewModels
       Assert.IsTrue(vm.IsSitemapsVisible);
       Assert.IsFalse(vm.IsServerUrlVisible);
       Assert.IsFalse(vm.Waiter.IsVisible);
-      Assert.AreEqual(server, factoryUri.OriginalString);
+      Assert.AreEqual(server, factoryAddress);
       Assert.AreEqual(server, _env.AppConfiguration.Server);
       Assert.IsTrue(_env.ConfigurationProvider.IsSaved);
     }

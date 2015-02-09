@@ -4,21 +4,21 @@ namespace WinHAB.Core
 {
   public class RestClientFactory : IRestClientFactory
   {
-    private Uri _baseUri;
+    private string _baseAddress;
 
-    public RestClientFactory(Uri baseUri)
+    public RestClientFactory(string baseAddress)
     {
-      _baseUri = baseUri;
+      _baseAddress = baseAddress;
     }
 
-    public void SetBaseUri(Uri newBaseUri)
+    public void SetBaseAddress(string newBaseAddress)
     {
-      _baseUri = newBaseUri;
+      _baseAddress = newBaseAddress;
     }
 
     public IRestClient Create()
     {
-      return new RestClient(_baseUri);
+      return new RestClient(new Uri(_baseAddress));
     }
   }
 }
