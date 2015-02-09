@@ -15,44 +15,21 @@ namespace WinHAB.Tests.Desktop
   [TestClass]
   public class DesktopNavigationServiceTests
   {
-    public DesktopNavigationServiceTests()
+    private TestEnvironment _env = new TestEnvironment();
+
+    [TestInitialize]
+    public void PrepareTest()
     {
-      _hostMock.SetupAllProperties();
-      _factoryMock.CallBase = true;
+      _env.Init();
     }
     
-    private Mock<INavigationHost> _hostMock = new Mock<INavigationHost>();
-    private Mock<AbstractViewModelViewFactory> _factoryMock = new Mock<AbstractViewModelViewFactory>();
-
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
-
     [TestMethod]
     public void DesktopNavigationServiceNavigateViewInstanceTest()
     {
-      var viewMock = new Mock<IView>();
-      var nav = new DesktopNavigationService(_hostMock.Object, _factoryMock.Object);
+      Mock<IView> viewMock = new Mock<IView>();
+      var nav = new DesktopNavigationService(_env.NavigationHost, _env.ViewModelViewFactory);
       nav.Navigate(viewMock.Object);
-      Assert.AreSame(viewMock.Object, _hostMock.Object.Content);
+      Assert.AreSame(viewMock.Object, _env.NavigationHost.Content);
       Assert.AreSame(viewMock.Object, nav.CurrentVeiw);
 
       nav.Navigate(new Mock<IView>().Object);
@@ -72,7 +49,7 @@ namespace WinHAB.Tests.Desktop
       viewMock3.Object.DataContext = vm.Object;
 
 
-      var nav = new DesktopNavigationService(_hostMock.Object, _factoryMock.Object);
+      var nav = new DesktopNavigationService(_env.NavigationHost, _env.ViewModelViewFactory);
       nav.Navigate(viewMock1.Object);
       Assert.AreSame(viewMock1.Object, nav.CurrentVeiw);
 
@@ -111,51 +88,57 @@ namespace WinHAB.Tests.Desktop
       viewMock.SetupAllProperties();
       var viewModelMock = new Mock<IViewModel>();
 
-      _factoryMock.Object.Map(viewModelMock.Object.GetType(), viewMock.Object.GetType());
-      _factoryMock.Setup(x => x.CreateView(It.IsAny<Type>())).Returns(() => viewMock.Object);
-      _factoryMock.Setup(x => x.CreateViewModel(It.IsAny<Type>(), It.IsAny<Action<ConstructorParameters>>()))
+      _env.ViewModelViewFactory.Map(viewModelMock.Object.GetType(), viewMock.Object.GetType());
+      _env.ViewModelViewFactoryMock.Setup(x => x.CreateView(It.IsAny<Type>())).Returns(() => viewMock.Object);
+      _env.ViewModelViewFactoryMock.Setup(x => x.CreateViewModel(It.IsAny<Type>(), It.IsAny<Action<ConstructorParameters>>()))
         .Returns(() => viewModelMock.Object);
 
-      var nav = new DesktopNavigationService(_hostMock.Object, _factoryMock.Object);
+      var nav = new DesktopNavigationService(_env.NavigationHost, _env.ViewModelViewFactory);
       
       // Navigate(IViewModel)
       nav.Navigate(viewModelMock.Object);
       Assert.AreSame(viewMock.Object, nav.CurrentVeiw);
-      Assert.IsNotNull(_hostMock.Object.Content);
-      Assert.AreSame(viewMock.Object, _hostMock.Object.Content); 
+      Assert.IsNotNull(_env.NavigationHost.Content);
+      Assert.AreSame(viewMock.Object, _env.NavigationHost.Content); 
       Assert.AreSame(viewMock.Object.DataContext, viewModelMock.Object);
 
       // Navigate(Type, ctorParams)
       nav.ClearHistory();
       Assert.AreSame(viewModelMock.Object, nav.Navigate(viewModelMock.Object.GetType(), null));
       Assert.AreSame(viewMock.Object, nav.CurrentVeiw);
-      Assert.IsNotNull(_hostMock.Object.Content);
-      Assert.AreSame(viewMock.Object, _hostMock.Object.Content);
+      Assert.IsNotNull(_env.NavigationHost.Content);
+      Assert.AreSame(viewMock.Object, _env.NavigationHost.Content);
       Assert.AreSame(viewMock.Object.DataContext, viewModelMock.Object);
 
       // Navigate(Type)
       nav.ClearHistory();
       Assert.AreSame(viewModelMock.Object, nav.Navigate(viewModelMock.Object.GetType()));
       Assert.AreSame(viewMock.Object, nav.CurrentVeiw);
-      Assert.IsNotNull(_hostMock.Object.Content);
-      Assert.AreSame(viewMock.Object, _hostMock.Object.Content);
+      Assert.IsNotNull(_env.NavigationHost.Content);
+      Assert.AreSame(viewMock.Object, _env.NavigationHost.Content);
       Assert.AreSame(viewMock.Object.DataContext, viewModelMock.Object);
 
       // Navigate<>()
       nav.ClearHistory();
       Assert.AreSame(viewModelMock.Object, nav.Navigate<IViewModel>());
       Assert.AreSame(viewMock.Object, nav.CurrentVeiw);
-      Assert.IsNotNull(_hostMock.Object.Content);
-      Assert.AreSame(viewMock.Object, _hostMock.Object.Content);
+      Assert.IsNotNull(_env.NavigationHost.Content);
+      Assert.AreSame(viewMock.Object, _env.NavigationHost.Content);
       Assert.AreSame(viewMock.Object.DataContext, viewModelMock.Object);
 
       // Navigate<T>(ctorParams)
       nav.ClearHistory();
       Assert.AreSame(viewModelMock.Object, nav.Navigate<IViewModel>(null));
       Assert.AreSame(viewMock.Object, nav.CurrentVeiw);
-      Assert.IsNotNull(_hostMock.Object.Content);
-      Assert.AreSame(viewMock.Object, _hostMock.Object.Content);
+      Assert.IsNotNull(_env.NavigationHost.Content);
+      Assert.AreSame(viewMock.Object, _env.NavigationHost.Content);
       Assert.AreSame(viewMock.Object.DataContext, viewModelMock.Object);
+
+      // OnNavigatedTo calling test
+      bool isOnNavigateToCalled = false;
+      viewModelMock.Setup(x => x.OnNavigatedTo()).Callback(() => isOnNavigateToCalled = true);
+      nav.Navigate(viewModelMock.Object);
+      Assert.IsTrue(isOnNavigateToCalled);
     }
   }
 }

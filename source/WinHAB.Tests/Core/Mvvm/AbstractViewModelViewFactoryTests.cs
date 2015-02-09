@@ -37,6 +37,10 @@ namespace WinHAB.Tests.Core.Mvvm
       }
 
       public INavigationService Navigation { get; private set; }
+      public void OnNavigatedTo()
+      {
+        throw new NotImplementedException();
+      }
     }
 
     class ViewModel2 : IViewModel
@@ -47,6 +51,10 @@ namespace WinHAB.Tests.Core.Mvvm
       }
 
       public INavigationService Navigation { get; private set; }
+      public void OnNavigatedTo()
+      {
+        throw new NotImplementedException();
+      }
     }
 
     class ImplementationOfAbstractViewModelViewFactoryForTests : AbstractViewModelViewFactory

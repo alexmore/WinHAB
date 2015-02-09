@@ -4,6 +4,7 @@ using Moq;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Mvvm;
+using WinHAB.Desktop;
 
 namespace WinHAB.Tests
 {
@@ -15,8 +16,14 @@ namespace WinHAB.Tests
     public IRestClientFactory RestClientFactory { get { return RestClientFactoryMock.Object; }}
     public OpenHabClient Client { get; set; }
 
+    public Mock<INavigationHost> NavigationHostMock { get; set; }
+    public INavigationHost NavigationHost { get { return NavigationHostMock.Object; }}
+
     public Mock<INavigationService> NavigationMock { get; set; }
     public INavigationService Navigation { get { return NavigationMock.Object; }}
+
+    public Mock<AbstractViewModelViewFactory> ViewModelViewFactoryMock { get; set; }
+    public AbstractViewModelViewFactory ViewModelViewFactory { get { return ViewModelViewFactoryMock.Object; }}
 
     public TestConfigurationProvider ConfigurationProvider { get; set; }
     public AppConfiguration AppConfiguration { get; set; }
@@ -29,6 +36,10 @@ namespace WinHAB.Tests
 
       Client = new OpenHabClient(RestClientFactory);
 
+      NavigationHostMock = new Mock<INavigationHost>();
+      NavigationHostMock.SetupAllProperties();
+      ViewModelViewFactoryMock = new Mock<AbstractViewModelViewFactory>();
+      ViewModelViewFactoryMock.CallBase = true;
       NavigationMock = new Mock<INavigationService>();
       InitNavigation();
 

@@ -38,6 +38,7 @@ namespace WinHAB.Desktop
       var view = _factory.CreateViewByViewModelType(viewModel.GetType());
       view.DataContext = viewModel;
       Navigate(view);
+      viewModel.OnNavigatedTo();
     }
 
     public IViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters)

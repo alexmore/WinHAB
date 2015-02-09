@@ -19,5 +19,9 @@ namespace WinHAB.Core.Mvvm
     }
 
     public INavigationService Navigation { get; protected set; }
+    
+    public virtual void OnNavigatedTo()
+    {
+    }
   }
 }
