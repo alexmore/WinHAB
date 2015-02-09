@@ -67,6 +67,8 @@
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="RestClient.cs" />
     <Compile Include="RestClientFactory.cs" />
+    <Compile Include="ViewModels\LaunchViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">

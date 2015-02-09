@@ -10,14 +10,12 @@ namespace WinHAB.Tests.Core
   [TestClass]
   public class OpenHabClientTests
   {
-    private Mock<IRestClient> _restMock;
-    private Mock<IRestClientFactory> _restFactoryMock;
-
+    private TestEnvironment _env = new TestEnvironment();
+    
     [TestInitialize]
     public void PrepareTest()
     {
-      _restMock = new Mock<IRestClient>();
-      _restFactoryMock = new Mock<IRestClientFactory>();
+      _env.Init();
     }
 
     #region
@@ -27,20 +25,10 @@ namespace WinHAB.Tests.Core
     [TestMethod]
     public async Task OpenHabClientGetSitemapsTest()
     {
-      string json = @"{
-                        ""sitemap"":
-                            [ {""name"":""demo"",""label"":""Demo House"",""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo"",
-                                     ""homepage"":{""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo/demo"",""leaf"":""false""}},
-                              {""name"":""demo1"",""label"":""Demo House 1"",""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo1"",
-                                     ""homepage"":{""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo1/demo1"",""leaf"":""false""}}]
-                      }";
-      
-      _restMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/sitemaps"))))
-        .ReturnsAsync(JObject.Parse(json));
-      
-      _restFactoryMock.Setup(x => x.Create()).Returns(_restMock.Object);
+      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/sitemaps"))))
+        .ReturnsAsync(JObject.Parse(_env.JsonSitemaps));
 
-      var cln = new OpenHabClient(_restFactoryMock.Object);
+      var cln = new OpenHabClient(_env.RestClientFactory);
       var sitemaps = await cln.GetSitemapsAsync();
 
       Assert.AreEqual(2, sitemaps.Count);
@@ -63,18 +51,26 @@ namespace WinHAB.Tests.Core
     {
       string json = @"{""sitemap"":{""name"":""demo"",""label"":""Demo House"",""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo""}}";
 
-      _restMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/sitemaps"))))
+      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url == "/rest/sitemaps")))
         .ReturnsAsync(JObject.Parse(json));
 
-      _restFactoryMock.Setup(x => x.Create()).Returns(_restMock.Object);
-
-      var cln = new OpenHabClient(_restFactoryMock.Object);
+      var cln = new OpenHabClient(_env.RestClientFactory);
       var sitemaps = await cln.GetSitemapsAsync();
 
       Assert.AreEqual(1, sitemaps.Count);
 
       var s1 = sitemaps[0]; 
       Assert.IsNull(s1.HomepageLink);
+    }
+
+    [TestMethod]
+    public void OpenHabClientSetServerUriTest()
+    {
+      bool isSetBaseUriCalled = false;
+      _env.RestClientFactoryMock.Setup(x => x.SetBaseUri(It.IsAny<Uri>())).Callback(() => isSetBaseUriCalled = true);
+
+      _env.Client.SetServerUri(new Uri("http://server"));
+      Assert.IsTrue(isSetBaseUriCalled);
     }
   }
 }

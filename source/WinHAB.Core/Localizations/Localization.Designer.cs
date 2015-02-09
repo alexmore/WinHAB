@@ -60,5 +60,32 @@ namespace WinHAB.Core.Localizations {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection error.
+        /// </summary>
+        public static string aunchViewModelConnectionErrorTitle {
+            get {
+                return ResourceManager.GetString("aunchViewModelConnectionErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting....
+        /// </summary>
+        public static string Connecting {
+            get {
+                return ResourceManager.GetString("Connecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not load sitemaps list. Details:.
+        /// </summary>
+        public static string LaunchViewModelConnectionError {
+            get {
+                return ResourceManager.GetString("LaunchViewModelConnectionError", resourceCulture);
+            }
+        }
     }
 }

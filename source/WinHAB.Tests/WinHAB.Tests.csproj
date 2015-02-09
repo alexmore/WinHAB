@@ -78,8 +78,11 @@
     <Compile Include="Core\Mvvm\MvvmExtensionsTests.cs" />
     <Compile Include="Core\Mvvm\WaiterViewModelTests.cs" />
     <Compile Include="Core\OpenHabClientTests.cs" />
+    <Compile Include="Core\ViewModels\LaunchViewModelTests.cs" />
+    <Compile Include="TestEnvironment.cs" />
     <Compile Include="Desktop\DesktopNavigationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestConfigurationProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
