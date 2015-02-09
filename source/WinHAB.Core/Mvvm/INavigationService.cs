@@ -5,7 +5,9 @@ namespace WinHAB.Core.Mvvm
 {
   public interface INavigationService
   {
-    void Navigate(IView view); 
+    IView CurrentView { get; }
+
+    void NavigateView(IView view); 
     void Navigate(IViewModel viewModel);
     
     IViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters);

@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Core\Mvvm\AbstractViewModelViewFactoryTests.cs" />
     <Compile Include="Core\Mvvm\ConstructorParametersTests.cs" />
+    <Compile Include="Core\Mvvm\AbstractNavigationServiceTests.cs" />
     <Compile Include="Core\Mvvm\MvvmExtensionsTests.cs" />
     <Compile Include="Core\Mvvm\WaiterViewModelTests.cs" />
     <Compile Include="Core\OpenHabClientTests.cs" />
