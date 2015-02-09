@@ -6,6 +6,7 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 
@@ -34,8 +35,14 @@ namespace WinHAB.Tests.Core.ViewModels
 
       // If AppConfiguration.Server is empty
       var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
+
+      Assert.IsFalse(vm.IsServerAddressVisible);
+      Assert.IsFalse(vm.IsSitemapsVisible);
+
       vm.OnNavigatedTo();
       Assert.AreEqual("http://", vm.ServerAddress);
+      Assert.IsTrue(vm.IsServerAddressVisible);
+      Assert.IsFalse(vm.IsSitemapsVisible);
 
       vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
       _env.ConfigurationProvider.Values["Server"] = "http://myserver/";
@@ -63,7 +70,7 @@ namespace WinHAB.Tests.Core.ViewModels
       Assert.IsNotNull(vm.Sitemaps);
       Assert.AreEqual(2, vm.Sitemaps.Count);
       Assert.IsTrue(vm.IsSitemapsVisible);
-      Assert.IsFalse(vm.IsServerUrlVisible);
+      Assert.IsFalse(vm.IsServerAddressVisible);
       Assert.IsFalse(vm.Waiter.IsVisible);
       Assert.AreEqual(server, factoryAddress);
       Assert.AreEqual(server, _env.AppConfiguration.Server);
@@ -86,9 +93,24 @@ namespace WinHAB.Tests.Core.ViewModels
 
       Assert.IsTrue(isExceptionCatched);
       Assert.IsFalse(vm.IsSitemapsVisible);
-      Assert.IsTrue(vm.IsServerUrlVisible);
+      Assert.IsTrue(vm.IsServerAddressVisible);
       Assert.IsFalse(vm.Waiter.IsVisible);
-      
+    }
+
+    [TestMethod]
+    public async Task LaunchViewModelSelectSitemapCommandTest()
+    {
+      _env.NavigationMock.Setup(x=>x.Navigate<MainViewModel>(It.IsAny<Action<ConstructorParameters>>()))
+        .Verifiable();
+      _env.NavigationMock.Setup(x => x.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action>()))
+        .Verifiable();
+
+      var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
+      vm.SelectSitemapCommand.Execute(new SitemapData());
+      _env.NavigationMock.Verify(x => x.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action>()));
+
+      vm.SelectSitemapCommand.Execute(new SitemapData() {HomepageLink = new Uri("http://hello")});
+      _env.NavigationMock.Verify(x=>x.Navigate<MainViewModel>(It.IsAny<Action<ConstructorParameters>>()));
     }
   }
 }

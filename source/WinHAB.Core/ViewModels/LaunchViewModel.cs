@@ -21,6 +21,7 @@ namespace WinHAB.Core.ViewModels
 
       ConnectCommand = new AsyncRelayCommand<string>(Connect, (string x) => 
         !string.IsNullOrWhiteSpace(ServerAddress));
+      SelectSitemapCommand = new RelayCommand<SitemapData>(SelectSitemap);
     }
 
     public AsyncRelayCommand<string> ConnectCommand { get; set; }
@@ -45,23 +46,29 @@ namespace WinHAB.Core.ViewModels
     public ObservableCollection<SitemapData> Sitemaps { get { return _Sitemaps; } set { _Sitemaps = value; RaisePropertyChanged(() => Sitemaps); } }
 
     #region Appearance
-    private bool _IsServerUrlVisible;
-    public bool IsServerUrlVisible { get { return _IsServerUrlVisible; } set { _IsServerUrlVisible = value; RaisePropertyChanged(() => IsServerUrlVisible); } }
+    private bool _isServerAddressVisible = false;
+    public bool IsServerAddressVisible { get { return _isServerAddressVisible; } set { _isServerAddressVisible = value; RaisePropertyChanged(() => IsServerAddressVisible); } }
 
-    private bool _IsSitemapsVisible;
+    private bool _IsSitemapsVisible = false;
     public bool IsSitemapsVisible { get { return _IsSitemapsVisible; } set { _IsSitemapsVisible = value; RaisePropertyChanged(() => IsSitemapsVisible); } }
+
+    void HideAll()
+    {
+      IsServerAddressVisible = false;
+      IsSitemapsVisible = false;
+    }
 
     void ShowServerUrl()
     {
       Waiter.Hide();
-      IsServerUrlVisible = true;
+      IsServerAddressVisible = true;
       IsSitemapsVisible = false;
     }
 
     void ShowSitemaps()
     {
       Waiter.Hide();
-      IsServerUrlVisible = false;
+      IsServerAddressVisible = false;
       IsSitemapsVisible = true;
     }
     #endregion
@@ -71,12 +78,14 @@ namespace WinHAB.Core.ViewModels
       ServerAddress = _config.Server;
 
       if (string.IsNullOrWhiteSpace(ServerAddress)) ServerAddress = "http://";
+      ShowServerUrl();
     }
 
     async Task Connect(string server)
     {
       try
       {
+        HideAll();
         Waiter.Show(Localization.Connecting);
         _client.SetServerAddress(server);
         Sitemaps = new ObservableCollection<SitemapData>(await _client.GetSitemapsAsync());
@@ -86,13 +95,18 @@ namespace WinHAB.Core.ViewModels
       }
       catch (Exception e)
       {
-        Navigation.ShowMessage(Localization.aunchViewModelConnectionErrorTitle, Localization.LaunchViewModelConnectionError+" "+e.Message, ShowServerUrl);
+        Navigation.ShowMessage(Localization.LaunchViewModelConnectionErrorTitle, Localization.LaunchViewModelConnectionError+" "+e.Message, ShowServerUrl);
       }
     }
 
     void SelectSitemap(SitemapData sitemap)
     {
-      if (sitemap == null || sitemap.HomepageLink == null) return;
+      if (sitemap == null || sitemap.HomepageLink == null)
+      {
+        Navigation.ShowMessage(Localization.LaunchViewSelesiteMapHomepageLinkExceptonTitle, Localization.LaunchViewSelesiteMapHomepageLinkExcepton,
+          () => { });
+        return;
+      }
 
       Navigation.Navigate<MainViewModel>(x => x.Add("homepageUri", sitemap.HomepageLink));
     }

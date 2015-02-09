@@ -62,15 +62,6 @@ namespace WinHAB.Core.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection error.
-        /// </summary>
-        public static string aunchViewModelConnectionErrorTitle {
-            get {
-                return ResourceManager.GetString("aunchViewModelConnectionErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Connecting....
         /// </summary>
         public static string Connecting {
@@ -85,6 +76,33 @@ namespace WinHAB.Core.Localizations {
         public static string LaunchViewModelConnectionError {
             get {
                 return ResourceManager.GetString("LaunchViewModelConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection error.
+        /// </summary>
+        public static string LaunchViewModelConnectionErrorTitle {
+            get {
+                return ResourceManager.GetString("LaunchViewModelConnectionErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Homepage link missing in the selected Sitemap..
+        /// </summary>
+        public static string LaunchViewSelesiteMapHomepageLinkExcepton {
+            get {
+                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExcepton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading Sitemap.
+        /// </summary>
+        public static string LaunchViewSelesiteMapHomepageLinkExceptonTitle {
+            get {
+                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExceptonTitle", resourceCulture);
             }
         }
     }
