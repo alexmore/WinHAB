@@ -19,11 +19,27 @@ namespace WinHAB.Core.ViewModels
       _client = client;
       _config = config;
 
-      ConnectCommand = new AsyncRelayCommand<string>(Connect);
+      ConnectCommand = new AsyncRelayCommand<string>(Connect, (string x) => 
+        !string.IsNullOrWhiteSpace(ServerAddress));
     }
 
     public AsyncRelayCommand<string> ConnectCommand { get; set; }
     public RelayCommand<SitemapData> SelectSitemapCommand { get; set; }
+
+    private string _ServerAddress;
+    public string ServerAddress
+    {
+      get
+      {
+        return _ServerAddress;
+      }
+      set
+      {
+        _ServerAddress = value;
+        RaisePropertyChanged(() => ServerAddress);
+        ConnectCommand.RaiseCanExecuteChanged();
+      }
+    }
 
     private ObservableCollection<SitemapData> _Sitemaps;
     public ObservableCollection<SitemapData> Sitemaps { get { return _Sitemaps; } set { _Sitemaps = value; RaisePropertyChanged(() => Sitemaps); } }
@@ -50,6 +66,12 @@ namespace WinHAB.Core.ViewModels
     }
     #endregion
 
+    public override void OnNavigatedTo()
+    {
+      ServerAddress = _config.Server;
+
+      if (string.IsNullOrWhiteSpace(ServerAddress)) ServerAddress = "http://";
+    }
 
     async Task Connect(string server)
     {

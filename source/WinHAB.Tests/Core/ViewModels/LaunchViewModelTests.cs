@@ -23,7 +23,28 @@ namespace WinHAB.Tests.Core.ViewModels
     }
 
     [TestMethod]
-    public async Task ConnectCommandTest()
+    public async Task LaunchViewModelConnectOnNavigateTest()
+    {
+      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
+        .ReturnsAsync(JObject.Parse(_env.JsonSitemaps));
+
+      string factoryAddress = null;
+      _env.RestClientFactoryMock.Setup(x => x.SetBaseAddress(It.IsAny<string>()))
+        .Callback<string>(x => factoryAddress = x);
+
+      // If AppConfiguration.Server is empty
+      var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
+      vm.OnNavigatedTo();
+      Assert.AreEqual("http://", vm.ServerAddress);
+
+      vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
+      _env.ConfigurationProvider.Values["Server"] = "http://myserver/";
+      vm.OnNavigatedTo();
+      Assert.AreEqual("http://myserver/", vm.ServerAddress);
+    }
+
+    [TestMethod]
+    public async Task LaunchViewModelConnectCommandTest()
     {
       _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
         .ReturnsAsync(JObject.Parse(_env.JsonSitemaps));
@@ -37,7 +58,9 @@ namespace WinHAB.Tests.Core.ViewModels
       const string server = "http://server/";
       _env.ConfigurationProvider.IsSaved = false;
 
+      vm.ServerAddress = server;
       await vm.ConnectCommand.ExecuteAsync(server);
+      Assert.IsNotNull(vm.Sitemaps);
       Assert.AreEqual(2, vm.Sitemaps.Count);
       Assert.IsTrue(vm.IsSitemapsVisible);
       Assert.IsFalse(vm.IsServerUrlVisible);
@@ -48,7 +71,7 @@ namespace WinHAB.Tests.Core.ViewModels
     }
 
     [TestMethod]
-    public async Task ConnectCommandExceptionTest()
+    public async Task LaunchViewModelConnectCommandExceptionTest()
     {
       _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
         .Throws(new Exception("Some exception"));
@@ -58,6 +81,7 @@ namespace WinHAB.Tests.Core.ViewModels
       bool isExceptionCatched = false;
       _env.OnNavigationShowMessage = (t, tt) => isExceptionCatched = true;
 
+      vm.ServerAddress = "http://server/";
       await vm.ConnectCommand.ExecuteAsync("http://server/");
 
       Assert.IsTrue(isExceptionCatched);

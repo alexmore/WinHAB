@@ -39,6 +39,7 @@ namespace WinHAB.Tests
 
     public string Get(string key)
     {
+      if (!Values.ContainsKey(key)) return null;
       return Values[key];
     }
 
