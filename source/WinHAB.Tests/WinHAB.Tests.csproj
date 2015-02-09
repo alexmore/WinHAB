@@ -51,6 +51,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -73,6 +77,7 @@
     <Compile Include="Core\Mvvm\ConstructorParametersTests.cs" />
     <Compile Include="Core\Mvvm\MvvmExtensionsTests.cs" />
     <Compile Include="Core\Mvvm\WaiterViewModelTests.cs" />
+    <Compile Include="Core\OpenHabClientTests.cs" />
     <Compile Include="Desktop\DesktopNavigationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
