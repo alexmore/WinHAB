@@ -25,7 +25,7 @@ namespace WinHAB.Desktop.Configuration
 
       Bind<string>().ToConstant(AppConstants.ConfigurationFile).WhenInjectedInto<JsonConfigurationProvider>();
       Bind<IConfigurationProvider>().To<JsonConfigurationProvider>();
-      Bind<AppConfiguration>().ToSelf().InSingletonScope();
+      Bind<AppConfiguration>().To<DesktopConfiguration>().InSingletonScope();
 
 
       Bind<string>().ToMethod(x => GetServerAddress(x.Kernel)).WhenInjectedInto<RestClientFactory>();

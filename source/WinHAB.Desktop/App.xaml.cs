@@ -9,11 +9,11 @@ using System.Windows;
 using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
 using Ninject;
+using WinHAB.Core.Configuration;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Windows;
-using CoreCfg = WinHAB.Core.Configuration;
 
 namespace WinHAB.Desktop
 {
@@ -31,7 +31,7 @@ namespace WinHAB.Desktop
       
       var kernel = new StandardKernel(new DefaultModule(MainWindow as HostWindow));
 
-      var cfg = kernel.Get<CoreCfg.AppConfiguration>();
+      var cfg = kernel.Get<AppConfiguration>() as DesktopConfiguration;
       await cfg.LoadAsync();
 
       // Appearance settings
@@ -42,11 +42,11 @@ namespace WinHAB.Desktop
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      //navigation.Navigate<LaunchViewModel>();
-      navigation.Navigate<MainViewModel>();
+      navigation.Navigate<LaunchViewModel>();
+      //navigation.Navigate<MainViewModel>();
     }
 
-    private void SetAppearance(CoreCfg.AppConfiguration cfg)
+    private void SetAppearance(DesktopConfiguration cfg)
     {
       try
       {

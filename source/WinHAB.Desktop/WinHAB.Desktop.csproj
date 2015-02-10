@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Configuration\DesktopConfiguration.cs" />
     <Compile Include="Controls\HeaderDropDownControl.xaml.cs">
       <DependentUpon>HeaderDropDownControl.xaml</DependentUpon>
     </Compile>

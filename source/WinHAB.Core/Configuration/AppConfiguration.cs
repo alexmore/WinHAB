@@ -5,23 +5,23 @@ namespace WinHAB.Core.Configuration
 {
   public class AppConfiguration
   {
-    private readonly IConfigurationProvider _provider;
+    protected IConfigurationProvider Provider { get; set; }
 
     public AppConfiguration(IConfigurationProvider provider)
     {
-      _provider = provider;
+      Provider = provider;
     }
 
-    public void Load() { _provider.Load(); }
-    public async Task LoadAsync() { await _provider.LoadAsync(); }
+    public void Load() { Provider.Load(); }
+    public async Task LoadAsync() { await Provider.LoadAsync(); }
 
-    public void Save() { _provider.Save(); }
-    public async Task SaveAsync() { await _provider.SaveAsync(); }
+    public void Save() { Provider.Save(); }
+    public async Task SaveAsync() { await Provider.SaveAsync(); }
 
     public string Language
     {
-      get { return _provider.Get(this.GetPropertyName(() => Language)) ?? "en"; }
-      set { _provider.Set(this.GetPropertyName(() => Language), value); }
+      get { return Provider.Get(this.GetPropertyName(() => Language)) ?? "en"; }
+      set { Provider.Set(this.GetPropertyName(() => Language), value); }
     }
 
     public IEnumerable<Language> AvailableLanguages
@@ -34,30 +34,14 @@ namespace WinHAB.Core.Configuration
 
     public string Server
     {
-      get { return _provider.Get(this.GetPropertyName(() => Server)); }
-      set { _provider.Set(this.GetPropertyName(() => Server), value); }
+      get { return Provider.Get(this.GetPropertyName(() => Server)); }
+      set { Provider.Set(this.GetPropertyName(() => Server), value); }
     }
 
     public string Sitemap
     {
-      get { return _provider.Get(this.GetPropertyName(() => Sitemap)); }
-      set { _provider.Set(this.GetPropertyName(() => Sitemap), value); }
+      get { return Provider.Get(this.GetPropertyName(() => Sitemap)); }
+      set { Provider.Set(this.GetPropertyName(() => Sitemap), value); }
     }
-
-    #region Appearance
-
-    public string AccentColor
-    {
-      get { return _provider.Get(this.GetPropertyName(() => AccentColor)); }
-      set { _provider.Set(this.GetPropertyName(() => AccentColor), value); }
-    }
-
-    public string ThemeSource
-    {
-      get { return _provider.Get(this.GetPropertyName(() => ThemeSource)); }
-      set { _provider.Set(this.GetPropertyName(() => ThemeSource), value); }
-    }
-
-    #endregion
   }
 }

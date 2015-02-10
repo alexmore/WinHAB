@@ -16,6 +16,7 @@ using FirstFloor.ModernUI.Presentation;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
+using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop.Controls
@@ -39,11 +40,11 @@ namespace WinHAB.Desktop.Controls
     }
 
     public static readonly DependencyProperty AppConfigurationProperty = DependencyProperty.Register(
-      "AppConfiguration", typeof (AppConfiguration), typeof (HeaderDropDownControl), new PropertyMetadata(default(AppConfiguration)));
+      "AppConfiguration", typeof(DesktopConfiguration), typeof(HeaderDropDownControl), new PropertyMetadata(default(AppConfiguration)));
 
-    public AppConfiguration AppConfiguration
+    public DesktopConfiguration AppConfiguration
     {
-      get { return (AppConfiguration) GetValue(AppConfigurationProperty); }
+      get { return (DesktopConfiguration)GetValue(AppConfigurationProperty); }
       set { SetValue(AppConfigurationProperty, value); }
     }
 
