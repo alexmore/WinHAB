@@ -66,10 +66,9 @@ namespace WinHAB.Tests.Core.Mvvm
       var viewMock = new Mock<IView>();
       viewMock.SetupAllProperties();
       ConstructorParameters ctorParameters = null;
-
-      var isOnNavigatedToCalled = false;
+      
       var viewModelMock = new Mock<IViewModel>();
-      viewModelMock.Setup(x => x.OnNavigatedTo()).Callback(() => isOnNavigatedToCalled = true);
+      viewModelMock.Setup(x => x.OnNavigatedTo()).Verifiable();
 
       _env.ViewModelViewFactory.Map(viewModelMock.Object.GetType(), viewMock.Object.GetType());
       _env.ViewModelViewFactoryMock.Setup(x => x.CreateView(It.IsAny<Type>())).Returns(() => viewMock.Object);
@@ -85,7 +84,7 @@ namespace WinHAB.Tests.Core.Mvvm
       // IViewModel
       nav.Navigate(viewModelMock.Object);
       Assert.AreSame(viewModelMock.Object, nav.CurrentView.DataContext);
-      Assert.IsTrue(isOnNavigatedToCalled);
+      viewModelMock.Verify(x=>x.OnNavigatedTo());
       Assert.IsTrue(isNavigatedToView);
 
       // Navigate(Type, ctorParams)
@@ -126,8 +125,7 @@ namespace WinHAB.Tests.Core.Mvvm
       viewMock.SetupAllProperties();
       
       var viewModelMock = new Mock<IViewModel>();
-      int isCleanupCalledCount = 0;
-      viewModelMock.Setup(x => x.Cleanup()).Callback(() => isCleanupCalledCount++);
+      viewModelMock.Setup(x => x.Cleanup()).Verifiable();
 
       _env.ViewModelViewFactory.Map(viewModelMock.Object.GetType(), viewMock.Object.GetType());
       _env.ViewModelViewFactoryMock.Setup(x => x.CreateView(It.IsAny<Type>())).Returns(() => viewMock.Object);
@@ -146,18 +144,18 @@ namespace WinHAB.Tests.Core.Mvvm
 
       nav.GoBack();
       Assert.AreEqual(0, nav.HistoryCount);
-      Assert.IsTrue(isCleanupCalledCount == 1);
+      viewModelMock.Verify(x=>x.Cleanup(), Times.Once);
 
       nav.GoBack();
       nav.Navigate(viewModelMock.Object);
       nav.Navigate(viewModelMock.Object);
 
       nav.CleanCurrentView();
-      isCleanupCalledCount = 0;
+      viewModelMock.ResetCalls();
       nav.ClearHistory();
       Assert.AreEqual(0, nav.HistoryCount);
       Assert.IsNull(nav.CurrentView);
-      Assert.IsTrue(isCleanupCalledCount == 2);
+      viewModelMock.Verify(x => x.Cleanup(), Times.Exactly(2));
       
     }
   }

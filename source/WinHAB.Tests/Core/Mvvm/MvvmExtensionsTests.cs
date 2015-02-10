@@ -11,19 +11,18 @@ namespace WinHAB.Tests.Core.Mvvm
     [TestMethod]
     public void MvvmExtensionsViewCleanupTest()
     {
-      bool isCleanupCalled = false;
 
       var viewMock = new Mock<IView>();
       viewMock.SetupAllProperties();
       
       var viewModelMock = new Mock<IViewModel>();
-      viewModelMock.Setup(x => x.Cleanup()).Callback(() => isCleanupCalled = true);
+      viewModelMock.Setup(x => x.Cleanup()).Verifiable();
 
       viewMock.Object.DataContext = viewModelMock.Object;
 
       viewMock.Object.Cleanup();
 
-      Assert.IsTrue(isCleanupCalled);
+      viewModelMock.Verify(x=>x.Cleanup());
 
       viewMock.Object.DataContext = null;
       viewMock.Object.Cleanup();
