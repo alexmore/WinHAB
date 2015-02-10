@@ -44,6 +44,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="LinkText" Property="Margin" Value="0"/>
+                            <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IconData" Value="{x:Null}">
+                            <Setter TargetName="LinkText" Property="Margin" Value="0"/>
+                            <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -98,6 +103,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="LinkText" Property="Margin" Value="0"/>
+                            <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IconData" Value="{x:Null}">
+                            <Setter TargetName="LinkText" Property="Margin" Value="0"/>
+                            <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -69,6 +69,14 @@ namespace WinHAB.Desktop
         cfg.Save();
         AppearanceManager.Current.ThemeSource = AppConstants.DefaultThemeSource;
       }
+
+      try
+      {
+        cfg.SetBackground(cfg.BackgroundImagePath);
+      }
+      catch (Exception)
+      {
+      }
     }
   }
 

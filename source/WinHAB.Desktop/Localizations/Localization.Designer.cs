@@ -70,6 +70,15 @@ namespace WinHAB.Desktop.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background.
+        /// </summary>
+        public static string Background {
+            get {
+                return ResourceManager.GetString("Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Server.
         /// </summary>
         public static string ChangeServer {
@@ -97,11 +106,20 @@ namespace WinHAB.Desktop.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image Files.
+        /// </summary>
+        public static string ImageFiles {
+            get {
+                return ResourceManager.GetString("ImageFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
-        public static string Language {
+        public static string InterfaceLanguage {
             get {
-                return ResourceManager.GetString("Language", resourceCulture);
+                return ResourceManager.GetString("InterfaceLanguage", resourceCulture);
             }
         }
         
@@ -201,6 +219,25 @@ namespace WinHAB.Desktop.Localizations {
         public static string ThemeLight {
             get {
                 return ResourceManager.GetString("ThemeLight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to apply selected image for the application background.
+        ///Details:.
+        /// </summary>
+        public static string UnableApplySelectedImageToBackground {
+            get {
+                return ResourceManager.GetString("UnableApplySelectedImageToBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background image.
+        /// </summary>
+        public static string UnableApplySelectedImageToBackgroundTitle {
+            get {
+                return ResourceManager.GetString("UnableApplySelectedImageToBackgroundTitle", resourceCulture);
             }
         }
         

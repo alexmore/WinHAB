@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Presentation;
+using Microsoft.Win32;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
@@ -36,9 +37,10 @@ namespace WinHAB.Desktop.Controls
                                AppearanceManager.DarkThemeSource.OriginalString.ToLower();
         LightButton.IsChecked = !DarkButton.IsChecked;
         AccentListBox.SelectedItem = AppearanceManager.Current.AccentColor;
+        SetResetBackgroundImageButtonVisibility();
       };
     }
-
+    
     public static readonly DependencyProperty AppConfigurationProperty = DependencyProperty.Register(
       "AppConfiguration", typeof(DesktopConfiguration), typeof(HeaderDropDownControl), new PropertyMetadata(default(AppConfiguration)));
 
@@ -125,6 +127,41 @@ namespace WinHAB.Desktop.Controls
     {
       System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
       Application.Current.Shutdown();
+    }
+
+    private void SetResetBackgroundImageButtonVisibility()
+    {
+      ResetBackgroundImageButton.Visibility = string.IsNullOrWhiteSpace(AppConfiguration.BackgroundImagePath)
+          ? Visibility.Collapsed
+          : Visibility.Visible;
+    }
+
+    private void ResetBackground(object sender, RoutedEventArgs e)
+    {
+      AppConfiguration.SetBackground(null);
+      SetResetBackgroundImageButtonVisibility();
+    }
+
+    private void SelectBackground(object sender, RoutedEventArgs e)
+    {
+      var d = new OpenFileDialog();
+      d.DefaultExt = "*.jpg";
+      d.Filter = Localizations.Localization.ImageFiles + "|*.jpg";
+      bool? dRes = d.ShowDialog();
+      if (dRes.HasValue && dRes.Value)
+      {
+        try
+        {
+          AppConfiguration.SetBackground(d.FileName);
+        }
+        catch (Exception ex)
+        {
+          NavigationService.ShowMessage(Localizations.Localization.UnableApplySelectedImageToBackgroundTitle, 
+            Localizations.Localization.UnableApplySelectedImageToBackground+"\r\n"+ex.Message, () => { });
+        }
+      }
+
+      SetResetBackgroundImageButtonVisibility();
     }
   }
 }

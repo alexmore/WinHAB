@@ -7,6 +7,5 @@
                   Style="{StaticResource HostWindowStyle}"
                   Padding="0" >
     <Grid>
-        
     </Grid>
 </mui:ModernWindow>

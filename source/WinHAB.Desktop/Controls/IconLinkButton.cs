@@ -17,7 +17,7 @@ namespace WinHAB.Desktop.Controls
     }
 
     public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
-      "IconSize", typeof(double), typeof(IconLinkButton), new PropertyMetadata(16D));
+      "IconSize", typeof(double), typeof(IconLinkButton), new PropertyMetadata(12D));
 
     public double IconSize
     {

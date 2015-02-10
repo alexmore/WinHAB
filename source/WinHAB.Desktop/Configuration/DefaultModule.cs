@@ -12,16 +12,17 @@ namespace WinHAB.Desktop.Configuration
 {
   public class DefaultModule : NinjectModule
   {
-    private readonly INavigationHost _navigationHost;
+    private readonly HostWindow _hostWindow;
 
-    public DefaultModule(INavigationHost navigationHost)
+    public DefaultModule(HostWindow hostWindow)
     {
-      _navigationHost = navigationHost;
+      _hostWindow = hostWindow;
     }
 
     public override void Load()
     {
-      Bind<INavigationHost>().ToConstant(_navigationHost).InSingletonScope();
+      Bind<HostWindow>().ToConstant(_hostWindow);
+      Bind<INavigationHost>().ToConstant(_hostWindow).InSingletonScope();
 
       Bind<string>().ToConstant(AppConstants.ConfigurationFile).WhenInjectedInto<JsonConfigurationProvider>();
       Bind<IConfigurationProvider>().To<JsonConfigurationProvider>();

@@ -120,6 +120,9 @@
   <data name="Appearance" xml:space="preserve">
     <value>Внешний вид</value>
   </data>
+  <data name="Background" xml:space="preserve">
+    <value>Фон</value>
+  </data>
   <data name="ChangeServer" xml:space="preserve">
     <value>Выбрать другой сервер</value>
   </data>
@@ -129,8 +132,11 @@
   <data name="Connect" xml:space="preserve">
     <value>Подключиться</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>Язык</value>
+  <data name="ImageFiles" xml:space="preserve">
+    <value>Файлы изображений</value>
+  </data>
+  <data name="InterfaceLanguage" xml:space="preserve">
+    <value>Язык интерфейса</value>
   </data>
   <data name="LaunchViewSelectSitemap" xml:space="preserve">
     <value>Выберите схему</value>
@@ -164,6 +170,13 @@
   </data>
   <data name="ThemeLight" xml:space="preserve">
     <value>Светлая</value>
+  </data>
+  <data name="UnableApplySelectedImageToBackground" xml:space="preserve">
+    <value>Невозможно применить выбранное изображение в качестве фона приложения.
+Подробности:</value>
+  </data>
+  <data name="UnableApplySelectedImageToBackgroundTitle" xml:space="preserve">
+    <value>Фоновое изображение</value>
   </data>
   <data name="WinHABDescription" xml:space="preserve">
     <value>OpenHAB клиент для рабочего стола Microsoft Windows</value>
