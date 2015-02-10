@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="WinHAB.Desktop.Controls.HeaderDropDownControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             mc:Ignorable="d" >
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Margin="0,5">
+            <TextBlock Text="SETTINGS" Style="{StaticResource Heading3}" />
+            <StackPanel Orientation="Vertical" Margin="10,0">
+                <controls:IconLinkButton IconData="{StaticResource GraphDiagramIcon}" Content="Change Sitemap" Margin="0,2,0,0" Click="ChangeSitemap" />
+                <controls:IconLinkButton IconData="{StaticResource ServerIcon}" Content="Change server" Margin="0,2,0,0" Click="ChangeServer" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="0,5">
+            <TextBlock Text="APPEARANCE" Style="{StaticResource Heading3}"/>
+            <StackPanel Orientation="Vertical" Margin="10,0">
+                <Grid Margin="5,0">
+                    <TextBlock Text="THEME" Style="{StaticResource Heading4}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <RadioButton Name="LightButton" Content="Light" Style="{StaticResource LinkRadioButton}" Click="SetLightTheme"/>
+                        <RadioButton Name="DarkButton"  Content="DARK" Style="{StaticResource LinkRadioButton}" Click="SetDarkTheme"/>
+                    </StackPanel>
+                </Grid>
+                <ListBox Name="AccentListBox" Margin="3,10,3,0" SelectionChanged="SetAccentColor">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel MaxWidth="220" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Rectangle Width="30" Height="30" Margin="2">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush x:Name="Brush" Color="{Binding}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <Color>#33B5E5</Color>
+                    <Color>#0099CC</Color>
+                    <Color>#AA66CC</Color>
+                    <Color>#9933CC</Color>
+                    <Color>#99CC00</Color>
+                    <Color>#669900</Color>
+                    <Color>#FFBB33</Color>
+                    <Color>#FF8800</Color>
+                    <Color>#FF4444</Color>
+                    <Color>#CC0000</Color>
+                </ListBox>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

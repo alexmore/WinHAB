@@ -15,6 +15,7 @@
 
     <!-- blank window style, no backbutton, menu and title links -->
     <Style x:Key="HostWindowStyle" TargetType="controls:ModernWindow" BasedOn="{StaticResource {x:Type controls:ModernWindow}}" >
+        <Setter Property="BackgroundContent" Value="{x:Null}"/>
         <Setter Property="Padding" Value="8" />
         <Setter Property="IsTitleVisible" Value="True" />
         <Setter Property="Template">

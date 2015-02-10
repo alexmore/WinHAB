@@ -43,5 +43,21 @@ namespace WinHAB.Core.Configuration
       get { return _provider.Get(this.GetPropertyName(() => Sitemap)); }
       set { _provider.Set(this.GetPropertyName(() => Sitemap), value); }
     }
+
+    #region Appearance
+
+    public string AccentColor
+    {
+      get { return _provider.Get(this.GetPropertyName(() => AccentColor)); }
+      set { _provider.Set(this.GetPropertyName(() => AccentColor), value); }
+    }
+
+    public string ThemeSource
+    {
+      get { return _provider.Get(this.GetPropertyName(() => ThemeSource)); }
+      set { _provider.Set(this.GetPropertyName(() => ThemeSource), value); }
+    }
+
+    #endregion
   }
 }
