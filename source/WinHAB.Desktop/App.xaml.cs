@@ -42,7 +42,8 @@ namespace WinHAB.Desktop
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      navigation.Navigate<LaunchViewModel>();
+      //navigation.Navigate<LaunchViewModel>();
+      navigation.Navigate<MainViewModel>();
     }
 
     private void SetAppearance(CoreCfg.AppConfiguration cfg)

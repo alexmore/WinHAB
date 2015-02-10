@@ -19,8 +19,8 @@
         </Grid.RowDefinitions>
         
         <StackPanel Orientation="Vertical" Margin="0,0,0,20">
-            <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource WindowText}" Width="50" Height="50" HorizontalAlignment="Center"/>
-            <TextBlock Text="WINHAB" Style="{StaticResource Heading2}" FontSize="24" HorizontalAlignment="Center"/>
+            <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource Accent}" Width="50" Height="50" HorizontalAlignment="Center"/>
+            <TextBlock Text="WINHAB" Style="{StaticResource Heading2}" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0"/>
             <TextBlock Text="{x:Static loc:Localization.WinHABDescription}" Style="{StaticResource Title}"  HorizontalAlignment="Center" FontSize="18"/>
         </StackPanel>
         

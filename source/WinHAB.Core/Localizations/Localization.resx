@@ -124,7 +124,7 @@
     <value>Can not load sitemaps list. Details:</value>
   </data>
   <data name="Connecting" xml:space="preserve">
-    <value>Connecting...</value>
+    <value>Connecting</value>
   </data>
   <data name="LaunchViewSelesiteMapHomepageLinkExcepton" xml:space="preserve">
     <value>Homepage link missing in the selected Sitemap.</value>

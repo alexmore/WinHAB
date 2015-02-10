@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
     <Grid>
@@ -26,15 +27,19 @@
                 <Path Data="{StaticResource OpenHabIcon}" Fill="White" Stretch="Uniform" Width="30" Height="30" Margin="5"/>
             </Border>
             
-            <StackPanel Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <TextBlock Text="DEMO HOUSE" Style="{StaticResource Heading2}"/>
-                <ToggleButton Name="HeaderDropDownButton" Style="{StaticResource DropDownToggleButton}" Margin="5,0"/>
-                <Popup IsOpen="{Binding IsChecked, ElementName=HeaderDropDownButton}" StaysOpen="False">
+            <Grid Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <controls:IconLinkButton x:Name="HeaderButton"
+                                         IconData="{StaticResource ArrowHeadDownIcon}" IconSize="12"
+                                         Content="DEMO HOUSE" Style="{StaticResource RightIconLinkButton}"
+                                         FontSize="16" FontWeight="Bold"
+                                         Click="OpenHeaderDropDown"/>
+                <Popup Name="HeaderDropDownPopup" StaysOpen="False"
+                       PlacementTarget="{Binding ElementName=HeaderButton}" >
                     <Border Background="{DynamicResource WindowBackground}" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Padding="10" >
-                        <controls:HeaderDropDownControl AppConfiguration="{Binding AppConfiguration}" NavigationService="{Binding NavigationService}" />
+                            <controls:HeaderDropDownControl AppConfiguration="{Binding AppConfiguration}" NavigationService="{Binding NavigationService}" />
                     </Border>
                 </Popup>
-            </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

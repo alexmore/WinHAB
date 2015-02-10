@@ -4,26 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
-             mc:Ignorable="d" >
+             xmlns:loc="clr-namespace:WinHAB.Desktop.Localizations"
+             mc:Ignorable="d" 
+             Name="HeaderDropDown">
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Vertical" Margin="0,5">
-            <TextBlock Text="SETTINGS" Style="{StaticResource Heading3}" />
+            <TextBlock Text="{Binding Source={x:Static loc:Localization.Settings}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource Heading3}" />
             <StackPanel Orientation="Vertical" Margin="10,0">
-                <controls:IconLinkButton IconData="{StaticResource GraphDiagramIcon}" Content="Change Sitemap" Margin="0,2,0,0" Click="ChangeSitemap" />
-                <controls:IconLinkButton IconData="{StaticResource ServerIcon}" Content="Change server" Margin="0,2,0,0" Click="ChangeServer" />
+                <controls:IconLinkButton IconData="{StaticResource GraphDiagramIcon}" Content="{Binding Source={x:Static loc:Localization.ChangeSitemap}, Converter={StaticResource ToUpperConverter}}" Margin="0,2,0,0" Click="ChangeSitemap" />
+                <controls:IconLinkButton IconData="{StaticResource ServerIcon}" Content="{Binding Source={x:Static loc:Localization.ChangeServer}, Converter={StaticResource ToUpperConverter}}" Margin="0,2,0,0" Click="ChangeServer" />
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Margin="0,5">
-            <TextBlock Text="APPEARANCE" Style="{StaticResource Heading3}"/>
+            <TextBlock Text="{Binding Source={x:Static loc:Localization.Appearance}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource Heading3}"/>
             <StackPanel Orientation="Vertical" Margin="10,0">
                 <Grid Margin="5,0">
-                    <TextBlock Text="THEME" Style="{StaticResource Heading4}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Source={x:Static loc:Localization.Theme}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource Heading4}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <RadioButton Name="LightButton" Content="Light" Style="{StaticResource LinkRadioButton}" Click="SetLightTheme"/>
-                        <RadioButton Name="DarkButton"  Content="DARK" Style="{StaticResource LinkRadioButton}" Click="SetDarkTheme"/>
+                        <RadioButton Name="LightButton" Content="{x:Static loc:Localization.ThemeLight}" Style="{StaticResource LinkRadioButton}" Click="SetLightTheme"/>
+                        <RadioButton Name="DarkButton"  Content="{x:Static loc:Localization.ThemeDark}" Style="{StaticResource LinkRadioButton}" Click="SetDarkTheme"/>
                     </StackPanel>
                 </Grid>
-                <ListBox Name="AccentListBox" Margin="3,10,3,0" SelectionChanged="SetAccentColor">
+                <ListBox Name="AccentListBox" Margin="3,10,3,0" SelectionChanged="SetAccentColor" >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel MaxWidth="220" />
@@ -50,6 +52,16 @@
                     <Color>#CC0000</Color>
                 </ListBox>
             </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="0,5">
+            <TextBlock Text="{Binding Source={x:Static loc:Localization.Language}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource Heading3}" />
+            <ComboBox Name="LanguageComboBox" Margin="10,5,10,5" 
+                      ItemsSource="{Binding AppConfiguration.AvailableLanguages, ElementName=HeaderDropDown}" 
+                      DisplayMemberPath="Title" SelectedValuePath="Culture" SelectedValue="{Binding AppConfiguration.Language, ElementName=HeaderDropDown}"
+                      SelectionChanged="SetLanguage"/>
+            <controls:IconLinkButton x:Name="RestartToApplyButton" IconData="{StaticResource ReloadIcon}" Content="{x:Static loc:Localization.RestartToApply}" 
+                                     Click="RestartToApply"
+                                     Margin="0,0,10,0"  HorizontalAlignment="Right"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

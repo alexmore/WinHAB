@@ -105,5 +105,25 @@ namespace WinHAB.Desktop.Controls
         await vm.ConnectCommand.ExecuteAsync(AppConfiguration.Server);
       }
     }
+
+    private void SetLanguage(object sender, SelectionChangedEventArgs e)
+    {
+      if (LanguageComboBox.SelectedItem == null || (LanguageComboBox.SelectedItem as WinHAB.Core.Configuration.Language) == null) return;
+
+      var language = (LanguageComboBox.SelectedItem as Language);
+      AppConfiguration.Language = language.Culture;
+      AppConfiguration.Save();
+
+      if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower() != AppConfiguration.Language.ToLower())
+        RestartToApplyButton.Visibility = Visibility.Visible;
+      else
+        RestartToApplyButton.Visibility = Visibility.Collapsed;
+    }
+
+    private void RestartToApply(object sender, RoutedEventArgs e)
+    {
+      System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+      Application.Current.Shutdown();
+    }
   }
 }
