@@ -9,7 +9,7 @@
                   Name="HostWindowName">
     <mui:ModernWindow.BackgroundContent>
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Border Background="{DynamicResource WindowBackground}" Opacity=".2"/>
+            <Border Background="Black" Opacity=".2"/>
         </Grid>
     </mui:ModernWindow.BackgroundContent>
     <Grid>
