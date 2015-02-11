@@ -27,7 +27,7 @@ namespace WinHAB.Tests.Core.ViewModels
     public async Task LaunchViewModelConnectOnNavigateTest()
     {
       _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
-        .ReturnsAsync(JObject.Parse(_env.JsonSitemaps));
+        .ReturnsAsync(JObject.Parse(JsonResources.Sitemaps));
 
       string factoryAddress = null;
       _env.RestClientFactoryMock.Setup(x => x.SetBaseAddress(It.IsAny<string>()))
@@ -54,7 +54,7 @@ namespace WinHAB.Tests.Core.ViewModels
     public async Task LaunchViewModelConnectCommandTest()
     {
       _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
-        .ReturnsAsync(JObject.Parse(_env.JsonSitemaps));
+        .ReturnsAsync(JObject.Parse(JsonResources.Sitemaps));
 
       string factoryAddress = null;
       _env.RestClientFactoryMock.Setup(x => x.SetBaseAddress(It.IsAny<string>()))

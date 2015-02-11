@@ -80,12 +80,22 @@
     <Compile Include="Core\Mvvm\WaiterViewModelTests.cs" />
     <Compile Include="Core\OpenHabClientTests.cs" />
     <Compile Include="Core\ViewModels\LaunchViewModelTests.cs" />
+    <Compile Include="JsonResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JsonResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TestEnvironment.cs" />
     <Compile Include="Desktop\DesktopNavigationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConfigurationProvider.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="JsonResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>JsonResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WinHAB.Core\WinHAB.Core.csproj">
       <Project>{0e01f4b2-4524-4286-92d5-190bb7ee5cf8}</Project>

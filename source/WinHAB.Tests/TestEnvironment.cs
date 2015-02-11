@@ -68,15 +68,6 @@ namespace WinHAB.Tests
          if (OnNavigationShowMessage != null) OnNavigationShowMessage(t, tt);
        });
     }
-    
-    #endregion
-
-    #region Json strings
-    public readonly string JsonSitemaps = @"{ ""sitemap"":
-                            [ {""name"":""demo"",""label"":""Demo House"",""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo"",
-                                     ""homepage"":{""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo/demo"",""leaf"":""false""}},
-                              {""name"":""demo1"",""label"":""Demo House 1"",""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo1"",
-                                     ""homepage"":{""link"":""http://demo.openhab.org:8080/rest/sitemaps/demo1/demo1"",""leaf"":""false""}}]}";
     #endregion
   }
 }

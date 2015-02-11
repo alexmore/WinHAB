@@ -26,7 +26,7 @@ namespace WinHAB.Tests.Core
     public async Task OpenHabClientGetSitemapsTest()
     {
       _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/sitemaps"))))
-        .ReturnsAsync(JObject.Parse(_env.JsonSitemaps));
+        .ReturnsAsync(JObject.Parse(JsonResources.Sitemaps));
 
       var cln = new OpenHabClient(_env.RestClientFactory);
       var sitemaps = await cln.GetSitemapsAsync();
