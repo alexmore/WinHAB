@@ -41,5 +41,43 @@
                 </Popup>
             </Grid>
         </Grid>
+
+        <Grid Grid.Row="1" Margin="40,10,0,20">
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Mouse.PreviewMouseWheel="HorizontalScroll"
+                          PanningMode="HorizontalOnly" Foreground="White">
+                <ItemsControl Name="Widgets" ItemsSource="{Binding Widgets}">
+                    <ItemsControl.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="WidgetViews/WidgetDataTemplates.xaml"/>
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel  Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,60,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Title}" Margin="0,20,0,10" FontFamily="Segoe UI" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <ItemsControl Name="ChildrenWidgets" ItemsSource="{Binding Widgets}" Grid.Row="1">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <controls:WidgetsPanel  />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </UserControl>

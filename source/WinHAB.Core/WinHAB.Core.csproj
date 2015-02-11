@@ -73,6 +73,12 @@
     <Compile Include="RestClientFactory.cs" />
     <Compile Include="ViewModels\LaunchViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\TextWidget.cs" />
+    <Compile Include="ViewModels\Widgets\PictureWidget.cs" />
+    <Compile Include="ViewModels\Widgets\WeatherWidget.cs" />
+    <Compile Include="ViewModels\Widgets\FrameWidget.cs" />
+    <Compile Include="ViewModels\Widgets\WidgetBase.cs" />
+    <Compile Include="ViewModels\Widgets\WidgetSize.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
