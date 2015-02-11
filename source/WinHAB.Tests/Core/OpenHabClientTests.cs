@@ -63,5 +63,23 @@ namespace WinHAB.Tests.Core
       var s1 = sitemaps[0]; 
       Assert.IsNull(s1.HomepageLink);
     }
+
+    [TestMethod]
+    public async Task OpenHabClientGetPageTest()
+    {
+      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<Uri>(url => url.OriginalString.Contains("/rest/sitemaps/demo/demo"))))
+        .ReturnsAsync(JObject.Parse(JsonResources.Homepage));
+
+      var cln = new OpenHabClient(_env.RestClientFactory);
+      var page = await cln.GetPageAsync(new Uri("http://demo/rest/sitemaps/demo/demo"));
+
+      Assert.IsNotNull(page);
+      Assert.AreEqual("demo", page.Id);
+      Assert.AreEqual(4, page.Widgets.Count);
+
+      var w0 = page.Widgets[0];
+      Assert.AreEqual("Frame", w0.Type);
+      Assert.AreEqual(4, w0.Widgets.Count);
+    }
   }
 }

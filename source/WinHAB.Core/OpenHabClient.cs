@@ -25,5 +25,16 @@ namespace WinHAB.Core
         return jobject.ToObject<SitemapListData>().Sitemaps;
       }
     }
+
+    public async Task<PageData> GetPageAsync(Uri pageUri)
+    {
+      using (var cln = _factory.Create())
+      {
+        var jobject = await cln.GetJObjectAsync(pageUri);
+        if (jobject == null) return null;
+        
+        return jobject.ToObject<PageData>();
+      }
+    }
   }
 }
