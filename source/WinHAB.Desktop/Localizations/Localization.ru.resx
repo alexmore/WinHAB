@@ -156,8 +156,14 @@
   <data name="LaunchViewServerUrlTitleExample" xml:space="preserve">
     <value>(например, http://localhost:8080/)</value>
   </data>
+  <data name="ResetBackground" xml:space="preserve">
+    <value>Сброс</value>
+  </data>
   <data name="RestartToApply" xml:space="preserve">
     <value>Перезапустить программу</value>
+  </data>
+  <data name="SelectBackground" xml:space="preserve">
+    <value>Выбрать изображение</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>

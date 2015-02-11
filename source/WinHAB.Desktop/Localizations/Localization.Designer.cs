@@ -178,11 +178,29 @@ namespace WinHAB.Desktop.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string ResetBackground {
+            get {
+                return ResourceManager.GetString("ResetBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restart to apply.
         /// </summary>
         public static string RestartToApply {
             get {
                 return ResourceManager.GetString("RestartToApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose image.
+        /// </summary>
+        public static string SelectBackground {
+            get {
+                return ResourceManager.GetString("SelectBackground", resourceCulture);
             }
         }
         

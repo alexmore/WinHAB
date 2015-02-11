@@ -5,7 +5,13 @@
                   Width="1200" Height="708"
                   WindowStartupLocation="CenterScreen"
                   Style="{StaticResource HostWindowStyle}"
-                  Padding="0" >
+                  Padding="0" 
+                  Name="HostWindowName">
+    <mui:ModernWindow.BackgroundContent>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border Background="{DynamicResource WindowBackground}" Opacity=".2"/>
+        </Grid>
+    </mui:ModernWindow.BackgroundContent>
     <Grid>
     </Grid>
 </mui:ModernWindow>

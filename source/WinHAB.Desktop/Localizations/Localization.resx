@@ -156,8 +156,14 @@
   <data name="LaunchViewServerUrlTitleExample" xml:space="preserve">
     <value>(e.g. http://localhost:8080/)</value>
   </data>
+  <data name="ResetBackground" xml:space="preserve">
+    <value>Reset</value>
+  </data>
   <data name="RestartToApply" xml:space="preserve">
     <value>Restart to apply</value>
+  </data>
+  <data name="SelectBackground" xml:space="preserve">
+    <value>Choose image</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>

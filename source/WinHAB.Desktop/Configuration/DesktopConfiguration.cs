@@ -50,7 +50,16 @@ namespace WinHAB.Desktop.Configuration
         img.Source = bitmap;
         img.Stretch = Stretch.UniformToFill;
 
-        _hostWindow.BackgroundContent = img;
+        if (_hostWindow.BackgroundContent is Grid)
+        {
+          if ((_hostWindow.BackgroundContent as Grid).Children.Count > 0 &&
+            (_hostWindow.BackgroundContent as Grid).Children[0] is Image)
+            (_hostWindow.BackgroundContent as Grid).Children.RemoveAt(0);
+          
+          (_hostWindow.BackgroundContent as Grid).Children.Insert(0, img);
+        }
+        else
+          _hostWindow.BackgroundContent = img;
       }
       else
         _hostWindow.BackgroundContent = null;
