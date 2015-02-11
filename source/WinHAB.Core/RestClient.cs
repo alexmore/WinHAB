@@ -9,14 +9,13 @@ namespace WinHAB.Core
 {
   public class RestClient : HttpClient, IRestClient
   {
-    public RestClient(Uri baseUri)
+    public RestClient()
     {
-      BaseAddress = baseUri;
       DefaultRequestHeaders.Clear();
       DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    public async Task<JObject> GetJObjectAsync(string query)
+    public async Task<JObject> GetJObjectAsync(Uri query)
     {
       HttpResponseMessage responce = await GetAsync(query);
       responce.EnsureSuccessStatusCode();

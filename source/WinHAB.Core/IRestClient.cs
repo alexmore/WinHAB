@@ -6,6 +6,6 @@ namespace WinHAB.Core
 {
   public interface IRestClient : IDisposable
   {
-    Task<JObject> GetJObjectAsync(string query);
+    Task<JObject> GetJObjectAsync(Uri query);
   }
 }

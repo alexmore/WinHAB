@@ -26,13 +26,9 @@ namespace WinHAB.Tests.Core.ViewModels
     [TestMethod]
     public async Task LaunchViewModelConnectOnNavigateTest()
     {
-      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
+      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<Uri>(url => url.OriginalString.Contains("/demo/sitemaps"))))
         .ReturnsAsync(JObject.Parse(JsonResources.Sitemaps));
-
-      string factoryAddress = null;
-      _env.RestClientFactoryMock.Setup(x => x.SetBaseAddress(It.IsAny<string>()))
-        .Callback<string>(x => factoryAddress = x);
-
+      
       // If AppConfiguration.Server is empty
       var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
 
@@ -53,12 +49,8 @@ namespace WinHAB.Tests.Core.ViewModels
     [TestMethod]
     public async Task LaunchViewModelConnectCommandTest()
     {
-      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
+      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<Uri>(url => url.OriginalString.Contains("/rest/sitemaps"))))
         .ReturnsAsync(JObject.Parse(JsonResources.Sitemaps));
-
-      string factoryAddress = null;
-      _env.RestClientFactoryMock.Setup(x => x.SetBaseAddress(It.IsAny<string>()))
-        .Callback<string>(x => factoryAddress = x);
       
       var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
 
@@ -72,7 +64,6 @@ namespace WinHAB.Tests.Core.ViewModels
       Assert.IsTrue(vm.IsSitemapsVisible);
       Assert.IsFalse(vm.IsServerAddressVisible);
       Assert.IsFalse(vm.Waiter.IsVisible);
-      Assert.AreEqual(server, factoryAddress);
       Assert.AreEqual(server, _env.AppConfiguration.Server);
       Assert.IsTrue(_env.ConfigurationProvider.IsSaved);
     }
@@ -80,7 +71,7 @@ namespace WinHAB.Tests.Core.ViewModels
     [TestMethod]
     public async Task LaunchViewModelConnectCommandExceptionTest()
     {
-      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<string>(url => url.Contains("/rest/sitemaps"))))
+      _env.RestClientMock.Setup(x => x.GetJObjectAsync(It.Is<Uri>(url => url.OriginalString.Contains("/demo/sitemaps"))))
         .Throws(new Exception("Some exception"));
       
       var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);

@@ -87,8 +87,7 @@ namespace WinHAB.Core.ViewModels
       {
         HideAll();
         Waiter.Show(Localization.Connecting);
-        _client.SetServerAddress(server);
-        Sitemaps = new ObservableCollection<SitemapData>(await _client.GetSitemapsAsync());
+        Sitemaps = new ObservableCollection<SitemapData>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
         _config.Server = server;
         await _config.SaveAsync();
         ShowSitemaps();

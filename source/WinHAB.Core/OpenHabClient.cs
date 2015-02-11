@@ -15,16 +15,11 @@ namespace WinHAB.Core
       _factory = restClientFactory;
     }
 
-    public void SetServerAddress(string serverAddress)
-    {
-      _factory.SetBaseAddress(serverAddress);
-    }
-
-    public async Task<List<SitemapData>> GetSitemapsAsync()
+    public async Task<List<SitemapData>> GetSitemapsAsync(Uri sitemapUri)
     {
       using (var cln = _factory.Create())
       {
-        var jobject = await cln.GetJObjectAsync("/rest/sitemaps");
+        var jobject = await cln.GetJObjectAsync(sitemapUri);
         if (jobject == null) return null;
 
         return jobject.ToObject<SitemapListData>().Sitemaps;

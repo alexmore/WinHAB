@@ -63,14 +63,14 @@ namespace WinHAB.Tests {
         /// <summary>
         ///   Looks up a localized string similar to {&quot;id&quot;:&quot;demo&quot;,&quot;title&quot;:&quot;Demo House&quot;,&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo/demo&quot;,&quot;leaf&quot;:&quot;false&quot;,&quot;widget&quot;:[{&quot;widgetId&quot;:&quot;demo_0&quot;,&quot;type&quot;:&quot;Frame&quot;,&quot;label&quot;:&quot;&quot;,&quot;icon&quot;:&quot;frame&quot;,&quot;widget&quot;:[{&quot;widgetId&quot;:&quot;demo_0_0&quot;,&quot;type&quot;:&quot;Group&quot;,&quot;label&quot;:&quot;First Floor&quot;,&quot;icon&quot;:&quot;firstfloor&quot;,&quot;item&quot;:{&quot;type&quot;:&quot;GroupItem&quot;,&quot;name&quot;:&quot;gFF&quot;,&quot;state&quot;:&quot;Undefined&quot;,&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/items/gFF&quot;},&quot;linkedPage&quot;:{&quot;id&quot;:&quot;0000&quot;,&quot;title&quot;:&quot;First Floor&quot;,&quot;icon&quot;:&quot;firstfloor&quot;,&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo/0 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DemoDemo {
+        internal static string Homepage {
             get {
-                return ResourceManager.GetString("DemoDemo", resourceCulture);
+                return ResourceManager.GetString("Homepage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {&quot;sitemap&quot;: [ {&quot;name&quot;:&quot;demo&quot;,&quot;label&quot;:&quot;Demo House&quot;,&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo&quot;,&quot;homepage&quot;:{&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo/demo&quot;,&quot;leaf&quot;:&quot;false&quot;}}, {&quot;name&quot;:&quot;demo 1&quot;,&quot;label&quot;:&quot;Demo House 1&quot;,&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo &quot;,&quot;homepage&quot;:{&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo1/demo1&quot;,&quot;leaf&quot;:&quot;false&quot;}}]}.
+        ///   Looks up a localized string similar to {&quot;sitemap&quot;: [ {&quot;name&quot;:&quot;demo&quot;,&quot;label&quot;:&quot;Demo House&quot;,&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo&quot;,&quot;homepage&quot;:{&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo/demo&quot;,&quot;leaf&quot;:&quot;false&quot;}}, {&quot;name&quot;:&quot;demo1&quot;,&quot;label&quot;:&quot;Demo House 1&quot;,&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo1 &quot;,&quot;homepage&quot;:{&quot;link&quot;:&quot;http://demo.openhab.org:8080/rest/sitemaps/demo1/demo1&quot;,&quot;leaf&quot;:&quot;false&quot;}}]}.
         /// </summary>
         internal static string Sitemaps {
             get {
