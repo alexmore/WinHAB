@@ -6,44 +6,66 @@
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1000">
+             d:DesignHeight="600" d:DesignWidth="1000"
+             Name="MainViewControl"
+             Foreground="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Grid Name="Header" Grid.Row="0" Background="{DynamicResource WindowBackground}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="Header" Grid.Row="0" Grid.Column="1" Margin="0,0,50,0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Name="LogoBorder" Background="{DynamicResource Accent}" BorderThickness="0" Grid.RowSpan="2">
-                <Path Data="{StaticResource OpenHabIcon}" Fill="White" Stretch="Uniform" Width="30" Height="30" Margin="5"/>
-            </Border>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton Name="TitleToggleButton" Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderDropDownToggleButton}" 
+                          Foreground="{Binding Foreground, ElementName=MainViewControl}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="WinHAB" Style="{StaticResource TitleH1}" Margin="0,-10"/>
+                    <Path Data="{StaticResource ArrowHeadDownIcon}" VerticalAlignment="Center" Margin="10,6,0,0" Width="14" Height="14" 
+                          Fill="{Binding Foreground, ElementName=TitleToggleButton}" Stretch="Uniform"/>
+                </StackPanel>
+            </ToggleButton>
+            <Popup IsOpen="{Binding IsChecked, ElementName=TitleToggleButton}" Grid.Column="0" Grid.Row="0" Name="HeaderDropDownPopup" StaysOpen="False"
+                       PlacementTarget="{Binding ElementName=TitleToggleButton}" >
+                <Border Background="{DynamicResource WindowBackground}" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Padding="10" >
+                    <controls:HeaderDropDownControl AppConfiguration="{Binding AppConfiguration}" NavigationService="{Binding NavigationService}" />
+                </Border>
+            </Popup>
             
-            <Grid Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <controls:IconLinkButton x:Name="HeaderButton"
-                                         IconData="{StaticResource ArrowHeadDownIcon}" IconSize="12"
-                                         Content="DEMO HOUSE" Style="{StaticResource RightIconLinkButton}"
-                                         FontSize="16" FontWeight="Bold"
-                                         Click="OpenHeaderDropDown"/>
-                <Popup Name="HeaderDropDownPopup" StaysOpen="False"
-                       PlacementTarget="{Binding ElementName=HeaderButton}" >
-                    <Border Background="{DynamicResource WindowBackground}" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Padding="10" >
-                            <controls:HeaderDropDownControl AppConfiguration="{Binding AppConfiguration}" NavigationService="{Binding NavigationService}" />
-                    </Border>
-                </Popup>
-            </Grid>
+            <ToggleButton Name="SitemapToggleButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderDropDownToggleButton}" 
+                          Foreground="{Binding Foreground, ElementName=MainViewControl}" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Path Data="{StaticResource GraphDiagramIcon}" VerticalAlignment="Center" Margin="0,3,10,0" Width="20" Height="20" 
+                          Fill="{Binding Foreground, ElementName=SitemapToggleButton}" Stretch="Uniform"/>
+                    <TextBlock Text="Demo house" Style="{StaticResource TitleH3}" VerticalAlignment="Center"/>
+                    <Path Data="{StaticResource ArrowHeadDownIcon}" VerticalAlignment="Center" Margin="5,6,0,0" Width="10" Height="10" 
+                          Fill="{Binding Foreground, ElementName=SitemapToggleButton}" Stretch="Uniform"/>
+                </StackPanel>
+            </ToggleButton>
+
+            <TextBlock Grid.Column="6" Grid.Row="0" Text="18:26"  Style="{StaticResource TitleH1}" HorizontalAlignment="Right" Margin="0,-10" />
+            <TextBlock Grid.Column="6" Grid.Row="1" Text="четверг, 12 февраля 2015"  Style="{StaticResource TitleH3}" />
         </Grid>
 
-        <Grid Grid.Row="1" Margin="40,10,0,20">
-            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Mouse.PreviewMouseWheel="HorizontalScroll"
+        <Grid Grid.Row="1" Grid.Column="1" Margin="0,20,0,20">
+            <ScrollViewer Name="TileScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"  Mouse.PreviewMouseWheel="HorizontalScroll"
                           PanningMode="HorizontalOnly" Foreground="White">
                 <ItemsControl Name="Widgets" ItemsSource="{Binding Widgets}">
                     <ItemsControl.Resources>
@@ -60,12 +82,12 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0,0,60,0">
+                            <Grid Margin="0,0,30,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Title}" Margin="0,20,0,10" FontFamily="Segoe UI" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Title}" Margin="0,0,0,10" Style="{StaticResource TitleH4}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <ItemsControl Name="ChildrenWidgets" ItemsSource="{Binding Widgets}" Grid.Row="1">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>

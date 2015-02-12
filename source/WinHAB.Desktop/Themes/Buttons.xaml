@@ -14,6 +14,7 @@
         <Setter Property="Height" Value="NaN" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="11" />
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:IconLinkButton}">
@@ -30,24 +31,23 @@
                             <Path Name="IconPath"  
                                   Data="{TemplateBinding IconData}"
                                   Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}" 
-                                  Fill="{TemplateBinding Foreground}" Stretch="Uniform"/>
-                            <TextBlock Name="LinkText"  Grid.Column="1"
-                                       DataContext="{TemplateBinding Content}"
-                                       Text="{Binding Converter={StaticResource ToUpperConverter}}"
-                                       Margin="5,0,0,0"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                  Fill="{TemplateBinding Foreground}" Stretch="Uniform"
+                                  Margin="0,0,5,0"/>
+                            <ContentPresenter Grid.Column="1" Name="Presenter" Margin="{TemplateBinding Padding}"
+                                              Content="{TemplateBinding Content}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Grid>
 
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
-                            <Setter TargetName="LinkText" Property="Margin" Value="0"/>
-                            <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="IconPath" Property="Margin" Value="0"/>
                         </Trigger>
                         <Trigger Property="IconData" Value="{x:Null}">
-                            <Setter TargetName="LinkText" Property="Margin" Value="0"/>
+                            <Setter TargetName="IconPath" Property="Margin" Value="0"/>
                             <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -126,12 +126,13 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DropDownToggleButton" TargetType="ToggleButton" BasedOn="{StaticResource SystemButtonBase}" >
+    <Style x:Key="HeaderDropDownToggleButton" TargetType="ToggleButton" BasedOn="{StaticResource SystemButtonBase}" >
         <Setter Property="Foreground" Value="{DynamicResource WindowText}"/>
         <Setter Property="Width" Value="NaN" />
         <Setter Property="Height" Value="NaN" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -140,11 +141,17 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 SnapsToDevicePixels="true">
-                        <Path Name="IconPath"  Data="{StaticResource ArrowHeadDownIcon}" Width="12" Height="12" Fill="{TemplateBinding Foreground}" Stretch="Uniform"/>
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <ContentPresenter Name="Presenter" Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextHover}"/>
+                            <Setter Property="Opacity" Value=".8"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -152,13 +159,13 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource Accent}"/>
+                <Setter Property="Opacity" Value=".8"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextPressed}" />
+                <Setter Property="Opacity" Value=".4" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextDisabled}" />
+                <Setter Property="Opacity" Value=".4" />
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -25,12 +25,7 @@ namespace WinHAB.Desktop.Views
     {
       InitializeComponent();
     }
-
-    private void OpenHeaderDropDown(object sender, RoutedEventArgs e)
-    {
-      HeaderDropDownPopup.IsOpen = !HeaderDropDownPopup.IsOpen;
-    }
-
+    
     private void HorizontalScroll(object sender, MouseWheelEventArgs e)
     {
       var scrollViewer = (sender as ScrollViewer);

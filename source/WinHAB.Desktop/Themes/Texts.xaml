@@ -11,24 +11,32 @@
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="FontSize" Value="50" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
     <Style x:Key="TitleH2" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="FontSize" Value="30" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
     <Style x:Key="TitleH3" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
     <Style x:Key="TitleH4" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI Semilight" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
     <Style x:Key="HeaderH1" TargetType="TextBlock">
@@ -36,6 +44,8 @@
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
     <Style x:Key="HeaderH2" TargetType="TextBlock">
@@ -43,6 +53,8 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
     <Style x:Key="HeaderH3" TargetType="TextBlock">
@@ -50,6 +62,8 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
     <Style x:Key="HeaderH4" TargetType="TextBlock">
@@ -57,5 +71,7 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 </ResourceDictionary>

@@ -88,6 +88,7 @@
       <DependentUpon>WaiterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsPanel.cs" />
+    <Compile Include="ViewModels\DesktopMainViewModel.cs" />
     <Compile Include="Views\LaunchView.xaml.cs">
       <DependentUpon>LaunchView.xaml</DependentUpon>
     </Compile>

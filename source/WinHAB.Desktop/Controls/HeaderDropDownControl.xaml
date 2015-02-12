@@ -6,11 +6,14 @@
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
              xmlns:loc="clr-namespace:WinHAB.Desktop.Localizations"
              mc:Ignorable="d" 
+             Foreground="{DynamicResource WindowText}"
              Name="HeaderDropDown">
     <StackPanel Orientation="Vertical">
         <TextBlock Text="{Binding Source={x:Static loc:Localization.Settings}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH3}" />
         <StackPanel Orientation="Vertical" Margin="10,0,0,0">
-            <controls:IconLinkButton Margin="0,5,0,0" IconData="{StaticResource GraphDiagramIcon}" Content="{Binding Source={x:Static loc:Localization.ChangeSitemap}, Converter={StaticResource ToUpperConverter}}" Click="ChangeSitemap" />
+            <controls:IconLinkButton Margin="0,5,0,0" IconData="{StaticResource GraphDiagramIcon}" 
+                                     Content="{Binding Source={x:Static loc:Localization.ChangeSitemap}, Converter={StaticResource ToUpperConverter}}" 
+                                     Click="ChangeSitemap" />
             <controls:IconLinkButton Margin="0,5,0,0" IconData="{StaticResource ServerIcon}" Content="{Binding Source={x:Static loc:Localization.ChangeServer}, Converter={StaticResource ToUpperConverter}}" Click="ChangeServer" />
         </StackPanel>
         

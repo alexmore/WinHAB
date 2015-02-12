@@ -13,6 +13,7 @@ using WinHAB.Core.Configuration;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Desktop.Configuration;
+using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop
@@ -42,8 +43,8 @@ namespace WinHAB.Desktop
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      navigation.Navigate<LaunchViewModel>();
-      //navigation.Navigate<MainViewModel>();
+      //navigation.Navigate<LaunchViewModel>();
+      navigation.Navigate<DesktopMainViewModel>();
     }
 
     private void SetAppearance(DesktopConfiguration cfg)
