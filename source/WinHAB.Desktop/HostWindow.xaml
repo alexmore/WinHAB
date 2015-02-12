@@ -7,11 +7,6 @@
                   Style="{StaticResource HostWindowStyle}"
                   Padding="0" 
                   Name="HostWindowName">
-    <mui:ModernWindow.BackgroundContent>
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Border Background="Black" Opacity=".2"/>
-        </Grid>
-    </mui:ModernWindow.BackgroundContent>
     <Grid>
     </Grid>
 </mui:ModernWindow>

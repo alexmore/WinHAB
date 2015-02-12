@@ -40,7 +40,12 @@
                                     </Grid.RowDefinitions>
 
                                     <!-- window background content -->
-                                    <ContentControl Grid.RowSpan="2" Content="{TemplateBinding BackgroundContent}" />
+                                    <Grid Grid.RowSpan="2">
+                                        <ContentControl Content="{TemplateBinding BackgroundContent}" />
+                                        <Border Background="#59000000" />
+                                        <!-- Background mask-->
+                                    </Grid>
+                                    
 
                                     <!-- window content -->
                                     <controls:TransitioningContentControl Grid.Row="1" Content="{TemplateBinding Content}"
