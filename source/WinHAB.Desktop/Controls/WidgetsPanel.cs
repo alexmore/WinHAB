@@ -16,6 +16,11 @@ namespace WinHAB.Desktop.Controls
     private double MediumFullWidth { get { return MediumSize.Width + WidgetMarging; }}
     private double MediumFullHeight { get { return MediumSize.Height + WidgetMarging; } }
 
+    public WidgetsPanel() : base()
+    {
+      MinHeight = LargeSize.Height + WidgetMarging;
+    }
+
     private string PrintMap(List<MapItem>[] map)
     {
       var s = string.Empty;
