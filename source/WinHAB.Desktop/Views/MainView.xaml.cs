@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using WinHAB.Core.Mvvm;
 
 namespace WinHAB.Desktop.Views
@@ -24,6 +25,19 @@ namespace WinHAB.Desktop.Views
     public MainView()
     {
       InitializeComponent();
+
+      Action setCurrentDateTime = () =>
+      {
+        TimeTextBlock.Text = DateTime.Now.ToShortTimeString();
+        DateTextBlock.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+      };
+
+      setCurrentDateTime();
+
+      var timer = new DispatcherTimer();
+      timer.Interval = new TimeSpan(0,0,0,1);
+      timer.Tick += (sender, args) => setCurrentDateTime();
+      timer.Start();
     }
     
     private void HorizontalScroll(object sender, MouseWheelEventArgs e)

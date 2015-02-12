@@ -10,6 +10,6 @@
              d:DesignHeight="{x:Static configuration:AppConstants.WidgetMediumWidth}" d:DesignWidth="{x:Static configuration:AppConstants.WidgetMediumHeight}"
              Padding="0">
     <Grid Margin="5">
-        <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBlock Text="{Binding Title}" FontSize="11" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Bottom" MaxHeight="32"/>
     </Grid>
 </UserControl>

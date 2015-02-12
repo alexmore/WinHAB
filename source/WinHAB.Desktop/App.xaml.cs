@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
 using Ninject;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Desktop.Configuration;
@@ -37,14 +40,23 @@ namespace WinHAB.Desktop
 
       // Appearance settings
       SetAppearance(cfg);
-     
-      System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(cfg.Language);
+
+      var ci = new CultureInfo(cfg.Language);
+      Thread.CurrentThread.CurrentCulture = ci;
+      Thread.CurrentThread.CurrentUICulture = ci;
       
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
       //navigation.Navigate<LaunchViewModel>();
-      navigation.Navigate<DesktopMainViewModel>();
+      navigation.Navigate<DesktopMainViewModel>(x => x
+        .Add("selectedSitemap", new SitemapData { Name = "demo", Label = "Demo house", HomepageLink = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo/demo"), Link = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo") })
+        .Add("sitemaps", new[]
+        {
+          new SitemapData { Name = "demo", Label = "Demo house", HomepageLink = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo/demo"), Link = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo") },
+          new SitemapData { Name = "demo1", Label = "Demo house 1", HomepageLink = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo/demo"), Link = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo") }
+        })
+        );
     }
 
     private void SetAppearance(DesktopConfiguration cfg)
