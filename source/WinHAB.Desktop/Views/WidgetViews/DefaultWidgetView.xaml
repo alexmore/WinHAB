@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="WinHAB.Desktop.Views.WidgetViews.TextWidgetView"
+﻿<UserControl x:Class="WinHAB.Desktop.Views.WidgetViews.DefaultWidgetView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Background="{DynamicResource Accent}" Foreground="White"
-             Height="150" Width="150">
-    <Grid Margin="10">
+             Background="{DynamicResource Accent}"
+             Foreground="White"
+             d:DesignHeight="120" d:DesignWidth="120"
+             Padding="0">
+    <Grid Margin="5">
         <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>

@@ -94,14 +94,8 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WidgetViews\PictureWidgetView.xaml.cs">
-      <DependentUpon>PictureWidgetView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WidgetViews\TextWidgetView.xaml.cs">
-      <DependentUpon>TextWidgetView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WidgetViews\WeatherWidgetView.xaml.cs">
-      <DependentUpon>WeatherWidgetView.xaml</DependentUpon>
+    <Compile Include="Views\WidgetViews\DefaultWidgetView.xaml.cs">
+      <DependentUpon>DefaultWidgetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ColorExtensions.cs" />
     <Page Include="Controls\HeaderDropDownControl.xaml">
@@ -161,15 +155,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WidgetViews\PictureWidgetView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\WidgetViews\TextWidgetView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\WidgetViews\WeatherWidgetView.xaml">
+    <Page Include="Views\WidgetViews\DefaultWidgetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

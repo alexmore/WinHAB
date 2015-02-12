@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WinHAB.Desktop.Views.WidgetViews
 {
   /// <summary>
-  /// Interaction logic for TextWidgetView.xaml
+  /// Interaction logic for DefaultWidgetView.xaml
   /// </summary>
-  public partial class TextWidgetView : UserControl
+  public partial class DefaultWidgetView : UserControl
   {
-    public TextWidgetView()
+    public DefaultWidgetView()
     {
       InitializeComponent();
     }
