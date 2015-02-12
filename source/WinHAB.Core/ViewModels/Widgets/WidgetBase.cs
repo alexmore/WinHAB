@@ -13,5 +13,8 @@ namespace WinHAB.Core.ViewModels.Widgets
     private string _Title;
     public string Title { get { return _Title; } set { _Title = value; RaisePropertyChanged(() => Title); } }
 
+    private string _Value;
+    public string Value { get { return _Value; } set { _Value = value; RaisePropertyChanged(() => Value); } }
+
   }
 }

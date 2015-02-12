@@ -49,8 +49,21 @@ namespace WinHAB.Core.ViewModels
         frame.Widgets = new ObservableCollection<WidgetBase>();
         foreach (var w in i.Widgets)
         {
-          frame.Widgets.Add(new WidgetBase(Navigation) { Size = WidgetSize.Meduim, Title = w.Label});
+          frame.Widgets.Add(new WidgetBase(Navigation)
+          {
+            Size = w.FormattedValue.Length > 56 ? WidgetSize.Large : (w.FormattedValue.Length > 15 ? WidgetSize.Wide : WidgetSize.Meduim), 
+            Title = w.Title,
+            Value = w.FormattedValue
+          });
         }
+
+        var s = "Q1 r1 uiop1";
+        frame.Widgets.Add(new WidgetBase(Navigation)
+        {
+          Size = s.Length > 31 ? WidgetSize.Large : (s.Length > 15 ? WidgetSize.Wide : WidgetSize.Meduim),
+          Title = "Mega Super Wrapped Trimmed Test tile",
+          Value = s
+        });
         Widgets.Add(frame);
       }
       Waiter.Hide();

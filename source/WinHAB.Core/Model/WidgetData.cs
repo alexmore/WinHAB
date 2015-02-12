@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace WinHAB.Core.Model
@@ -12,6 +13,29 @@ namespace WinHAB.Core.Model
     public string Name { get; set; }
 
     public string Label { get; set; }
+
+    public string Title
+    {
+      get
+      {
+        if (string.IsNullOrWhiteSpace(Label)) return null;
+        if (Label.IndexOf('[') == -1) return Label;
+        return Label.Substring(0, Label.LastIndexOf('['));
+      }
+    }
+
+    public string FormattedValue
+    {
+      get
+      {
+        if (string.IsNullOrWhiteSpace(Label)) return null;
+        var pattern = @"\[(.*?)\]";
+        var match = Regex.Match(Label, pattern);
+        return match.Groups[1].Value;
+      }
+    }
+
+
     public string Icon { get; set; }
     public string LabelColor { get; set; }
     public string ValueColor { get; set; }

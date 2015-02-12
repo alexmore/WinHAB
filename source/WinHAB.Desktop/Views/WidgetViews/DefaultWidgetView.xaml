@@ -7,9 +7,28 @@
              mc:Ignorable="d" 
              Background="{DynamicResource Accent}"
              Foreground="White"
-             d:DesignHeight="{x:Static configuration:AppConstants.WidgetMediumWidth}" d:DesignWidth="{x:Static configuration:AppConstants.WidgetMediumHeight}"
+             d:DesignHeight="{x:Static configuration:AppConstants.WidgetMediumHeight}" d:DesignWidth="{x:Static configuration:AppConstants.WidgetMediumWidth}"
              Padding="0">
-    <Grid Margin="5">
-        <TextBlock Text="{Binding Title}" FontSize="11" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Bottom" MaxHeight="32"/>
+    <Grid Margin="5" Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2"  Text="{Binding Value}" Style="{StaticResource TitleH2}"
+                   TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                   LineStackingStrategy="BlockLineHeight" LineHeight="32"/>
+        <Path Grid.Row="2" Grid.Column="0"
+              Data="{StaticResource ServerIcon}" VerticalAlignment="Center" Width="25" Height="25" Margin="0,0,5,0"
+              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Stretch="Uniform"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" 
+                   Text="{Binding Title}" FontSize="12" 
+                   TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                   MaxHeight="32"/>
+        
     </Grid>
 </UserControl>
