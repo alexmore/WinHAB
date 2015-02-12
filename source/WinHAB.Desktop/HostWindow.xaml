@@ -6,7 +6,7 @@
                   WindowStartupLocation="CenterScreen"
                   Style="{StaticResource HostWindowStyle}"
                   Padding="0" 
-                  Name="HostWindowName">
+                  Name="HostWindowName" >
     <Grid>
     </Grid>
 </mui:ModernWindow>
