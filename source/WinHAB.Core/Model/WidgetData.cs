@@ -49,7 +49,7 @@ namespace WinHAB.Core.Model
       {
         if (string.IsNullOrWhiteSpace(Label)) return null;
         if (Label.IndexOf('[') == -1) return Label;
-        return Label.Substring(0, Label.LastIndexOf('['));
+        return Label.Substring(0, Label.LastIndexOf('[')).Trim();
       }
     }
 
@@ -60,7 +60,7 @@ namespace WinHAB.Core.Model
         if (string.IsNullOrWhiteSpace(Label)) return null;
         const string pattern = @"\[(.*?)\]";
         var match = Regex.Match(Label, pattern);
-        return match.Groups[1].Value;
+        return match.Groups[1].Value.Trim();
       }
     }
     #endregion

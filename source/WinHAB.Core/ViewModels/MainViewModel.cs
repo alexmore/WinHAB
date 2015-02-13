@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using WinHAB.Core.Collections;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Model;
@@ -11,13 +14,15 @@ namespace WinHAB.Core.ViewModels
   public class MainViewModel : ViewModel
   {
     private OpenHabClient _client;
+    private readonly IWidgetsFactory _widgetsFactory;
 
-    public MainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient client, IEnumerable<SitemapData> sitemaps, SitemapData selectedSitemap) : base(navigationService)
+    public MainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient client, IWidgetsFactory widgetsFactory, IEnumerable<SitemapData> sitemaps, SitemapData selectedSitemap) : base(navigationService)
     {
       AppConfiguration = appConfig;
 
       Sitemap = selectedSitemap;
       _client = client;
+      _widgetsFactory = widgetsFactory;
       SitemapsList = sitemaps.ToObservableCollection();
 
       WidgetsListTitle = Sitemap.Label;
@@ -40,33 +45,48 @@ namespace WinHAB.Core.ViewModels
 
     public async override void OnNavigatedTo()
     {
-      Waiter.Show();
-      var page = await _client.GetPageAsync(Sitemap.HomepageLink);
-      Widgets = new ObservableCollection<FrameWidget>();
-      foreach (var i in page.Widgets)
-      {
-        var frame = new FrameWidget(Navigation) {Title = i.Label};
-        frame.Widgets = new ObservableCollection<WidgetBase>();
-        foreach (var w in i.Widgets)
-        {
-          frame.Widgets.Add(new WidgetBase(Navigation)
-          {
-            Size = w.FormattedValue.Length > 56 ? WidgetSize.Large : (w.FormattedValue.Length > 15 ? WidgetSize.Wide : WidgetSize.Meduim), 
-            Title = w.Title,
-            Value = w.FormattedValue
-          });
-        }
-
-        var s = "Q1 r1 uiop1";
-        frame.Widgets.Add(new WidgetBase(Navigation)
-        {
-          Size = s.Length > 31 ? WidgetSize.Large : (s.Length > 15 ? WidgetSize.Wide : WidgetSize.Meduim),
-          Title = "Mega Super Wrapped Trimmed Test tile",
-          Value = s
-        });
-        Widgets.Add(frame);
-      }
-      Waiter.Hide();
+      Widgets = await LoadPageWidgets(Sitemap.HomepageLink).ToObservableCollectionAsync();
     }
+
+    private async Task<IEnumerable<FrameWidget>> LoadPageWidgets(Uri pageUri)
+    {
+      Waiter.Show();
+      
+      var page = await _client.GetPageAsync(pageUri);
+      if (page == null || page.Widgets == null || page.Widgets.Count == 0) return null;
+
+      // Wrap independent widgets into frames
+      var framesData = new List<WidgetData>();
+      foreach (var widget in page.Widgets)
+      {
+        if (widget.Type == WidgetType.Frame) framesData.Add(widget);
+        else
+        {
+          if (framesData.Last() == null || framesData.Last().Label != "#WRAPPER#") framesData.Add(new WidgetData() { Widgets = new List<WidgetData>(), Label = "#WRAPPER#"});
+          framesData.Last().Widgets.Add(widget);
+        }
+      }
+
+      var res = new List<FrameWidget>();
+      foreach (var frameData in framesData)
+      {
+        var frame = (FrameWidget)_widgetsFactory.Create(frameData);
+        res.Add(frame);
+
+        foreach (var widgetData in frameData.Widgets)
+        {
+          var widget = _widgetsFactory.Create(widgetData);
+          if (widget != null) frame.Widgets.Add(widget);
+        }
+      }
+
+      Waiter.Hide();
+
+      return res;
+    }
+
+    #region History
+    #endregion
+
   }
 }

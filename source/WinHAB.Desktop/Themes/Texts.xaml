@@ -10,7 +10,7 @@
     <Style x:Key="TitleH1" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="FontSize" Value="50" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
@@ -18,7 +18,7 @@
     <Style x:Key="TitleH2" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="FontSize" Value="30" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
@@ -26,7 +26,7 @@
     <Style x:Key="TitleH3" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
@@ -43,7 +43,7 @@
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
@@ -52,7 +52,7 @@
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
@@ -71,6 +71,31 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="TextWidgetValue" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="26" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="TextWidgetTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="15" />
+        <Setter Property="MaxHeight" Value="30"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>

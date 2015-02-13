@@ -2,7 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:widgets="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core"
                     xmlns:widgetViews="clr-namespace:WinHAB.Desktop.Views.WidgetViews">
-    <DataTemplate DataType="{x:Type widgets:WidgetBase}">
-        <widgetViews:DefaultWidgetView />
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views/WidgetViews/WidgetViewStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <DataTemplate DataType="{x:Type widgets:TextWidget}">
+        <Button Style="{StaticResource TextWidgetView}"/>
     </DataTemplate>
 </ResourceDictionary>
