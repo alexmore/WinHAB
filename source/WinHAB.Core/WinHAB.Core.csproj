@@ -51,10 +51,12 @@
       <DependentUpon>Localization.ru.resx</DependentUpon>
     </Compile>
     <Compile Include="Model\ItemData.cs" />
+    <Compile Include="Model\MappingData.cs" />
     <Compile Include="Model\PageData.cs" />
     <Compile Include="Model\SitemapData.cs" />
     <Compile Include="Model\ToListJsonConverter.cs" />
     <Compile Include="Model\WidgetData.cs" />
+    <Compile Include="Model\WidgetTypeJsonConverter.cs" />
     <Compile Include="Mvvm\AbstractNavigationService.cs" />
     <Compile Include="Mvvm\AbstractViewModelViewFactory.cs" />
     <Compile Include="Mvvm\AsyncRelayCommand.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="ViewModels\Widgets\FrameWidget.cs" />
     <Compile Include="ViewModels\Widgets\WidgetBase.cs" />
     <Compile Include="ViewModels\Widgets\WidgetSize.cs" />
+    <Compile Include="ViewModels\Widgets\WidgetType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
