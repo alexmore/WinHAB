@@ -30,7 +30,15 @@ namespace WinHAB.Desktop.Converters
         }
 
         if (geometry.StartsWith("M") && geometry.EndsWith("z"))
-          return Geometry.Parse(geometry);
+        {
+          try
+          {
+            return Geometry.Parse(geometry);
+          }
+          catch
+          {
+          }
+        }
 
         return null;
       }
