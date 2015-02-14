@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\DesktopConfiguration.cs" />
+    <Compile Include="Configuration\UserResources.cs" />
     <Compile Include="Controls\HeaderDropDownControl.xaml.cs">
       <DependentUpon>HeaderDropDownControl.xaml</DependentUpon>
     </Compile>
@@ -98,6 +99,7 @@
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ColorExtensions.cs" />
+    <Compile Include="Windows\ResourceDictionaryExtensions.cs" />
     <Page Include="Controls\HeaderDropDownControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

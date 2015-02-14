@@ -6,6 +6,7 @@ using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
+using WinHAB.Desktop.Configuration;
 
 namespace WinHAB.Desktop.ViewModels
 {
@@ -16,10 +17,13 @@ namespace WinHAB.Desktop.ViewModels
     {
     }
 
-    public override void OnNavigatedTo()
+    public async override void OnNavigatedTo()
     {
+      Waiter.Show();
+      await UserResources.LoadUserResources(AppConfiguration.Server);
+      Waiter.Hide();
+      
       base.OnNavigatedTo();
-
     }
 
     #region Appearance

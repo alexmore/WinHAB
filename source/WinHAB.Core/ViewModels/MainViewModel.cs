@@ -46,9 +46,6 @@ namespace WinHAB.Core.ViewModels
     public async override void OnNavigatedTo()
     {
       Widgets = await LoadPageWidgets(Sitemap.HomepageLink).ToObservableCollectionAsync();
-
-      // TODO: Load remote Icons xaml resource
-
       AppConfiguration.Sitemap = Sitemap.Name;
       await AppConfiguration.SaveAsync();
     }
