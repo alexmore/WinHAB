@@ -62,7 +62,7 @@ namespace WinHAB.Core.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connecting.
+        ///   Looks up a localized string similar to Connecting....
         /// </summary>
         public static string Connecting {
             get {

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
+using FirstFloor.ModernUI.Windows.Converters;
 using Ninject;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Model;
@@ -48,15 +49,12 @@ namespace WinHAB.Desktop
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      //navigation.Navigate<LaunchViewModel>();
-      navigation.Navigate<DesktopMainViewModel>(x => x
-        .Add("selectedSitemap", new SitemapData { Name = "demo", Label = "Demo house", HomepageLink = new Uri("http://localhost:8080/rest/sitemaps/demo/demo"), Link = new Uri("http://localhost:8080/rest/sitemaps/demo") })
-        .Add("sitemaps", new[]
-        {
-          new SitemapData { Name = "demo", Label = "Demo house", HomepageLink = new Uri("http://localhost:8080/rest/sitemaps/demo/demo"), Link = new Uri("http://localhost:8080/rest/sitemaps/demo") },
-          new SitemapData { Name = "demo1", Label = "Demo house 1", HomepageLink = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo/demo"), Link = new Uri("http://demo.openhab.org:8080/rest/sitemaps/demo") }
-        })
-        );
+      
+      var vm = navigation.Navigate<LaunchViewModel>();
+      vm.HideAll();
+      vm.Waiter.Show(Localizations.Localization.Starting);
+      if (!string.IsNullOrWhiteSpace(cfg.Server)) await vm.ConnectCommand.ExecuteAsync(cfg.Server);
+      else vm.ShowServerUrl();
     }
 
     private void SetAppearance(DesktopConfiguration cfg)

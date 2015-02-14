@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Configuration;
@@ -52,20 +53,20 @@ namespace WinHAB.Core.ViewModels
     private bool _IsSitemapsVisible = false;
     public bool IsSitemapsVisible { get { return _IsSitemapsVisible; } set { _IsSitemapsVisible = value; RaisePropertyChanged(() => IsSitemapsVisible); } }
 
-    void HideAll()
+    public void HideAll()
     {
       IsServerAddressVisible = false;
       IsSitemapsVisible = false;
     }
 
-    void ShowServerUrl()
+    public void ShowServerUrl()
     {
       Waiter.Hide();
       IsServerAddressVisible = true;
       IsSitemapsVisible = false;
     }
 
-    void ShowSitemaps()
+    public void ShowSitemaps()
     {
       Waiter.Hide();
       IsServerAddressVisible = false;
@@ -90,7 +91,12 @@ namespace WinHAB.Core.ViewModels
         Sitemaps = new ObservableCollection<SitemapData>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
         _config.Server = server;
         await _config.SaveAsync();
-        ShowSitemaps();
+
+        var existingSitemap = Sitemaps.FirstOrDefault(x => x.Name == _config.Sitemap);
+        if (existingSitemap == null) 
+          ShowSitemaps();
+        else
+          SelectSitemapCommand.Execute(existingSitemap);
       }
       catch (Exception e)
       {
@@ -107,7 +113,7 @@ namespace WinHAB.Core.ViewModels
         return;
       }
 
-      Navigation.Navigate<MainViewModel>(x => x.Add("homepageUri", sitemap.HomepageLink));
+      Navigation.Navigate<MainViewModel>(x => x.Add("sitemaps", Sitemaps).Add("selectedSitemap", sitemap));
     }
   }
 }

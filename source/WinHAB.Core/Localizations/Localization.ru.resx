@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Connecting" xml:space="preserve">
-    <value>Подключение</value>
+    <value>Подключение...</value>
   </data>
   <data name="LaunchViewModelConnectionError" xml:space="preserve">
     <value>Невозможно загрузить схему. Подробности:</value>
