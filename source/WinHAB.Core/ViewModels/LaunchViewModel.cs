@@ -89,11 +89,12 @@ namespace WinHAB.Core.ViewModels
         HideAll();
         Waiter.Show(Localization.Connecting);
         Sitemaps = new ObservableCollection<SitemapData>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
+        bool showSitemaps = _config.Server != server;
         _config.Server = server;
         await _config.SaveAsync();
 
         var existingSitemap = Sitemaps.FirstOrDefault(x => x.Name == _config.Sitemap);
-        if (existingSitemap == null) 
+        if (existingSitemap == null || showSitemaps) 
           ShowSitemaps();
         else
           SelectSitemapCommand.Execute(existingSitemap);

@@ -103,6 +103,7 @@ namespace WinHAB.Desktop.Controls
     {
       if (NavigationService != null)
       {
+        AppConfiguration.Sitemap = null;
         NavigationService.ClearHistory();
         var vm = NavigationService.Navigate<LaunchViewModel>();
         await vm.ConnectCommand.ExecuteAsync(AppConfiguration.Server);

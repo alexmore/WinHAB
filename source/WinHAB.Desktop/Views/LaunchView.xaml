@@ -24,14 +24,14 @@
             <TextBlock Text="{x:Static loc:Localization.WinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
         </StackPanel>
         
-        <controls:WaiterControl Waiter="{Binding Waiter}" Grid.Row="1" Grid.RowSpan="2"/>
+        <controls:WaiterControl Waiter="{Binding Waiter}" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <TextBlock Text="{Binding Source={x:Static loc:Localization.LaunchViewServerUrlTitle}, Converter={StaticResource ToUpperConverter}}" 
                        Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
             <TextBlock Text="{x:Static loc:Localization.LaunchViewServerUrlTitleExample}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
-            <TextBox Name="ServerAddressTextBox" Text="{Binding ServerAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" HorizontalAlignment="Stretch" />
-            <Button Content="{x:Static loc:Localization.Connect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
+            <TextBox Name="ServerAddressTextBox" Text="{Binding ServerAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" HorizontalAlignment="Stretch" KeyDown="ConnectToServer"/>
+            <Button Name="ConnectButton" Content="{x:Static loc:Localization.Connect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
         </StackPanel>
 
         <Grid Grid.Row="2" Width="300" MaxHeight="300" Visibility="{Binding IsSitemapsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
