@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
+using FirstFloor.ModernUI.Windows.Converters;
 using Ninject;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Desktop.Configuration;
+using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop
@@ -36,14 +41,20 @@ namespace WinHAB.Desktop
 
       // Appearance settings
       SetAppearance(cfg);
-     
-      System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(cfg.Language);
+
+      var ci = new CultureInfo(cfg.Language);
+      Thread.CurrentThread.CurrentCulture = ci;
+      Thread.CurrentThread.CurrentUICulture = ci;
       
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      //navigation.Navigate<LaunchViewModel>();
-      navigation.Navigate<MainViewModel>();
+      
+      var vm = navigation.Navigate<LaunchViewModel>();
+      vm.HideAll();
+      vm.Waiter.Show(Localizations.Localization.Starting);
+      if (!string.IsNullOrWhiteSpace(cfg.Server)) await vm.ConnectCommand.ExecuteAsync(cfg.Server);
+      else vm.ShowServerUrl();
     }
 
     private void SetAppearance(DesktopConfiguration cfg)

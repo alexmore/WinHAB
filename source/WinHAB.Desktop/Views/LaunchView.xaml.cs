@@ -25,5 +25,15 @@ namespace WinHAB.Desktop.Views
     {
       InitializeComponent();
     }
+
+    private void ConnectToServer(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Enter)
+      {
+        var cmd = ConnectButton.Command;
+        if (cmd.CanExecute((sender as TextBox).Text))
+          cmd.Execute((sender as TextBox).Text);
+      }
+    }
   }
 }

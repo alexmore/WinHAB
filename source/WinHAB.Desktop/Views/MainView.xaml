@@ -6,77 +6,89 @@
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1000">
+             d:DesignHeight="600" d:DesignWidth="1000"
+             Name="MainViewControl"
+             Foreground="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Grid Name="Header" Grid.Row="0" Background="{DynamicResource WindowBackground}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="Header" Grid.Row="0" Grid.Column="1" Margin="0,0,50,0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Name="LogoBorder" Background="{DynamicResource Accent}" BorderThickness="0" Grid.RowSpan="2">
-                <Path Data="{StaticResource OpenHabIcon}" Fill="White" Stretch="Uniform" Width="30" Height="30" Margin="5"/>
-            </Border>
-            
-            <Grid Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <controls:IconLinkButton x:Name="HeaderButton"
-                                         IconData="{StaticResource ArrowHeadDownIcon}" IconSize="12"
-                                         Content="DEMO HOUSE" Style="{StaticResource RightIconLinkButton}"
-                                         FontSize="16" FontWeight="Bold"
-                                         Click="OpenHeaderDropDown"/>
-                <Popup Name="HeaderDropDownPopup" StaysOpen="False"
-                       PlacementTarget="{Binding ElementName=HeaderButton}" >
+            <Grid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <ToggleButton Name="TitleToggleButton" Style="{StaticResource HeaderDropDownToggleButton}" Foreground="{Binding Foreground, ElementName=MainViewControl}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="WinHAB" Style="{StaticResource TitleH1}" Margin="0,-10"/>
+                        <Path Data="{StaticResource ExpanderDownIcon}" VerticalAlignment="Center" Margin="10,6,0,0" Width="14" Height="14" Fill="{Binding Foreground, ElementName=TitleToggleButton}" Stretch="Uniform"/>
+                    </StackPanel>
+                </ToggleButton>
+                <Popup IsOpen="{Binding IsChecked, ElementName=TitleToggleButton}" Name="HeaderDropDownPopup" StaysOpen="False" PlacementTarget="{Binding ElementName=TitleToggleButton}" >
                     <Border Background="{DynamicResource WindowBackground}" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Padding="10" >
-                            <controls:HeaderDropDownControl AppConfiguration="{Binding AppConfiguration}" NavigationService="{Binding NavigationService}" />
+                        <controls:HeaderDropDownControl AppConfiguration="{Binding AppConfiguration}" NavigationService="{Binding NavigationService}" />
                     </Border>
                 </Popup>
             </Grid>
+            <TextBlock Name="TimeTextBlock" Grid.Row="0" Text="18:26" Style="{StaticResource TitleH1}" HorizontalAlignment="Right" Margin="0,-10" />
+            <TextBlock Name="DateTextBlock" Grid.Row="1" Text="четверг, 12 февраля 2015"  Style="{StaticResource TitleH4}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-5,0,0" />
         </Grid>
 
-        <Grid Grid.Row="1" Margin="40,10,0,20">
-            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Mouse.PreviewMouseWheel="HorizontalScroll"
+        <Button Name="HistoryBackButton" Grid.Row="1" Grid.Column="0" Style="{StaticResource HeaderLinkButton}" Foreground="{Binding Foreground, ElementName=MainViewControl}" 
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,1">
+            <Path Data="{StaticResource CircledArrowLeftIcon}" VerticalAlignment="Center" Width="30" Height="30" 
+                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Stretch="Uniform"/>
+        </Button>
+        <TextBlock Name="WidgetsListTitle" Grid.Row="1" Grid.Column="1" Text="{Binding WidgetsListTitle}" Style="{StaticResource TitleH2}"/>
+
+        <controls:WaiterControl Waiter="{Binding Waiter}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,20" Visibility="{Binding Waiter.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+            <ScrollViewer Name="TileScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"  Mouse.PreviewMouseWheel="HorizontalScroll"
                           PanningMode="HorizontalOnly" Foreground="White">
-                <ItemsControl Name="Widgets" ItemsSource="{Binding Widgets}">
-                    <ItemsControl.Resources>
-                        <ResourceDictionary>
-                            <ResourceDictionary.MergedDictionaries>
-                                <ResourceDictionary Source="WidgetViews/WidgetDataTemplates.xaml"/>
-                            </ResourceDictionary.MergedDictionaries>
-                        </ResourceDictionary>
-                    </ItemsControl.Resources>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel  Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0,0,60,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Title}" Margin="0,20,0,10" FontFamily="Segoe UI" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <ItemsControl Name="ChildrenWidgets" ItemsSource="{Binding Widgets}" Grid.Row="1">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <controls:WidgetsPanel  />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <StackPanel Orientation="Horizontal">
+                    <Border Background="Transparent" Width="60"/>
+                    <ItemsControl Name="Widgets" ItemsSource="{Binding Widgets}">
+                        <ItemsControl.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="WidgetViews/WidgetDataTemplates.xaml"/>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
+                        </ItemsControl.Resources>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel  Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,30,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding Title}" Margin="0,0,0,10" Style="{StaticResource TitleH4}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <ItemsControl Name="ChildrenWidgets" ItemsSource="{Binding Widgets}" Grid.Row="1">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <controls:WidgetsPanel  />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
     </Grid>

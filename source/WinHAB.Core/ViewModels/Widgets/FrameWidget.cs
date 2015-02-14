@@ -1,12 +1,14 @@
 ﻿using System.Collections.ObjectModel;
+using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
   public class FrameWidget : WidgetBase
   {
-    public FrameWidget(INavigationService navigationService) : base(navigationService)
+    public FrameWidget(INavigationService navigationService, WidgetData data) : base(navigationService, data)
     {
+      Widgets = new ObservableCollection<WidgetBase>();
     }
 
     private ObservableCollection<WidgetBase> _Widgets;

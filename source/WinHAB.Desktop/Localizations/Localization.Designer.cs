@@ -214,6 +214,15 @@ namespace WinHAB.Desktop.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Starting....
+        /// </summary>
+        public static string Starting {
+            get {
+                return ResourceManager.GetString("Starting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Theme.
         /// </summary>
         public static string Theme {

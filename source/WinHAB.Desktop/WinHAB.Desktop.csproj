@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\DesktopConfiguration.cs" />
+    <Compile Include="Configuration\UserResources.cs" />
     <Compile Include="Controls\HeaderDropDownControl.xaml.cs">
       <DependentUpon>HeaderDropDownControl.xaml</DependentUpon>
     </Compile>
@@ -88,16 +89,17 @@
       <DependentUpon>WaiterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsPanel.cs" />
+    <Compile Include="Converters\StringToGeometryConverter.cs" />
+    <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\DesktopMainViewModel.cs" />
     <Compile Include="Views\LaunchView.xaml.cs">
       <DependentUpon>LaunchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WidgetViews\DefaultWidgetView.xaml.cs">
-      <DependentUpon>DefaultWidgetView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\ColorExtensions.cs" />
+    <Compile Include="Windows\ResourceDictionaryExtensions.cs" />
     <Page Include="Controls\HeaderDropDownControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,11 +157,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WidgetViews\DefaultWidgetView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\WidgetViews\TextWidgetViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\WidgetViews\WidgetDataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WidgetViews\WidgetViewStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

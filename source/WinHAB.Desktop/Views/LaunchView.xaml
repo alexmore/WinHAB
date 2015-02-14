@@ -20,17 +20,18 @@
         
         <StackPanel Orientation="Vertical" Margin="0,0,0,20">
             <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource Accent}" Width="50" Height="50" HorizontalAlignment="Center"/>
-            <TextBlock Text="WINHAB" Style="{StaticResource Heading2}" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-            <TextBlock Text="{x:Static loc:Localization.WinHABDescription}" Style="{StaticResource Title}"  HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Text="WinHAB" Style="{StaticResource TitleH2}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            <TextBlock Text="{x:Static loc:Localization.WinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
         </StackPanel>
         
-        <controls:WaiterControl Waiter="{Binding Waiter}" Grid.Row="1" Grid.RowSpan="2"/>
+        <controls:WaiterControl Waiter="{Binding Waiter}" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
-            <TextBlock Text="{Binding Source={x:Static loc:Localization.LaunchViewServerUrlTitle}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource Heading2}" HorizontalAlignment="Center" />
+            <TextBlock Text="{Binding Source={x:Static loc:Localization.LaunchViewServerUrlTitle}, Converter={StaticResource ToUpperConverter}}" 
+                       Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
             <TextBlock Text="{x:Static loc:Localization.LaunchViewServerUrlTitleExample}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
-            <TextBox Name="ServerAddressTextBox" Text="{Binding ServerAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" HorizontalAlignment="Stretch" />
-            <Button Content="{x:Static loc:Localization.Connect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
+            <TextBox Name="ServerAddressTextBox" Text="{Binding ServerAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" HorizontalAlignment="Stretch" KeyDown="ConnectToServer"/>
+            <Button Name="ConnectButton" Content="{x:Static loc:Localization.Connect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
         </StackPanel>
 
         <Grid Grid.Row="2" Width="300" MaxHeight="300" Visibility="{Binding IsSitemapsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -40,7 +41,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding Source={x:Static loc:Localization.LaunchViewSelectSitemap}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource Heading2}" HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="0" Text="{Binding Source={x:Static loc:Localization.LaunchViewSelectSitemap}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
             <TextBlock Grid.Row="1" Text="{x:Static loc:Localization.LaunchViewSelectSitemapToLoad}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
 
             <ItemsControl Grid.Row="2" ItemsSource="{Binding Sitemaps}" Margin="0,5">
@@ -71,7 +72,8 @@
                                       Width="24" Height="24"
                                       VerticalAlignment="Center"
                                       Margin="0,0,10,0"/>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource Heading2}" />
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name, Converter={StaticResource ToUpperConverter}}" 
+                                           Style="{StaticResource HeaderH4}" />
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Label}" Style="{StaticResource Small}" />
                             </Grid>
                         </Button>
