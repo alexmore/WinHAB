@@ -40,6 +40,7 @@
     <Compile Include="Configuration\Language.cs" />
     <Compile Include="IRestClient.cs" />
     <Compile Include="IRestClientFactory.cs" />
+    <Compile Include="ITimer.cs" />
     <Compile Include="Localizations\Localization.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

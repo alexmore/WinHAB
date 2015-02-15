@@ -100,6 +100,7 @@
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ColorExtensions.cs" />
+    <Compile Include="Windows\DesktopTimer.cs" />
     <Compile Include="Windows\ResourceDictionaryExtensions.cs" />
     <Page Include="Controls\HeaderDropDownControl.xaml">
       <SubType>Designer</SubType>
