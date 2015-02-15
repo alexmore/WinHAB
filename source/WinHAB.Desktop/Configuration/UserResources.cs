@@ -23,7 +23,7 @@ namespace WinHAB.Desktop.Configuration
 
       try
       {
-        var stream = await client.GetResource(new Uri(serverAddress + "/winhab/UserResources.xaml"));
+        var stream = await client.GetStreamAsync(new Uri(serverAddress + "/winhab/UserResources.xaml"));
         var userResourcesReader = new System.Windows.Markup.XamlReader();
         Icons.MergedDictionaries.Add(LoadReasourceDictionary(stream));
       }
