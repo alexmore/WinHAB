@@ -101,8 +101,6 @@
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="IsEnabled" Value="{Binding IsLink}"/>
         <Setter Property="Template" Value="{StaticResource TextWidgetViewTemplate}"/>
-        <Setter Property="Command" Value="{Binding LoadLinkedPageCommand}"/>
-        <Setter Property="CommandParameter" Value="{Binding}"/>
     </Style>
 
 </ResourceDictionary>

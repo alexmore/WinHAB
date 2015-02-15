@@ -34,7 +34,5 @@ namespace WinHAB.Core.ViewModels.Widgets
     public string Icon { get { return _icon; } set { _icon = value; RaisePropertyChanged(() => Icon); } }
 
     public bool IsLink { get { return LinkedPageUri != null; }}
-
-    public AsyncRelayCommand<WidgetBase> LoadLinkedPageCommand { get; set; }
   }
 }

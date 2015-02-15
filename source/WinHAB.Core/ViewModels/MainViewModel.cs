@@ -88,10 +88,8 @@ namespace WinHAB.Core.ViewModels
         {
           var widget = _widgetsFactory.Create(widgetData);
           if (widget != null)
-          {
-            widget.LoadLinkedPageCommand = LoadLinkedPageCommand;
             frame.Widgets.Add(widget);
-          }
+          
         }
       }
 
@@ -110,7 +108,7 @@ namespace WinHAB.Core.ViewModels
 
     readonly Stack<PagesHistoryItem> _pagesHistory = new Stack<PagesHistoryItem>();
     private PagesHistoryItem _currentPage;
-    
+
     public bool HasHistory { get { return _pagesHistory.Count > 0; } }
 
     private string _HistoryPath;
