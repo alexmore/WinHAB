@@ -11,6 +11,7 @@ using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Views;
+using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop.Configuration
 {
@@ -25,6 +26,8 @@ namespace WinHAB.Desktop.Configuration
 
     public override void Load()
     {
+      Bind<ITimer>().To<DesktopTimer>();
+
       Bind<HostWindow>().ToConstant(_hostWindow);
       Bind<INavigationHost>().ToConstant(_hostWindow).InSingletonScope();
 
@@ -46,7 +49,7 @@ namespace WinHAB.Desktop.Configuration
       Bind<Func<Type, WidgetData, WidgetBase>>()
         .ToMethod(x => (t, d) => (WidgetBase)x.Kernel.Get(t, new ConstructorArgument("data", d)));
       Bind<IWidgetsFactory>().To<WidgetsFactory>();
-    }
+      }
 
     void ConfigureVMVFactory(IViewModelViewFactory f)
     {
