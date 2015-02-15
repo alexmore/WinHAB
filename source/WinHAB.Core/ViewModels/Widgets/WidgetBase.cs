@@ -18,7 +18,7 @@ namespace WinHAB.Core.ViewModels.Widgets
         LinkedPageUri = data.LinkedPage.Link;
     }
 
-    protected WidgetData Data { get; set; }
+    public WidgetData Data { get; set; }
     public WidgetSize Size { get; set; }
 
     private string _Title;
@@ -35,6 +35,6 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     public bool IsLink { get { return LinkedPageUri != null; }}
 
-
+    public AsyncRelayCommand<WidgetBase> LoadLinkedPageCommand { get; set; }
   }
 }

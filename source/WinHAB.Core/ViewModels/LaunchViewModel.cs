@@ -114,7 +114,7 @@ namespace WinHAB.Core.ViewModels
         return;
       }
 
-      Navigation.Navigate<MainViewModel>(x => x.Add("sitemaps", Sitemaps).Add("selectedSitemap", sitemap));
+      Navigation.Navigate<MainViewModel>(x => x.Add("selectedSitemap", sitemap));
     }
   }
 }

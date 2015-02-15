@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using WinHAB.Core.Mvvm;
+using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Desktop.Views
 {
@@ -38,8 +40,25 @@ namespace WinHAB.Desktop.Views
       timer.Interval = new TimeSpan(0,0,0,1);
       timer.Tick += (sender, args) => setCurrentDateTime();
       timer.Start();
+
+      this.Loaded += OnLoaded;
     }
-    
+
+    private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+    {
+      var dependancyProperyDescriptor = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, typeof (ItemsControl));
+
+      if (dependancyProperyDescriptor != null)
+      {
+        dependancyProperyDescriptor.AddValueChanged(Widgets, ItemsSourceChangedEvent);
+      }
+    }
+
+    private void ItemsSourceChangedEvent(object sender, EventArgs e)
+    {
+      Transition.StartTransition();
+    }
+
     private void HorizontalScroll(object sender, MouseWheelEventArgs e)
     {
       var scrollViewer = (sender as ScrollViewer);

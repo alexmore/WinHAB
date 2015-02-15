@@ -20,7 +20,7 @@ namespace WinHAB.Core.Model
     public string ValueColor { get; set; }
     
     [JsonProperty("mapping")]
-    [JsonConverter(typeof(ToListJsonConverter<WidgetData>))]
+    [JsonConverter(typeof(ToListJsonConverter<MappingData>))]
     public List<MappingData> Mappings;
     public bool SwitchSupport { get; set; }
     public int SendFrequency { get; set; }

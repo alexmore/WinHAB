@@ -76,6 +76,8 @@ namespace WinHAB.Desktop.Controls
    
     private int GetColumnsCount(List<MapItem>[] map)
     {
+      if (map[0].Count == 0) return 0;
+      
       var columnsCount = map[0].Count-1;
 
       var hasWidgetInLastColumn = false;
