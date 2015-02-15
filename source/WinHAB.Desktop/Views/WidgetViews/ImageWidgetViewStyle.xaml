@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:WinHAB.Desktop.Converters"
+                    xmlns:controls="clr-namespace:WinHAB.Desktop.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/Icons.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="ImageWidgetView" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource Accent}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Width" Value="NaN" />
+        <Setter Property="Height" Value="NaN" />
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="IsEnabled" Value="{Binding IsLink}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Grid Name="BackgroundGrid">
+                            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" 
+
+                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+
+                            <Image Name="Image"  Source="{Binding ImageStream, Converter={StaticResource StreamToWidgetImageConverter}}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        
+                        <controls:WaiterControl Waiter="{Binding Waiter}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        <Grid Name="TextGrid" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="Transparent" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Name="TextTitleTextBlock"  Grid.Row="0" Grid.Column="0" Margin="5,5,0,5" 
+                                       Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}"
+                                       HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+
+                            <Path Name="TextLinkPath"  Grid.Row="0" Grid.Column="1" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              Data="{StaticResource ArrowHeadRightIcon}" VerticalAlignment="Bottom" Width="10" Height="10" Margin="2,0,5,7"
+                              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Stretch="Uniform"/>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BackgroundGrid"  Property="Opacity" Value=".8"/>
+                            <Setter TargetName="TextGrid" Property="Background" Value="#59000000"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundGrid" Property="Opacity" Value=".6"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="BackgroundGrid" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

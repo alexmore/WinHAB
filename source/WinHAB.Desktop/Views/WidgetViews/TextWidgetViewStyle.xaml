@@ -5,9 +5,7 @@
         <ResourceDictionary Source="/Themes/Icons.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
-    <converters:TextWidgetValueToVisibilityConverter x:Key="TextWidgetValueToVisibilityConverter" />
-    <converters:StringToGeometryConverter x:Key="StringToGeometryConverter" />
+  
 
     <ControlTemplate x:Key="TextWidgetViewTemplate" TargetType="{x:Type Button}">
         <Grid>

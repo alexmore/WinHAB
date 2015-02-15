@@ -13,5 +13,13 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     private ObservableCollection<WidgetBase> _Widgets;
     public ObservableCollection<WidgetBase> Widgets { get { return _Widgets; } set { _Widgets = value; RaisePropertyChanged(() => Widgets); } }
+
+    public override void Cleanup()
+    {
+      base.Cleanup();
+      if (Widgets != null)
+        foreach (var widget in Widgets)
+          widget.Cleanup();
+    }
   }
 }

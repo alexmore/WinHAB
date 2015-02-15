@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 
@@ -20,6 +21,11 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     public WidgetData Data { get; set; }
     public WidgetSize Size { get; set; }
+
+    public virtual Task Initialize()
+    {
+      return Task.FromResult(0);
+    }
 
     private string _Title;
     public string Title { get { return _Title; } set { _Title = value; RaisePropertyChanged(() => Title); } }

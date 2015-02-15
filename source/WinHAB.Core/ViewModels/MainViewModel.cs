@@ -39,14 +39,14 @@ namespace WinHAB.Core.ViewModels
     public string Title { get { return _title; } set { _title = value; RaisePropertyChanged(() => Title); } }
 
     private ObservableCollection<FrameWidget> _Widgets;
-    public ObservableCollection<FrameWidget> Widgets { get { return _Widgets; } set { _Widgets = value; RaisePropertyChanged(() => Widgets); } }
+    public ObservableCollection<FrameWidget> Widgets { get { return _Widgets; } set { if (_Widgets != null) CleanupWidgets(); _Widgets = value; RaisePropertyChanged(() => Widgets); } }
 
     private SitemapData _Sitemap;
     public SitemapData Sitemap { get { return _Sitemap; } set { _Sitemap = value; RaisePropertyChanged(() => Sitemap); } }
 
     public async override void OnNavigatedTo()
     {
-      Widgets = await LoadPageWidgets(Sitemap.HomepageLink).ToObservableCollectionAsync();
+      await LoadPageWidgets(Sitemap.HomepageLink);
 
       _currentPage = new PagesHistoryItem() {Title = Sitemap.Label, Uri = Sitemap.HomepageLink};
       
@@ -54,14 +54,14 @@ namespace WinHAB.Core.ViewModels
       await AppConfiguration.SaveAsync();
     }
 
-    private async Task<IEnumerable<FrameWidget>> LoadPageWidgets(Uri pageUri)
+    private async Task LoadPageWidgets(Uri pageUri)
     {
       const string fakeFrameLabel = "#WRAPPER#";
 
       Waiter.Show();
       
       var page = await OpenHabClient.GetPageAsync(pageUri);
-      if (page == null || page.Widgets == null || page.Widgets.Count == 0) return null;
+      if (page == null || page.Widgets == null || page.Widgets.Count == 0) return;
 
       // Wrap independent widgets into frames
       var framesData = new List<WidgetData>();
@@ -76,6 +76,8 @@ namespace WinHAB.Core.ViewModels
         }
       }
 
+      var widgetsInitializators = new List<Task>();
+
       var res = new List<FrameWidget>();
       foreach (var frameData in framesData)
       {
@@ -83,19 +85,30 @@ namespace WinHAB.Core.ViewModels
         
         var frame = (FrameWidget)_widgetsFactory.Create(frameData);
         res.Add(frame);
+        widgetsInitializators.Add(frame.Initialize());
 
         foreach (var widgetData in frameData.Widgets)
         {
           var widget = _widgetsFactory.Create(widgetData);
           if (widget != null)
+          {
             frame.Widgets.Add(widget);
-          
+            widgetsInitializators.Add(widget.Initialize());
+          }
         }
       }
 
+      Widgets = res.ToObservableCollection();
       Waiter.Hide();
 
-      return res;
+      Parallel.ForEach(widgetsInitializators, async x => await x);
+    }
+
+    private void CleanupWidgets()
+    {
+      if (Widgets != null)
+        foreach (var frame in Widgets)
+          frame.Cleanup();
     }
 
     #region History
@@ -120,7 +133,7 @@ namespace WinHAB.Core.ViewModels
     {
       if (widget.LinkedPageUri != null)
       {
-        Widgets = await LoadPageWidgets(widget.LinkedPageUri).ToObservableCollectionAsync();
+        await LoadPageWidgets(widget.LinkedPageUri);
         Title = widget.Title + " " + widget.Value;
 
         if (_currentPage != null)
@@ -143,7 +156,7 @@ namespace WinHAB.Core.ViewModels
 
       if (_currentPage != null)
       {
-        Widgets = await LoadPageWidgets(_currentPage.Uri).ToObservableCollectionAsync();
+        await LoadPageWidgets(_currentPage.Uri);
         Title = _currentPage.Title;
         RaisePropertyChanged(() => HasHistory);
         HistoryPath = GetHistoryPath();

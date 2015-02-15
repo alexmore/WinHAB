@@ -80,6 +80,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Widgets\FrameWidget.cs" />
     <Compile Include="ViewModels\Widgets\IWidgetsFactory.cs" />
+    <Compile Include="ViewModels\Widgets\ImageWidget.cs" />
     <Compile Include="ViewModels\Widgets\TextWidget.cs" />
     <Compile Include="ViewModels\Widgets\WidgetBase.cs" />
     <Compile Include="ViewModels\Widgets\WidgetsFactory.cs" />

@@ -3,6 +3,7 @@
     
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Views/WidgetViews/TextWidgetViewStyle.xaml" />
+        <ResourceDictionary Source="/Views/WidgetViews/ImageWidgetViewStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

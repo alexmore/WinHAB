@@ -1,4 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-                    
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:WinHAB.Desktop.Converters">
+
+    <converters:TextWidgetValueToVisibilityConverter x:Key="TextWidgetValueToVisibilityConverter" />
+    <converters:StringToGeometryConverter x:Key="StringToGeometryConverter" />
+    <converters:StreamToWidgetImageConverter x:Key="StreamToWidgetImageConverter" />
 </ResourceDictionary>
