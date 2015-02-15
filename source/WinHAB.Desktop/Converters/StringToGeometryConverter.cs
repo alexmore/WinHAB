@@ -16,7 +16,7 @@ namespace WinHAB.Desktop.Converters
       {
         if (value == null || string.IsNullOrWhiteSpace(value.ToString())) return null;
 
-        var stringKey = value.ToString();
+        var stringKey = value.ToString().Replace("-","");
 
         var resourceKey = UserResources.Icons.GetResourceKeys().FirstOrDefault(x =>
           x.ToLower() == stringKey.ToLower().Trim() ||
