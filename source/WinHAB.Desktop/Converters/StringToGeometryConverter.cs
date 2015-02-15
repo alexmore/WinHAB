@@ -16,12 +16,13 @@ namespace WinHAB.Desktop.Converters
       {
         if (value == null || string.IsNullOrWhiteSpace(value.ToString())) return null;
 
-        var geometryName = value.ToString();
+        var stringKey = value.ToString();
 
-        return UserResources.Icons.FindIconResource(geometryName) as Geometry ?? 
-          new ResourceDictionary()
-            {Source = new Uri("/Themes/Icons.xaml", UriKind.Relative)}
-              .FindIconResource(geometryName) as Geometry;
+        var resourceKey = UserResources.Icons.GetResourceKeys().FirstOrDefault(x =>
+          x.ToLower() == stringKey.ToLower().Trim() ||
+          x.ToLower() == (stringKey.Trim() + "icon").ToLower());
+
+        return resourceKey != null ? UserResources.Icons[resourceKey] as Geometry : null;
       }
 
       public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

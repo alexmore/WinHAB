@@ -1,25 +1,19 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace WinHAB.Desktop.Windows
 {
   public static class ResourceDictionaryExtensions
   {
-    public static object FindResource(this ResourceDictionary resource, string key)
+    public static IEnumerable<string> GetResourceKeys(this ResourceDictionary resource)
     {
-      if (resource == null) return null;
+      var keys = resource.Keys.Cast<string>().ToList();
 
-      var resKey = resource.Keys.Cast<string>()
-        .FirstOrDefault(x =>x.ToLower() == key.ToLower().Trim());
-      
-      return resKey != null ? resource[resKey] : null;
-    }
+      foreach (var i in resource.MergedDictionaries)
+        keys.AddRange(i.GetResourceKeys());
 
-    public static object FindIconResource(this ResourceDictionary resource, string key)
-    {
-      if (resource == null) return null;
-
-      return resource.FindResource(key) ?? resource.FindResource(key + "icon");
+      return keys;
     }
   }
 }

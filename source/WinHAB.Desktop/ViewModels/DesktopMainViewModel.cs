@@ -12,15 +12,15 @@ namespace WinHAB.Desktop.ViewModels
 {
   public class DesktopMainViewModel : MainViewModel
   {
-    public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient client, IWidgetsFactory widgetsFactory, IEnumerable<SitemapData> sitemaps, SitemapData selectedSitemap) : 
-      base(navigationService, appConfig, client,  widgetsFactory, selectedSitemap)
+    public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient openHabClient, IWidgetsFactory widgetsFactory, IEnumerable<SitemapData> sitemaps, SitemapData selectedSitemap) : 
+      base(navigationService, appConfig, openHabClient,  widgetsFactory, selectedSitemap)
     {
     }
 
     public async override void OnNavigatedTo()
     {
       Waiter.Show();
-      await UserResources.LoadUserResources(AppConfiguration.Server);
+      await UserResources.LoadUserResources(AppConfiguration.Server, OpenHabClient);
       Waiter.Hide();
       
       base.OnNavigatedTo();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -19,8 +20,17 @@ namespace WinHAB.Core
     {
       HttpResponseMessage responce = await GetAsync(query);
       responce.EnsureSuccessStatusCode();
-
+      
       return JObject.Parse(await responce.Content.ReadAsStringAsync());
+    }
+
+    public async Task<Stream> GetStreamAsync(Uri query)
+    {
+      HttpResponseMessage responce = await GetAsync(query);
+      responce.EnsureSuccessStatusCode();
+
+      return await responce.Content.ReadAsStreamAsync();
+
     }
   }
 }

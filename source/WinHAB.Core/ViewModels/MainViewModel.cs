@@ -14,16 +14,16 @@ namespace WinHAB.Core.ViewModels
 {
   public class MainViewModel : ViewModel
   {
-    private OpenHabClient _client;
+    protected readonly OpenHabClient OpenHabClient;
     private readonly IWidgetsFactory _widgetsFactory;
 
     public MainViewModel(INavigationService navigationService, 
-      AppConfiguration appConfig, OpenHabClient client, IWidgetsFactory widgetsFactory, 
+      AppConfiguration appConfig, OpenHabClient openHabClient, IWidgetsFactory widgetsFactory, 
       SitemapData selectedSitemap) : base(navigationService)
     {
       AppConfiguration = appConfig;
       Sitemap = selectedSitemap;
-      _client = client;
+      OpenHabClient = openHabClient;
       _widgetsFactory = widgetsFactory;
 
       Title = Sitemap.Label;
@@ -60,7 +60,7 @@ namespace WinHAB.Core.ViewModels
 
       Waiter.Show();
       
-      var page = await _client.GetPageAsync(pageUri);
+      var page = await OpenHabClient.GetPageAsync(pageUri);
       if (page == null || page.Widgets == null || page.Widgets.Count == 0) return null;
 
       // Wrap independent widgets into frames

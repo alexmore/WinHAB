@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WinHAB.Core.Model;
@@ -34,6 +35,14 @@ namespace WinHAB.Core
         if (jobject == null) return null;
         
         return jobject.ToObject<PageData>();
+      }
+    }
+
+    public async Task<Stream> GetResource(Uri resourceUri)
+    {
+      using (var cln = _factory.Create())
+      {
+        return await cln.GetStreamAsync(resourceUri);
       }
     }
   }
