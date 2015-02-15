@@ -24,7 +24,7 @@ namespace WinHAB.Core
       return JObject.Parse(await responce.Content.ReadAsStringAsync());
     }
 
-    public async Task<Stream> GetStreamAsync(Uri query)
+    public async Task<Stream> GetAsStreamAsync(Uri query)
     {
       HttpResponseMessage responce = await GetAsync(query);
       responce.EnsureSuccessStatusCode();

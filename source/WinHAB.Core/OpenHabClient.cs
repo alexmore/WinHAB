@@ -38,11 +38,11 @@ namespace WinHAB.Core
       }
     }
 
-    public async Task<Stream> GetResource(Uri resourceUri)
+    public async Task<Stream> GetStreamAsync(Uri uri)
     {
       using (var cln = _factory.Create())
       {
-        return await cln.GetStreamAsync(resourceUri);
+        return await cln.GetAsStreamAsync(uri);
       }
     }
   }

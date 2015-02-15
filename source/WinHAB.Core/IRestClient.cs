@@ -8,6 +8,6 @@ namespace WinHAB.Core
   public interface IRestClient : IDisposable
   {
     Task<JObject> GetJObjectAsync(Uri query);
-    Task<Stream> GetStreamAsync(Uri query);
+    Task<Stream> GetAsStreamAsync(Uri query);
   }
 }
