@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Command;
 
 namespace WinHAB.Core.Mvvm
 {
@@ -19,6 +20,8 @@ namespace WinHAB.Core.Mvvm
     void ClearHistory();
     bool CanGoBack();
     void GoBack();
+
+    RelayCommand GoBackCommand { get; }
 
     Task ShowMessageAsync(string title, string text);
     void ShowMessage(string title, string text, Action onClose);

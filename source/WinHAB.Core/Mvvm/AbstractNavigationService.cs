@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Command;
 
 namespace WinHAB.Core.Mvvm
 {
@@ -14,6 +15,7 @@ namespace WinHAB.Core.Mvvm
     {
       Factory = factory;
       History = new Stack<IView>();
+      GoBackCommand = new RelayCommand(GoBack);
     }
 
     public IView CurrentView { get; protected set; }
@@ -83,7 +85,11 @@ namespace WinHAB.Core.Mvvm
         CurrentView.Cleanup();
         CurrentView = null;
       }
-      NavigateView(History.Pop());
+
+      CurrentView = History.Pop(); 
+      NavigateView(CurrentView);
     }
+
+    public RelayCommand GoBackCommand { get; protected set; }
   }
 }
