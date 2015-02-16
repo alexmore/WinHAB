@@ -187,6 +187,9 @@ Details:</value>
   <data name="UnableApplySelectedImageToBackgroundTitle" xml:space="preserve">
     <value>Background image</value>
   </data>
+  <data name="ViewImage" xml:space="preserve">
+    <value>View image</value>
+  </data>
   <data name="WinHABDescription" xml:space="preserve">
     <value>Microsoft Windows desktop client for OpenHAB</value>
   </data>

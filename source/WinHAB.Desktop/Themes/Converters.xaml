@@ -5,4 +5,5 @@
     <converters:TextWidgetValueToVisibilityConverter x:Key="TextWidgetValueToVisibilityConverter" />
     <converters:StringToGeometryConverter x:Key="StringToGeometryConverter" />
     <converters:StreamToWidgetImageConverter x:Key="StreamToWidgetImageConverter" />
+    <converters:StreamToImageConverter x:Key="StreamToImageConverter" />
 </ResourceDictionary>

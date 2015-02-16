@@ -187,6 +187,9 @@
   <data name="UnableApplySelectedImageToBackgroundTitle" xml:space="preserve">
     <value>Фоновое изображение</value>
   </data>
+  <data name="ViewImage" xml:space="preserve">
+    <value>Просмотр изображения</value>
+  </data>
   <data name="WinHABDescription" xml:space="preserve">
     <value>OpenHAB клиент для рабочего стола Microsoft Windows</value>
   </data>

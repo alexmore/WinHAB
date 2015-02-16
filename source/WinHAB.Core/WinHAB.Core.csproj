@@ -79,6 +79,7 @@
     <Compile Include="ViewModels\LaunchViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Widgets\FrameWidget.cs" />
+    <Compile Include="ViewModels\Widgets\ImageWidgetPage.cs" />
     <Compile Include="ViewModels\Widgets\IWidgetsFactory.cs" />
     <Compile Include="ViewModels\Widgets\ImageWidget.cs" />
     <Compile Include="ViewModels\Widgets\TextWidget.cs" />

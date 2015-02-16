@@ -90,6 +90,7 @@
       <DependentUpon>WaiterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsPanel.cs" />
+    <Compile Include="Converters\StreamToImageConverter.cs" />
     <Compile Include="Converters\StreamToWidgetImageConverter.cs" />
     <Compile Include="Converters\StringToGeometryConverter.cs" />
     <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WidgetViews\ImageWidgetPageView.xaml.cs">
+      <DependentUpon>ImageWidgetPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ColorExtensions.cs" />
     <Compile Include="Windows\DesktopTimer.cs" />
@@ -165,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WidgetViews\ImageWidgetPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

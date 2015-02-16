@@ -12,6 +12,6 @@
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type widgets:ImageWidget}">
-        <Button Style="{StaticResource ImageWidgetView}" />
+        <Button Style="{StaticResource ImageWidgetView}" Command="{Binding DataContext.LoadLinkedPageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
     </DataTemplate>
 </ResourceDictionary>

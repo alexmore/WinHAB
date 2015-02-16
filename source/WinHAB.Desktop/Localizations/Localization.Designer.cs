@@ -269,6 +269,15 @@ namespace WinHAB.Desktop.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View image.
+        /// </summary>
+        public static string ViewImage {
+            get {
+                return ResourceManager.GetString("ViewImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microsoft Windows desktop client for OpenHAB.
         /// </summary>
         public static string WinHABDescription {

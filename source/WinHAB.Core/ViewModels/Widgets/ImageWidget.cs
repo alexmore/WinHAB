@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 
@@ -16,11 +17,14 @@ namespace WinHAB.Core.ViewModels.Widgets
       _client = client;
       _timer = timer;
       Size = WidgetSize.Large;
+
+      ViewImageCommand = new RelayCommand(()=>Navigation.Navigate<ImageWidgetPage>(x=>x.Add("image", this)));
     }
 
-    private Stream _ImageStream;
-    public Stream ImageStream { get { return _ImageStream; } set { _ImageStream = value; RaisePropertyChanged(() => ImageStream); } }
-    
+    private byte[] _imageCache = null;
+
+    public Stream ImageStream { get { return _imageCache != null ? new MemoryStream(_imageCache) : null; } }
+
     public override async Task Initialize()
     {
       await LoadImageAsync(Data.Url);
@@ -40,15 +44,24 @@ namespace WinHAB.Core.ViewModels.Widgets
 
       try
       {
-        ImageStream = await _client.GetStreamAsync(Data.Url);
+        var stream = await _client.GetStreamAsync(Data.Url);
+        using (var memStream = new MemoryStream())
+        {
+          await stream.CopyToAsync(memStream);
+          _imageCache = memStream.ToArray();
+        }
+        RaisePropertyChanged(() => ImageStream);
       }
       catch (Exception)
       {
-        ImageStream = null;
+        _imageCache = null;
+        RaisePropertyChanged(()=>ImageStream);
       }
 
       Waiter.Hide();
     }
+
+    public RelayCommand ViewImageCommand { get; set; }
 
     public override void Cleanup()
     {
