@@ -10,6 +10,7 @@ using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
+using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Views;
@@ -45,7 +46,7 @@ namespace WinHAB.Desktop.Configuration
 
       var vmvFactory = Kernel.Get<DesktopViewModelViewFactory>();
       ConfigureVMVFactory(vmvFactory);
-      Bind<MainViewModel>().To<DesktopMainViewModel>();
+      Bind<MainPage>().To<DesktopMainViewModel>();
       Bind<IViewModelViewFactory>().ToConstant(vmvFactory).InSingletonScope();
       Bind<INavigationService>().To<DesktopNavigationServiceBase>().InSingletonScope();
 
@@ -56,8 +57,8 @@ namespace WinHAB.Desktop.Configuration
 
     void ConfigureVMVFactory(IViewModelViewFactory f)
     {
-      f.Map<LaunchViewModel, LaunchView>();
-      f.Map<MainViewModel, MainView>(); 
+      f.Map<BootstrapperPage, LaunchView>();
+      f.Map<MainPage, MainView>(); 
       f.Map<DesktopMainViewModel, MainView>();
       f.Map<ImageWidgetPage, ImageWidgetPageView>();
     }

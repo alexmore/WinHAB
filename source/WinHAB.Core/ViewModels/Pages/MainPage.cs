@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx;
 using WinHAB.Core.Fx.Mvvm;
@@ -11,14 +10,14 @@ using WinHAB.Core.Models;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels.Widgets;
 
-namespace WinHAB.Core.ViewModels
+namespace WinHAB.Core.ViewModels.Pages
 {
-  public class MainViewModel : PageBase
+  public class MainPage : PageBase
   {
     protected readonly OpenHabClient OpenHabClient;
     private readonly WidgetsFactory _widgetsFactory;
 
-    public MainViewModel(INavigationService navigationService, 
+    public MainPage(INavigationService navigationService, 
       AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory) : base(navigationService)
     {
       AppConfiguration = appConfig;

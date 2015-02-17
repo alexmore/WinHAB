@@ -6,6 +6,7 @@ using WinHAB.Core.Fx;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
 using WinHAB.Core.Net;
+using WinHAB.Core.ViewModels.Pages;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {

@@ -8,12 +8,13 @@ using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
+using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.Configuration;
 
 namespace WinHAB.Desktop.ViewModels
 {
-  public class DesktopMainViewModel : MainViewModel
+  public class DesktopMainViewModel : MainPage
   {
     public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
       base(navigationService, appConfig, openHabClient,  widgetsFactory)

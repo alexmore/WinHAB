@@ -2,21 +2,20 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Localization;
 using WinHAB.Core.Models;
 using WinHAB.Core.Net;
 
-namespace WinHAB.Core.ViewModels
+namespace WinHAB.Core.ViewModels.Pages
 {
-  public class LaunchViewModel : PageBase
+  public class BootstrapperPage : PageBase
   {
     private OpenHabClient _client;
     private AppConfiguration _config;
 
-    public LaunchViewModel(INavigationService navigationService, OpenHabClient client, AppConfiguration config) : base(navigationService)
+    public BootstrapperPage(INavigationService navigationService, OpenHabClient client, AppConfiguration config) : base(navigationService)
     {
       _client = client;
       _config = config;
@@ -117,7 +116,7 @@ namespace WinHAB.Core.ViewModels
         return;
       }
 
-      await Navigation.NavigateAsync<MainViewModel>(sitemap);
+      await Navigation.NavigateAsync<MainPage>(sitemap);
     }
   }
 }

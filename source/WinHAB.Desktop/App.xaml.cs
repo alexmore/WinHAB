@@ -16,6 +16,7 @@ using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
 using WinHAB.Core.ViewModels;
+using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Windows;
@@ -50,7 +51,7 @@ namespace WinHAB.Desktop
 
       var navigation = kernel.Get<INavigationService>();
       
-      var vm = await navigation.NavigateAsync<LaunchViewModel>();
+      var vm = await navigation.NavigateAsync<BootstrapperPage>();
       vm.HideAll();
       vm.TaskProgress.Show(Localizations.Localization.Starting);
       if (!string.IsNullOrWhiteSpace(cfg.Server)) await vm.ConnectCommand.ExecuteAsync(cfg.Server);

@@ -17,6 +17,7 @@ using Microsoft.Win32;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.ViewModels;
+using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Windows;
 
@@ -95,7 +96,7 @@ namespace WinHAB.Desktop.Controls
       if (NavigationService != null)
       {
         NavigationService.ClearHistory();
-        NavigationService.NavigateAsync<LaunchViewModel>();
+        NavigationService.NavigateAsync<BootstrapperPage>();
       }
     }
 
@@ -105,7 +106,7 @@ namespace WinHAB.Desktop.Controls
       {
         AppConfiguration.Sitemap = null;
         NavigationService.ClearHistory();
-        var vm = await NavigationService.NavigateAsync<LaunchViewModel>();
+        var vm = await NavigationService.NavigateAsync<BootstrapperPage>();
         await vm.ConnectCommand.ExecuteAsync(AppConfiguration.Server);
       }
     }
