@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace WinHAB.Core.Collections
+namespace WinHAB.Core.Fx
 {
   public static class CollectionExtensions
   {
