@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 
 namespace WinHAB.Tests.Core.Mvvm
 {

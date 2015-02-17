@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace WinHAB.Core.Mvvm
+namespace WinHAB.Core.Fx.Mvvm
 {
   public class ConstructorParameters
   {

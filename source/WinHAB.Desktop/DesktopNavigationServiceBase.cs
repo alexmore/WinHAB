@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Controls;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 
 namespace WinHAB.Desktop
 {
-  public class DesktopNavigationService : AbstractNavigationService
+  public class DesktopNavigationServiceBase : NavigationServiceBase
   {
     private readonly INavigationHost _navigationHost;
 
-    public DesktopNavigationService(INavigationHost navigationHost, IViewModelViewFactory factory)
+    public DesktopNavigationServiceBase(INavigationHost navigationHost, IViewModelViewFactory factory)
       : base(factory)
     {
       _navigationHost = navigationHost;

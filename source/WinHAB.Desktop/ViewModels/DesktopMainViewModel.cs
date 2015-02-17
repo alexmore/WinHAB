@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
@@ -18,13 +18,13 @@ namespace WinHAB.Desktop.ViewModels
     {
     }
 
-    public async override void OnNavigatedTo()
+    public async override void OnLoaded()
     {
       Waiter.Show();
       await UserResources.LoadUserResources(AppConfiguration.Server, OpenHabClient);
       Waiter.Hide();
       
-      base.OnNavigatedTo();
+      base.OnLoaded();
     }
 
     #region Appearance

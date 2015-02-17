@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Documents;
 using Ninject;
 using Ninject.Parameters;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 
 namespace WinHAB.Desktop.Configuration
 {

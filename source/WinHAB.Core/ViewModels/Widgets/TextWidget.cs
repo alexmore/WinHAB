@@ -1,5 +1,5 @@
-﻿using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
+﻿using WinHAB.Core.Fx.Mvvm;
+using WinHAB.Core.Models;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {

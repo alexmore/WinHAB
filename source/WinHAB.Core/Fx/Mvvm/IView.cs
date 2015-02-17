@@ -1,4 +1,4 @@
-﻿namespace WinHAB.Core.Mvvm
+﻿namespace WinHAB.Core.Fx.Mvvm
 {
   public interface IView
   {

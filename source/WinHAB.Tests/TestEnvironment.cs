@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Moq;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Net;
 using WinHAB.Desktop;
 

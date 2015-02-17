@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Moq.Protected;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Desktop;
 
 namespace WinHAB.Tests.Core.Mvvm
@@ -25,9 +25,9 @@ namespace WinHAB.Tests.Core.Mvvm
       _env.Init();
     }
 
-    class TestNavigationService : AbstractNavigationService
+    class TestNavigationServiceBase : NavigationServiceBase
     {
-      public TestNavigationService(IViewModelViewFactory factory) : base(factory)
+      public TestNavigationServiceBase(IViewModelViewFactory factory) : base(factory)
       {
       }
 
@@ -68,7 +68,7 @@ namespace WinHAB.Tests.Core.Mvvm
       ConstructorParameters ctorParameters = null;
       
       var viewModelMock = new Mock<IViewModel>();
-      viewModelMock.Setup(x => x.OnNavigatedTo()).Verifiable();
+      viewModelMock.Setup(x => x.OnLoaded()).Verifiable();
 
       _env.ViewModelViewFactory.Map(viewModelMock.Object.GetType(), viewMock.Object.GetType());
       _env.ViewModelViewFactoryMock.Setup(x => x.CreateView(It.IsAny<Type>())).Returns(() => viewMock.Object);
@@ -76,7 +76,7 @@ namespace WinHAB.Tests.Core.Mvvm
         .Returns(() => viewModelMock.Object)
         .Callback<Type, Action<ConstructorParameters>>((t,a) => ctorParameters = a.GetConstructorParameters());
 
-      var nav = new TestNavigationService(_env.ViewModelViewFactory);
+      var nav = new TestNavigationServiceBase(_env.ViewModelViewFactory);
 
       bool isNavigatedToView = false;
       nav.OnNavigatedToView = () => isNavigatedToView = true;
@@ -84,7 +84,7 @@ namespace WinHAB.Tests.Core.Mvvm
       // IViewModel
       nav.Navigate(viewModelMock.Object);
       Assert.AreSame(viewModelMock.Object, nav.CurrentView.DataContext);
-      viewModelMock.Verify(x=>x.OnNavigatedTo());
+      viewModelMock.Verify(x=>x.OnLoaded());
       Assert.IsTrue(isNavigatedToView);
 
       // Navigate(Type, ctorParams)
@@ -132,7 +132,7 @@ namespace WinHAB.Tests.Core.Mvvm
       _env.ViewModelViewFactoryMock.Setup(x => x.CreateViewModel(It.IsAny<Type>(), It.IsAny<Action<ConstructorParameters>>()))
         .Returns(() => viewModelMock.Object);
 
-      var nav = new TestNavigationService(_env.ViewModelViewFactory);
+      var nav = new TestNavigationServiceBase(_env.ViewModelViewFactory);
       
       Assert.IsFalse(nav.CanGoBack());
 

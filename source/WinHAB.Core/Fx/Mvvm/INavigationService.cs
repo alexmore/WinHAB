@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 
-namespace WinHAB.Core.Mvvm
+namespace WinHAB.Core.Fx.Mvvm
 {
   public interface INavigationService
   {

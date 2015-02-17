@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {

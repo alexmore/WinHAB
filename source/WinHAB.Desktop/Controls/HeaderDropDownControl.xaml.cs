@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using FirstFloor.ModernUI.Presentation;
 using Microsoft.Win32;
 using WinHAB.Core.Configuration;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Windows;

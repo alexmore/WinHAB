@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 
-namespace WinHAB.Core.Mvvm
+namespace WinHAB.Core.Fx.Mvvm
 {
-  public abstract class AbstractNavigationService : INavigationService
+  public abstract class NavigationServiceBase : INavigationService
   {
     protected Stack<IView> History { get; set; }
 
     protected IViewModelViewFactory Factory { get; set; }
 
-    protected AbstractNavigationService(IViewModelViewFactory factory)
+    protected NavigationServiceBase(IViewModelViewFactory factory)
     {
       Factory = factory;
       History = new Stack<IView>();
@@ -21,6 +21,7 @@ namespace WinHAB.Core.Mvvm
     public IView CurrentView { get; protected set; }
 
     public abstract void NavigateView(IView view);
+    
     public abstract Task ShowMessageAsync(string title, string text);
     public abstract void ShowMessage(string title, string text, Action onClose);
     
@@ -32,7 +33,7 @@ namespace WinHAB.Core.Mvvm
       if (CurrentView != null) History.Push(CurrentView);
       NavigateView(view);
       CurrentView = view;
-      viewModel.OnNavigatedTo();
+      viewModel.OnLoaded();
     }
 
     public virtual IViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters)

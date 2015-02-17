@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 
 namespace WinHAB.Tests.Core.Mvvm
 {
@@ -37,7 +37,7 @@ namespace WinHAB.Tests.Core.Mvvm
       }
 
       public INavigationService Navigation { get; private set; }
-      public void OnNavigatedTo()
+      public void OnLoaded()
       {
         throw new NotImplementedException();
       }
@@ -51,7 +51,7 @@ namespace WinHAB.Tests.Core.Mvvm
       }
 
       public INavigationService Navigation { get; private set; }
-      public void OnNavigatedTo()
+      public void OnLoaded()
       {
         throw new NotImplementedException();
       }

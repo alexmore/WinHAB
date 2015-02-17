@@ -6,8 +6,8 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 
 namespace WinHAB.Tests.Core.ViewModels
@@ -35,14 +35,14 @@ namespace WinHAB.Tests.Core.ViewModels
       Assert.IsFalse(vm.IsServerAddressVisible);
       Assert.IsFalse(vm.IsSitemapsVisible);
 
-      vm.OnNavigatedTo();
+      vm.OnLoaded();
       Assert.AreEqual("http://", vm.ServerAddress);
       Assert.IsTrue(vm.IsServerAddressVisible);
       Assert.IsFalse(vm.IsSitemapsVisible);
 
       vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
       _env.ConfigurationProvider.Values["Server"] = "http://myserver/";
-      vm.OnNavigatedTo();
+      vm.OnLoaded();
       Assert.AreEqual("http://myserver/", vm.ServerAddress);
     }
 

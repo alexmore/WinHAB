@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Localization;
 using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
 using WinHAB.Core.Net;
 
 namespace WinHAB.Core.ViewModels
@@ -75,7 +75,7 @@ namespace WinHAB.Core.ViewModels
     }
     #endregion
 
-    public override void OnNavigatedTo()
+    public override void OnLoaded()
     {
       ServerAddress = _config.Server;
 

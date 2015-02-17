@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels.Widgets;
 
@@ -45,7 +45,7 @@ namespace WinHAB.Core.ViewModels
     private Sitemap _Sitemap;
     public Sitemap Sitemap { get { return _Sitemap; } set { _Sitemap = value; RaisePropertyChanged(() => Sitemap); } }
 
-    public async override void OnNavigatedTo()
+    public async override void OnLoaded()
     {
       await LoadPageWidgets(Sitemap.HomepageLink);
 

@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Desktop;
 
 namespace WinHAB.Tests.Desktop
@@ -27,7 +27,7 @@ namespace WinHAB.Tests.Desktop
     public void DesktopNavigationServiceNavigateViewInstanceTest()
     {
       Mock<IView> viewMock = new Mock<IView>();
-      var nav = new DesktopNavigationService(_env.NavigationHost, _env.ViewModelViewFactory);
+      var nav = new DesktopNavigationServiceBase(_env.NavigationHost, _env.ViewModelViewFactory);
       nav.NavigateView(viewMock.Object);
       Assert.AreSame(viewMock.Object, _env.NavigationHost.Content);
     }

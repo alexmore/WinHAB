@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WinHAB.Core.Mvvm
+namespace WinHAB.Core.Fx.Mvvm
 {
   public static class MvvmExtensions
   {

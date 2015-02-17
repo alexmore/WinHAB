@@ -1,8 +1,6 @@
-﻿
+﻿using GalaSoft.MvvmLight;
 
-using GalaSoft.MvvmLight;
-
-namespace WinHAB.Core.Mvvm
+namespace WinHAB.Core.Fx.Mvvm
 {
   public class ViewModel : ViewModelBase, IViewModel
   {
@@ -20,7 +18,7 @@ namespace WinHAB.Core.Mvvm
 
     public INavigationService Navigation { get; protected set; }
     
-    public virtual void OnNavigatedTo()
+    public virtual void OnLoaded()
     {
     }
   }

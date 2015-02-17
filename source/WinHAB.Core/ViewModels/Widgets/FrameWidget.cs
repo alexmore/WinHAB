@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {

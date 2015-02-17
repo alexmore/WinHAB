@@ -6,8 +6,8 @@ using Ninject.Parameters;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
-using WinHAB.Core.Mvvm;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
@@ -47,7 +47,7 @@ namespace WinHAB.Desktop.Configuration
       ConfigureVMVFactory(vmvFactory);
       Bind<MainViewModel>().To<DesktopMainViewModel>();
       Bind<IViewModelViewFactory>().ToConstant(vmvFactory).InSingletonScope();
-      Bind<INavigationService>().To<DesktopNavigationService>().InSingletonScope();
+      Bind<INavigationService>().To<DesktopNavigationServiceBase>().InSingletonScope();
 
       Bind<Func<Type, Widget, WidgetBase>>()
         .ToMethod(x => (t, d) => (WidgetBase) x.Kernel.Get(t, new ConstructorArgument("data", d)));
