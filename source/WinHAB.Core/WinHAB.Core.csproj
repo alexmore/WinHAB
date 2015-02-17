@@ -55,9 +55,9 @@
     <Compile Include="Model\MappingData.cs" />
     <Compile Include="Model\PageData.cs" />
     <Compile Include="Model\SitemapData.cs" />
-    <Compile Include="Model\ToListJsonConverter.cs" />
+    <Compile Include="Model\Converters\ToListJsonConverter.cs" />
     <Compile Include="Model\WidgetData.cs" />
-    <Compile Include="Model\WidgetTypeJsonConverter.cs" />
+    <Compile Include="Model\Converters\WidgetTypeJsonConverter.cs" />
     <Compile Include="Mvvm\AbstractNavigationService.cs" />
     <Compile Include="Mvvm\AbstractViewModelViewFactory.cs" />
     <Compile Include="Mvvm\AsyncRelayCommand.cs" />

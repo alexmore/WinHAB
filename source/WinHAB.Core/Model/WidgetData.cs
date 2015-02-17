@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using WinHAB.Core.Model.Converters;
 using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Core.Model

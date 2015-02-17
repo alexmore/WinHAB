@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WinHAB.Core.ViewModels.Widgets;
 
-namespace WinHAB.Core.Model
+namespace WinHAB.Core.Model.Converters
 {
   public class WidgetTypeJsonConverter : JsonConverter
   {
