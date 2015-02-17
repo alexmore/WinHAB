@@ -50,7 +50,7 @@ namespace WinHAB.Desktop
 
       var navigation = kernel.Get<INavigationService>();
       
-      var vm = navigation.Navigate<LaunchViewModel>();
+      var vm = await navigation.NavigateAsync<LaunchViewModel>();
       vm.HideAll();
       vm.TaskProgress.Show(Localizations.Localization.Starting);
       if (!string.IsNullOrWhiteSpace(cfg.Server)) await vm.ConnectCommand.ExecuteAsync(cfg.Server);

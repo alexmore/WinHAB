@@ -26,38 +26,31 @@ namespace WinHAB.Core.Fx.Mvvm
     public abstract void ShowMessage(string title, string text, Action onClose);
     
 
-    public virtual void Navigate(IViewModel viewModel)
+    public virtual async Task NavigateAsync(IViewModel viewModel, dynamic parameter)
     {
       var view = Factory.CreateViewByViewModelType(viewModel.GetType());
       view.DataContext = viewModel;
       if (CurrentView != null) History.Push(CurrentView);
       NavigateView(view);
       CurrentView = view;
-      viewModel.OnLoaded();
+      await viewModel.InitializeAsync(parameter);
     }
 
-    public virtual IViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters)
+    public virtual async Task<IViewModel> NavigateAsync(Type viewModelType, dynamic parameter)
     {
-      var vm = Factory.CreateViewModel(viewModelType, ctorParameters);
-      Navigate(vm);
+      var vm = Factory.CreateViewModel(viewModelType);
+      await NavigateAsync(vm, parameter);
       return vm;
     }
 
-    public virtual IViewModel Navigate(Type viewModelType)
+    public virtual async Task<T> NavigateAsync<T>(dynamic parameter) where T : IViewModel
     {
-      var vm = Factory.CreateViewModel(viewModelType, null);
-      Navigate(vm);
-      return vm;
+      return (T)await NavigateAsync(typeof(T), parameter);
     }
 
-    public virtual T Navigate<T>(Action<ConstructorParameters> ctorParameters) where T : IViewModel
+    public virtual async Task<T> NavigateAsync<T>() where T : IViewModel
     {
-      return (T)Navigate(typeof(T), ctorParameters);
-    }
-
-    public virtual T Navigate<T>() where T : IViewModel
-    {
-      return (T)Navigate(typeof(T));
+      return (T) await NavigateAsync(typeof(T), null);
     }
 
     public virtual void ClearHistory()

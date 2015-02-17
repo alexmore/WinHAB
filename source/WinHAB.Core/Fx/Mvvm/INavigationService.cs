@@ -9,13 +9,12 @@ namespace WinHAB.Core.Fx.Mvvm
     IView CurrentView { get; }
 
     void NavigateView(IView view); 
-    void Navigate(IViewModel viewModel);
+    Task NavigateAsync(IViewModel viewModel, dynamic parameter);
     
-    IViewModel Navigate(Type viewModelType, Action<ConstructorParameters> ctorParameters);
-    IViewModel Navigate(Type viewModelType);
+    Task<IViewModel> NavigateAsync(Type viewModelType, dynamic parameter);
 
-    T Navigate<T>(Action<ConstructorParameters> ctorParameters) where T : IViewModel;
-    T Navigate<T>() where T : IViewModel;
+    Task<T> NavigateAsync<T>(dynamic parameter) where T : IViewModel;
+    Task<T> NavigateAsync<T>() where T : IViewModel;
 
     void ClearHistory();
     bool CanGoBack();

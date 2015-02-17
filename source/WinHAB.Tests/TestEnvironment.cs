@@ -55,7 +55,7 @@ namespace WinHAB.Tests
 
     void InitNavigation()
     {
-      NavigationMock.Setup(x => x.Navigate(It.IsAny<IViewModel>()))
+      NavigationMock.Setup(x => x.NavigateAsync(It.IsAny<IViewModel>(), It.IsAny<object>()))
         .Callback<IViewModel>(vm => { if (OnNavigationNavigate != null) OnNavigationNavigate(vm); });
 
       NavigationMock.Setup(x => x.ShowMessageAsync(It.IsAny<string>(), It.IsAny<string>()))

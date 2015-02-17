@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx.Mvvm;
@@ -14,17 +16,17 @@ namespace WinHAB.Desktop.ViewModels
   public class DesktopMainViewModel : MainViewModel
   {
     public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
-      base(navigationService, appConfig, openHabClient,  widgetsFactory, selectedSitemap)
+      base(navigationService, appConfig, openHabClient,  widgetsFactory)
     {
     }
 
-    public async override void OnLoaded()
+    public async override Task InitializeAsync(dynamic parameter)
     {
       TaskProgress.Show();
       await UserResources.LoadUserResources(AppConfiguration.Server, OpenHabClient);
       TaskProgress.Hide();
-      
-      base.OnLoaded();
+
+      await base.InitializeAsync((object)parameter);
     }
 
     #region Appearance

@@ -19,16 +19,12 @@ namespace WinHAB.Core.ViewModels
     private readonly WidgetsFactory _widgetsFactory;
 
     public MainViewModel(INavigationService navigationService, 
-      AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory, 
-      Sitemap selectedSitemap) : base(navigationService)
+      AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory) : base(navigationService)
     {
       AppConfiguration = appConfig;
-      Sitemap = selectedSitemap;
       OpenHabClient = openHabClient;
       _widgetsFactory = widgetsFactory;
-
-      Title = Sitemap.Label;
-
+      
       LoadLinkedPageCommand = new AsyncRelayCommand<WidgetBase>(LoadLinkedPage);
       HistoryBackCommand = new AsyncRelayCommand(HistoryBack);
     }
@@ -41,17 +37,16 @@ namespace WinHAB.Core.ViewModels
 
     private ObservableCollection<FrameWidget> _Widgets;
     public ObservableCollection<FrameWidget> Widgets { get { return _Widgets; } set { if (_Widgets != null) CleanupWidgets(); _Widgets = value; RaisePropertyChanged(() => Widgets); } }
-
-    private Sitemap _Sitemap;
-    public Sitemap Sitemap { get { return _Sitemap; } set { _Sitemap = value; RaisePropertyChanged(() => Sitemap); } }
-
-    public async override void OnLoaded()
+    
+    public override async Task InitializeAsync(dynamic parameter)
     {
-      await LoadPageWidgets(Sitemap.HomepageLink);
+      Title = parameter.Label;
 
-      _currentPage = new PagesHistoryItem() {Title = Sitemap.Label, Uri = Sitemap.HomepageLink};
-      
-      AppConfiguration.Sitemap = Sitemap.Name;
+      await LoadPageWidgets(parameter.HomepageLink);
+
+      _currentPage = new PagesHistoryItem() { Title = parameter.Label, Uri = parameter.HomepageLink };
+
+      AppConfiguration.Sitemap = parameter.Name;
       await AppConfiguration.SaveAsync();
     }
 

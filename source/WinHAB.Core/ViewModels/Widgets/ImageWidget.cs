@@ -20,7 +20,7 @@ namespace WinHAB.Core.ViewModels.Widgets
       _timer = timer;
       Size = WidgetSize.Large;
 
-      ViewImageCommand = new RelayCommand(()=>Navigation.Navigate<ImageWidgetPage>(x=>x.Add("image", this)));
+      ViewImageCommand = new AsyncRelayCommand(async ()=> await Navigation.NavigateAsync<ImageWidgetPage>(this));
     }
 
     private byte[] _imageCache = null;
@@ -63,7 +63,7 @@ namespace WinHAB.Core.ViewModels.Widgets
       TaskProgress.Hide();
     }
 
-    public RelayCommand ViewImageCommand { get; set; }
+    public AsyncRelayCommand ViewImageCommand { get; set; }
 
     public override void Cleanup()
     {

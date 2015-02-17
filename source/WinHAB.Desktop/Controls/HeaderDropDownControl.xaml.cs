@@ -95,7 +95,7 @@ namespace WinHAB.Desktop.Controls
       if (NavigationService != null)
       {
         NavigationService.ClearHistory();
-        NavigationService.Navigate<LaunchViewModel>();
+        NavigationService.NavigateAsync<LaunchViewModel>();
       }
     }
 
@@ -105,7 +105,7 @@ namespace WinHAB.Desktop.Controls
       {
         AppConfiguration.Sitemap = null;
         NavigationService.ClearHistory();
-        var vm = NavigationService.Navigate<LaunchViewModel>();
+        var vm = await NavigationService.NavigateAsync<LaunchViewModel>();
         await vm.ConnectCommand.ExecuteAsync(AppConfiguration.Server);
       }
     }

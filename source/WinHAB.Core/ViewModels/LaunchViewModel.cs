@@ -23,11 +23,11 @@ namespace WinHAB.Core.ViewModels
 
       ConnectCommand = new AsyncRelayCommand<string>(Connect, (string x) => 
         !string.IsNullOrWhiteSpace(ServerAddress));
-      SelectSitemapCommand = new RelayCommand<Sitemap>(SelectSitemap);
+      SelectSitemapCommand = new AsyncRelayCommand<Sitemap>(SelectSitemap);
     }
 
     public AsyncRelayCommand<string> ConnectCommand { get; set; }
-    public RelayCommand<Sitemap> SelectSitemapCommand { get; set; }
+    public AsyncRelayCommand<Sitemap> SelectSitemapCommand { get; set; }
 
     private string _ServerAddress;
     public string ServerAddress
@@ -75,12 +75,14 @@ namespace WinHAB.Core.ViewModels
     }
     #endregion
 
-    public override void OnLoaded()
+    public override Task InitializeAsync(dynamic parameter)
     {
       ServerAddress = _config.Server;
 
       if (string.IsNullOrWhiteSpace(ServerAddress)) ServerAddress = "http://";
       ShowServerUrl();
+
+      return Task.FromResult(0);
     }
 
     async Task Connect(string server)
@@ -106,7 +108,7 @@ namespace WinHAB.Core.ViewModels
       }
     }
 
-    void SelectSitemap(Sitemap sitemap)
+    async Task SelectSitemap(Sitemap sitemap)
     {
       if (sitemap == null || sitemap.HomepageLink == null)
       {
@@ -115,7 +117,7 @@ namespace WinHAB.Core.ViewModels
         return;
       }
 
-      Navigation.Navigate<MainViewModel>(x => x.Add("selectedSitemap", sitemap));
+      await Navigation.NavigateAsync<MainViewModel>(sitemap);
     }
   }
 }

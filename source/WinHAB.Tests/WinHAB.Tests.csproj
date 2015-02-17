@@ -73,13 +73,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Core\Mvvm\AbstractViewModelViewFactoryTests.cs" />
-    <Compile Include="Core\Mvvm\ConstructorParametersTests.cs" />
-    <Compile Include="Core\Mvvm\AbstractNavigationServiceTests.cs" />
-    <Compile Include="Core\Mvvm\MvvmExtensionsTests.cs" />
-    <Compile Include="Core\ViewModels\TaskProgressViewModelTests.cs" />
-    <Compile Include="Core\OpenHabClientTests.cs" />
-    <Compile Include="Core\ViewModels\LaunchViewModelTests.cs" />
     <Compile Include="JsonResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

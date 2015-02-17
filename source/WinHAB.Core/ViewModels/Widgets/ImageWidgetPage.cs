@@ -1,15 +1,23 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Fx.Mvvm;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
   public class ImageWidgetPage : ViewModel
   {
-    public ImageWidgetPage(INavigationService navigationService, ImageWidget image) : base(navigationService)
+    public ImageWidgetPage(INavigationService navigationService) : base(navigationService)
     {
-      Image = image;
+     
     }
 
     public ImageWidget Image { get; set; }
+
+    public override Task InitializeAsync(dynamic parameter)
+    {
+      Image = parameter as ImageWidget;
+      RaisePropertyChanged(()=>Image);
+      return Task.FromResult(default(object));
+    }
   }
 }

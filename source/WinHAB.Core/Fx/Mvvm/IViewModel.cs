@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
 
 namespace WinHAB.Core.Fx.Mvvm
 {
@@ -6,6 +7,6 @@ namespace WinHAB.Core.Fx.Mvvm
   {
     INavigationService Navigation { get; }
 
-    void OnLoaded();
+    Task InitializeAsync(dynamic parameter);
   }
 }
