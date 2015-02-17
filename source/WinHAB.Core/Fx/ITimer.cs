@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WinHAB.Core
+namespace WinHAB.Core.Fx
 {
   public interface ITimer
   {

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
+using WinHAB.Core.Fx;
 using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 
