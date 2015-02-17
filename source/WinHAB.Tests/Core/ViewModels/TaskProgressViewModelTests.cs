@@ -1,16 +1,15 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WinHAB.Core.Fx.Mvvm;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WinHAB.Core.ViewModels;
 
-namespace WinHAB.Tests.Core.Mvvm
+namespace WinHAB.Tests.Core.ViewModels
 {
   [TestClass]
-  public class WaiterViewModelTests
+  public class TaskProgressViewModelTests
   {
     [TestMethod]
-    public void WaiterViewModelShowHideTests()
+    public void TaskProgressViewModelShowHideTests()
     {
-      var vm = new WaiterViewModel();
+      var vm = new TaskProgressViewModel();
       vm.Show();
       Assert.IsTrue(vm.IsVisible);
       vm.Hide();

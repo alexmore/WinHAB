@@ -63,7 +63,7 @@ namespace WinHAB.Tests.Core.ViewModels
       Assert.AreEqual(2, vm.Sitemaps.Count);
       Assert.IsTrue(vm.IsSitemapsVisible);
       Assert.IsFalse(vm.IsServerAddressVisible);
-      Assert.IsFalse(vm.Waiter.IsVisible);
+      Assert.IsFalse(vm.TaskProgress.IsVisible);
       Assert.AreEqual(server, _env.AppConfiguration.Server);
       Assert.IsTrue(_env.ConfigurationProvider.IsSaved);
     }
@@ -85,7 +85,7 @@ namespace WinHAB.Tests.Core.ViewModels
       Assert.IsTrue(isExceptionCatched);
       Assert.IsFalse(vm.IsSitemapsVisible);
       Assert.IsTrue(vm.IsServerAddressVisible);
-      Assert.IsFalse(vm.Waiter.IsVisible);
+      Assert.IsFalse(vm.TaskProgress.IsVisible);
     }
 
     [TestMethod]

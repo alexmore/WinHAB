@@ -52,7 +52,7 @@ namespace WinHAB.Desktop
       
       var vm = navigation.Navigate<LaunchViewModel>();
       vm.HideAll();
-      vm.Waiter.Show(Localizations.Localization.Starting);
+      vm.TaskProgress.Show(Localizations.Localization.Starting);
       if (!string.IsNullOrWhiteSpace(cfg.Server)) await vm.ConnectCommand.ExecuteAsync(cfg.Server);
       else vm.ShowServerUrl();
     }

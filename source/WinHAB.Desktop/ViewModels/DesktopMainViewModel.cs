@@ -20,9 +20,9 @@ namespace WinHAB.Desktop.ViewModels
 
     public async override void OnLoaded()
     {
-      Waiter.Show();
+      TaskProgress.Show();
       await UserResources.LoadUserResources(AppConfiguration.Server, OpenHabClient);
-      Waiter.Hide();
+      TaskProgress.Hide();
       
       base.OnLoaded();
     }

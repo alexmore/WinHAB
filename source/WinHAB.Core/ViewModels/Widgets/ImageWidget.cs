@@ -41,7 +41,7 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     async Task LoadImageAsync(Uri url)
     {
-      Waiter.Show();
+      TaskProgress.Show();
       if (url == null) return;
 
       try
@@ -60,7 +60,7 @@ namespace WinHAB.Core.ViewModels.Widgets
         RaisePropertyChanged(()=>ImageStream);
       }
 
-      Waiter.Hide();
+      TaskProgress.Hide();
     }
 
     public RelayCommand ViewImageCommand { get; set; }

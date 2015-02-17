@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using WinHAB.Core.ViewModels;
 
 namespace WinHAB.Core.Fx.Mvvm
 {
@@ -9,11 +10,11 @@ namespace WinHAB.Core.Fx.Mvvm
       Navigation = navigationService;
     }
 
-    WaiterViewModel _waiter = new WaiterViewModel();
-    public WaiterViewModel Waiter
+    TaskProgressViewModel _taskProgress = new TaskProgressViewModel();
+    public TaskProgressViewModel TaskProgress
     {
-      get { return _waiter; }
-      set { _waiter = value; RaisePropertyChanged(() => Waiter); }
+      get { return _taskProgress; }
+      set { _taskProgress = value; RaisePropertyChanged(() => TaskProgress); }
     }
 
     public INavigationService Navigation { get; protected set; }

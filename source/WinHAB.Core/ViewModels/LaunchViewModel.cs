@@ -62,14 +62,14 @@ namespace WinHAB.Core.ViewModels
 
     public void ShowServerUrl()
     {
-      Waiter.Hide();
+      TaskProgress.Hide();
       IsServerAddressVisible = true;
       IsSitemapsVisible = false;
     }
 
     public void ShowSitemaps()
     {
-      Waiter.Hide();
+      TaskProgress.Hide();
       IsServerAddressVisible = false;
       IsSitemapsVisible = true;
     }
@@ -88,7 +88,7 @@ namespace WinHAB.Core.ViewModels
       try
       {
         HideAll();
-        Waiter.Show(Strings.TaskConnecting);
+        TaskProgress.Show(Strings.TaskConnecting);
         Sitemaps = new ObservableCollection<Sitemap>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
         bool showSitemaps = _config.Server != server;
         _config.Server = server;

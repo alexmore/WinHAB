@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace WinHAB.Core.Fx.Mvvm
+namespace WinHAB.Core.ViewModels
 {
-  public class WaiterViewModel : ViewModelBase
+  public class TaskProgressViewModel : ViewModelBase
   {
     bool _isVisible;
     public bool IsVisible

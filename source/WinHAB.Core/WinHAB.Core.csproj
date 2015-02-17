@@ -67,7 +67,7 @@
     <Compile Include="Fx\Mvvm\IViewModel.cs" />
     <Compile Include="Fx\Mvvm\MvvmExtensions.cs" />
     <Compile Include="Fx\Mvvm\ViewModel.cs" />
-    <Compile Include="Fx\Mvvm\WaiterViewModel.cs" />
+    <Compile Include="ViewModels\TaskProgressViewModel.cs" />
     <Compile Include="Net\OpenHabClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fx\ReflectionExtensions.cs" />

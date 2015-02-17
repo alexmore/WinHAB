@@ -29,7 +29,7 @@
                             <Image Name="Image"  Source="{Binding ImageStream, Converter={StaticResource StreamToWidgetImageConverter}}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
 
-                        <controls:WaiterControl Waiter="{Binding Waiter}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <controls:TaskProgressControl TaskProgress="{Binding TaskProgress}" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
                         <Border Name="Links"  Background="{DynamicResource Accent}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Padding="5"
                                 Visibility="Collapsed" >

@@ -86,8 +86,8 @@
       <DependentUpon>HeaderDropDownControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\IconLinkButton.cs" />
-    <Compile Include="Controls\WaiterControl.xaml.cs">
-      <DependentUpon>WaiterControl.xaml</DependentUpon>
+    <Compile Include="Controls\TaskProgressControl.xaml.cs">
+      <DependentUpon>TaskProgressControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsPanel.cs" />
     <Compile Include="Converters\StreamToImageConverter.cs" />
@@ -111,7 +111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\WaiterControl.xaml">
+    <Page Include="Controls\TaskProgressControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

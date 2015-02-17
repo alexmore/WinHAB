@@ -59,7 +59,7 @@ namespace WinHAB.Core.ViewModels
     {
       const string fakeFrameLabel = "#WRAPPER#";
 
-      Waiter.Show();
+      TaskProgress.Show();
       
       var page = await OpenHabClient.GetPageAsync(pageUri);
       if (page == null || page.Widgets == null || page.Widgets.Count == 0) return;
@@ -100,7 +100,7 @@ namespace WinHAB.Core.ViewModels
       }
 
       Widgets = res.ToObservableCollection();
-      Waiter.Hide();
+      TaskProgress.Hide();
 
       Parallel.ForEach(widgetsInitializators, async x => await x);
     }

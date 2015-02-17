@@ -23,8 +23,8 @@
             <TextBlock Text="WinHAB" Style="{StaticResource TitleH2}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
             <TextBlock Text="{x:Static loc:Localization.WinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
         </StackPanel>
-        
-        <controls:WaiterControl Waiter="{Binding Waiter}" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <controls:TaskProgressControl TaskProgress="{Binding TaskProgress}" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <TextBlock Text="{Binding Source={x:Static loc:Localization.LaunchViewServerUrlTitle}, Converter={StaticResource ToUpperConverter}}" 
