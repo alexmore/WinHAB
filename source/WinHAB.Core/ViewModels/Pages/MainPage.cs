@@ -80,7 +80,7 @@ namespace WinHAB.Core.ViewModels.Pages
         
         var frame = (FrameWidget)_widgetsFactory.Create(frameData);
         res.Add(frame);
-        widgetsInitializators.Add(frame.Initialize());
+        widgetsInitializators.Add(frame.InitializeAsync(null));
 
         foreach (var widgetData in frameData.Widgets)
         {
@@ -88,7 +88,7 @@ namespace WinHAB.Core.ViewModels.Pages
           if (widget != null)
           {
             frame.Widgets.Add(widget);
-            widgetsInitializators.Add(widget.Initialize());
+            widgetsInitializators.Add(widget.InitializeAsync(null));
           }
         }
       }

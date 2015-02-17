@@ -23,11 +23,6 @@ namespace WinHAB.Core.ViewModels
     public Widget Data { get; set; }
     public WidgetSize Size { get; set; }
 
-    public virtual Task Initialize()
-    {
-      return Task.FromResult(0);
-    }
-
     private string _title;
     public string Title { get { return _title; } set { _title = value; RaisePropertyChanged(() => Title); } }
 
