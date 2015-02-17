@@ -17,7 +17,7 @@ namespace WinHAB.Core.ViewModels
       Icon = data.Icon;
 
       if (data.LinkedPage != null && data.LinkedPage.Link != null)
-        LinkedPageUri = data.LinkedPage.Link;
+        LinkedPage = data.LinkedPage.Link;
     }
 
     public Widget Data { get; set; }
@@ -28,18 +28,18 @@ namespace WinHAB.Core.ViewModels
       return Task.FromResult(0);
     }
 
-    private string _Title;
-    public string Title { get { return _Title; } set { _Title = value; RaisePropertyChanged(() => Title); } }
+    private string _title;
+    public string Title { get { return _title; } set { _title = value; RaisePropertyChanged(() => Title); } }
 
-    private string _Value;
-    public string Value { get { return _Value; } set { _Value = value; RaisePropertyChanged(() => Value); } }
+    private string _value;
+    public string Value { get { return _value; } set { _value = value; RaisePropertyChanged(() => Value); } }
 
-    private Uri _LinkedPageUri;
-    public Uri LinkedPageUri { get { return _LinkedPageUri; } set { _LinkedPageUri = value; RaisePropertyChanged(() => LinkedPageUri); RaisePropertyChanged(()=>IsLink); } }
+    private Uri _linkedPage;
+    public Uri LinkedPage { get { return _linkedPage; } set { _linkedPage = value; RaisePropertyChanged(() => LinkedPage); RaisePropertyChanged(()=>IsLink); } }
 
     private string _icon;
     public string Icon { get { return _icon; } set { _icon = value; RaisePropertyChanged(() => Icon); } }
 
-    public bool IsLink { get { return LinkedPageUri != null; }}
+    public bool IsLink { get { return LinkedPage != null; }}
   }
 }

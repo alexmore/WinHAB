@@ -126,9 +126,9 @@ namespace WinHAB.Core.ViewModels.Pages
 
     async Task LoadLinkedPage(WidgetBase widget)
     {
-      if (widget.LinkedPageUri != null)
+      if (widget.LinkedPage != null)
       {
-        await LoadPageWidgets(widget.LinkedPageUri);
+        await LoadPageWidgets(widget.LinkedPage);
         Title = widget.Title + " " + widget.Value;
 
         if (_currentPage != null)
@@ -137,7 +137,7 @@ namespace WinHAB.Core.ViewModels.Pages
           RaisePropertyChanged(()=>HasHistory);
           HistoryPath = GetHistoryPath();
         }
-        _currentPage = new PagesHistoryItem() {Title = Title, Uri = widget.LinkedPageUri};
+        _currentPage = new PagesHistoryItem() {Title = Title, Uri = widget.LinkedPage};
 
       }
     }
