@@ -80,9 +80,9 @@
     <Compile Include="ViewModels\Widgets\ImageWidget.cs" />
     <Compile Include="ViewModels\Widgets\TextWidget.cs" />
     <Compile Include="ViewModels\WidgetBase.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetsFactory.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetSize.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetType.cs" />
+    <Compile Include="ViewModels\WidgetsFactory.cs" />
+    <Compile Include="ViewModels\WidgetSize.cs" />
+    <Compile Include="ViewModels\WidgetType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">

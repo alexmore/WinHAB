@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Core.Models.Converters

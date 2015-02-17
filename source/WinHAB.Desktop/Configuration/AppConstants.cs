@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
+using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Desktop.Configuration

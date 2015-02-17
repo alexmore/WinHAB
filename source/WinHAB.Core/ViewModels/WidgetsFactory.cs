@@ -1,7 +1,8 @@
 ﻿using System;
 using WinHAB.Core.Models;
+using WinHAB.Core.ViewModels.Widgets;
 
-namespace WinHAB.Core.ViewModels.Widgets
+namespace WinHAB.Core.ViewModels
 {
   public class WidgetsFactory
   {
