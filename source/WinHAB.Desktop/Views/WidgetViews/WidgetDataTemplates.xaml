@@ -7,11 +7,11 @@
         <ResourceDictionary Source="/Views/WidgetViews/WidgetViewStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
-    <DataTemplate DataType="{x:Type widgets:TextWidget}">
+    <DataTemplate DataType="{x:Type widgets:TextWidgetModel}">
         <Button Style="{StaticResource TextWidgetView}" Command="{Binding DataContext.LoadLinkedPageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type widgets:ImageWidget}">
+    <DataTemplate DataType="{x:Type widgets:ImageWidgetModel}">
         <Button Style="{StaticResource ImageWidgetView}" Command="{Binding DataContext.LoadLinkedPageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
     </DataTemplate>
 </ResourceDictionary>

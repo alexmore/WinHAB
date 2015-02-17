@@ -14,7 +14,7 @@ using WinHAB.Desktop.Configuration;
 
 namespace WinHAB.Desktop.ViewModels
 {
-  public class DesktopMainViewModel : MainPage
+  public class DesktopMainViewModel : MainPageModel
   {
     public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
       base(navigationService, appConfig, openHabClient,  widgetsFactory)

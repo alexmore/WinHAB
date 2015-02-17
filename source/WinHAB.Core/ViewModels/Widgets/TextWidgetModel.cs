@@ -3,9 +3,9 @@ using WinHAB.Core.Models;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
-  public class TextWidget : WidgetBase
+  public class TextWidgetModel : WidgetModelBase
   {
-    public TextWidget(Widget data) : base(data)
+    public TextWidgetModel(Widget data) : base(data)
     {
       Size = WidgetSize.Meduim;
       

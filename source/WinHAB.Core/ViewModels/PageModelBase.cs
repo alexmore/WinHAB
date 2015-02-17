@@ -2,9 +2,9 @@
 
 namespace WinHAB.Core.ViewModels
 {
-  public class PageBase : ViewModel
+  public class PageModelBase : ViewModel
   {
-    protected PageBase(INavigationService navigationService)
+    protected PageModelBase(INavigationService navigationService)
     {
       Navigation = navigationService;
     }

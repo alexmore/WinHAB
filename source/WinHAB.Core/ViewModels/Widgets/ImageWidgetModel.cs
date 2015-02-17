@@ -10,20 +10,20 @@ using WinHAB.Core.ViewModels.Pages;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
-  public class ImageWidget : WidgetBase
+  public class ImageWidgetModel : WidgetModelBase
   {
     private readonly INavigationService _navigationService;
     private readonly OpenHabClient _client;
     private readonly ITimer _timer;
 
-    public ImageWidget(INavigationService navigationService, Widget data, OpenHabClient client, ITimer timer) : base(data)
+    public ImageWidgetModel(INavigationService navigationService, Widget data, OpenHabClient client, ITimer timer) : base(data)
     {
       _navigationService = navigationService;
       _client = client;
       _timer = timer;
       Size = WidgetSize.Large;
 
-      ViewImageCommand = new AsyncRelayCommand(async () => await _navigationService.NavigateAsync<ImageWidgetPage>(this));
+      ViewImageCommand = new AsyncRelayCommand(async () => await _navigationService.NavigateAsync<ImageWidgetPageModel>(this));
     }
 
     private byte[] _imageCache = null;

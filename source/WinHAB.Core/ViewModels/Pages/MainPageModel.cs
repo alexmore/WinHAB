@@ -12,19 +12,19 @@ using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Core.ViewModels.Pages
 {
-  public class MainPage : PageBase
+  public class MainPageModel : PageModelBase
   {
     protected readonly OpenHabClient OpenHabClient;
     private readonly WidgetsFactory _widgetsFactory;
 
-    public MainPage(INavigationService navigationService, 
+    public MainPageModel(INavigationService navigationService, 
       AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory) : base(navigationService)
     {
       AppConfiguration = appConfig;
       OpenHabClient = openHabClient;
       _widgetsFactory = widgetsFactory;
       
-      LoadLinkedPageCommand = new AsyncRelayCommand<WidgetBase>(LoadLinkedPage);
+      LoadLinkedPageCommand = new AsyncRelayCommand<WidgetModelBase>(LoadLinkedPage);
       HistoryBackCommand = new AsyncRelayCommand(HistoryBack);
     }
 
@@ -34,8 +34,8 @@ namespace WinHAB.Core.ViewModels.Pages
     private string _title;
     public string Title { get { return _title; } set { _title = value; RaisePropertyChanged(() => Title); } }
 
-    private ObservableCollection<FrameWidget> _Widgets;
-    public ObservableCollection<FrameWidget> Widgets { get { return _Widgets; } set { if (_Widgets != null) CleanupWidgets(); _Widgets = value; RaisePropertyChanged(() => Widgets); } }
+    private ObservableCollection<FrameWidgetModel> _Widgets;
+    public ObservableCollection<FrameWidgetModel> Widgets { get { return _Widgets; } set { if (_Widgets != null) CleanupWidgets(); _Widgets = value; RaisePropertyChanged(() => Widgets); } }
     
     public override async Task InitializeAsync(dynamic parameter)
     {
@@ -70,12 +70,12 @@ namespace WinHAB.Core.ViewModels.Pages
 
       var widgetsInitializators = new List<Task>();
 
-      var res = new List<FrameWidget>();
+      var res = new List<FrameWidgetModel>();
       foreach (var frameData in framesData)
       {
         if (frameData.Label == fakeFrameLabel) frameData.Label = null;
         
-        var frame = (FrameWidget)_widgetsFactory.Create(frameData);
+        var frame = (FrameWidgetModel)_widgetsFactory.Create(frameData);
         res.Add(frame);
         widgetsInitializators.Add(frame.InitializeAsync(null));
 
@@ -119,9 +119,9 @@ namespace WinHAB.Core.ViewModels.Pages
     private string _HistoryPath;
     public string HistoryPath { get { return _HistoryPath; } set { _HistoryPath = value; RaisePropertyChanged(() => HistoryPath); } }
     
-    public AsyncRelayCommand<WidgetBase> LoadLinkedPageCommand { get; set; }
+    public AsyncRelayCommand<WidgetModelBase> LoadLinkedPageCommand { get; set; }
 
-    async Task LoadLinkedPage(WidgetBase widget)
+    async Task LoadLinkedPage(WidgetModelBase widget)
     {
       if (widget.LinkedPage != null)
       {

@@ -6,9 +6,9 @@ using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Core.ViewModels
 {
-  public class WidgetBase : ViewModel
+  public class WidgetModelBase : ViewModel
   {
-    protected WidgetBase(Widget data)
+    protected WidgetModelBase(Widget data)
     {
       Data = data;
 

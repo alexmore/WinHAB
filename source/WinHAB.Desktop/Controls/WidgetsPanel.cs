@@ -127,7 +127,7 @@ namespace WinHAB.Desktop.Controls
 
     bool? FindAndPlace(List<MapItem>[] map, ContentPresenter content)
     {
-      var widget = content.Content as WidgetBase;
+      var widget = content.Content as WidgetModelBase;
       if (widget == null) return null;
 
       var columnsCount = map[0].Count;

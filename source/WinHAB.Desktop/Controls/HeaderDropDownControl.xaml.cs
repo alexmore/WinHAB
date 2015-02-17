@@ -97,7 +97,7 @@ namespace WinHAB.Desktop.Controls
       {
         NavigationService.ClearHistory();
         AppConfiguration.Runtime.IsRestarting = true;
-        await NavigationService.NavigateAsync<BootstrapperPage>();
+        await NavigationService.NavigateAsync<BootstrapperPageModel>();
       }
     }
 
@@ -107,7 +107,7 @@ namespace WinHAB.Desktop.Controls
       {
         AppConfiguration.Sitemap = null;
         NavigationService.ClearHistory();
-        var vm = await NavigationService.NavigateAsync<BootstrapperPage>();
+        var vm = await NavigationService.NavigateAsync<BootstrapperPageModel>();
         await vm.ConnectCommand.ExecuteAsync(AppConfiguration.Server);
       }
     }

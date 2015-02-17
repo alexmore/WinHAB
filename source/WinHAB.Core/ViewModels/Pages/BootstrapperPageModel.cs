@@ -10,12 +10,12 @@ using WinHAB.Core.Net;
 
 namespace WinHAB.Core.ViewModels.Pages
 {
-  public class BootstrapperPage : PageBase
+  public class BootstrapperPageModel : PageModelBase
   {
     private OpenHabClient _client;
     private AppConfiguration _config;
 
-    public BootstrapperPage(INavigationService navigationService, OpenHabClient client, AppConfiguration config) : base(navigationService)
+    public BootstrapperPageModel(INavigationService navigationService, OpenHabClient client, AppConfiguration config) : base(navigationService)
     {
       _client = client;
       _config = config;
@@ -131,7 +131,7 @@ namespace WinHAB.Core.ViewModels.Pages
         return;
       }
 
-      await Navigation.NavigateAsync<MainPage>(sitemap);
+      await Navigation.NavigateAsync<MainPageModel>(sitemap);
       _config.Sitemap = sitemap.Name;
       await _config.SaveAsync();
     }

@@ -51,7 +51,7 @@ namespace WinHAB.Desktop
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      await navigation.NavigateAsync<BootstrapperPage>();
+      await navigation.NavigateAsync<BootstrapperPageModel>();
     }
 
     private void SetAppearance(DesktopConfiguration cfg)
