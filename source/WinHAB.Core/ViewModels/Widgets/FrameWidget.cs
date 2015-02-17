@@ -6,7 +6,7 @@ namespace WinHAB.Core.ViewModels.Widgets
 {
   public class FrameWidget : WidgetBase
   {
-    public FrameWidget(INavigationService navigationService, Widget data) : base(navigationService, data)
+    public FrameWidget(Widget data) : base(data)
     {
       Widgets = new ObservableCollection<WidgetBase>();
     }

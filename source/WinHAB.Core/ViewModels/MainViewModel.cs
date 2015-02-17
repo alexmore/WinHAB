@@ -13,7 +13,7 @@ using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Core.ViewModels
 {
-  public class MainViewModel : ViewModel
+  public class MainViewModel : PageBase
   {
     protected readonly OpenHabClient OpenHabClient;
     private readonly WidgetsFactory _widgetsFactory;

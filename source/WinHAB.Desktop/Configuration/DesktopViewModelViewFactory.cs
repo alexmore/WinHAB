@@ -17,19 +17,9 @@ namespace WinHAB.Desktop.Configuration
       _kernel = kernel;
     }
 
-    public override IViewModel CreateViewModel(Type viewModelType, Action<ConstructorParameters> ctorParameters)
+    public override IViewModel CreateViewModel(Type viewModelType)
     {
-      var ctorArgs = new List<ConstructorArgument>();
-
-      if (ctorParameters != null && ctorParameters.GetConstructorParameters() != null &&
-          ctorParameters.GetConstructorParameters().Parameters != null)
-      {
-        ctorArgs.AddRange(ctorParameters
-          .GetConstructorParameters().Parameters
-          .Select(x => new ConstructorArgument(x.Key, x.Value)).ToArray());
-      }
-
-      return (IViewModel) _kernel.Get(viewModelType, ctorArgs.ToArray());
+      return (IViewModel) _kernel.Get(viewModelType);
     }
 
     public override IView CreateView(Type viewType)

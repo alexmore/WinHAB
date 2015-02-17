@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Fx.Mvvm;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
-  public class ImageWidgetPage : ViewModel
+  public class ImageWidgetPage : PageBase
   {
     public ImageWidgetPage(INavigationService navigationService) : base(navigationService)
     {

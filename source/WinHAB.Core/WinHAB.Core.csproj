@@ -59,7 +59,6 @@
     <Compile Include="Fx\Mvvm\AbstractViewModelViewFactory.cs" />
     <Compile Include="Fx\Mvvm\AsyncRelayCommand.cs" />
     <Compile Include="Fx\Mvvm\AsyncRelayCommandGeneric.cs" />
-    <Compile Include="Fx\Mvvm\ConstructorParameters.cs" />
     <Compile Include="Fx\Mvvm\INavigationService.cs" />
     <Compile Include="Fx\Mvvm\IViewModelViewMapper.cs" />
     <Compile Include="Fx\Mvvm\IView.cs" />
@@ -67,6 +66,7 @@
     <Compile Include="Fx\Mvvm\IViewModel.cs" />
     <Compile Include="Fx\Mvvm\MvvmExtensions.cs" />
     <Compile Include="Fx\Mvvm\ViewModel.cs" />
+    <Compile Include="ViewModels\PageBase.cs" />
     <Compile Include="ViewModels\TaskProgressViewModel.cs" />
     <Compile Include="Net\OpenHabClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="ViewModels\Widgets\ImageWidgetPage.cs" />
     <Compile Include="ViewModels\Widgets\ImageWidget.cs" />
     <Compile Include="ViewModels\Widgets\TextWidget.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetBase.cs" />
+    <Compile Include="ViewModels\WidgetBase.cs" />
     <Compile Include="ViewModels\Widgets\WidgetsFactory.cs" />
     <Compile Include="ViewModels\Widgets\WidgetSize.cs" />
     <Compile Include="ViewModels\Widgets\WidgetType.cs" />

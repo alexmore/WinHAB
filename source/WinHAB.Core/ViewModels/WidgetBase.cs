@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
+using WinHAB.Core.ViewModels.Widgets;
 
-namespace WinHAB.Core.ViewModels.Widgets
+namespace WinHAB.Core.ViewModels
 {
   public class WidgetBase : ViewModel
   {
-    public WidgetBase(INavigationService navigationService, Widget data) : base(navigationService)
+    protected WidgetBase(Widget data)
     {
       Data = data;
 

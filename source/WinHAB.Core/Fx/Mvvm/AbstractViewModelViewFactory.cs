@@ -8,13 +8,8 @@ namespace WinHAB.Core.Fx.Mvvm
   {
     protected readonly List<KeyValuePair<Type, Type>> MapList = new List<KeyValuePair<Type, Type>>();
     
-    public abstract IViewModel CreateViewModel(Type viewModelType, Action<ConstructorParameters> ctorParameters);
+    public abstract IViewModel CreateViewModel(Type viewModelType);
     public abstract IView CreateView(Type viewType);
-
-    public virtual IViewModel CreateViewModel(Type viewModelType)
-    {
-      return CreateViewModel(viewModelType, null);
-    }
 
     public IView CreateViewByViewModelType(Type viewModelType)
     {

@@ -11,7 +11,7 @@ using WinHAB.Core.Net;
 
 namespace WinHAB.Core.ViewModels
 {
-  public class LaunchViewModel : ViewModel
+  public class LaunchViewModel : PageBase
   {
     private OpenHabClient _client;
     private AppConfiguration _config;

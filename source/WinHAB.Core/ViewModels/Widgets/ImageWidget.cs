@@ -11,16 +11,18 @@ namespace WinHAB.Core.ViewModels.Widgets
 {
   public class ImageWidget : WidgetBase
   {
+    private readonly INavigationService _navigationService;
     private readonly OpenHabClient _client;
     private readonly ITimer _timer;
 
-    public ImageWidget(INavigationService navigationService, Widget data, OpenHabClient client, ITimer timer) : base(navigationService, data)
+    public ImageWidget(INavigationService navigationService, Widget data, OpenHabClient client, ITimer timer) : base(data)
     {
+      _navigationService = navigationService;
       _client = client;
       _timer = timer;
       Size = WidgetSize.Large;
 
-      ViewImageCommand = new AsyncRelayCommand(async ()=> await Navigation.NavigateAsync<ImageWidgetPage>(this));
+      ViewImageCommand = new AsyncRelayCommand(async () => await _navigationService.NavigateAsync<ImageWidgetPage>(this));
     }
 
     private byte[] _imageCache = null;

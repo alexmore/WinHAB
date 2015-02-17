@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.Configuration;
 
