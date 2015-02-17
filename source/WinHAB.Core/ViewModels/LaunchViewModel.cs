@@ -7,6 +7,7 @@ using WinHAB.Core.Configuration;
 using WinHAB.Core.Localizations;
 using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
+using WinHAB.Core.Net;
 
 namespace WinHAB.Core.ViewModels
 {

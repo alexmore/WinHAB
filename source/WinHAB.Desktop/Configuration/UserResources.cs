@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Resources;
 using WinHAB.Core;
+using WinHAB.Core.Net;
 using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop.Configuration

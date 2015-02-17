@@ -8,6 +8,7 @@ using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx;
 using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
+using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Core.ViewModels

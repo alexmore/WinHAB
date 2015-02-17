@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WinHAB.Core
+﻿namespace WinHAB.Core.Net
 {
   public interface IRestClientFactory
   {

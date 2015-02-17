@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
 using WinHAB.Core;
+using WinHAB.Core.Net;
 
 namespace WinHAB.Tests.Core
 {

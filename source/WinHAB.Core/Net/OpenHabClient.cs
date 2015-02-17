@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using WinHAB.Core.Model;
 
-namespace WinHAB.Core
+namespace WinHAB.Core.Net
 {
   public class OpenHabClient
   {

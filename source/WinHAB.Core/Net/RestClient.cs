@@ -5,8 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-
-namespace WinHAB.Core
+namespace WinHAB.Core.Net
 {
   public class RestClient : HttpClient, IRestClient
   {

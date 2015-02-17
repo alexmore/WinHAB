@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Fx;
 using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
+using WinHAB.Core.Net;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
