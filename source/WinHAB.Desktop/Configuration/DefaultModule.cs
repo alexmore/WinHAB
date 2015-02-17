@@ -51,7 +51,7 @@ namespace WinHAB.Desktop.Configuration
 
       Bind<Func<Type, Widget, WidgetBase>>()
         .ToMethod(x => (t, d) => (WidgetBase) x.Kernel.Get(t, new ConstructorArgument("data", d)));
-      Bind<IWidgetsFactory>().To<WidgetsFactory>();
+      Bind<WidgetsFactory>().ToSelf();
     }
 
     void ConfigureVMVFactory(IViewModelViewFactory f)

@@ -13,7 +13,7 @@ namespace WinHAB.Desktop.ViewModels
 {
   public class DesktopMainViewModel : MainViewModel
   {
-    public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient openHabClient, IWidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
+    public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
       base(navigationService, appConfig, openHabClient,  widgetsFactory, selectedSitemap)
     {
     }

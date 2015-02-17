@@ -16,10 +16,10 @@ namespace WinHAB.Core.ViewModels
   public class MainViewModel : ViewModel
   {
     protected readonly OpenHabClient OpenHabClient;
-    private readonly IWidgetsFactory _widgetsFactory;
+    private readonly WidgetsFactory _widgetsFactory;
 
     public MainViewModel(INavigationService navigationService, 
-      AppConfiguration appConfig, OpenHabClient openHabClient, IWidgetsFactory widgetsFactory, 
+      AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory, 
       Sitemap selectedSitemap) : base(navigationService)
     {
       AppConfiguration = appConfig;
