@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Fx;
 
 namespace WinHAB.Desktop.Configuration
 {

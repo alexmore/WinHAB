@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace WinHAB.Core
+namespace WinHAB.Core.Fx
 {
   public static class ReflectionExtensions
   {

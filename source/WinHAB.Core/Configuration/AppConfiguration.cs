@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using WinHAB.Core.Fx;
 
 namespace WinHAB.Core.Configuration
 {
