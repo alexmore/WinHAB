@@ -3,7 +3,7 @@ using WinHAB.Core.Models;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
-  public class WidgetsFactory : IWidgetsFactory
+  public class WidgetsFactory
   {
     private readonly Func<Type, Widget, WidgetBase> _createWidgetFunc;
 
