@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -50,12 +51,7 @@ namespace WinHAB.Desktop
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      
-      var vm = await navigation.NavigateAsync<BootstrapperPage>();
-      vm.HideAll();
-      vm.TaskProgress.Show(Localizations.Localization.Starting);
-      if (!string.IsNullOrWhiteSpace(cfg.Server)) await vm.ConnectCommand.ExecuteAsync(cfg.Server);
-      else vm.ShowServerUrl();
+      await navigation.NavigateAsync<BootstrapperPage>();
     }
 
     private void SetAppearance(DesktopConfiguration cfg)

@@ -132,4 +132,7 @@
   <data name="MessageHomepageLinkMissedInSitemapTitle" xml:space="preserve">
     <value>Loading Sitemap</value>
   </data>
+  <data name="TaskStarting" xml:space="preserve">
+    <value>Starting...</value>
+  </data>
 </root>

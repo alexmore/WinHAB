@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AppRuntimeConfiguration.cs" />
     <Compile Include="Fx\CollectionExtensions.cs" />
     <Compile Include="Configuration\AppConfiguration.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />

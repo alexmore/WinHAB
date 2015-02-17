@@ -91,12 +91,13 @@ namespace WinHAB.Desktop.Controls
       }
     }
 
-    private void ChangeServer(object sender, RoutedEventArgs e)
+    private async void ChangeServer(object sender, RoutedEventArgs e)
     {
       if (NavigationService != null)
       {
         NavigationService.ClearHistory();
-        NavigationService.NavigateAsync<BootstrapperPage>();
+        AppConfiguration.Runtime.IsRestarting = true;
+        await NavigationService.NavigateAsync<BootstrapperPage>();
       }
     }
 

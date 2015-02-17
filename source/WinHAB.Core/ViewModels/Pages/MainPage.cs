@@ -44,9 +44,6 @@ namespace WinHAB.Core.ViewModels.Pages
       await LoadPageWidgets(parameter.HomepageLink);
 
       _currentPage = new PagesHistoryItem() { Title = parameter.Label, Uri = parameter.HomepageLink };
-
-      AppConfiguration.Sitemap = parameter.Name;
-      await AppConfiguration.SaveAsync();
     }
 
     private async Task LoadPageWidgets(Uri pageUri)

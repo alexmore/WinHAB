@@ -105,5 +105,14 @@ namespace WinHAB.Core.Localization {
                 return ResourceManager.GetString("TaskConnecting", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting....
+        /// </summary>
+        internal static string TaskStarting {
+            get {
+                return ResourceManager.GetString("TaskStarting", resourceCulture);
+            }
+        }
     }
 }

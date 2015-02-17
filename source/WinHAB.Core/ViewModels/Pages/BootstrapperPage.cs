@@ -19,14 +19,30 @@ namespace WinHAB.Core.ViewModels.Pages
     {
       _client = client;
       _config = config;
-
+      
       ConnectCommand = new AsyncRelayCommand<string>(Connect, (string x) => 
         !string.IsNullOrWhiteSpace(ServerAddress));
       SelectSitemapCommand = new AsyncRelayCommand<Sitemap>(SelectSitemap);
+
+      ServerAddress = _config.Server;
     }
 
     public AsyncRelayCommand<string> ConnectCommand { get; set; }
     public AsyncRelayCommand<Sitemap> SelectSitemapCommand { get; set; }
+
+    public override async Task InitializeAsync(dynamic parameter)
+    {
+      ShowTaskProgress(Strings.TaskStarting);
+
+      if (string.IsNullOrWhiteSpace(ServerAddress) || _config.Runtime.IsRestarting)
+      {
+        _config.Runtime.IsRestarting = false;
+        ServerAddress = string.IsNullOrWhiteSpace(ServerAddress) ? "http://" : ServerAddress;
+        ShowServerUrl();
+      }
+      else
+        await Connect(ServerAddress);
+    }
 
     private string _ServerAddress;
     public string ServerAddress
@@ -53,53 +69,52 @@ namespace WinHAB.Core.ViewModels.Pages
     private bool _IsSitemapsVisible = false;
     public bool IsSitemapsVisible { get { return _IsSitemapsVisible; } set { _IsSitemapsVisible = value; RaisePropertyChanged(() => IsSitemapsVisible); } }
 
-    public void HideAll()
+    private void HideAll()
     {
+      TaskProgress.Hide();
       IsServerAddressVisible = false;
       IsSitemapsVisible = false;
+    }
+
+    private void ShowTaskProgress(string text)
+    {
+      HideAll();
+      TaskProgress.Show(text);
     }
 
     public void ShowServerUrl()
     {
-      TaskProgress.Hide();
+      HideAll();
       IsServerAddressVisible = true;
-      IsSitemapsVisible = false;
     }
 
     public void ShowSitemaps()
     {
-      TaskProgress.Hide();
-      IsServerAddressVisible = false;
+      HideAll();
       IsSitemapsVisible = true;
     }
     #endregion
-
-    public override Task InitializeAsync(dynamic parameter)
-    {
-      ServerAddress = _config.Server;
-
-      if (string.IsNullOrWhiteSpace(ServerAddress)) ServerAddress = "http://";
-      ShowServerUrl();
-
-      return Task.FromResult(0);
-    }
 
     async Task Connect(string server)
     {
       try
       {
-        HideAll();
-        TaskProgress.Show(Strings.TaskConnecting);
+        ShowTaskProgress(Strings.TaskConnecting);
+        
         Sitemaps = new ObservableCollection<Sitemap>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
-        bool showSitemaps = _config.Server != server;
-        _config.Server = server;
-        await _config.SaveAsync();
+        bool showSitemaps = false;
+        if (_config.Server != server)
+        {
+          showSitemaps = true;
+          _config.Server = server;
+          await _config.SaveAsync();
+        }
 
-        var existingSitemap = Sitemaps.FirstOrDefault(x => x.Name == _config.Sitemap);
-        if (existingSitemap == null || showSitemaps) 
+        var savedSitemap = Sitemaps.FirstOrDefault(x => x.Name == _config.Sitemap);
+        if (savedSitemap == null || showSitemaps) 
           ShowSitemaps();
         else
-          SelectSitemapCommand.Execute(existingSitemap);
+          SelectSitemapCommand.Execute(savedSitemap);
       }
       catch (Exception e)
       {
@@ -117,6 +132,8 @@ namespace WinHAB.Core.ViewModels.Pages
       }
 
       await Navigation.NavigateAsync<MainPage>(sitemap);
+      _config.Sitemap = sitemap.Name;
+      await _config.SaveAsync();
     }
   }
 }
