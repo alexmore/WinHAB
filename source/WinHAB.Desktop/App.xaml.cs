@@ -13,7 +13,7 @@ using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Converters;
 using Ninject;
 using WinHAB.Core.Configuration;
-using WinHAB.Core.Model;
+using WinHAB.Core.Models;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Desktop.Configuration;

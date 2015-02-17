@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace WinHAB.Core.Model.Converters
+namespace WinHAB.Core.Models.Converters
 {
   public class ToListJsonConverter<T> : JsonConverter
   {

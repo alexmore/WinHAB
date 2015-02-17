@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using WinHAB.Core.Model;
+using WinHAB.Core.Models;
 
 namespace WinHAB.Core.Net
 {

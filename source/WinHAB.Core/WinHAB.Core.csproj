@@ -46,13 +46,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Model\ItemData.cs" />
-    <Compile Include="Model\MappingData.cs" />
-    <Compile Include="Model\PageData.cs" />
-    <Compile Include="Model\SitemapData.cs" />
-    <Compile Include="Model\Converters\ToListJsonConverter.cs" />
-    <Compile Include="Model\WidgetData.cs" />
-    <Compile Include="Model\Converters\WidgetTypeJsonConverter.cs" />
+    <Compile Include="Models\ItemData.cs" />
+    <Compile Include="Models\MappingData.cs" />
+    <Compile Include="Models\PageData.cs" />
+    <Compile Include="Models\SitemapData.cs" />
+    <Compile Include="Models\Converters\ToListJsonConverter.cs" />
+    <Compile Include="Models\WidgetData.cs" />
+    <Compile Include="Models\Converters\WidgetTypeJsonConverter.cs" />
     <Compile Include="Mvvm\AbstractNavigationService.cs" />
     <Compile Include="Mvvm\AbstractViewModelViewFactory.cs" />
     <Compile Include="Mvvm\AsyncRelayCommand.cs" />

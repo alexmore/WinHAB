@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
-using WinHAB.Core.Model;
+using WinHAB.Core.Models;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;

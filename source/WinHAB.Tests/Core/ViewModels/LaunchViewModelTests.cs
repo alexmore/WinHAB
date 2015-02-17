@@ -6,7 +6,7 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using WinHAB.Core;
 using WinHAB.Core.Configuration;
-using WinHAB.Core.Model;
+using WinHAB.Core.Models;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.ViewModels;
 

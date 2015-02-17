@@ -1,4 +1,4 @@
-﻿using WinHAB.Core.Model;
+﻿using WinHAB.Core.Models;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {

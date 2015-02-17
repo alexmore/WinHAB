@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WinHAB.Core.ViewModels.Widgets;
 
-namespace WinHAB.Core.Model.Converters
+namespace WinHAB.Core.Models.Converters
 {
   public class WidgetTypeJsonConverter : JsonConverter
   {

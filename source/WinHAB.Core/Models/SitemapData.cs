@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using WinHAB.Core.Model.Converters;
+using WinHAB.Core.Models.Converters;
 
-namespace WinHAB.Core.Model
+namespace WinHAB.Core.Models
 {
   public class SitemapData
   {

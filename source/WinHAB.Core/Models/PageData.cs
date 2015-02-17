@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using WinHAB.Core.Model.Converters;
+using WinHAB.Core.Models.Converters;
 
-namespace WinHAB.Core.Model
+namespace WinHAB.Core.Models
 {
   public class PageData
   {

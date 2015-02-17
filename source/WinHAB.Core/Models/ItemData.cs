@@ -1,4 +1,4 @@
-﻿namespace WinHAB.Core.Model
+﻿namespace WinHAB.Core.Models
 {
   public class ItemData
   {
