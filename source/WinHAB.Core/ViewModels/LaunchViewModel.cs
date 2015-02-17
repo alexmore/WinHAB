@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Configuration;
-using WinHAB.Core.Localizations;
+using WinHAB.Core.Localization;
 using WinHAB.Core.Model;
 using WinHAB.Core.Mvvm;
 using WinHAB.Core.Net;
@@ -88,7 +88,7 @@ namespace WinHAB.Core.ViewModels
       try
       {
         HideAll();
-        Waiter.Show(Localization.Connecting);
+        Waiter.Show(Strings.TaskConnecting);
         Sitemaps = new ObservableCollection<SitemapData>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
         bool showSitemaps = _config.Server != server;
         _config.Server = server;
@@ -102,7 +102,7 @@ namespace WinHAB.Core.ViewModels
       }
       catch (Exception e)
       {
-        Navigation.ShowMessage(Localization.LaunchViewModelConnectionErrorTitle, Localization.LaunchViewModelConnectionError+" "+e.Message, ShowServerUrl);
+        Navigation.ShowMessage(Strings.MessageConnectionErrorTitle, Strings.MessageConnectionError + " " + e.Message, ShowServerUrl);
       }
     }
 
@@ -110,7 +110,7 @@ namespace WinHAB.Core.ViewModels
     {
       if (sitemap == null || sitemap.HomepageLink == null)
       {
-        Navigation.ShowMessage(Localization.LaunchViewSelesiteMapHomepageLinkExceptonTitle, Localization.LaunchViewSelesiteMapHomepageLinkExcepton,
+        Navigation.ShowMessage(Strings.MessageHomepageLinkMissedInSitemapTitle, Strings.MessageHomepageLinkMissedInSitemap,
           () => { });
         return;
       }

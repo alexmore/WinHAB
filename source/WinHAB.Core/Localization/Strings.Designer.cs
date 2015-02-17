@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WinHAB.Core.Localizations {
+namespace WinHAB.Core.Localization {
     using System;
     using System.Reflection;
     
@@ -23,24 +23,24 @@ namespace WinHAB.Core.Localizations {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Localization {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Localization() {
+        internal Strings() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WinHAB.Core.Localizations.Localization", typeof(Localization).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WinHAB.Core.Localization.Strings", typeof(Strings).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -52,7 +52,7 @@ namespace WinHAB.Core.Localizations {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -62,47 +62,47 @@ namespace WinHAB.Core.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connecting....
-        /// </summary>
-        public static string Connecting {
-            get {
-                return ResourceManager.GetString("Connecting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Can not load sitemaps list. Details:.
         /// </summary>
-        public static string LaunchViewModelConnectionError {
+        internal static string MessageConnectionError {
             get {
-                return ResourceManager.GetString("LaunchViewModelConnectionError", resourceCulture);
+                return ResourceManager.GetString("MessageConnectionError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Connection error.
         /// </summary>
-        public static string LaunchViewModelConnectionErrorTitle {
+        internal static string MessageConnectionErrorTitle {
             get {
-                return ResourceManager.GetString("LaunchViewModelConnectionErrorTitle", resourceCulture);
+                return ResourceManager.GetString("MessageConnectionErrorTitle", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Homepage link missing in the selected Sitemap..
         /// </summary>
-        public static string LaunchViewSelesiteMapHomepageLinkExcepton {
+        internal static string MessageHomepageLinkMissedInSitemap {
             get {
-                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExcepton", resourceCulture);
+                return ResourceManager.GetString("MessageHomepageLinkMissedInSitemap", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Loading Sitemap.
         /// </summary>
-        public static string LaunchViewSelesiteMapHomepageLinkExceptonTitle {
+        internal static string MessageHomepageLinkMissedInSitemapTitle {
             get {
-                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExceptonTitle", resourceCulture);
+                return ResourceManager.GetString("MessageHomepageLinkMissedInSitemapTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting....
+        /// </summary>
+        internal static string TaskConnecting {
+            get {
+                return ResourceManager.GetString("TaskConnecting", resourceCulture);
             }
         }
     }

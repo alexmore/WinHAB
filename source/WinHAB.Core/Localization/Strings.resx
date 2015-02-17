@@ -117,19 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LaunchViewModelConnectionErrorTitle" xml:space="preserve">
+  <data name="MessageConnectionErrorTitle" xml:space="preserve">
     <value>Connection error</value>
   </data>
-  <data name="LaunchViewModelConnectionError" xml:space="preserve">
+  <data name="MessageConnectionError" xml:space="preserve">
     <value>Can not load sitemaps list. Details:</value>
   </data>
-  <data name="Connecting" xml:space="preserve">
+  <data name="TaskConnecting" xml:space="preserve">
     <value>Connecting...</value>
   </data>
-  <data name="LaunchViewSelesiteMapHomepageLinkExcepton" xml:space="preserve">
+  <data name="MessageHomepageLinkMissedInSitemap" xml:space="preserve">
     <value>Homepage link missing in the selected Sitemap.</value>
   </data>
-  <data name="LaunchViewSelesiteMapHomepageLinkExceptonTitle" xml:space="preserve">
+  <data name="MessageHomepageLinkMissedInSitemapTitle" xml:space="preserve">
     <value>Loading Sitemap</value>
   </data>
 </root>
