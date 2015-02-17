@@ -7,7 +7,7 @@ namespace WinHAB.Core.ViewModels.Widgets
 {
   public class WidgetBase : ViewModel
   {
-    public WidgetBase(INavigationService navigationService, WidgetData data) : base(navigationService)
+    public WidgetBase(INavigationService navigationService, Widget data) : base(navigationService)
     {
       Data = data;
 
@@ -19,7 +19,7 @@ namespace WinHAB.Core.ViewModels.Widgets
         LinkedPageUri = data.LinkedPage.Link;
     }
 
-    public WidgetData Data { get; set; }
+    public Widget Data { get; set; }
     public WidgetSize Size { get; set; }
 
     public virtual Task Initialize()

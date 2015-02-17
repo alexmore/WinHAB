@@ -15,25 +15,25 @@ namespace WinHAB.Core.Net
       _factory = restClientFactory;
     }
 
-    public async Task<List<SitemapData>> GetSitemapsAsync(Uri sitemapUri)
+    public async Task<List<Sitemap>> GetSitemapsAsync(Uri sitemapUri)
     {
       using (var cln = _factory.Create())
       {
         var jobject = await cln.GetJObjectAsync(sitemapUri);
         if (jobject == null) return null;
 
-        return jobject.ToObject<SitemapListData>().Sitemaps;
+        return jobject.ToObject<SitemapList>().Sitemaps;
       }
     }
 
-    public async Task<PageData> GetPageAsync(Uri pageUri)
+    public async Task<Page> GetPageAsync(Uri pageUri)
     {
       using (var cln = _factory.Create())
       {
         var jobject = await cln.GetJObjectAsync(pageUri);
         if (jobject == null) return null;
         
-        return jobject.ToObject<PageData>();
+        return jobject.ToObject<Page>();
       }
     }
 

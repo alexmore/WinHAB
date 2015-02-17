@@ -38,6 +38,8 @@
     <Compile Include="Configuration\AppConfiguration.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\Language.cs" />
+    <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
+    <Compile Include="Models\SitemapList.cs" />
     <Compile Include="Net\IRestClient.cs" />
     <Compile Include="Net\IRestClientFactory.cs" />
     <Compile Include="Fx\ITimer.cs" />
@@ -46,12 +48,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ItemData.cs" />
-    <Compile Include="Models\MappingData.cs" />
-    <Compile Include="Models\PageData.cs" />
-    <Compile Include="Models\SitemapData.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Mapping.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Sitemap.cs" />
     <Compile Include="Models\Converters\ToListJsonConverter.cs" />
-    <Compile Include="Models\WidgetData.cs" />
+    <Compile Include="Models\Widget.cs" />
     <Compile Include="Models\Converters\WidgetTypeJsonConverter.cs" />
     <Compile Include="Mvvm\AbstractNavigationService.cs" />
     <Compile Include="Mvvm\AbstractViewModelViewFactory.cs" />

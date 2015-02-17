@@ -5,14 +5,14 @@ namespace WinHAB.Core.ViewModels.Widgets
 {
   public class WidgetsFactory : IWidgetsFactory
   {
-    private readonly Func<Type, WidgetData, WidgetBase> _createWidgetFunc;
+    private readonly Func<Type, Widget, WidgetBase> _createWidgetFunc;
 
-    public WidgetsFactory(Func<Type, WidgetData, WidgetBase> createWidgetFunc)
+    public WidgetsFactory(Func<Type, Widget, WidgetBase> createWidgetFunc)
     {
       _createWidgetFunc = createWidgetFunc;
     }
 
-    public WidgetBase Create(WidgetData data)
+    public WidgetBase Create(Widget data)
     {
       switch (data.Type)
       {

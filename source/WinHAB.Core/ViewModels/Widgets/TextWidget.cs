@@ -5,7 +5,7 @@ namespace WinHAB.Core.ViewModels.Widgets
 {
   public class TextWidget : WidgetBase
   {
-    public TextWidget(INavigationService navigationService, WidgetData data) : base(navigationService, data)
+    public TextWidget(INavigationService navigationService, Widget data) : base(navigationService, data)
     {
       Size = WidgetSize.Meduim;
       

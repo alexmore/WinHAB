@@ -20,7 +20,7 @@ namespace WinHAB.Core.ViewModels
 
     public MainViewModel(INavigationService navigationService, 
       AppConfiguration appConfig, OpenHabClient openHabClient, IWidgetsFactory widgetsFactory, 
-      SitemapData selectedSitemap) : base(navigationService)
+      Sitemap selectedSitemap) : base(navigationService)
     {
       AppConfiguration = appConfig;
       Sitemap = selectedSitemap;
@@ -42,8 +42,8 @@ namespace WinHAB.Core.ViewModels
     private ObservableCollection<FrameWidget> _Widgets;
     public ObservableCollection<FrameWidget> Widgets { get { return _Widgets; } set { if (_Widgets != null) CleanupWidgets(); _Widgets = value; RaisePropertyChanged(() => Widgets); } }
 
-    private SitemapData _Sitemap;
-    public SitemapData Sitemap { get { return _Sitemap; } set { _Sitemap = value; RaisePropertyChanged(() => Sitemap); } }
+    private Sitemap _Sitemap;
+    public Sitemap Sitemap { get { return _Sitemap; } set { _Sitemap = value; RaisePropertyChanged(() => Sitemap); } }
 
     public async override void OnNavigatedTo()
     {
@@ -65,14 +65,14 @@ namespace WinHAB.Core.ViewModels
       if (page == null || page.Widgets == null || page.Widgets.Count == 0) return;
 
       // Wrap independent widgets into frames
-      var framesData = new List<WidgetData>();
+      var framesData = new List<Widget>();
       foreach (var widget in page.Widgets)
       {
         if (widget.Type == WidgetType.Frame) framesData.Add(widget);
         else
         {
           if (framesData.Count == 0 || framesData.Last() == null || framesData.Last().Label != fakeFrameLabel) 
-            framesData.Add(new WidgetData() { Widgets = new List<WidgetData>(), Label = fakeFrameLabel, Type = WidgetType.Frame });
+            framesData.Add(new Widget() { Widgets = new List<Widget>(), Label = fakeFrameLabel, Type = WidgetType.Frame });
           framesData.Last().Widgets.Add(widget);
         }
       }

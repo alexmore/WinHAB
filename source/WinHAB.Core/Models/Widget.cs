@@ -8,7 +8,7 @@ using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Core.Models
 {
-  public class WidgetData
+  public class Widget
   {
     [JsonProperty("widgetId")]
     public string Id { get; set; }
@@ -21,8 +21,8 @@ namespace WinHAB.Core.Models
     public string ValueColor { get; set; }
     
     [JsonProperty("mapping")]
-    [JsonConverter(typeof(ToListJsonConverter<MappingData>))]
-    public List<MappingData> Mappings;
+    [JsonConverter(typeof(ToListJsonConverter<Mapping>))]
+    public List<Mapping> Mappings;
     public bool SwitchSupport { get; set; }
     public int SendFrequency { get; set; }
     public string Separator { get; set; }
@@ -36,12 +36,12 @@ namespace WinHAB.Core.Models
     public string Service { get; set; }
     public string Period { get; set; }
 
-     public ItemData Item { get; set; }
-    public PageData LinkedPage { get; set; }
+     public Item Item { get; set; }
+    public Page LinkedPage { get; set; }
 
     [JsonProperty("widget")]
-    [JsonConverter(typeof(ToListJsonConverter<WidgetData>))]
-    public List<WidgetData> Widgets { get; set; }
+    [JsonConverter(typeof(ToListJsonConverter<Widget>))]
+    public List<Widget> Widgets { get; set; }
 
     #region Calculated properties
     public string Title

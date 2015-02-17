@@ -23,11 +23,11 @@ namespace WinHAB.Core.ViewModels
 
       ConnectCommand = new AsyncRelayCommand<string>(Connect, (string x) => 
         !string.IsNullOrWhiteSpace(ServerAddress));
-      SelectSitemapCommand = new RelayCommand<SitemapData>(SelectSitemap);
+      SelectSitemapCommand = new RelayCommand<Sitemap>(SelectSitemap);
     }
 
     public AsyncRelayCommand<string> ConnectCommand { get; set; }
-    public RelayCommand<SitemapData> SelectSitemapCommand { get; set; }
+    public RelayCommand<Sitemap> SelectSitemapCommand { get; set; }
 
     private string _ServerAddress;
     public string ServerAddress
@@ -44,8 +44,8 @@ namespace WinHAB.Core.ViewModels
       }
     }
 
-    private ObservableCollection<SitemapData> _Sitemaps;
-    public ObservableCollection<SitemapData> Sitemaps { get { return _Sitemaps; } set { _Sitemaps = value; RaisePropertyChanged(() => Sitemaps); } }
+    private ObservableCollection<Sitemap> _Sitemaps;
+    public ObservableCollection<Sitemap> Sitemaps { get { return _Sitemaps; } set { _Sitemaps = value; RaisePropertyChanged(() => Sitemaps); } }
 
     #region Appearance
     private bool _isServerAddressVisible = false;
@@ -89,7 +89,7 @@ namespace WinHAB.Core.ViewModels
       {
         HideAll();
         Waiter.Show(Strings.TaskConnecting);
-        Sitemaps = new ObservableCollection<SitemapData>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
+        Sitemaps = new ObservableCollection<Sitemap>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
         bool showSitemaps = _config.Server != server;
         _config.Server = server;
         await _config.SaveAsync();
@@ -106,7 +106,7 @@ namespace WinHAB.Core.ViewModels
       }
     }
 
-    void SelectSitemap(SitemapData sitemap)
+    void SelectSitemap(Sitemap sitemap)
     {
       if (sitemap == null || sitemap.HomepageLink == null)
       {

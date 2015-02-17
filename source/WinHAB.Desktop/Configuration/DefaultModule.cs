@@ -49,7 +49,7 @@ namespace WinHAB.Desktop.Configuration
       Bind<IViewModelViewFactory>().ToConstant(vmvFactory).InSingletonScope();
       Bind<INavigationService>().To<DesktopNavigationService>().InSingletonScope();
 
-      Bind<Func<Type, WidgetData, WidgetBase>>()
+      Bind<Func<Type, Widget, WidgetBase>>()
         .ToMethod(x => (t, d) => (WidgetBase) x.Kernel.Get(t, new ConstructorArgument("data", d)));
       Bind<IWidgetsFactory>().To<WidgetsFactory>();
     }

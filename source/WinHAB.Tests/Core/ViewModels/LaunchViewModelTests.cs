@@ -97,10 +97,10 @@ namespace WinHAB.Tests.Core.ViewModels
         .Verifiable();
 
       var vm = new LaunchViewModel(_env.Navigation, _env.Client, _env.AppConfiguration);
-      vm.SelectSitemapCommand.Execute(new SitemapData());
+      vm.SelectSitemapCommand.Execute(new Sitemap());
       _env.NavigationMock.Verify(x => x.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action>()));
 
-      vm.SelectSitemapCommand.Execute(new SitemapData() {HomepageLink = new Uri("http://hello")});
+      vm.SelectSitemapCommand.Execute(new Sitemap() {HomepageLink = new Uri("http://hello")});
       _env.NavigationMock.Verify(x=>x.Navigate<MainViewModel>(It.IsAny<Action<ConstructorParameters>>()));
     }
   }

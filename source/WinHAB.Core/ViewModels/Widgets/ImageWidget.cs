@@ -14,7 +14,7 @@ namespace WinHAB.Core.ViewModels.Widgets
     private readonly OpenHabClient _client;
     private readonly ITimer _timer;
 
-    public ImageWidget(INavigationService navigationService, WidgetData data, OpenHabClient client, ITimer timer) : base(navigationService, data)
+    public ImageWidget(INavigationService navigationService, Widget data, OpenHabClient client, ITimer timer) : base(navigationService, data)
     {
       _client = client;
       _timer = timer;

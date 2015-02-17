@@ -1,6 +1,6 @@
 ﻿namespace WinHAB.Core.Models
 {
-  public class ItemData
+  public class Item
   {
     public string Type { get; set; }
     public string Name { get; set; }

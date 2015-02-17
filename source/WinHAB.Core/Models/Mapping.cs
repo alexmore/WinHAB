@@ -1,6 +1,6 @@
 ﻿namespace WinHAB.Core.Models
 {
-  public class MappingData
+  public class Mapping
   {
     public string Command { get; set; }
     public string Label { get; set; }

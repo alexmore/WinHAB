@@ -9,7 +9,7 @@ namespace WinHAB.Core.Models.Converters
   {
     public override bool CanConvert(Type objectType)
     {
-      return (objectType == typeof(WidgetData));
+      return (objectType == typeof(Widget));
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -20,7 +20,7 @@ namespace WinHAB.Core.Models.Converters
 
       var typeString = token.ToObject<string>();
 
-      return WidgetData.GetWidgetType(typeString);
+      return Widget.GetWidgetType(typeString);
     }
 
     public override bool CanWrite

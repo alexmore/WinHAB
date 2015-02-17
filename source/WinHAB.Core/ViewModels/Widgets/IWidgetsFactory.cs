@@ -4,6 +4,6 @@ namespace WinHAB.Core.ViewModels.Widgets
 {
   public interface IWidgetsFactory
   {
-    WidgetBase Create(WidgetData data);
+    WidgetBase Create(Widget data);
   }
 }
