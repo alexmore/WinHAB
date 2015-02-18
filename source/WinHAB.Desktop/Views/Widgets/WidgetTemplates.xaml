@@ -3,7 +3,7 @@
                     xmlns:widgets="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Views/WidgetViews/TextWidgetViewStyle.xaml" />
+        <ResourceDictionary Source="TextWidget.xaml" />
         <ResourceDictionary Source="/Views/WidgetViews/ImageWidgetViewStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
