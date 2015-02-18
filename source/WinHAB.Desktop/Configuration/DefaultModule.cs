@@ -12,6 +12,7 @@ using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
+using WinHAB.Desktop.Fx.Mvvm;
 using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Views;
 using WinHAB.Desktop.Views.WidgetViews;
@@ -49,7 +50,7 @@ namespace WinHAB.Desktop.Configuration
       var viewFactory = Kernel.Get<DesktopViewFactory>();
       viewFactory.ScanAssembly(this.GetType().Assembly);
       Bind<IViewFactory>().ToConstant(viewFactory).InSingletonScope();
-      Bind<INavigationService>().To<DesktopNavigationServiceBase>().InSingletonScope();
+      Bind<INavigationService>().To<DesktopNavigationService>().InSingletonScope();
 
       Bind<Func<Type, Widget, WidgetModelBase>>()
         .ToMethod(x => (t, d) => (WidgetModelBase) x.Kernel.Get(t, new ConstructorArgument("data", d)));

@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Controls;
 using WinHAB.Core.Fx.Mvvm;
 
-namespace WinHAB.Desktop
+namespace WinHAB.Desktop.Fx.Mvvm
 {
-  public class DesktopNavigationServiceBase : NavigationServiceBase
+  public class DesktopNavigationService : NavigationServiceBase
   {
     private readonly INavigationHost _navigationHost;
 
-    public DesktopNavigationServiceBase(INavigationHost navigationHost, IViewFactory factory)
+    public DesktopNavigationService(INavigationHost navigationHost, IViewFactory factory)
       : base(factory)
     {
       _navigationHost = navigationHost;

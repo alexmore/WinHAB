@@ -127,7 +127,7 @@
     <Compile Include="Configuration\AppConstants.cs" />
     <Compile Include="Configuration\DefaultModule.cs" />
     <Compile Include="Configuration\JsonConfigurationProvider.cs" />
-    <Compile Include="DesktopNavigationServiceBase.cs" />
+    <Compile Include="Fx\Mvvm\DesktopNavigationService.cs" />
     <Compile Include="HostWindow.xaml.cs">
       <DependentUpon>HostWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
