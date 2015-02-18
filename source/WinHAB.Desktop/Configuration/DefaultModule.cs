@@ -15,6 +15,7 @@ using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.Fx;
 using WinHAB.Desktop.Fx.Mvvm;
 using WinHAB.Desktop.ViewModels;
+using WinHAB.Desktop.ViewModels.Pages;
 using WinHAB.Desktop.Views;
 using WinHAB.Desktop.Views.WidgetViews;
 
@@ -45,7 +46,7 @@ namespace WinHAB.Desktop.Configuration
       Bind<IRestClient>().To<RestClient>();
       Bind<IRestClientFactory>().To<RestClientFactory>();
       
-      Bind<MainPageModel>().To<DesktopMainViewModel>();
+      Bind<MainPageModel>().To<DesktopMainPageModel>();
 
       var viewFactory = Kernel.Get<DesktopViewFactory>();
       viewFactory.ScanAssembly(this.GetType().Assembly);

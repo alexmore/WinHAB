@@ -1,23 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Media.Animation;
-using WinHAB.Core;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
-using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.Assets;
-using WinHAB.Desktop.Configuration;
 
-namespace WinHAB.Desktop.ViewModels
+namespace WinHAB.Desktop.ViewModels.Pages
 {
-  public class DesktopMainViewModel : MainPageModel
+  public class DesktopMainPageModel : MainPageModel
   {
-    public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
+    public DesktopMainPageModel(INavigationService navigationService, AppConfiguration appConfig, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
       base(navigationService, appConfig, clientFactory,  widgetsFactory)
     {
     }
