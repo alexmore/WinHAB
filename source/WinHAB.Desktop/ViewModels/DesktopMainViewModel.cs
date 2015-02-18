@@ -10,6 +10,7 @@ using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
+using WinHAB.Desktop.Assets;
 using WinHAB.Desktop.Configuration;
 
 namespace WinHAB.Desktop.ViewModels

@@ -1,16 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Resources;
-using WinHAB.Core;
 using WinHAB.Core.Net;
-using WinHAB.Desktop.Windows;
 
-namespace WinHAB.Desktop.Configuration
+namespace WinHAB.Desktop.Assets
 {
   public static class UserResources
   {
