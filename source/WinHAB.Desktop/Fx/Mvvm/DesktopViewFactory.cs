@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Documents;
 using Ninject;
 using WinHAB.Core.Fx.Mvvm;
 
-namespace WinHAB.Desktop.Configuration
+namespace WinHAB.Desktop.Fx.Mvvm
 {
   public class DesktopViewFactory : IViewFactory
   {

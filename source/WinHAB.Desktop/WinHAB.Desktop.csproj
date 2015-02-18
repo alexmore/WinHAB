@@ -80,7 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\DesktopConfiguration.cs" />
-    <Compile Include="Configuration\DesktopViewFactory.cs" />
+    <Compile Include="Fx\Mvvm\DesktopViewFactory.cs" />
     <Compile Include="Configuration\UserResources.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />
     <Compile Include="Controls\HeaderDropDownControl.xaml.cs">
