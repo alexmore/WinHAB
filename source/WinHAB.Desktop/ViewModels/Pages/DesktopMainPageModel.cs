@@ -27,6 +27,9 @@ namespace WinHAB.Desktop.ViewModels.Pages
     {
       AppConfig = appConfig as DesktopConfiguration;
 
+      _SelectedAccentColor =
+        AppConfig.AccentColors.FirstOrDefault(x => x.ToColor() == MUI.AppearanceManager.Current.AccentColor);
+
       _SelectedTheme =
         AppConfig.Themes.FirstOrDefault(
           x => x.Value.OriginalString.ToLower() == MUI.AppearanceManager.Current.ThemeSource.OriginalString.ToLower());
@@ -91,7 +94,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
         MUI.AppearanceManager.Current.ThemeSource = value.Value;
         if (AppConfig != null)
         {
-          AppConfig.ThemeSource = value.Value.OriginalString;
+          AppConfig.Theme = value.Value.OriginalString;
           AppConfig.Save();
         }
       }
@@ -134,7 +137,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
 
     public bool IsResetBackgroundAvailable
     {
-      get { return !string.IsNullOrWhiteSpace(AppConfig.BackgroundImagePath); }
+      get { return !string.IsNullOrWhiteSpace(AppConfig.BackgroundImage); }
     }
 
     private void SelectBackground()
@@ -163,7 +166,6 @@ namespace WinHAB.Desktop.ViewModels.Pages
     #region Accent color
 
     private string _SelectedAccentColor;
-
     public string SelectedAccentColor
     {
       get { return _SelectedAccentColor; }

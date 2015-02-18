@@ -14,6 +14,7 @@ using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Converters;
 using Ninject;
 using WinHAB.Core.Configuration;
+using WinHAB.Core.Fx;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
 using WinHAB.Core.ViewModels;
@@ -56,31 +57,28 @@ namespace WinHAB.Desktop
 
     private void SetAppearance(DesktopConfiguration cfg)
     {
-      try
-      {
-        AppearanceManager.Current.AccentColor = (Color) ColorConverter.ConvertFromString(cfg.AccentColor);
-      }
-      catch (Exception)
+      if (cfg.AccentColor.IsNullOrWhitespace() || cfg.AccentColor.ToColor().ToHexString() == "#00000000")
       {
         cfg.AccentColor = AppConstants.DefaultAccentColor.ToHexString();
         cfg.Save();
-        AppearanceManager.Current.AccentColor = AppConstants.DefaultAccentColor;
       }
 
+      AppearanceManager.Current.AccentColor = cfg.AccentColor.ToColor();
+    
       try
       {
-        AppearanceManager.Current.ThemeSource = new Uri(cfg.ThemeSource, UriKind.Relative);
+        AppearanceManager.Current.ThemeSource = new Uri(cfg.Theme, UriKind.Relative);
       }
       catch (Exception)
       {
-        cfg.ThemeSource = AppConstants.DefaultThemeSource.OriginalString;
+        cfg.Theme = AppConstants.DefaultThemeSource.OriginalString;
         cfg.Save();
         AppearanceManager.Current.ThemeSource = AppConstants.DefaultThemeSource;
       }
 
       try
       {
-        cfg.SetBackground(cfg.BackgroundImagePath);
+        cfg.SetBackground(cfg.BackgroundImage);
       }
       catch (Exception)
       {

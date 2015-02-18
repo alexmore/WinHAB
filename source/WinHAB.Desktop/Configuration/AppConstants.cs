@@ -5,6 +5,7 @@ using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
+using WinHAB.Desktop.Fx.Windows;
 
 namespace WinHAB.Desktop.Configuration
 {
@@ -22,7 +23,7 @@ namespace WinHAB.Desktop.Configuration
       get { return Path.Combine(ConfigurationFolder, "WinHAB.json"); }
     }
 
-    public static Color DefaultAccentColor { get { return (Color) ColorConverter.ConvertFromString("#FF8800"); }}
+    public static Color DefaultAccentColor { get { return "#FA6800".ToColor(); } }
     public static Uri DefaultThemeSource { get { return AppearanceManager.LightThemeSource; } }
 
     #region Widget sizes
