@@ -96,6 +96,7 @@
     <Compile Include="Converters\StreamToWidgetImageConverter.cs" />
     <Compile Include="Converters\StringToGeometryConverter.cs" />
     <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
+    <Compile Include="Fx\Net\DesktopRestClientExtensions.cs" />
     <Compile Include="ViewModels\DesktopMainViewModel.cs" />
     <Compile Include="Views\LaunchView.xaml.cs">
       <DependentUpon>LaunchView.xaml</DependentUpon>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using WinHAB.Core.Net;
+using WinHAB.Desktop.Fx.Net;
 
 namespace WinHAB.Desktop.Assets
 {
@@ -20,29 +21,14 @@ namespace WinHAB.Desktop.Assets
       {
         using (var cln = clientFactory.Create())
         {
-          var stream = await cln.GetAsync(new Uri(serverAddress + "/winhab/UserResources.xaml")).AsStreamAsync();
-          var userResourcesReader = new System.Windows.Markup.XamlReader();
-          Icons.MergedDictionaries.Add(LoadReasourceDictionary(stream));
+          var resource = await cln.GetAsync(new Uri(serverAddress + "/winhab/UserResources.xaml")).AsResourceDictionaryAsync();
+          if (resource != null)
+            Icons.MergedDictionaries.Add(resource);
         }
       }
       catch
       {
       }
-    }
-
-    public static ResourceDictionary LoadReasourceDictionary(Stream stream)
-    {
-      try
-      {
-        var reader = new System.Windows.Markup.XamlReader();
-        return (ResourceDictionary) reader.LoadAsync(stream);
-      }
-      catch
-      {
-        
-      }
-
-      return null;
     }
   }
 }
