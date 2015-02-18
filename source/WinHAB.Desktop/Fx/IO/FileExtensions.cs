@@ -2,7 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinHAB.Desktop.IO
+namespace WinHAB.Desktop.Fx.IO
 {
   public static class FileExtensions
   {

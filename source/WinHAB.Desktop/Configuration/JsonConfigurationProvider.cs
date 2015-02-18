@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WinHAB.Core.Configuration;
-using WinHAB.Desktop.IO;
+using WinHAB.Desktop.Fx.IO;
 
 namespace WinHAB.Desktop.Configuration
 {

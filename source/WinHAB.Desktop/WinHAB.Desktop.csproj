@@ -195,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="INavigationHost.cs" />
-    <Compile Include="IO\FileExtensions.cs" />
+    <Compile Include="Fx\IO\FileExtensions.cs" />
     <Compile Include="Localizations\Localization.Designer.cs">
       <DependentUpon>Localization.resx</DependentUpon>
       <AutoGen>True</AutoGen>
