@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/Converters.xaml" />
         <ResourceDictionary Source="/Themes/Icons.xaml" />
+        <ResourceDictionary Source="/Themes/IconLinkButton.xaml" />
         <ResourceDictionary Source="/Themes/Window.xaml" />
         <ResourceDictionary Source="/Themes/Buttons.xaml" />
         <ResourceDictionary Source="/Themes/Texts.xaml" />
