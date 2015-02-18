@@ -16,7 +16,7 @@ namespace WinHAB.Desktop.Configuration
   {
     public static ResourceDictionary Icons { get; private set; }
 
-    public static async Task LoadUserResources(string serverAddress, OpenHabClient client)
+    public static async Task LoadUserResources(string serverAddress, IRestClientFactory clientFactory)
     {
       Icons = new ResourceDictionary();
 
@@ -24,9 +24,12 @@ namespace WinHAB.Desktop.Configuration
 
       try
       {
-        var stream = await client.GetStreamAsync(new Uri(serverAddress + "/winhab/UserResources.xaml"));
-        var userResourcesReader = new System.Windows.Markup.XamlReader();
-        Icons.MergedDictionaries.Add(LoadReasourceDictionary(stream));
+        using (var cln = clientFactory.Create())
+        {
+          var stream = await cln.GetAsync(new Uri(serverAddress + "/winhab/UserResources.xaml")).AsStreamAsync();
+          var userResourcesReader = new System.Windows.Markup.XamlReader();
+          Icons.MergedDictionaries.Add(LoadReasourceDictionary(stream));
+        }
       }
       catch
       {

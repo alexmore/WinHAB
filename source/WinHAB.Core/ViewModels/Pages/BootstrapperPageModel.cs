@@ -12,12 +12,12 @@ namespace WinHAB.Core.ViewModels.Pages
 {
   public class BootstrapperPageModel : PageModelBase
   {
-    private OpenHabClient _client;
+    private IRestClientFactory _clientFactory;
     private AppConfiguration _config;
 
-    public BootstrapperPageModel(INavigationService navigationService, OpenHabClient client, AppConfiguration config) : base(navigationService)
+    public BootstrapperPageModel(INavigationService navigationService, IRestClientFactory clientFactory, AppConfiguration config) : base(navigationService)
     {
-      _client = client;
+      _clientFactory = clientFactory;
       _config = config;
       
       ConnectCommand = new AsyncRelayCommand<string>(Connect, (string x) => 
@@ -100,8 +100,12 @@ namespace WinHAB.Core.ViewModels.Pages
       try
       {
         ShowTaskProgress(Strings.TaskConnecting);
-        
-        Sitemaps = new ObservableCollection<Sitemap>(await _client.GetSitemapsAsync(new Uri(server+"/rest/sitemaps/")));
+
+        using (var cln = _clientFactory.Create())
+        {
+          Sitemaps =
+            new ObservableCollection<Sitemap>(await cln.GetAsync(new Uri(server + "/rest/sitemaps/")).AsSitemapAsync());
+        }
         bool showSitemaps = false;
         if (_config.Server != server)
         {

@@ -16,15 +16,15 @@ namespace WinHAB.Desktop.ViewModels
 {
   public class DesktopMainViewModel : MainPageModel
   {
-    public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
-      base(navigationService, appConfig, openHabClient,  widgetsFactory)
+    public DesktopMainViewModel(INavigationService navigationService, AppConfiguration appConfig, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory, IEnumerable<Sitemap> sitemaps, Sitemap selectedSitemap) : 
+      base(navigationService, appConfig, clientFactory,  widgetsFactory)
     {
     }
 
     public async override Task InitializeAsync(dynamic parameter)
     {
       TaskProgress.Show();
-      await UserResources.LoadUserResources(AppConfiguration.Server, OpenHabClient);
+      await UserResources.LoadUserResources(AppConfiguration.Server, ClientFactory);
       TaskProgress.Hide();
 
       await base.InitializeAsync((object)parameter);

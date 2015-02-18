@@ -14,14 +14,14 @@ namespace WinHAB.Core.ViewModels.Pages
 {
   public class MainPageModel : PageModelBase
   {
-    protected readonly OpenHabClient OpenHabClient;
+    protected readonly IRestClientFactory ClientFactory;
     private readonly WidgetsFactory _widgetsFactory;
 
     public MainPageModel(INavigationService navigationService, 
-      AppConfiguration appConfig, OpenHabClient openHabClient, WidgetsFactory widgetsFactory) : base(navigationService)
+      AppConfiguration appConfig, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory) : base(navigationService)
     {
       AppConfiguration = appConfig;
-      OpenHabClient = openHabClient;
+      ClientFactory = clientFactory;
       _widgetsFactory = widgetsFactory;
       
       LoadLinkedPageCommand = new AsyncRelayCommand<WidgetModelBase>(LoadLinkedPage);
@@ -51,8 +51,14 @@ namespace WinHAB.Core.ViewModels.Pages
       const string fakeFrameLabel = "#WRAPPER#";
 
       TaskProgress.Show();
+
+      Page page = null;
+
+      using (var cln = ClientFactory.Create())
+      {
+        page = await cln.GetAsync(pageUri).AsPageAsync();
+      }
       
-      var page = await OpenHabClient.GetPageAsync(pageUri);
       if (page == null || page.Widgets == null || page.Widgets.Count == 0) return;
 
       // Wrap independent widgets into frames

@@ -13,13 +13,13 @@ namespace WinHAB.Core.ViewModels.Widgets
   public class ImageWidgetModel : WidgetModelBase
   {
     private readonly INavigationService _navigationService;
-    private readonly OpenHabClient _client;
+    private readonly IRestClientFactory _clientFactory;
     private readonly ITimer _timer;
 
-    public ImageWidgetModel(INavigationService navigationService, Widget data, OpenHabClient client, ITimer timer) : base(data)
+    public ImageWidgetModel(INavigationService navigationService, Widget data, IRestClientFactory clientFactory, ITimer timer) : base(data)
     {
       _navigationService = navigationService;
-      _client = client;
+      _clientFactory = clientFactory;
       _timer = timer;
       Size = WidgetSize.Large;
 
@@ -49,13 +49,18 @@ namespace WinHAB.Core.ViewModels.Widgets
 
       try
       {
-        var stream = await _client.GetStreamAsync(Data.Url);
-        using (var memStream = new MemoryStream())
+        using (var cln = _clientFactory.Create())
         {
-          await stream.CopyToAsync(memStream);
-          _imageCache = memStream.ToArray();
+          var stream = await cln.GetAsync(Data.Url).AsStreamAsync();
+          
+          using (var memStream = new MemoryStream())
+          {
+            await stream.CopyToAsync(memStream);
+            _imageCache = memStream.ToArray();
+          }
+          
+          RaisePropertyChanged(() => ImageStream);
         }
-        RaisePropertyChanged(() => ImageStream);
       }
       catch (Exception)
       {
