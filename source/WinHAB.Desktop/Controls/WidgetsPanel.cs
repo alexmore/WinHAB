@@ -16,24 +16,6 @@ namespace WinHAB.Desktop.Controls
       MinHeight = AppConstants.WidgetLargeSize.Height + AppConstants.WidgetMarging;
     }
 
-    private string PrintMap(List<MapItem>[] map)
-    {
-      var s = string.Empty;
-      for (int i = 0; i < map.Length; i++)
-      {
-        for (int j = 0; j < map[i].Count; j++)
-        {
-          if (map[i][j] == null) s += "[ ] ";
-          else if (map[i][j].Size == WidgetSize.Large) s += "[L] ";
-          else if (map[i][j].Size == WidgetSize.Wide) s += "[W] ";
-          else s += "[N] ";
-        }
-        s += "\r\n";
-      }
-
-      return s;
-    }
-
     protected override Size MeasureOverride(Size availableSize)
     {
       var rowsCount = GetRowsCount(availableSize);
