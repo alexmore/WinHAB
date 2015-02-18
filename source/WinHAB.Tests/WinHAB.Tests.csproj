@@ -73,21 +73,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="JsonResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JsonResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="TestEnvironment.cs" />
-    <Compile Include="Desktop\DesktopNavigationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestConfigurationProvider.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JsonResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>JsonResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WinHAB.Core\WinHAB.Core.csproj">

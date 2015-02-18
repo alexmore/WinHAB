@@ -13,12 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WinHAB.Core.Fx.Mvvm;
+using WinHAB.Core.ViewModels.Pages;
 
 namespace WinHAB.Desktop.Views.WidgetViews
 {
   /// <summary>
   /// Interaction logic for ImageWidgetPageView.xaml
   /// </summary>
+  [ViewModel(typeof(ImageWidgetPageModel))]
   public partial class ImageWidgetPageView : IView
   {
     public ImageWidgetPageView()

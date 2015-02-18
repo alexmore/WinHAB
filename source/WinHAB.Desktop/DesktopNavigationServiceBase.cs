@@ -14,7 +14,7 @@ namespace WinHAB.Desktop
   {
     private readonly INavigationHost _navigationHost;
 
-    public DesktopNavigationServiceBase(INavigationHost navigationHost, IViewModelViewFactory factory)
+    public DesktopNavigationServiceBase(INavigationHost navigationHost, IViewFactory factory)
       : base(factory)
     {
       _navigationHost = navigationHost;

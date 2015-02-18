@@ -9,10 +9,8 @@ namespace WinHAB.Core.Fx.Mvvm
     IView CurrentView { get; }
 
     void NavigateView(IView view); 
-    Task NavigateAsync(IViewModel viewModel, dynamic parameter);
-    
-    Task<IViewModel> NavigateAsync(Type viewModelType, dynamic parameter);
 
+    Task<IViewModel> NavigateAsync(Type viewModelType, dynamic parameter);
     Task<T> NavigateAsync<T>(dynamic parameter) where T : IViewModel;
     Task<T> NavigateAsync<T>() where T : IViewModel;
 

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using WinHAB.Core.Fx.Mvvm;
+using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
 
 namespace WinHAB.Desktop.Views
@@ -22,6 +23,7 @@ namespace WinHAB.Desktop.Views
   /// <summary>
   /// Interaction logic for MainView.xaml
   /// </summary>
+  [ViewModel(typeof(MainPageModel))]
   public partial class MainView : IView
   {
     public MainView()

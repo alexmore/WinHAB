@@ -13,12 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WinHAB.Core.Fx.Mvvm;
+using WinHAB.Core.ViewModels.Pages;
 
 namespace WinHAB.Desktop.Views
 {
   /// <summary>
   /// Interaction logic for LaunchView.xaml
   /// </summary>
+  [ViewModel(typeof(BootstrapperPageModel))]
   public partial class LaunchView : IView
   {
     public LaunchView()

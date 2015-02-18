@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\DesktopConfiguration.cs" />
+    <Compile Include="Configuration\DesktopViewFactory.cs" />
     <Compile Include="Configuration\UserResources.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />
     <Compile Include="Controls\HeaderDropDownControl.xaml.cs">
@@ -125,7 +126,6 @@
     </Compile>
     <Compile Include="Configuration\AppConstants.cs" />
     <Compile Include="Configuration\DefaultModule.cs" />
-    <Compile Include="Configuration\DesktopViewModelViewFactory.cs" />
     <Compile Include="Configuration\JsonConfigurationProvider.cs" />
     <Compile Include="DesktopNavigationServiceBase.cs" />
     <Compile Include="HostWindow.xaml.cs">

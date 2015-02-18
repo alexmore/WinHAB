@@ -43,24 +43,17 @@ namespace WinHAB.Desktop.Configuration
       Bind<string>().ToMethod(x => GetServerAddress(x.Kernel)).WhenInjectedInto<RestClientFactory>();
       Bind<IRestClient>().To<RestClient>();
       Bind<IRestClientFactory>().To<RestClientFactory>();
-
-      var vmvFactory = Kernel.Get<DesktopViewModelViewFactory>();
-      ConfigureVMVFactory(vmvFactory);
+      
       Bind<MainPageModel>().To<DesktopMainViewModel>();
-      Bind<IViewModelViewFactory>().ToConstant(vmvFactory).InSingletonScope();
+
+      var viewFactory = Kernel.Get<DesktopViewFactory>();
+      viewFactory.ScanAssembly(this.GetType().Assembly);
+      Bind<IViewFactory>().ToConstant(viewFactory).InSingletonScope();
       Bind<INavigationService>().To<DesktopNavigationServiceBase>().InSingletonScope();
 
       Bind<Func<Type, Widget, WidgetModelBase>>()
         .ToMethod(x => (t, d) => (WidgetModelBase) x.Kernel.Get(t, new ConstructorArgument("data", d)));
       Bind<WidgetsFactory>().ToSelf();
-    }
-
-    void ConfigureVMVFactory(IViewModelViewFactory f)
-    {
-      f.Map<BootstrapperPageModel, LaunchView>();
-      f.Map<MainPageModel, MainView>(); 
-      f.Map<DesktopMainViewModel, MainView>();
-      f.Map<ImageWidgetPageModel, ImageWidgetPageView>();
     }
 
     string GetServerAddress(IKernel kernel)

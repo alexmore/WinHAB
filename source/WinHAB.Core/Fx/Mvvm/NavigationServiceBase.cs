@@ -9,9 +9,9 @@ namespace WinHAB.Core.Fx.Mvvm
   {
     protected Stack<IView> History { get; set; }
 
-    protected IViewModelViewFactory Factory { get; set; }
+    protected IViewFactory Factory { get; set; }
 
-    protected NavigationServiceBase(IViewModelViewFactory factory)
+    protected NavigationServiceBase(IViewFactory factory)
     {
       Factory = factory;
       History = new Stack<IView>();
@@ -25,21 +25,22 @@ namespace WinHAB.Core.Fx.Mvvm
     public abstract Task ShowMessageAsync(string title, string text);
     public abstract void ShowMessage(string title, string text, Action onClose);
     
-
-    public virtual async Task NavigateAsync(IViewModel viewModel, dynamic parameter)
+    public virtual async Task<IViewModel> NavigateAsync(Type viewModelType, dynamic parameter)
     {
-      var view = Factory.CreateViewByViewModelType(viewModel.GetType());
-      view.DataContext = viewModel;
+      var view = Factory.Create(viewModelType);
+      if (view == null)
+        throw new ArgumentException("Fails to create instance of view for view model" + viewModelType + ". May be view doesn't have ViewModelAttribute.");
+      
+      var vm = view.DataContext as IViewModel;
+      if (vm == null)
+        throw new ArgumentException("Fails to create instance of view model "+viewModelType+". View model must be passed as constructor parameter to a view and assign to DataContext property.");
+
       if (CurrentView != null) History.Push(CurrentView);
       NavigateView(view);
       CurrentView = view;
-      await viewModel.InitializeAsync(parameter);
-    }
-
-    public virtual async Task<IViewModel> NavigateAsync(Type viewModelType, dynamic parameter)
-    {
-      var vm = Factory.CreateViewModel(viewModelType);
-      await NavigateAsync(vm, parameter);
+      
+      await vm.InitializeAsync(parameter);
+      
       return vm;
     }
 
@@ -50,7 +51,7 @@ namespace WinHAB.Core.Fx.Mvvm
 
     public virtual async Task<T> NavigateAsync<T>() where T : IViewModel
     {
-      return (T) await NavigateAsync(typeof(T), null);
+      return await NavigateAsync<T>(null);
     }
 
     public virtual void ClearHistory()

@@ -39,6 +39,8 @@
     <Compile Include="Configuration\AppConfiguration.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\Language.cs" />
+    <Compile Include="Fx\Mvvm\IViewFactory.cs" />
+    <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
     <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
     <Compile Include="Models\SitemapList.cs" />
     <Compile Include="Net\IRestClient.cs" />
@@ -57,13 +59,10 @@
     <Compile Include="Models\Widget.cs" />
     <Compile Include="Models\Converters\WidgetTypeJsonConverter.cs" />
     <Compile Include="Fx\Mvvm\NavigationServiceBase.cs" />
-    <Compile Include="Fx\Mvvm\AbstractViewModelViewFactory.cs" />
     <Compile Include="Fx\Mvvm\AsyncRelayCommand.cs" />
     <Compile Include="Fx\Mvvm\AsyncRelayCommandGeneric.cs" />
     <Compile Include="Fx\Mvvm\INavigationService.cs" />
-    <Compile Include="Fx\Mvvm\IViewModelViewMapper.cs" />
     <Compile Include="Fx\Mvvm\IView.cs" />
-    <Compile Include="Fx\Mvvm\IViewModelViewFactory.cs" />
     <Compile Include="Fx\Mvvm\IViewModel.cs" />
     <Compile Include="Fx\Mvvm\MvvmExtensions.cs" />
     <Compile Include="Fx\Mvvm\ViewModel.cs" />
