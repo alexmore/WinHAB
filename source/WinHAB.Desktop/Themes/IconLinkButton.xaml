@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:WinHAB.Desktop.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <Style TargetType="controls:IconLinkButton" BasedOn="{StaticResource SystemButtonBase}" >
         <Setter Property="Foreground" Value="{DynamicResource LinkButtonText}"/>
         <Setter Property="Width" Value="NaN" />
