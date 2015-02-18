@@ -36,7 +36,7 @@
                 </ToggleButton>
                 <Popup IsOpen="{Binding IsChecked, ElementName=TitleToggleButton}" Name="HeaderDropDownPopup" StaysOpen="False" PlacementTarget="{Binding ElementName=TitleToggleButton}" >
                     <Border Background="{DynamicResource WindowBackground}" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Padding="10" >
-                        <controls:HeaderDropDownControl AppConfiguration="{Binding AppConfiguration}" NavigationService="{Binding NavigationService}" />
+                        <controls:SettingsDropDownControl />
                     </Border>
                 </Popup>
             </Grid>

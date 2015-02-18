@@ -17,10 +17,8 @@ namespace WinHAB.Core.ViewModels.Pages
     protected readonly IRestClientFactory ClientFactory;
     private readonly WidgetsFactory _widgetsFactory;
 
-    public MainPageModel(INavigationService navigationService, 
-      AppConfiguration appConfig, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory) : base(navigationService)
+    public MainPageModel(INavigationService navigationService, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory) : base(navigationService)
     {
-      AppConfiguration = appConfig;
       ClientFactory = clientFactory;
       _widgetsFactory = widgetsFactory;
       
@@ -28,9 +26,6 @@ namespace WinHAB.Core.ViewModels.Pages
       HistoryBackCommand = new AsyncRelayCommand(HistoryBack);
     }
 
-    public AppConfiguration AppConfiguration { get; private set; }
-    public INavigationService NavigationService { get { return Navigation; }}
-    
     private string _title;
     public string Title { get { return _title; } set { _title = value; RaisePropertyChanged(() => Title); } }
 

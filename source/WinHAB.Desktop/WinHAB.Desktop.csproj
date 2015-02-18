@@ -84,8 +84,8 @@
     <Compile Include="Fx\Mvvm\DesktopViewFactory.cs" />
     <Compile Include="Assets\UserResources.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />
-    <Compile Include="Controls\HeaderDropDownControl.xaml.cs">
-      <DependentUpon>HeaderDropDownControl.xaml</DependentUpon>
+    <Compile Include="Controls\SettingsDropDownControl.xaml.cs">
+      <DependentUpon>SettingsDropDownControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\IconLinkButton.cs" />
     <Compile Include="Controls\TaskProgressControl.xaml.cs">
@@ -118,7 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\HeaderDropDownControl.xaml">
+    <Page Include="Controls\SettingsDropDownControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
