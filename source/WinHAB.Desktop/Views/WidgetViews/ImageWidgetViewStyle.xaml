@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:WinHAB.Desktop.Converters"
                     xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
-                    xmlns:loc="clr-namespace:WinHAB.Desktop.Localizations">
+                    xmlns:loc="clr-namespace:WinHAB.Desktop.Localization">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/Icons.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
@@ -49,7 +49,7 @@
                                         <Path Data="{StaticResource FullScreenIcon}" Width="14" Height="14" Stretch="Uniform"
                                               Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
                                               Margin="0,0,5,0"/>
-                                        <TextBlock Text="{x:Static loc:Localization.ViewImage}" Style="{StaticResource TextWidgetTitle}" />
+                                        <TextBlock Text="{x:Static loc:Strings.ViewImage}" Style="{StaticResource TextWidgetTitle}" />
                                     </StackPanel>
                                 </Button>
 
