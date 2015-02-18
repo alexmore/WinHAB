@@ -109,7 +109,7 @@
     </Compile>
     <Compile Include="Windows\ColorExtensions.cs" />
     <Compile Include="Windows\DesktopTimer.cs" />
-    <Compile Include="Windows\ResourceDictionaryExtensions.cs" />
+    <Compile Include="Fx\Windows\ResourceDictionaryExtensions.cs" />
     <Page Include="Controls\HeaderDropDownControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

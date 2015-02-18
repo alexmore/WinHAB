@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 
-namespace WinHAB.Desktop.Windows
+namespace WinHAB.Desktop.Fx.Windows
 {
   public static class ResourceDictionaryExtensions
   {
