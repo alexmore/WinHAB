@@ -17,7 +17,6 @@ using WinHAB.Desktop.Fx.Mvvm;
 using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.ViewModels.Pages;
 using WinHAB.Desktop.Views;
-using WinHAB.Desktop.Views.WidgetViews;
 
 namespace WinHAB.Desktop.Configuration
 {

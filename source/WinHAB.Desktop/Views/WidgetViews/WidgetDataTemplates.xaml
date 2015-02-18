@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:widgets="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core"
-                    xmlns:widgetViews="clr-namespace:WinHAB.Desktop.Views.WidgetViews">
+                    xmlns:widgets="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Views/WidgetViews/WidgetViewStyles.xaml" />
