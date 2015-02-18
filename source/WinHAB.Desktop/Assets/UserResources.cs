@@ -15,7 +15,7 @@ namespace WinHAB.Desktop.Assets
     {
       Icons = new ResourceDictionary();
 
-      Icons.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Themes/WidgetIcons.xaml", UriKind.Relative) });
+      Icons.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Assets/WidgetIcons.xaml", UriKind.Relative) });
 
       try
       {
