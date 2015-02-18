@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             xmlns:pageViewModels="clr-namespace:WinHAB.Core.ViewModels.Pages;assembly=WinHAB.Core"
              mc:Ignorable="d" 
              Foreground="White"
-             d:DesignHeight="500" d:DesignWidth="900">
+             d:DesignHeight="500" d:DesignWidth="900"
+             d:DataContext="{d:DesignInstance Type=pageViewModels:ImageWidgetPageModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

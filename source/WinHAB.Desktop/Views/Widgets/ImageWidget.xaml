@@ -2,7 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:WinHAB.Desktop.Converters"
                     xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
-                    xmlns:loc="clr-namespace:WinHAB.Desktop.Localization">
+                    xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
+                    xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    mc:Ignorable="d" >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/Icons.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
@@ -24,7 +28,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
+                    <Grid  d:DataContext="{d:DesignInstance Type=vm:ImageWidgetModel}">
                         <Grid Name="BackgroundGrid">
                             <Image Name="Image"  Source="{Binding ImageStream, Converter={StaticResource StreamToWidgetImageConverter}}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>

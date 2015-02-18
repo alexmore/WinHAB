@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Pages;assembly=WinHAB.Core"
+             d:DataContext="{d:DesignInstance Type=vm:MainPageModel}"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000"
              Name="MainViewControl"
