@@ -7,7 +7,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="controls:IconLinkButton" BasedOn="{StaticResource SystemButtonBase}" >
-        <Setter Property="Foreground" Value="{DynamicResource LinkButtonText}"/>
+        <Setter Property="Foreground" Value="{DynamicResource WindowText}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Width" Value="NaN" />
         <Setter Property="Height" Value="NaN" />
         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -28,20 +29,18 @@
                             <Path Name="IconPath"  
                                   Data="{TemplateBinding IconData}"
                                   Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}" 
-                                  Fill="{TemplateBinding Foreground}" Stretch="Uniform"/>
-                            <TextBlock Name="LinkText"  Grid.Column="1"
-                                       DataContext="{TemplateBinding Content}"
-                                       Text="{Binding Converter={StaticResource ToUpperConverter}}"
-                                       Margin="5,0,0,0"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                  Fill="{TemplateBinding Foreground}" Stretch="Uniform" />
+                            <ContentPresenter Name="Presenter" Grid.Column="1" Margin="5,0,0,0"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Grid>
 
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
-                            <Setter TargetName="LinkText" Property="Margin" Value="0"/>
+                            <Setter TargetName="Presenter" Property="Margin" Value="0"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -49,72 +48,13 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextHover}"/>
+                <Setter Property="Opacity" Value=".8"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextPressed}" />
+                <Setter Property="Opacity" Value=".4" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextDisabled}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="RightIconLinkButton" TargetType="controls:IconLinkButton" BasedOn="{StaticResource SystemButtonBase}" >
-        <Setter Property="Foreground" Value="{DynamicResource WindowText}"/>
-        <Setter Property="Width" Value="NaN" />
-        <Setter Property="Height" Value="NaN" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:IconLinkButton}">
-                    <Border Name="Chrome"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                SnapsToDevicePixels="true">
-                        <Grid Margin="{TemplateBinding Padding}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Name="LinkText"  Grid.Column="0"
-                                       DataContext="{TemplateBinding Content}"
-                                       Text="{Binding Converter={StaticResource ToUpperConverter}}"
-                                       Margin="0,0,5,0"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            <Path Name="IconPath" Grid.Column="1"  
-                                  Data="{TemplateBinding IconData}"
-                                  Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}" 
-                                  Fill="{TemplateBinding Foreground}" Stretch="Uniform"/>
-                        </Grid>
-
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Content" Value="{x:Null}">
-                            <Setter TargetName="LinkText" Property="Margin" Value="0"/>
-                            <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                        <Trigger Property="IconData" Value="{x:Null}">
-                            <Setter TargetName="LinkText" Property="Margin" Value="0"/>
-                            <Setter TargetName="IconPath" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource Accent}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextPressed}" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource LinkButtonTextDisabled}" />
+                <Setter Property="Opacity" Value=".4" />
             </Trigger>
         </Style.Triggers>
     </Style>
