@@ -4,7 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="TextWidget.xaml" />
-        <ResourceDictionary Source="/Views/WidgetViews/ImageWidgetViewStyle.xaml" />
+        <ResourceDictionary Source="ImageWidget.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate DataType="{x:Type widgets:TextWidgetModel}">
