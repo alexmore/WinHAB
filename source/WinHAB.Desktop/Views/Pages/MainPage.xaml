@@ -68,7 +68,7 @@
                             <ItemsControl.Resources>
                                 <ResourceDictionary>
                                     <ResourceDictionary.MergedDictionaries>
-                                        <ResourceDictionary Source="../WidgetViews/WidgetDataTemplates.xaml"/>
+                                        <ResourceDictionary Source="../Widgets/WidgetTemplates.xaml"/>
                                     </ResourceDictionary.MergedDictionaries>
                                 </ResourceDictionary>
                             </ItemsControl.Resources>
