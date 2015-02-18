@@ -41,6 +41,7 @@
     <Compile Include="Configuration\Language.cs" />
     <Compile Include="Fx\Mvvm\IViewFactory.cs" />
     <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
+    <Compile Include="Fx\StringExtensions.cs" />
     <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
     <Compile Include="Models\SitemapList.cs" />
     <Compile Include="Net\IRestClient.cs" />
