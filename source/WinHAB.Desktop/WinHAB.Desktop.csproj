@@ -98,8 +98,8 @@
     <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
     <Compile Include="Fx\Net\DesktopRestClientExtensions.cs" />
     <Compile Include="ViewModels\Pages\DesktopMainPageModel.cs" />
-    <Compile Include="Views\LaunchView.xaml.cs">
-      <DependentUpon>LaunchView.xaml</DependentUpon>
+    <Compile Include="Views\Pages\BootstrapperPage.xaml.cs">
+      <DependentUpon>BootstrapperPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -165,7 +165,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LaunchView.xaml">
+    <Page Include="Views\Pages\BootstrapperPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
