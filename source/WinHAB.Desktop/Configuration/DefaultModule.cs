@@ -12,11 +12,11 @@ using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
+using WinHAB.Desktop.Fx;
 using WinHAB.Desktop.Fx.Mvvm;
 using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Views;
 using WinHAB.Desktop.Views.WidgetViews;
-using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop.Configuration
 {

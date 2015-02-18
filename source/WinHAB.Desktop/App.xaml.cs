@@ -21,7 +21,6 @@ using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Fx.Windows;
 using WinHAB.Desktop.ViewModels;
-using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop
 {
