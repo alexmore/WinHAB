@@ -19,6 +19,7 @@ using WinHAB.Core.Models;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
+using WinHAB.Desktop.Fx.Windows;
 using WinHAB.Desktop.ViewModels;
 using WinHAB.Desktop.Windows;
 

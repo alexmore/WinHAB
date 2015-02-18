@@ -107,7 +107,7 @@
     <Compile Include="Views\WidgetViews\ImageWidgetPageView.xaml.cs">
       <DependentUpon>ImageWidgetPageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ColorExtensions.cs" />
+    <Compile Include="Fx\Windows\ColorExtensions.cs" />
     <Compile Include="Windows\DesktopTimer.cs" />
     <Compile Include="Fx\Windows\ResourceDictionaryExtensions.cs" />
     <Page Include="Controls\HeaderDropDownControl.xaml">

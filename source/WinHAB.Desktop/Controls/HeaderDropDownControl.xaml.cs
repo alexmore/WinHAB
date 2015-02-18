@@ -19,6 +19,7 @@ using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
+using WinHAB.Desktop.Fx.Windows;
 using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop.Controls

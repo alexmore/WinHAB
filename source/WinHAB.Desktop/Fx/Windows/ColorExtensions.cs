@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace WinHAB.Desktop.Windows
+namespace WinHAB.Desktop.Fx.Windows
 {
   public static class ColorExtensions
   {
