@@ -61,191 +61,173 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Appearance.
-        /// </summary>
-        public static string Appearance {
-            get {
-                return ResourceManager.GetString("Appearance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Background.
-        /// </summary>
-        public static string Background {
-            get {
-                return ResourceManager.GetString("Background", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Change Server.
         /// </summary>
-        public static string ChangeServer {
+        public static string ButtonChangeServer {
             get {
-                return ResourceManager.GetString("ChangeServer", resourceCulture);
+                return ResourceManager.GetString("ButtonChangeServer", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Change Sitemap.
         /// </summary>
-        public static string ChangeSitemap {
+        public static string ButtonChangeSitemap {
             get {
-                return ResourceManager.GetString("ChangeSitemap", resourceCulture);
+                return ResourceManager.GetString("ButtonChangeSitemap", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Connect.
         /// </summary>
-        public static string Connect {
+        public static string ButtonConnect {
             get {
-                return ResourceManager.GetString("Connect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Image Files.
-        /// </summary>
-        public static string ImageFiles {
-            get {
-                return ResourceManager.GetString("ImageFiles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language.
-        /// </summary>
-        public static string InterfaceLanguage {
-            get {
-                return ResourceManager.GetString("InterfaceLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select Sitemap.
-        /// </summary>
-        public static string LaunchViewSelectSitemap {
-            get {
-                return ResourceManager.GetString("LaunchViewSelectSitemap", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to to load.
-        /// </summary>
-        public static string LaunchViewSelectSitemapToLoad {
-            get {
-                return ResourceManager.GetString("LaunchViewSelectSitemapToLoad", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Homepage link missing in the selected Sitemap..
-        /// </summary>
-        public static string LaunchViewSelesiteMapHomepageLinkExcepton {
-            get {
-                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExcepton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading Sitemap.
-        /// </summary>
-        public static string LaunchViewSelesiteMapHomepageLinkExceptonTitle {
-            get {
-                return ResourceManager.GetString("LaunchViewSelesiteMapHomepageLinkExceptonTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your OpenHAB Server Url.
-        /// </summary>
-        public static string LaunchViewServerUrlTitle {
-            get {
-                return ResourceManager.GetString("LaunchViewServerUrlTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (e.g. http://localhost:8080/).
-        /// </summary>
-        public static string LaunchViewServerUrlTitleExample {
-            get {
-                return ResourceManager.GetString("LaunchViewServerUrlTitleExample", resourceCulture);
+                return ResourceManager.GetString("ButtonConnect", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
-        public static string ResetBackground {
+        public static string ButtonResetBackground {
             get {
-                return ResourceManager.GetString("ResetBackground", resourceCulture);
+                return ResourceManager.GetString("ButtonResetBackground", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Restart to apply.
         /// </summary>
-        public static string RestartToApply {
+        public static string ButtonRestartToApply {
             get {
-                return ResourceManager.GetString("RestartToApply", resourceCulture);
+                return ResourceManager.GetString("ButtonRestartToApply", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Choose image.
         /// </summary>
-        public static string SelectBackground {
+        public static string ButtonSelectBackground {
             get {
-                return ResourceManager.GetString("SelectBackground", resourceCulture);
+                return ResourceManager.GetString("ButtonSelectBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View image.
+        /// </summary>
+        public static string ButtonViewImage {
+            get {
+                return ResourceManager.GetString("ButtonViewImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appearance.
+        /// </summary>
+        public static string LabelAppearance {
+            get {
+                return ResourceManager.GetString("LabelAppearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background.
+        /// </summary>
+        public static string LabelBackground {
+            get {
+                return ResourceManager.GetString("LabelBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Files.
+        /// </summary>
+        public static string LabelImageFiles {
+            get {
+                return ResourceManager.GetString("LabelImageFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string LabelInterfaceLanguage {
+            get {
+                return ResourceManager.GetString("LabelInterfaceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Sitemap.
+        /// </summary>
+        public static string LabelSelectSitemap {
+            get {
+                return ResourceManager.GetString("LabelSelectSitemap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (e.g. http://localhost:8080/).
+        /// </summary>
+        public static string LabelServerAddressExample {
+            get {
+                return ResourceManager.GetString("LabelServerAddressExample", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string Settings {
+        public static string LabelSettings {
             get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Starting....
-        /// </summary>
-        public static string Starting {
-            get {
-                return ResourceManager.GetString("Starting", resourceCulture);
+                return ResourceManager.GetString("LabelSettings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Theme.
         /// </summary>
-        public static string Theme {
+        public static string LabelTheme {
             get {
-                return ResourceManager.GetString("Theme", resourceCulture);
+                return ResourceManager.GetString("LabelTheme", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Dark.
         /// </summary>
-        public static string ThemeDark {
+        public static string LabelThemeDark {
             get {
-                return ResourceManager.GetString("ThemeDark", resourceCulture);
+                return ResourceManager.GetString("LabelThemeDark", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Light.
         /// </summary>
-        public static string ThemeLight {
+        public static string LabelThemeLight {
             get {
-                return ResourceManager.GetString("ThemeLight", resourceCulture);
+                return ResourceManager.GetString("LabelThemeLight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Windows desktop client for OpenHAB.
+        /// </summary>
+        public static string LabelWinHABDescription {
+            get {
+                return ResourceManager.GetString("LabelWinHABDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your OpenHAB Server Url.
+        /// </summary>
+        public static string LabelYourOpenHabServerUrl {
+            get {
+                return ResourceManager.GetString("LabelYourOpenHabServerUrl", resourceCulture);
             }
         }
         
@@ -253,36 +235,18 @@ namespace WinHAB.Desktop.Localization {
         ///   Looks up a localized string similar to Unable to apply selected image for the application background.
         ///Details:.
         /// </summary>
-        public static string UnableApplySelectedImageToBackground {
+        public static string MessageExceptionOnApplyImageToBackground {
             get {
-                return ResourceManager.GetString("UnableApplySelectedImageToBackground", resourceCulture);
+                return ResourceManager.GetString("MessageExceptionOnApplyImageToBackground", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Background image.
         /// </summary>
-        public static string UnableApplySelectedImageToBackgroundTitle {
+        public static string MessageExceptionOnApplyImageToBackgroundTitle {
             get {
-                return ResourceManager.GetString("UnableApplySelectedImageToBackgroundTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View image.
-        /// </summary>
-        public static string ViewImage {
-            get {
-                return ResourceManager.GetString("ViewImage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Microsoft Windows desktop client for OpenHAB.
-        /// </summary>
-        public static string WinHABDescription {
-            get {
-                return ResourceManager.GetString("WinHABDescription", resourceCulture);
+                return ResourceManager.GetString("MessageExceptionOnApplyImageToBackgroundTitle", resourceCulture);
             }
         }
     }

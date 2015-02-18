@@ -21,30 +21,28 @@
         <StackPanel Orientation="Vertical" Margin="0,0,0,20">
             <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource Accent}" Width="50" Height="50" HorizontalAlignment="Center"/>
             <TextBlock Text="WinHAB" Style="{StaticResource TitleH2}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-            <TextBlock Text="{x:Static loc:Strings.WinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
+            <TextBlock Text="{x:Static loc:Strings.LabelWinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
         </StackPanel>
 
         <controls:TaskProgressControl TaskProgress="{Binding TaskProgress}" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
-            <TextBlock Text="{Binding Source={x:Static loc:Strings.LaunchViewServerUrlTitle}, Converter={StaticResource ToUpperConverter}}" 
+            <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelYourOpenHabServerUrl}, Converter={StaticResource ToUpperConverter}}" 
                        Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
-            <TextBlock Text="{x:Static loc:Strings.LaunchViewServerUrlTitleExample}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{x:Static loc:Strings.LabelServerAddressExample}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
             <TextBox Name="ServerAddressTextBox" Text="{Binding ServerAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" HorizontalAlignment="Stretch" KeyDown="ConnectToServer"/>
-            <Button Name="ConnectButton" Content="{x:Static loc:Strings.Connect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
+            <Button Name="ConnectButton" Content="{x:Static loc:Strings.ButtonConnect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
         </StackPanel>
 
         <Grid Grid.Row="2" Width="300" MaxHeight="300" Visibility="{Binding IsSitemapsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding Source={x:Static loc:Strings.LaunchViewSelectSitemap}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
-            <TextBlock Grid.Row="1" Text="{x:Static loc:Strings.LaunchViewSelectSitemapToLoad}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Text="{Binding Source={x:Static loc:Strings.LabelSelectSitemap}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
 
-            <ItemsControl Grid.Row="2" ItemsSource="{Binding Sitemaps}" Margin="0,5">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Sitemaps}" Margin="0,5">
                 <ItemsControl.Template>
                     <ControlTemplate>
                         <StackPanel HorizontalAlignment="Stretch" IsItemsHost="true"/>

@@ -149,7 +149,7 @@ namespace WinHAB.Desktop.Controls
     {
       var d = new OpenFileDialog();
       d.DefaultExt = "*.jpg";
-      d.Filter = Localization.Strings.ImageFiles + "|*.jpg";
+      d.Filter = Localization.Strings.LabelImageFiles + "|*.jpg";
       bool? dRes = d.ShowDialog();
       if (dRes.HasValue && dRes.Value)
       {
@@ -159,8 +159,8 @@ namespace WinHAB.Desktop.Controls
         }
         catch (Exception ex)
         {
-          NavigationService.ShowMessage(Localization.Strings.UnableApplySelectedImageToBackgroundTitle, 
-            Localization.Strings.UnableApplySelectedImageToBackground+"\r\n"+ex.Message, () => { });
+          NavigationService.ShowMessage(Localization.Strings.MessageExceptionOnApplyImageToBackgroundTitle, 
+            Localization.Strings.MessageExceptionOnApplyImageToBackground+"\r\n"+ex.Message, () => { });
         }
       }
 
