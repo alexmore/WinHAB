@@ -6,6 +6,7 @@
         <ResourceDictionary Source="/Themes/IconLinkButton.xaml" />
         <ResourceDictionary Source="/Themes/Window.xaml" />
         <ResourceDictionary Source="/Themes/Buttons.xaml" />
+        <ResourceDictionary Source="/Themes/ToggleButton.xaml" />
         <ResourceDictionary Source="/Themes/Texts.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
