@@ -36,14 +36,14 @@ namespace WinHAB.Tests.Core.Fx
     #endregion
 
     [Test]
-    public void GetPropertyName_TryToPassNullpropertyExpression_ThrowsArgumentNullException()
+    public void GetPropertyName_ThrowsArgumentNullException_WhenPassNullpropertyExpression()
     {
       // assert
       Assert.That(() => this.GetPropertyName<object>(null), Throws.TypeOf<ArgumentNullException>());
     }
 
     [Test]
-    public void GetPropertyName_TryToPassWrongPropertyExpression_ThrowsArgumentExpression()
+    public void GetPropertyName_ThrowsArgumentExpression_WhenPassWrongPropertyExpression()
     {
       // assert
       Assert.That(()=> this.GetPropertyName<int?>(()=> GetHashCode()), Throws.ArgumentException);
@@ -52,7 +52,7 @@ namespace WinHAB.Tests.Core.Fx
     public int Field;
 
     [Test]
-    public void GetPropertyName_TryPassFieldToExpression_ThrowsArgumentException()
+    public void GetPropertyName_ThrowsArgumentException_WhenPassFieldToExpression()
     {
       // assert
       Assert.That(()=>this.GetPropertyName(()=>Field), Throws.ArgumentException);
