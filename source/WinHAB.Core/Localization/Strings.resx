@@ -135,4 +135,10 @@
   <data name="TaskStarting" xml:space="preserve">
     <value>Starting...</value>
   </data>
+  <data name="MessageMainPageModelNavigationFailed" xml:space="preserve">
+    <value>Can not load sitemap homepage. Details:</value>
+  </data>
+  <data name="MessageMainPageModelNavigationFailedTitle" xml:space="preserve">
+    <value>Main page loading</value>
+  </data>
 </root>

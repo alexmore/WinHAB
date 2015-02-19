@@ -41,7 +41,7 @@ namespace WinHAB.Core.ViewModels.Pages
         ShowServerUrl();
       }
       else
-        await Connect(ServerAddress);
+        await ConnectCommand.ExecuteAsync(ServerAddress);
     }
 
     private string _ServerAddress;
@@ -135,7 +135,20 @@ namespace WinHAB.Core.ViewModels.Pages
         return;
       }
 
-      await Navigation.NavigateAsync<MainPageModel>(sitemap);
+      try
+      {
+        await Navigation.NavigateAsync<MainPageModel>(sitemap);
+      }
+      catch (Exception e)
+      {
+        Navigation.ShowMessage(Strings.MessageMainPageModelNavigationFailedTitle, Strings.MessageMainPageModelNavigationFailed + "\r\n"+e.Message,
+          () => { });
+        
+        ShowSitemaps();
+        
+        return;
+      }
+      
       _config.Sitemap = sitemap.Name;
       await _config.SaveAsync();
     }
