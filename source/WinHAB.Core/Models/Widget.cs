@@ -45,25 +45,37 @@ namespace WinHAB.Core.Models
     public List<Widget> Widgets { get; set; }
 
     #region Calculated properties
+
+    Tuple<string, string> ParseLabel(string labelValue)
+    {
+      // check if label contains some value
+      // eg: Temperature [23 C]
+      var match = Regex.Match(labelValue, @"\[(.*?)\]");
+
+      var resTitle = labelValue;
+      string resValue = null;
+
+      if (match.Success)
+      {
+        var g = match.Groups[1];
+        if (g.Success)
+        {
+          resValue = g.Value.Trim();
+          resTitle = (labelValue.Substring(0, g.Index-1) + labelValue.Substring(g.Index+1 + g.Length)).Trim();
+        }
+      }
+
+      return new Tuple<string, string>(resTitle.Trim(), resValue);
+    }
+
     public string Title
     {
-      get
-      {
-        if (string.IsNullOrWhiteSpace(Label)) return null;
-        if (Label.IndexOf('[') == -1) return Label;
-        return Label.Substring(0, Label.LastIndexOf('[')).Trim();
-      }
+      get { return ParseLabel(Label).Item1; }
     }
 
     public string FormattedValue
     {
-      get
-      {
-        if (string.IsNullOrWhiteSpace(Label)) return null;
-        const string pattern = @"\[(.*?)\]";
-        var match = Regex.Match(Label, pattern);
-        return match.Groups[1].Value.Trim();
-      }
+      get { return ParseLabel(Label).Item2; }
     }
     #endregion
 
@@ -71,20 +83,20 @@ namespace WinHAB.Core.Models
 
     public static WidgetType GetWidgetType(string typeString)
     {
-      switch (typeString)
+      switch (typeString.ToLower())
       {
-        case "Chart": return WidgetType.Chart;
-        case "Colorpicker": return WidgetType.Colorpicker;
-        case "Frame": return WidgetType.Frame;
-        case "Group": return WidgetType.Group;
-        case "Image": return WidgetType.Image;
-        case "Selection": return WidgetType.Selection;
-        case "Setpoint": return WidgetType.Setpoint;
-        case "Slider": return WidgetType.Slider;
-        case "Switch": return WidgetType.Switch;
-        case "Text": return WidgetType.Text;
-        case "Video": return WidgetType.Video;
-        case "Webview": return WidgetType.Webview;
+        case "chart": return WidgetType.Chart;
+        case "colorpicker": return WidgetType.Colorpicker;
+        case "frame": return WidgetType.Frame;
+        case "group": return WidgetType.Group;
+        case "image": return WidgetType.Image;
+        case "selection": return WidgetType.Selection;
+        case "setpoint": return WidgetType.Setpoint;
+        case "slider": return WidgetType.Slider;
+        case "switch": return WidgetType.Switch;
+        case "text": return WidgetType.Text;
+        case "video": return WidgetType.Video;
+        case "webview": return WidgetType.Webview;
         
         default:
           return WidgetType.Unknown;
