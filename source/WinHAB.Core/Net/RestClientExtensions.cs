@@ -9,31 +9,31 @@ namespace WinHAB.Core.Net
 {
   public static class RestClientExtensions
   {
-    public static async Task<JObject> AsJObjectAsync(this Task<HttpResponseMessage> responceTask)
+    public static async Task<JObject> AsJObjectAsync(this Task<HttpResponseMessage> responseTask)
     {
-      var responce = await responceTask;
-      responce.EnsureSuccessStatusCode();
-      return JObject.Parse(await responce.Content.ReadAsStringAsync());
+      var response = await responseTask;
+      response.EnsureSuccessStatusCode();
+      return JObject.Parse(await response.Content.ReadAsStringAsync());
     }
 
-    public static async Task<Stream> AsStreamAsync(this Task<HttpResponseMessage> responceTask)
+    public static async Task<Stream> AsStreamAsync(this Task<HttpResponseMessage> responseTask)
     {
-      var responce = await responceTask;
-      responce.EnsureSuccessStatusCode();
-      return await responce.Content.ReadAsStreamAsync();
+      var response = await responseTask;
+      response.EnsureSuccessStatusCode();
+      return await response.Content.ReadAsStreamAsync();
     }
 
-    public static async Task<List<Sitemap>> AsSitemapAsync(this Task<HttpResponseMessage> responceTask)
+    public static async Task<List<Sitemap>> AsSitemapAsync(this Task<HttpResponseMessage> responseTask)
     {
-      var jobject = await responceTask.AsJObjectAsync();
+      var jobject = await responseTask.AsJObjectAsync();
       if (jobject == null) return null;
 
       return jobject.ToObject<SitemapList>().Sitemaps;
     }
 
-    public static async Task<Page> AsPageAsync(this Task<HttpResponseMessage> responceTask)
+    public static async Task<Page> AsPageAsync(this Task<HttpResponseMessage> responseTask)
     {
-      var jobject = await responceTask.AsJObjectAsync();
+      var jobject = await responseTask.AsJObjectAsync();
       if (jobject == null) return null;
 
       return jobject.ToObject<Page>();
