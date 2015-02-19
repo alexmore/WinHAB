@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using WinHAB.Core.Fx;
 
 namespace WinHAB.Core.Configuration
 {
@@ -10,7 +11,10 @@ namespace WinHAB.Core.Configuration
     public AppConfiguration(IConfigurationProvider provider)
     {
       Provider = provider;
+      Runtime = new AppRuntimeConfiguration();
     }
+
+    public AppRuntimeConfiguration Runtime { get; set; }
 
     public void Load() { Provider.Load(); }
     public async Task LoadAsync() { await Provider.LoadAsync(); }
@@ -43,5 +47,7 @@ namespace WinHAB.Core.Configuration
       get { return Provider.Get(this.GetPropertyName(() => Sitemap)); }
       set { Provider.Set(this.GetPropertyName(() => Sitemap), value); }
     }
+
+    
   }
 }

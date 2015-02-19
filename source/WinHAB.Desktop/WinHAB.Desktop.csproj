@@ -80,38 +80,49 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\DesktopConfiguration.cs" />
-    <Compile Include="Configuration\UserResources.cs" />
+    <Compile Include="Configuration\JsonConfigurationProvider.cs" />
+    <Compile Include="Fx\Mvvm\DesktopViewFactory.cs" />
+    <Compile Include="Assets\UserResources.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />
-    <Compile Include="Controls\HeaderDropDownControl.xaml.cs">
-      <DependentUpon>HeaderDropDownControl.xaml</DependentUpon>
+    <Compile Include="Controls\SettingsDropDownControl.xaml.cs">
+      <DependentUpon>SettingsDropDownControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\IconLinkButton.cs" />
-    <Compile Include="Controls\WaiterControl.xaml.cs">
-      <DependentUpon>WaiterControl.xaml</DependentUpon>
+    <Compile Include="Controls\TaskProgressControl.xaml.cs">
+      <DependentUpon>TaskProgressControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsPanel.cs" />
     <Compile Include="Converters\StreamToImageConverter.cs" />
     <Compile Include="Converters\StreamToWidgetImageConverter.cs" />
     <Compile Include="Converters\StringToGeometryConverter.cs" />
     <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
-    <Compile Include="ViewModels\DesktopMainViewModel.cs" />
-    <Compile Include="Views\LaunchView.xaml.cs">
-      <DependentUpon>LaunchView.xaml</DependentUpon>
+    <Compile Include="Fx\Net\DesktopRestClientExtensions.cs" />
+    <Compile Include="ViewModels\Pages\DesktopMainPageModel.cs" />
+    <Compile Include="Views\Pages\BootstrapperPage.xaml.cs">
+      <DependentUpon>BootstrapperPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
+    <Compile Include="Views\Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WidgetViews\ImageWidgetPageView.xaml.cs">
-      <DependentUpon>ImageWidgetPageView.xaml</DependentUpon>
+    <Compile Include="Views\Pages\ImageWidgetPage.xaml.cs">
+      <DependentUpon>ImageWidgetPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ColorExtensions.cs" />
-    <Compile Include="Windows\DesktopTimer.cs" />
-    <Compile Include="Windows\ResourceDictionaryExtensions.cs" />
-    <Page Include="Controls\HeaderDropDownControl.xaml">
+    <Compile Include="Fx\Windows\ColorExtensions.cs" />
+    <Compile Include="Fx\DesktopTimer.cs" />
+    <Compile Include="Fx\Windows\ResourceDictionaryExtensions.cs" />
+    <Page Include="Assets\DefaultOpenHabIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\WidgetIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SettingsDropDownControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\WaiterControl.xaml">
+    <Page Include="Controls\TaskProgressControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,9 +136,7 @@
     </Compile>
     <Compile Include="Configuration\AppConstants.cs" />
     <Compile Include="Configuration\DefaultModule.cs" />
-    <Compile Include="Configuration\DesktopViewModelViewFactory.cs" />
-    <Compile Include="Configuration\JsonConfigurationProvider.cs" />
-    <Compile Include="DesktopNavigationService.cs" />
+    <Compile Include="Fx\Mvvm\DesktopNavigationService.cs" />
     <Compile Include="HostWindow.xaml.cs">
       <DependentUpon>HostWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -144,60 +153,60 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\IconLinkButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\OpenHabIconsStub.xaml">
+    <Page Include="Themes\RadioButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Texts.xaml">
+    <Page Include="Themes\TextBlock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\WidgetIcons.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Themes\ToggleButton.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LaunchView.xaml">
+    <Page Include="Views\Pages\BootstrapperPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainView.xaml">
+    <Page Include="Views\Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WidgetViews\ImageWidgetPageView.xaml">
+    <Page Include="Views\Pages\ImageWidgetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WidgetViews\ImageWidgetViewStyle.xaml">
+    <Page Include="Views\Widgets\ImageWidget.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WidgetViews\TextWidgetViewStyle.xaml">
+    <Page Include="Views\Widgets\WidgetTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WidgetViews\WidgetDataTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\WidgetViews\WidgetViewStyles.xaml">
+    <Page Include="Views\Widgets\TextWidget.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="INavigationHost.cs" />
-    <Compile Include="IO\FileExtensions.cs" />
-    <Compile Include="Localizations\Localization.Designer.cs">
-      <DependentUpon>Localization.resx</DependentUpon>
+    <Compile Include="Fx\IO\FileExtensions.cs" />
+    <Compile Include="Localization\Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -214,11 +223,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Localizations\Localization.resx">
+    <EmbeddedResource Include="Localization\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Localization.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localizations\Localization.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

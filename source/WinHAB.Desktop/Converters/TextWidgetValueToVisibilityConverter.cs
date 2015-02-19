@@ -10,7 +10,7 @@ namespace WinHAB.Desktop.Converters
   {
       public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
       {
-        var widget = value as TextWidget;
+        var widget = value as TextWidgetModel;
         if (widget == null) return Visibility.Collapsed;
 
         parameter = parameter ?? "";

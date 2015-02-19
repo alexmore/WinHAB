@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.Configuration;
 
@@ -13,24 +14,6 @@ namespace WinHAB.Desktop.Controls
     public WidgetsPanel() : base()
     {
       MinHeight = AppConstants.WidgetLargeSize.Height + AppConstants.WidgetMarging;
-    }
-
-    private string PrintMap(List<MapItem>[] map)
-    {
-      var s = string.Empty;
-      for (int i = 0; i < map.Length; i++)
-      {
-        for (int j = 0; j < map[i].Count; j++)
-        {
-          if (map[i][j] == null) s += "[ ] ";
-          else if (map[i][j].Size == WidgetSize.Large) s += "[L] ";
-          else if (map[i][j].Size == WidgetSize.Wide) s += "[W] ";
-          else s += "[N] ";
-        }
-        s += "\r\n";
-      }
-
-      return s;
     }
 
     protected override Size MeasureOverride(Size availableSize)
@@ -126,7 +109,7 @@ namespace WinHAB.Desktop.Controls
 
     bool? FindAndPlace(List<MapItem>[] map, ContentPresenter content)
     {
-      var widget = content.Content as WidgetBase;
+      var widget = content.Content as WidgetModelBase;
       if (widget == null) return null;
 
       var columnsCount = map[0].Count;

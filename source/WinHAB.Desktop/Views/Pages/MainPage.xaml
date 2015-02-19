@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="WinHAB.Desktop.Views.Pages.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Pages;assembly=WinHAB.Core"
+             d:DataContext="{d:DesignInstance Type=vm:MainPageModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000"
+             Name="MainViewControl"
+             Foreground="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="Header" Grid.Row="0" Grid.Column="1" Margin="0,0,50,0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <ToggleButton Name="TitleToggleButton" Style="{StaticResource LinkToggleButton}" Foreground="{Binding Foreground, ElementName=MainViewControl}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="WinHAB" Style="{StaticResource TitleH1}" Margin="0,-10"/>
+                        <Path Data="{StaticResource ExpanderDownIcon}" VerticalAlignment="Center" Margin="10,6,0,0" Width="14" Height="14" Fill="{Binding Foreground, ElementName=TitleToggleButton}" Stretch="Uniform"/>
+                    </StackPanel>
+                </ToggleButton>
+                <Popup IsOpen="{Binding IsChecked, ElementName=TitleToggleButton}" Name="HeaderDropDownPopup" StaysOpen="False" PlacementTarget="{Binding ElementName=TitleToggleButton}" >
+                    <Border Background="{DynamicResource WindowBackground}" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Padding="10" >
+                        <controls:SettingsDropDownControl />
+                    </Border>
+                </Popup>
+            </Grid>
+            <TextBlock Name="TimeTextBlock" Grid.Row="0" Text="18:26" Style="{StaticResource TitleH1}" HorizontalAlignment="Right" Margin="0,-10" />
+            <TextBlock Name="DateTextBlock" Grid.Row="1" Text="четверг, 12 февраля 2015"  Style="{StaticResource TitleH4}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-5,0,0" />
+        </Grid>
+
+        <Button Name="HistoryBackButton" Grid.Row="1" Grid.Column="0" Style="{StaticResource HeaderLinkButton}" Foreground="{Binding Foreground, ElementName=MainViewControl}" 
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,1"
+                Visibility="{Binding HasHistory, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Command="{Binding HistoryBackCommand}">
+            <Path Data="{StaticResource CircledArrowLeftIcon}" VerticalAlignment="Center" Width="30" Height="30" 
+                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Stretch="Uniform"/>
+        </Button>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Name="HistoryPathTextBlock"  Text="{Binding HistoryPath}" Style="{StaticResource TitleH4}" Margin="0,0,0,-5"/>
+            <TextBlock Name="WidgetsListTitle"  Text="{Binding Title}" Style="{StaticResource TitleH2}" />
+        </StackPanel>
+
+        <controls:TaskProgressControl TaskProgress="{Binding TaskProgress}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,20" 
+              Visibility="{Binding TaskProgress.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+            <controls:TransitioningContentControl x:Name="Transition">
+                <ScrollViewer Name="TileScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"  Mouse.PreviewMouseWheel="HorizontalScroll"
+                          PanningMode="HorizontalOnly" Foreground="White">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="Transparent" Width="60"/>
+                        <ItemsControl Name="Widgets" ItemsSource="{Binding Widgets}" >
+                            <ItemsControl.Resources>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="../Widgets/WidgetTemplates.xaml"/>
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
+                            </ItemsControl.Resources>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel  Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,30,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Title}" Margin="0,0,0,10" Style="{StaticResource TitleH4}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <ItemsControl ItemsSource="{Binding Widgets}" Grid.Row="1">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <controls:WidgetsPanel  />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </controls:TransitioningContentControl>
+        </Grid>
+
+    </Grid>
+</UserControl>

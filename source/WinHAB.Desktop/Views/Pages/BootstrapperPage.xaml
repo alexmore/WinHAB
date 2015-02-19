@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="WinHAB.Desktop.Views.Pages.BootstrapperPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
+             xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Pages;assembly=WinHAB.Core"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:BootstrapperPageModel}"
+             Background="{DynamicResource WindowBackground}"
+             Foreground="{DynamicResource WindowText}"
+             Padding="20"
+             VerticalAlignment=" Center" HorizontalAlignment="Center">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+            <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource Accent}" Width="50" Height="50" HorizontalAlignment="Center"/>
+            <TextBlock Text="WinHAB" Style="{StaticResource TitleH2}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            <TextBlock Text="{x:Static loc:Strings.LabelWinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <controls:TaskProgressControl TaskProgress="{Binding TaskProgress}" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
+            <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelYourOpenHabServerUrl}, Converter={StaticResource ToUpperConverter}}" 
+                       Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
+            <TextBlock Text="{x:Static loc:Strings.LabelServerAddressExample}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
+            <TextBox Name="ServerAddressTextBox" Text="{Binding ServerAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" HorizontalAlignment="Stretch" KeyDown="ConnectToServer"/>
+            <Button Name="ConnectButton" Content="{x:Static loc:Strings.ButtonConnect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
+        </StackPanel>
+
+        <Grid Grid.Row="2" Width="300" MaxHeight="300" Visibility="{Binding IsSitemapsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding Source={x:Static loc:Strings.LabelSelectSitemap}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
+
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Sitemaps}" Margin="0,5">
+                <ItemsControl.Template>
+                    <ControlTemplate>
+                        <StackPanel HorizontalAlignment="Stretch" IsItemsHost="true"/>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.SelectSitemapCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding}"
+                                HorizontalContentAlignment="Stretch"
+                                Margin="0,5">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Path Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                      Data="{StaticResource GraphDiagramIcon}"
+                                      Stretch="Uniform"
+                                      Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                      Width="24" Height="24"
+                                      VerticalAlignment="Center"
+                                      Margin="0,0,10,0"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name, Converter={StaticResource ToUpperConverter}}" 
+                                           Style="{StaticResource HeaderH4}" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Label}" Style="{StaticResource Small}" />
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>

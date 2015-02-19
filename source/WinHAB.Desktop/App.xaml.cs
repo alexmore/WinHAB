@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,12 +14,14 @@ using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Converters;
 using Ninject;
 using WinHAB.Core.Configuration;
-using WinHAB.Core.Model;
-using WinHAB.Core.Mvvm;
+using WinHAB.Core.Fx;
+using WinHAB.Core.Fx.Mvvm;
+using WinHAB.Core.Models;
 using WinHAB.Core.ViewModels;
+using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
+using WinHAB.Desktop.Fx.Windows;
 using WinHAB.Desktop.ViewModels;
-using WinHAB.Desktop.Windows;
 
 namespace WinHAB.Desktop
 {
@@ -49,41 +52,33 @@ namespace WinHAB.Desktop
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
-      
-      var vm = navigation.Navigate<LaunchViewModel>();
-      vm.HideAll();
-      vm.Waiter.Show(Localizations.Localization.Starting);
-      if (!string.IsNullOrWhiteSpace(cfg.Server)) await vm.ConnectCommand.ExecuteAsync(cfg.Server);
-      else vm.ShowServerUrl();
+      await navigation.NavigateAsync<BootstrapperPageModel>();
     }
 
     private void SetAppearance(DesktopConfiguration cfg)
     {
-      try
-      {
-        AppearanceManager.Current.AccentColor = (Color) ColorConverter.ConvertFromString(cfg.AccentColor);
-      }
-      catch (Exception)
+      if (cfg.AccentColor.IsNullOrWhitespace() || cfg.AccentColor.ToColor().ToHexString() == "#00000000")
       {
         cfg.AccentColor = AppConstants.DefaultAccentColor.ToHexString();
         cfg.Save();
-        AppearanceManager.Current.AccentColor = AppConstants.DefaultAccentColor;
       }
 
+      AppearanceManager.Current.AccentColor = cfg.AccentColor.ToColor();
+    
       try
       {
-        AppearanceManager.Current.ThemeSource = new Uri(cfg.ThemeSource, UriKind.Relative);
+        AppearanceManager.Current.ThemeSource = new Uri(cfg.Theme, UriKind.Relative);
       }
       catch (Exception)
       {
-        cfg.ThemeSource = AppConstants.DefaultThemeSource.OriginalString;
+        cfg.Theme = AppConstants.DefaultThemeSource.OriginalString;
         cfg.Save();
         AppearanceManager.Current.ThemeSource = AppConstants.DefaultThemeSource;
       }
 
       try
       {
-        cfg.SetBackground(cfg.BackgroundImagePath);
+        cfg.SetBackground(cfg.BackgroundImage);
       }
       catch (Exception)
       {

@@ -5,8 +5,9 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using WinHAB.Core.ViewModels.Widgets;
+using WinHAB.Desktop.Assets;
 using WinHAB.Desktop.Configuration;
-using WinHAB.Desktop.Windows;
+using WinHAB.Desktop.Fx.Windows;
 
 namespace WinHAB.Desktop.Converters
 {

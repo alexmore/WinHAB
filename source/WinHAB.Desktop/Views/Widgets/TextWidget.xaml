@@ -1,0 +1,107 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    mc:Ignorable="d" >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/Icons.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+  
+
+    <ControlTemplate x:Key="TextWidgetViewTemplate" TargetType="{x:Type Button}">
+        <Grid d:DataContext="{d:DesignInstance Type=vm:TextWidgetModel}">
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Grid Margin="5" Name="TextGrid" Visibility="{Binding Converter={StaticResource TextWidgetValueToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Name="TextValueTextBox" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   Text="{Binding Value}" Style="{StaticResource TextWidgetValue}"/>
+
+                <Path Name="TextIconPath" Grid.Row="1" Grid.Column="0"
+                              Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" VerticalAlignment="Center" Width="25" Height="25" Margin="0,0,5,0"
+                              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Stretch="Uniform"/>
+
+                <TextBlock Name="TextTitleTextBlock"  Grid.Row="1" Grid.Column="1" 
+                           Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}"
+                           HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                <Path Name="TextLinkPath"  Grid.Row="1" Grid.Column="2" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              Data="{StaticResource ArrowHeadRightIcon}" VerticalAlignment="Bottom" Width="10" Height="10" Margin="2,0,0,2"
+                              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Stretch="Uniform"/>
+
+            </Grid>
+
+            <Grid Margin="5" Name="IconGrid" Visibility="{Binding Converter={StaticResource TextWidgetValueToVisibilityConverter}, ConverterParameter=icon}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Path Name="IconIconPath"  Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" VerticalAlignment="Center" Width="25" Height="25" Margin="0,0,2,0"
+                          Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Stretch="Uniform"/>
+                    <TextBlock Name="IconValueTextBox"  VerticalAlignment="Top" HorizontalAlignment="Right"
+                               Text="{Binding Value}" Style="{StaticResource TextWidgetValue}" />
+                </StackPanel>
+
+                <TextBlock Name="IconTitleTextBlock"  Grid.Row="1" Grid.Column="0" 
+                                   Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}"
+                                   HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                <Path Name="IconLinkPath" Grid.Row="1" Grid.Column="1" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              Data="{StaticResource ArrowHeadRightIcon}" VerticalAlignment="Bottom" Width="10" Height="10" Margin="2,0,0,2"
+                              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Stretch="Uniform"/>
+
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="TextIconPath" Property="Data" Value="{x:Null}">
+                <Setter TargetName="IconIconPath" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="TextIconPath" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger SourceName="IconValueTextBox" Property="Text" Value="">
+                <Setter TargetName="IconIconPath" Property="Width" Value="35"/>
+                <Setter TargetName="IconIconPath" Property="Height" Value="35"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="BackgroundBorder" Property="Opacity" Value=".8"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="BackgroundBorder" Property="Opacity" Value=".4" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" Value="1" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="TextWidgetView" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource Accent}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Width" Value="NaN" />
+        <Setter Property="Height" Value="NaN" />
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="IsEnabled" Value="{Binding IsLink}"/>
+        <Setter Property="Template" Value="{StaticResource TextWidgetViewTemplate}"/>
+    </Style>
+
+</ResourceDictionary>

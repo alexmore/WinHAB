@@ -34,59 +34,56 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Collections\CollectionExtensions.cs" />
+    <Compile Include="Configuration\AppRuntimeConfiguration.cs" />
+    <Compile Include="Fx\CollectionExtensions.cs" />
     <Compile Include="Configuration\AppConfiguration.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\Language.cs" />
-    <Compile Include="IRestClient.cs" />
-    <Compile Include="IRestClientFactory.cs" />
-    <Compile Include="ITimer.cs" />
-    <Compile Include="Localizations\Localization.Designer.cs">
+    <Compile Include="Fx\Mvvm\IViewFactory.cs" />
+    <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
+    <Compile Include="Fx\StringExtensions.cs" />
+    <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
+    <Compile Include="Models\SitemapList.cs" />
+    <Compile Include="Net\IRestClient.cs" />
+    <Compile Include="Net\IRestClientFactory.cs" />
+    <Compile Include="Fx\ITimer.cs" />
+    <Compile Include="Localization\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Localization.resx</DependentUpon>
+      <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Localizations\Localization.ru1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Localization.ru.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ItemData.cs" />
-    <Compile Include="Model\MappingData.cs" />
-    <Compile Include="Model\PageData.cs" />
-    <Compile Include="Model\SitemapData.cs" />
-    <Compile Include="Model\ToListJsonConverter.cs" />
-    <Compile Include="Model\WidgetData.cs" />
-    <Compile Include="Model\WidgetTypeJsonConverter.cs" />
-    <Compile Include="Mvvm\AbstractNavigationService.cs" />
-    <Compile Include="Mvvm\AbstractViewModelViewFactory.cs" />
-    <Compile Include="Mvvm\AsyncRelayCommand.cs" />
-    <Compile Include="Mvvm\AsyncRelayCommandGeneric.cs" />
-    <Compile Include="Mvvm\ConstructorParameters.cs" />
-    <Compile Include="Mvvm\INavigationService.cs" />
-    <Compile Include="Mvvm\IViewModelViewMapper.cs" />
-    <Compile Include="Mvvm\IView.cs" />
-    <Compile Include="Mvvm\IViewModelViewFactory.cs" />
-    <Compile Include="Mvvm\IViewModel.cs" />
-    <Compile Include="Mvvm\MvvmExtensions.cs" />
-    <Compile Include="Mvvm\ViewModel.cs" />
-    <Compile Include="Mvvm\WaiterViewModel.cs" />
-    <Compile Include="OpenHabClient.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Mapping.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Sitemap.cs" />
+    <Compile Include="Models\Converters\ToListJsonConverter.cs" />
+    <Compile Include="Models\Widget.cs" />
+    <Compile Include="Models\Converters\WidgetTypeJsonConverter.cs" />
+    <Compile Include="Fx\Mvvm\NavigationServiceBase.cs" />
+    <Compile Include="Fx\Mvvm\AsyncRelayCommand.cs" />
+    <Compile Include="Fx\Mvvm\AsyncRelayCommandGeneric.cs" />
+    <Compile Include="Fx\Mvvm\INavigationService.cs" />
+    <Compile Include="Fx\Mvvm\IView.cs" />
+    <Compile Include="Fx\Mvvm\IViewModel.cs" />
+    <Compile Include="Fx\Mvvm\MvvmExtensions.cs" />
+    <Compile Include="Fx\Mvvm\ViewModel.cs" />
+    <Compile Include="Net\RestClientExtensions.cs" />
+    <Compile Include="ViewModels\PageModelBase.cs" />
+    <Compile Include="ViewModels\TaskProgressViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionExtensions.cs" />
-    <Compile Include="RestClient.cs" />
-    <Compile Include="RestClientFactory.cs" />
-    <Compile Include="ViewModels\LaunchViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\Widgets\FrameWidget.cs" />
-    <Compile Include="ViewModels\Widgets\ImageWidgetPage.cs" />
-    <Compile Include="ViewModels\Widgets\IWidgetsFactory.cs" />
-    <Compile Include="ViewModels\Widgets\ImageWidget.cs" />
-    <Compile Include="ViewModels\Widgets\TextWidget.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetBase.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetsFactory.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetSize.cs" />
-    <Compile Include="ViewModels\Widgets\WidgetType.cs" />
+    <Compile Include="Fx\ReflectionExtensions.cs" />
+    <Compile Include="Net\RestClient.cs" />
+    <Compile Include="Net\RestClientFactory.cs" />
+    <Compile Include="ViewModels\Pages\BootstrapperPageModel.cs" />
+    <Compile Include="ViewModels\Pages\MainPageModel.cs" />
+    <Compile Include="ViewModels\Widgets\FrameWidgetModel.cs" />
+    <Compile Include="ViewModels\Pages\ImageWidgetPageModel.cs" />
+    <Compile Include="ViewModels\Widgets\ImageWidgetModel.cs" />
+    <Compile Include="ViewModels\Widgets\TextWidgetModel.cs" />
+    <Compile Include="ViewModels\WidgetModelBase.cs" />
+    <Compile Include="ViewModels\WidgetsFactory.cs" />
+    <Compile Include="ViewModels\WidgetSize.cs" />
+    <Compile Include="ViewModels\WidgetType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
@@ -106,13 +103,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localizations\Localization.ru.resx">
+    <EmbeddedResource Include="Localization\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Localization.ru1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localizations\Localization.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Localization.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
