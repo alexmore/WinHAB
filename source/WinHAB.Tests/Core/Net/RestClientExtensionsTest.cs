@@ -40,10 +40,12 @@ namespace WinHAB.Tests.Core.Net
     {
       _helper = new TestHelpers();
       _sitemapResponse = _helper.CreateAsyncResponse(JsonResources.Sitemaps);
+      _mainPageResponse = _helper.CreateAsyncResponse(JsonResources.MainPage);
     }
 
     private TestHelpers _helper;
     private Task<HttpResponseMessage> _sitemapResponse;
+    private Task<HttpResponseMessage> _mainPageResponse;
 
     [Test]
     public async Task AsJObjectAsync_ReturnsValidJObject_OnValidResponse()
@@ -60,21 +62,14 @@ namespace WinHAB.Tests.Core.Net
     }
 
     [Test]
-    public async Task AsSitemapListAsync_ReturnsSitemap_OnValidResponse()
+    public async Task AsSitemapListAsync_ReturnsSitemapListWithSingleItem_OnValidResponse()
     {
       var sitemap = await _sitemapResponse.AsSitemapListAsync();
 
-      Assert.That(sitemap, Is.InstanceOf<List<Sitemap>>() & Is.Not.Null);
-    }
-
-    [Test]
-    public async Task AsSitemapListAsync_ReturnsListOfSiteMapWithSigleItem_WhenResponseIsValid()
-    {
-      var sitemap = await _sitemapResponse.AsSitemapListAsync();
-      
+      Assert.That(sitemap, Is.InstanceOf<List<Sitemap>>() & Is.Not.Null); 
       Assert.That(sitemap.Count, Is.EqualTo(1));
     }
-
+    
     [Test]
     public async Task AsSitemapListAsync_SuccessfullyParsesSitemapsJson()
     {
@@ -86,6 +81,27 @@ namespace WinHAB.Tests.Core.Net
       Assert.That(sitemap.Label, Is.EqualTo("Main Menu"));
       Assert.That(sitemap.Link, Is.EqualTo(new Uri("http://localhost:8080/rest/sitemaps/demo"))); 
       Assert.That(sitemap.HomepageLink, Is.EqualTo(new Uri("http://localhost:8080/rest/sitemaps/demo/demo")));
+    }
+
+    [Test]
+    public async Task AsPageAsync_ReturnsPageInstance_OnValidResponse()
+    {
+      var page = await _mainPageResponse.AsPageAsync();
+
+      Assert.That(page, Is.InstanceOf<Page>() & Is.Not.Null);
+      
+    }
+
+    [Test]
+    public async Task AsPageAsync_SuccessfullyParsesPageJson()
+    {
+      var page = await _mainPageResponse.AsPageAsync();
+
+      Assert.That(page.Id, Is.EqualTo("demo"));
+      Assert.That(page.Title, Is.EqualTo("Main Menu"));
+
+      Assert.That(page.Widgets.Count, Is.EqualTo(4));
+      Assert.That(page.Widgets, Has.All.InstanceOf<Widget>());
     }
   }
 }
