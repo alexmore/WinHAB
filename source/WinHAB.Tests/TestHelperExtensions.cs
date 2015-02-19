@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace WinHAB.Tests
 {
-  public class TestHelpers
+  public static class TestHelperExtensions
   {
-    public Task<HttpResponseMessage> CreateAsyncResponse(string content)
+    public static Task<HttpResponseMessage> AsAsyncResponse(this string content)
     {
       return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent(content)});
     }

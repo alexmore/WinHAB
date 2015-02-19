@@ -19,8 +19,6 @@ namespace WinHAB.Tests.Core.ViewModels
       ClientFactoryMock.Setup(x => x.Create()).Returns(() => RestClientMock.Object);
 
       NavigationMock = new Mock<INavigationService>();
-      //NavigationMock.Setup(x=>x.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action>()))
-      //  .Verifiable();
     }
 
     public FakeConfigurationProvider ConfigurationProvider { get; set; }

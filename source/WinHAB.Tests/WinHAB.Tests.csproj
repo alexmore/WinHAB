@@ -99,7 +99,7 @@
       <DependentUpon>JsonResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestHelpers.cs" />
+    <Compile Include="TestHelperExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WinHAB.Core\WinHAB.Core.csproj">

@@ -35,36 +35,25 @@ namespace WinHAB.Tests.Core.Net
     }
     #endregion
 
-    [SetUp]
-    public void SetupTest()
-    {
-      _helper = new TestHelpers();
-      _sitemapResponse = _helper.CreateAsyncResponse(JsonResources.Sitemaps);
-      _mainPageResponse = _helper.CreateAsyncResponse(JsonResources.MainPage);
-    }
-
-    private TestHelpers _helper;
-    private Task<HttpResponseMessage> _sitemapResponse;
-    private Task<HttpResponseMessage> _mainPageResponse;
-
+  
     [Test]
     public async Task AsJObjectAsync_ReturnsValidJObject_OnValidResponse()
     {
-      var jobject = await _sitemapResponse.AsJObjectAsync();
+      var jobject = await JsonResources.Sitemaps.AsAsyncResponse().AsJObjectAsync();
       Assert.That(jobject, Is.InstanceOf<JObject>());
     }
 
     [Test]
     public void AsJObject_ThrowsException_WhenReponseIsNotValid()
     {
-      var response = _helper.CreateAsyncResponse("<This is XML, NOT json>");
+      var response = "<This is XML, NOT json>".AsAsyncResponse();
       Assert.That(async () => await response.AsJObjectAsync(), Throws.Exception);
     }
 
     [Test]
     public async Task AsSitemapListAsync_ReturnsSitemapListWithSingleItem_OnValidResponse()
     {
-      var sitemap = await _sitemapResponse.AsSitemapListAsync();
+      var sitemap = await JsonResources.Sitemaps.AsAsyncResponse().AsSitemapListAsync();
 
       Assert.That(sitemap, Is.InstanceOf<List<Sitemap>>() & Is.Not.Null); 
       Assert.That(sitemap.Count, Is.EqualTo(1));
@@ -73,7 +62,7 @@ namespace WinHAB.Tests.Core.Net
     [Test]
     public async Task AsSitemapListAsync_SuccessfullyParsesSitemapsJson()
     {
-      var sitemaps = await _sitemapResponse.AsSitemapListAsync();
+      var sitemaps = await JsonResources.Sitemaps.AsAsyncResponse().AsSitemapListAsync();
 
       var sitemap = sitemaps[0];
 
@@ -86,7 +75,7 @@ namespace WinHAB.Tests.Core.Net
     [Test]
     public async Task AsPageAsync_ReturnsPageInstance_OnValidResponse()
     {
-      var page = await _mainPageResponse.AsPageAsync();
+      var page = await JsonResources.MainPage.AsAsyncResponse().AsPageAsync();
 
       Assert.That(page, Is.InstanceOf<Page>() & Is.Not.Null);
       
@@ -95,7 +84,7 @@ namespace WinHAB.Tests.Core.Net
     [Test]
     public async Task AsPageAsync_SuccessfullyParsesPageJson()
     {
-      var page = await _mainPageResponse.AsPageAsync();
+      var page = await JsonResources.MainPage.AsAsyncResponse().AsPageAsync();
 
       Assert.That(page.Id, Is.EqualTo("demo"));
       Assert.That(page.Title, Is.EqualTo("Main Menu"));

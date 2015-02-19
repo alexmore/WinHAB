@@ -94,7 +94,7 @@ namespace WinHAB.Tests.Core.ViewModels.Pages
     private void PrepareVMHelperForConnectCommandExecution()
     {
       _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.Is<Uri>(u => u == new Uri("http://localhost/rest/sitemaps/") || u == new Uri("http://localhost1/rest/sitemaps/"))))
-        .Returns(new TestHelpers().CreateAsyncResponse(JsonResources.Sitemaps));
+        .Returns(JsonResources.Sitemaps.AsAsyncResponse());
 
       _vmHelper.Configuration.Server = "http://localhost";
     }
