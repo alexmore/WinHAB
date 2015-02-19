@@ -104,7 +104,7 @@ namespace WinHAB.Core.ViewModels.Pages
         using (var cln = _clientFactory.Create())
         {
           Sitemaps =
-            new ObservableCollection<Sitemap>(await cln.GetAsync(new Uri(server + "/rest/sitemaps/")).AsSitemapAsync());
+            new ObservableCollection<Sitemap>(await cln.GetAsync(new Uri(server + "/rest/sitemaps/")).AsSitemapListAsync());
         }
         bool showSitemaps = false;
         if (_config.Server != server)

@@ -23,7 +23,7 @@ namespace WinHAB.Core.Net
       return await response.Content.ReadAsStreamAsync();
     }
 
-    public static async Task<List<Sitemap>> AsSitemapAsync(this Task<HttpResponseMessage> responseTask)
+    public static async Task<List<Sitemap>> AsSitemapListAsync(this Task<HttpResponseMessage> responseTask)
     {
       var jobject = await responseTask.AsJObjectAsync();
       if (jobject == null) return null;
