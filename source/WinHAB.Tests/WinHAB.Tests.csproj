@@ -90,6 +90,9 @@
     <Compile Include="Core\Fx\ReflectionExtenionsTest.cs" />
     <Compile Include="Core\Models\WidgetTest.cs" />
     <Compile Include="Core\Net\RestClientExtensionsTest.cs" />
+    <Compile Include="Core\ViewModels\Pages\BootstrapperPageModelTest.cs" />
+    <Compile Include="Core\ViewModels\ViewModelsTestHelper.cs" />
+    <Compile Include="FakeConfigurationProvider.cs" />
     <Compile Include="JsonResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
