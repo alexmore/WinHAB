@@ -55,6 +55,7 @@ namespace WinHAB.Tests.Core.Models
     [TestCase("Title 1", Result = "Title 1")]
     [TestCase("Title 2 [12]", Result = "Title 2")]
     [TestCase("Title 4 [[3]", Result = "Title 4")]
+    [TestCase(null, Result = null)]
     public string TitleProperty_ReturnsParsedTitle_OnLabelWithTittleAndValue_(string label)
     {
       return new Widget() {Label = label}.Title;
@@ -64,6 +65,7 @@ namespace WinHAB.Tests.Core.Models
     [TestCase("Title 2 [12]", Result = "12")]
     [TestCase("[1]Title 3 [1]", Result = "1")]
     [TestCase("Title 4 [[3 ]", Result = "[3")]
+    [TestCase(null, Result = null)]
     public string FormattedValueProperty_ReturnsParsedValue_OnLabelWithTitleAndValue(string label)
     {
       return new Widget() { Label = label }.FormattedValue;

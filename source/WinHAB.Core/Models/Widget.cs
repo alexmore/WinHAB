@@ -48,8 +48,8 @@ namespace WinHAB.Core.Models
 
     Tuple<string, string> ParseLabel(string labelValue)
     {
-      // check if label contains some value
-      // eg: Temperature [23 C]
+      if (labelValue == null) return new Tuple<string, string>(null, null);
+      
       var match = Regex.Match(labelValue, @"\[(.*?)\]");
 
       var resTitle = labelValue;
