@@ -87,6 +87,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\Fx\MvvmExtensionsTest.cs" />
     <Compile Include="Core\Fx\ReflectionExtenionsTest.cs" />
     <Compile Include="Core\Models\WidgetTest.cs" />
     <Compile Include="Core\Net\RestClientExtensionsTest.cs" />
