@@ -7,7 +7,7 @@ namespace WinHAB.Core.Fx.Mvvm
 {
   public abstract class NavigationServiceBase : INavigationService
   {
-    protected Stack<IView> History { get; set; }
+    public Stack<IView> History { get; set; }
 
     protected IViewFactory Factory { get; set; }
 
