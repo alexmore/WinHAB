@@ -30,7 +30,7 @@ namespace WinHAB.Core.ViewModels.Pages
     public AsyncRelayCommand<string> ConnectCommand { get; set; }
     public AsyncRelayCommand<Sitemap> SelectSitemapCommand { get; set; }
 
-    public override async Task InitializeAsync(dynamic parameter)
+    public override async Task InitializeAsync(object parameter)
     {
       ShowTaskProgress(Strings.TaskStarting);
 

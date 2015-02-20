@@ -5,6 +5,6 @@ namespace WinHAB.Core.Fx.Mvvm
 {
   public interface IViewModel : ICleanup
   {
-    Task InitializeAsync(dynamic parameter);
+    Task InitializeAsync(object parameter);
   }
 }

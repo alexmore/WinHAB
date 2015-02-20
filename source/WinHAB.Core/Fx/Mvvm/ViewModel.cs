@@ -13,7 +13,7 @@ namespace WinHAB.Core.Fx.Mvvm
       set { _taskProgress = value; RaisePropertyChanged(() => TaskProgress); }
     }
 
-    public virtual Task InitializeAsync(dynamic parameter)
+    public virtual Task InitializeAsync(object parameter)
     {
       return Task.FromResult(0);
     }

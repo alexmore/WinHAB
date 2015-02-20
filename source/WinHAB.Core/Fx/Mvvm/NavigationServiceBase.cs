@@ -24,8 +24,8 @@ namespace WinHAB.Core.Fx.Mvvm
     
     public abstract Task ShowMessageAsync(string title, string text);
     public abstract void ShowMessage(string title, string text, Action onClose);
-    
-    public virtual async Task<IViewModel> NavigateAsync(Type viewModelType, dynamic parameter)
+
+    public virtual async Task<IViewModel> NavigateAsync(Type viewModelType, object parameter)
     {
       var view = Factory.Create(viewModelType);
       if (view == null)
@@ -44,7 +44,7 @@ namespace WinHAB.Core.Fx.Mvvm
       return vm;
     }
 
-    public virtual async Task<T> NavigateAsync<T>(dynamic parameter) where T : IViewModel
+    public virtual async Task<T> NavigateAsync<T>(object parameter) where T : IViewModel
     {
       return (T)await NavigateAsync(typeof(T), parameter);
     }

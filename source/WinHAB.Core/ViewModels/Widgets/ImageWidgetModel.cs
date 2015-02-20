@@ -30,7 +30,7 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     public Stream ImageStream { get { return _imageCache != null ? new MemoryStream(_imageCache) : null; } }
 
-    public override async Task InitializeAsync(dynamic parameter)
+    public override async Task InitializeAsync(object parameter)
     {
       await LoadImageAsync(Data.Url);
 

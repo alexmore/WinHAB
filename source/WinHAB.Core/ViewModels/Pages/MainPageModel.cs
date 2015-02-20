@@ -31,14 +31,18 @@ namespace WinHAB.Core.ViewModels.Pages
 
     private ObservableCollection<FrameWidgetModel> _Widgets;
     public ObservableCollection<FrameWidgetModel> Widgets { get { return _Widgets; } set { if (_Widgets != null) CleanupWidgets(); _Widgets = value; RaisePropertyChanged(() => Widgets); } }
-    
-    public override async Task InitializeAsync(dynamic parameter)
+
+    public override async Task InitializeAsync(object parameter)
     {
-      Title = parameter.Label;
+      var sitemap = parameter as Sitemap;
+      if (sitemap == null)
+        throw new ArgumentException("parameter must be of Sitemap type at MainPageModel.InitializeAsync.");
 
-      await LoadPageWidgets(parameter.HomepageLink);
+      Title = sitemap.Label;
 
-      _currentPage = new PagesHistoryItem() { Title = parameter.Label, Uri = parameter.HomepageLink };
+      await LoadPageWidgets(sitemap.HomepageLink);
+
+      _currentPage = new PagesHistoryItem() { Title = sitemap.Label, Uri = sitemap.HomepageLink };
     }
 
     private async Task LoadPageWidgets(Uri pageUri)

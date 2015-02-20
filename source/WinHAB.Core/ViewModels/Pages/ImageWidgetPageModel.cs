@@ -13,7 +13,7 @@ namespace WinHAB.Core.ViewModels.Pages
 
     public ImageWidgetModel Image { get; set; }
 
-    public override Task InitializeAsync(dynamic parameter)
+    public override Task InitializeAsync(object parameter)
     {
       Image = parameter as ImageWidgetModel;
       RaisePropertyChanged(()=>Image);
