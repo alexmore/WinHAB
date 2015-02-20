@@ -57,11 +57,11 @@ namespace WinHAB.Core.Fx.Mvvm
     public virtual void ClearHistory()
     {
       while (History.Count > 0)
-        History.Pop().Cleanup();
+        History.Pop().CleanupView();
 
       if (CurrentView != null)
       {
-        CurrentView.Cleanup();
+        CurrentView.CleanupView();
         CurrentView = null;
       }
     }
@@ -77,7 +77,7 @@ namespace WinHAB.Core.Fx.Mvvm
 
       if (CurrentView != null)
       {
-        CurrentView.Cleanup();
+        CurrentView.CleanupView();
         CurrentView = null;
       }
 
