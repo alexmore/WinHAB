@@ -88,6 +88,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Core\Fx\Mvvm\MvvmExtensionsTest.cs" />
+    <Compile Include="Core\Fx\Mvvm\NavigationServerBaseTest.cs" />
     <Compile Include="Core\Fx\ReflectionExtenionsTest.cs" />
     <Compile Include="Core\Models\WidgetTest.cs" />
     <Compile Include="Core\Net\RestClientExtensionsTest.cs" />
