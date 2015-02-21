@@ -68,6 +68,7 @@
     <Compile Include="Fx\Mvvm\MvvmExtensions.cs" />
     <Compile Include="Fx\Mvvm\ViewModel.cs" />
     <Compile Include="Net\RestClientExtensions.cs" />
+    <Compile Include="ViewModels\IWidgetsFactory.cs" />
     <Compile Include="ViewModels\PageModelBase.cs" />
     <Compile Include="ViewModels\TaskProgressViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

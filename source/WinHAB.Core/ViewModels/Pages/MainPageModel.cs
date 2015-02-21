@@ -15,9 +15,9 @@ namespace WinHAB.Core.ViewModels.Pages
   public class MainPageModel : PageModelBase
   {
     protected readonly IRestClientFactory ClientFactory;
-    private readonly WidgetsFactory _widgetsFactory;
+    private readonly IWidgetsFactory _widgetsFactory;
 
-    public MainPageModel(INavigationService navigationService, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory) : base(navigationService)
+    public MainPageModel(INavigationService navigationService, IRestClientFactory clientFactory, IWidgetsFactory widgetsFactory) : base(navigationService)
     {
       ClientFactory = clientFactory;
       _widgetsFactory = widgetsFactory;
