@@ -47,8 +47,6 @@ namespace WinHAB.Core.ViewModels.Pages
 
     private async Task LoadPageWidgets(Uri pageUri)
     {
-      const string fakeFrameLabel = "#WRAPPER#";
-
       TaskProgress.Show();
 
       Page page = null;
@@ -59,27 +57,20 @@ namespace WinHAB.Core.ViewModels.Pages
       }
       
       if (page == null || page.Widgets == null || page.Widgets.Count == 0) return;
-
-     
+      
       var widgetsInitializators = new List<Task>();
-
       var res = new List<FrameWidgetModel>();
+      
       foreach (var frameData in page.Widgets.CreateFrameWrappedCollection())
       {
-        if (frameData.Label == fakeFrameLabel) frameData.Label = null;
-        
         var frame = (FrameWidgetModel)_widgetsFactory.Create(frameData);
         res.Add(frame);
         widgetsInitializators.Add(frame.InitializeAsync(null));
 
-        foreach (var widgetData in frameData.Widgets)
+        foreach (var widget in frameData.Widgets.Select(widgetData => _widgetsFactory.Create(widgetData)).Where(widget => widget != null))
         {
-          var widget = _widgetsFactory.Create(widgetData);
-          if (widget != null)
-          {
-            frame.Widgets.Add(widget);
-            widgetsInitializators.Add(widget.InitializeAsync(null));
-          }
+          frame.Widgets.Add(widget);
+          widgetsInitializators.Add(widget.InitializeAsync(null));
         }
       }
 
