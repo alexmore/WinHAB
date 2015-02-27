@@ -10,5 +10,10 @@ namespace WinHAB.Tests
     {
       return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent(content)});
     }
+
+    public static Task<HttpResponseMessage> AsAsyncResponse(this byte[] content)
+    {
+      return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) { Content = new ByteArrayContent(content) });
+    }
   }
 }
