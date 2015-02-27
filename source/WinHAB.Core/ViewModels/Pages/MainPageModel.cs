@@ -60,23 +60,11 @@ namespace WinHAB.Core.ViewModels.Pages
       
       if (page == null || page.Widgets == null || page.Widgets.Count == 0) return;
 
-      // Wrap independent widgets into frames
-      var framesData = new List<Widget>();
-      foreach (var widget in page.Widgets)
-      {
-        if (widget.Type == WidgetType.Frame) framesData.Add(widget);
-        else
-        {
-          if (framesData.Count == 0 || framesData.Last() == null || framesData.Last().Label != fakeFrameLabel) 
-            framesData.Add(new Widget() { Widgets = new List<Widget>(), Label = fakeFrameLabel, Type = WidgetType.Frame });
-          framesData.Last().Widgets.Add(widget);
-        }
-      }
-
+     
       var widgetsInitializators = new List<Task>();
 
       var res = new List<FrameWidgetModel>();
-      foreach (var frameData in framesData)
+      foreach (var frameData in page.Widgets.CreateFrameWrappedCollection())
       {
         if (frameData.Label == fakeFrameLabel) frameData.Label = null;
         
