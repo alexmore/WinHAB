@@ -15,9 +15,9 @@ namespace WinHAB.Core.ViewModels.Pages
   public class MainPageModel : PageModelBase
   {
     protected readonly IRestClientFactory ClientFactory;
-    private readonly WidgetsFactory _widgetsFactory;
+    private readonly IWidgetsFactory _widgetsFactory;
 
-    public MainPageModel(INavigationService navigationService, IRestClientFactory clientFactory, WidgetsFactory widgetsFactory) : base(navigationService)
+    public MainPageModel(INavigationService navigationService, IRestClientFactory clientFactory, IWidgetsFactory widgetsFactory) : base(navigationService)
     {
       ClientFactory = clientFactory;
       _widgetsFactory = widgetsFactory;
@@ -31,20 +31,22 @@ namespace WinHAB.Core.ViewModels.Pages
 
     private ObservableCollection<FrameWidgetModel> _Widgets;
     public ObservableCollection<FrameWidgetModel> Widgets { get { return _Widgets; } set { if (_Widgets != null) CleanupWidgets(); _Widgets = value; RaisePropertyChanged(() => Widgets); } }
-    
-    public override async Task InitializeAsync(dynamic parameter)
+
+    public override async Task InitializeAsync(object parameter)
     {
-      Title = parameter.Label;
+      var sitemap = parameter as Sitemap;
+      if (sitemap == null)
+        throw new ArgumentException("parameter must be of Sitemap type at MainPageModel.InitializeAsync.");
 
-      await LoadPageWidgets(parameter.HomepageLink);
+      Title = sitemap.Label;
 
-      _currentPage = new PagesHistoryItem() { Title = parameter.Label, Uri = parameter.HomepageLink };
+      await LoadPageWidgets(sitemap.HomepageLink);
+
+      _currentPage = new PagesHistoryItem() { Title = sitemap.Label, Uri = sitemap.HomepageLink };
     }
 
     private async Task LoadPageWidgets(Uri pageUri)
     {
-      const string fakeFrameLabel = "#WRAPPER#";
-
       TaskProgress.Show();
 
       Page page = null;
@@ -55,39 +57,20 @@ namespace WinHAB.Core.ViewModels.Pages
       }
       
       if (page == null || page.Widgets == null || page.Widgets.Count == 0) return;
-
-      // Wrap independent widgets into frames
-      var framesData = new List<Widget>();
-      foreach (var widget in page.Widgets)
-      {
-        if (widget.Type == WidgetType.Frame) framesData.Add(widget);
-        else
-        {
-          if (framesData.Count == 0 || framesData.Last() == null || framesData.Last().Label != fakeFrameLabel) 
-            framesData.Add(new Widget() { Widgets = new List<Widget>(), Label = fakeFrameLabel, Type = WidgetType.Frame });
-          framesData.Last().Widgets.Add(widget);
-        }
-      }
-
+      
       var widgetsInitializators = new List<Task>();
-
       var res = new List<FrameWidgetModel>();
-      foreach (var frameData in framesData)
+      
+      foreach (var frameData in page.Widgets.CreateFrameWrappedCollection())
       {
-        if (frameData.Label == fakeFrameLabel) frameData.Label = null;
-        
         var frame = (FrameWidgetModel)_widgetsFactory.Create(frameData);
         res.Add(frame);
         widgetsInitializators.Add(frame.InitializeAsync(null));
 
-        foreach (var widgetData in frameData.Widgets)
+        foreach (var widget in frameData.Widgets.Select(widgetData => _widgetsFactory.Create(widgetData)).Where(widget => widget != null))
         {
-          var widget = _widgetsFactory.Create(widgetData);
-          if (widget != null)
-          {
-            frame.Widgets.Add(widget);
-            widgetsInitializators.Add(widget.InitializeAsync(null));
-          }
+          frame.Widgets.Add(widget);
+          widgetsInitializators.Add(widget.InitializeAsync(null));
         }
       }
 

@@ -98,6 +98,24 @@ namespace WinHAB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can not load sitemap homepage. Details:.
+        /// </summary>
+        internal static string MessageMainPageModelNavigationFailed {
+            get {
+                return ResourceManager.GetString("MessageMainPageModelNavigationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main page loading.
+        /// </summary>
+        internal static string MessageMainPageModelNavigationFailedTitle {
+            get {
+                return ResourceManager.GetString("MessageMainPageModelNavigationFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connecting....
         /// </summary>
         internal static string TaskConnecting {

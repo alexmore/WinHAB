@@ -30,7 +30,7 @@ namespace WinHAB.Core.ViewModels.Pages
     public AsyncRelayCommand<string> ConnectCommand { get; set; }
     public AsyncRelayCommand<Sitemap> SelectSitemapCommand { get; set; }
 
-    public override async Task InitializeAsync(dynamic parameter)
+    public override async Task InitializeAsync(object parameter)
     {
       ShowTaskProgress(Strings.TaskStarting);
 
@@ -41,7 +41,7 @@ namespace WinHAB.Core.ViewModels.Pages
         ShowServerUrl();
       }
       else
-        await Connect(ServerAddress);
+        await ConnectCommand.ExecuteAsync(ServerAddress);
     }
 
     private string _ServerAddress;
@@ -104,7 +104,7 @@ namespace WinHAB.Core.ViewModels.Pages
         using (var cln = _clientFactory.Create())
         {
           Sitemaps =
-            new ObservableCollection<Sitemap>(await cln.GetAsync(new Uri(server + "/rest/sitemaps/")).AsSitemapAsync());
+            new ObservableCollection<Sitemap>(await cln.GetAsync(new Uri(server + "/rest/sitemaps/")).AsSitemapListAsync());
         }
         bool showSitemaps = false;
         if (_config.Server != server)
@@ -135,7 +135,20 @@ namespace WinHAB.Core.ViewModels.Pages
         return;
       }
 
-      await Navigation.NavigateAsync<MainPageModel>(sitemap);
+      try
+      {
+        await Navigation.NavigateAsync<MainPageModel>(sitemap);
+      }
+      catch (Exception e)
+      {
+        Navigation.ShowMessage(Strings.MessageMainPageModelNavigationFailedTitle, Strings.MessageMainPageModelNavigationFailed + "\r\n"+e.Message,
+          () => { });
+        
+        ShowSitemaps();
+        
+        return;
+      }
+      
       _config.Sitemap = sitemap.Name;
       await _config.SaveAsync();
     }

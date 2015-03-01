@@ -54,7 +54,7 @@ namespace WinHAB.Desktop.Configuration
 
       Bind<Func<Type, Widget, WidgetModelBase>>()
         .ToMethod(x => (t, d) => (WidgetModelBase) x.Kernel.Get(t, new ConstructorArgument("data", d)));
-      Bind<WidgetsFactory>().ToSelf();
+      Bind<IWidgetsFactory>().To<WidgetsFactory>();
     }
 
     string GetServerAddress(IKernel kernel)

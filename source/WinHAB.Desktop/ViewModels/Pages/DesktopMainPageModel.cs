@@ -59,7 +59,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
       
     }
 
-    public override async Task InitializeAsync(dynamic parameter)
+    public override async Task InitializeAsync(object parameter)
     {
       TaskProgress.Show();
       await UserResources.LoadUserResources(AppConfig.Server, ClientFactory);

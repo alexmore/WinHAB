@@ -43,6 +43,7 @@
     <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
     <Compile Include="Fx\StringExtensions.cs" />
     <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
+    <Compile Include="Models\ModelExtensions.cs" />
     <Compile Include="Models\SitemapList.cs" />
     <Compile Include="Net\IRestClient.cs" />
     <Compile Include="Net\IRestClientFactory.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Fx\Mvvm\MvvmExtensions.cs" />
     <Compile Include="Fx\Mvvm\ViewModel.cs" />
     <Compile Include="Net\RestClientExtensions.cs" />
+    <Compile Include="ViewModels\IWidgetsFactory.cs" />
     <Compile Include="ViewModels\PageModelBase.cs" />
     <Compile Include="ViewModels\TaskProgressViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
