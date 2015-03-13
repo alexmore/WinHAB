@@ -57,7 +57,7 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
 
       await iw.InitializeAsync(null);
 
-      Assert.That(iw.TaskProgress.IsVisible, Is.False);
+      Assert.That(iw.IsProgressIndicatorVisible, Is.False);
     }
 
     [Test]

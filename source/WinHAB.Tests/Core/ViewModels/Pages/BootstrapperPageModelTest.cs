@@ -41,7 +41,7 @@ namespace WinHAB.Tests.Core.ViewModels.Pages
     {
       Assert.That(pm.IsServerAddressVisible, Is.True);
       Assert.That(pm.IsSitemapsVisible, Is.False);
-      Assert.That(pm.TaskProgress.IsVisible, Is.False);
+      Assert.That(pm.IsProgressIndicatorVisible, Is.False);
     }
 
     [Test]
@@ -103,7 +103,7 @@ namespace WinHAB.Tests.Core.ViewModels.Pages
     {
       Assert.That(pm.IsServerAddressVisible, Is.False);
       Assert.That(pm.IsSitemapsVisible, Is.True);
-      Assert.That(pm.TaskProgress.IsVisible, Is.False);
+      Assert.That(pm.IsProgressIndicatorVisible, Is.False);
     }
 
     [Test]
