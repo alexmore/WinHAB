@@ -57,7 +57,7 @@ namespace WinHAB.Core.ViewModels.Widgets
       {
         using (var cln = _clientFactory.Create())
         {
-          var stream = await cln.GetAsync(Data.Url).AsStreamAsync();
+          var stream = await cln.GetAsync(url).AsStreamAsync();
           
           using (var memStream = new MemoryStream())
           {

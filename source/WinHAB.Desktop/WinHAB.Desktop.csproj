@@ -107,6 +107,7 @@
     <Compile Include="Fx\Windows\ColorExtensions.cs" />
     <Compile Include="Fx\DesktopTimer.cs" />
     <Compile Include="Fx\Windows\ResourceDictionaryExtensions.cs" />
+    <Compile Include="Views\Widgets\ImageWidget.cs" />
     <Page Include="Assets\DefaultOpenHabIcons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
