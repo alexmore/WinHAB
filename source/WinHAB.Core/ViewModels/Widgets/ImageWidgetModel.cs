@@ -46,10 +46,10 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     async Task LoadImageAsync(Uri url)
     {
-      TaskProgress.Show();
+      ShowProgressIndicator();
       if (url == null)
       {
-        TaskProgress.Hide();
+        HideProgressIndicator();
         return;
       }
 
@@ -76,7 +76,7 @@ namespace WinHAB.Core.ViewModels.Widgets
         IsImageLoadingFailed = true;
       }
 
-      TaskProgress.Hide();
+      HideProgressIndicator();
     }
 
     public AsyncRelayCommand ViewImageCommand { get; set; }

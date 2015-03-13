@@ -71,7 +71,6 @@
     <Compile Include="Net\RestClientExtensions.cs" />
     <Compile Include="ViewModels\IWidgetsFactory.cs" />
     <Compile Include="ViewModels\PageModelBase.cs" />
-    <Compile Include="ViewModels\TaskProgressViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fx\ReflectionExtensions.cs" />
     <Compile Include="Net\RestClient.cs" />

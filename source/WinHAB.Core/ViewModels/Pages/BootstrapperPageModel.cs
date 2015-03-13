@@ -71,7 +71,7 @@ namespace WinHAB.Core.ViewModels.Pages
 
     private void HideAll()
     {
-      TaskProgress.Hide();
+      HideProgressIndicator();
       IsServerAddressVisible = false;
       IsSitemapsVisible = false;
     }
@@ -79,7 +79,7 @@ namespace WinHAB.Core.ViewModels.Pages
     private void ShowTaskProgress(string text)
     {
       HideAll();
-      TaskProgress.Show(text);
+      ShowProgressIndicator();
     }
 
     public void ShowServerUrl()

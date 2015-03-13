@@ -6,6 +6,7 @@
              xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
              xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Pages;assembly=WinHAB.Core"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:BootstrapperPageModel}"
              Background="{DynamicResource WindowBackground}"
@@ -26,7 +27,7 @@
             <TextBlock Text="{x:Static loc:Strings.LabelWinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
         </StackPanel>
 
-        <controls:TaskProgressControl TaskProgress="{Binding TaskProgress}" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <mui:ModernProgressRing  Grid.Row="1" Grid.RowSpan="2" Style="{DynamicResource ProgressIndicatorStyle}"/>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelYourOpenHabServerUrl}, Converter={StaticResource ToUpperConverter}}" 

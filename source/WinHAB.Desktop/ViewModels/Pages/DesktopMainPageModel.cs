@@ -61,9 +61,9 @@ namespace WinHAB.Desktop.ViewModels.Pages
 
     public override async Task InitializeAsync(object parameter)
     {
-      TaskProgress.Show();
+      ShowProgressIndicator();
       await UserResources.LoadUserResources(AppConfig.Server, ClientFactory);
-      TaskProgress.Hide();
+      HideProgressIndicator();
 
       SelectedLanguageCulture = AppConfig.Language;
 

@@ -5,7 +5,8 @@
                     xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
                     xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                     mc:Ignorable="d" >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/Icons.xaml" />
@@ -33,7 +34,7 @@
                             <Image Name="Image"  Source="{Binding ImageStream, Converter={StaticResource StreamToWidgetImageConverter}}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
 
-                        <controls:TaskProgressControl TaskProgress="{Binding TaskProgress}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <mui:ModernProgressRing Style="{DynamicResource ProgressIndicatorStyle}"/>
 
                         <Border Name="Links"  Background="{DynamicResource Accent}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Padding="5"
                                 Visibility="Collapsed" >

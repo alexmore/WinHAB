@@ -88,9 +88,6 @@
       <DependentUpon>SettingsDropDownControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\IconLinkButton.cs" />
-    <Compile Include="Controls\TaskProgressControl.xaml.cs">
-      <DependentUpon>TaskProgressControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\WidgetsPanel.cs" />
     <Compile Include="Converters\StreamToImageConverter.cs" />
     <Compile Include="Converters\StreamToWidgetImageConverter.cs" />
@@ -119,10 +116,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SettingsDropDownControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TaskProgressControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +153,10 @@
     <Page Include="Themes\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ModernProgressRing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\RadioButton.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -47,7 +47,7 @@ namespace WinHAB.Core.ViewModels.Pages
 
     private async Task LoadPageWidgets(Uri pageUri)
     {
-      TaskProgress.Show();
+      ShowProgressIndicator();
 
       Page page = null;
 
@@ -75,7 +75,7 @@ namespace WinHAB.Core.ViewModels.Pages
       }
 
       Widgets = res.ToObservableCollection();
-      TaskProgress.Hide();
+      HideProgressIndicator();
 
       Parallel.ForEach(widgetsInitializators, async x => await x);
     }
