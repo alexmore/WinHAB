@@ -1,11 +1,42 @@
-﻿namespace WinHAB.Core.Models
+﻿using Newtonsoft.Json;
+using WinHAB.Core.Models.Converters;
+
+namespace WinHAB.Core.Models
 {
   public class Item
   {
-    public string Type { get; set; }
+    [JsonConverter(typeof(ItemtTypeJsonConverter))]
+    public ItemType Type { get; set; }
     public string Name { get; set; }
     public string State { get; set; }
     public string Link { get; set; }
-	 
+
+    public static ItemType GetItemType(string typeString)
+    {
+      switch (typeString.ToLower())
+      {
+        case "groupitem":
+          return ItemType.Group;
+        case "switchitem":
+          return ItemType.Switch;
+        case "numberitem":
+          return ItemType.Number;
+        case "coloritem":
+          return ItemType.Color;
+        case "contactitem":
+          return ItemType.Contact;
+        case "datetimeitem":
+          return ItemType.DateTime;
+        case "dimmeritem":
+          return ItemType.Dimmer;
+        case "rollershutteritem":
+          return ItemType.Rollershutter;
+        case "stringitem":
+          return ItemType.String;
+
+        default:
+          return ItemType.Unknown;
+      }
+    }
   }
 }

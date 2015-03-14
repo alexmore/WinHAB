@@ -43,6 +43,8 @@
     <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
     <Compile Include="Fx\StringExtensions.cs" />
     <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
+    <Compile Include="Models\Converters\ItemTypeJsonConverter.cs" />
+    <Compile Include="Models\ItemType.cs" />
     <Compile Include="Models\ModelExtensions.cs" />
     <Compile Include="Models\SitemapList.cs" />
     <Compile Include="Net\IRestClient.cs" />
