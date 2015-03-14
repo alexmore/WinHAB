@@ -13,23 +13,41 @@ namespace WinHAB.Desktop.Converters
 {
   public class StringToGeometryConverter : IValueConverter
   {
-      public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+      if (value == null || string.IsNullOrWhiteSpace(value.ToString())) return null;
+
+      var iconString = value.ToString();
+
+      Geometry result = null;
+
+      result = GetIconGeometry(iconString.Replace("-", ""));
+      if (result == null)
       {
-        if (value == null || string.IsNullOrWhiteSpace(value.ToString())) return null;
-
-        var stringKey = value.ToString().Replace("-","");
-
-        var resourceKey = UserResources.Icons.GetResourceKeys().FirstOrDefault(x =>
-          x.ToLower() == stringKey.ToLower().Trim() ||
-          x.ToLower() == (stringKey.Trim() + "icon").ToLower());
-
-        return resourceKey != null ? UserResources.Icons[resourceKey] as Geometry : null;
+        if (iconString.LastIndexOf("-") >= 0)
+          result = GetIconGeometry(iconString.Substring(0, iconString.LastIndexOf("-")));
       }
 
-      public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-      {
-        return null;
-      }
-     
+
+      if (result == null && parameter != null) result = parameter as Geometry;
+
+      return result;
+    }
+
+
+    Geometry GetIconGeometry(string iconString)
+    {
+      var resourceKey = UserResources.Icons.GetResourceKeys().FirstOrDefault(x =>
+        x.ToLower() == iconString.ToLower().Trim() ||
+        x.ToLower() == (iconString.Trim() + "icon").ToLower());
+
+      return resourceKey != null ? UserResources.Icons[resourceKey] as Geometry : null;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+      return null;
+    }
+
   }
 }
