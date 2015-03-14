@@ -98,6 +98,7 @@
     <Compile Include="Core\ViewModels\Pages\BootstrapperPageModelTest.cs" />
     <Compile Include="Core\ViewModels\Pages\MainPageModelTest.cs" />
     <Compile Include="Core\ViewModels\ViewModelsTestHelper.cs" />
+    <Compile Include="Core\ViewModels\WidgetsFactoryTest.cs" />
     <Compile Include="Core\ViewModels\WidgetModelBaseTest.cs" />
     <Compile Include="Core\ViewModels\Widgets\FrameWidgetModelTest.cs" />
     <Compile Include="Core\ViewModels\Widgets\ImageWidgetModelTest.cs" />
