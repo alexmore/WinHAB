@@ -141,4 +141,10 @@
   <data name="MessageMainPageModelNavigationFailedTitle" xml:space="preserve">
     <value>Main page loading</value>
   </data>
+  <data name="MessageExceptionOnSwitchWidgetPostCommand" xml:space="preserve">
+    <value>An error has occured on posing command</value>
+  </data>
+  <data name="MessageExceptionOnSwitchWidgetPostCommandTitle" xml:space="preserve">
+    <value>Switch widget command error</value>
+  </data>
 </root>

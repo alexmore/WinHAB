@@ -81,12 +81,14 @@
     <Compile Include="ViewModels\Pages\MainPageModel.cs" />
     <Compile Include="ViewModels\Widgets\FrameWidgetModel.cs" />
     <Compile Include="ViewModels\Pages\ImageWidgetPageModel.cs" />
+    <Compile Include="ViewModels\Widgets\SwitchWidgetModel.cs" />
     <Compile Include="ViewModels\Widgets\ImageWidgetModel.cs" />
+    <Compile Include="ViewModels\Widgets\SwitchWidgetState.cs" />
     <Compile Include="ViewModels\Widgets\TextWidgetModel.cs" />
     <Compile Include="ViewModels\WidgetModelBase.cs" />
     <Compile Include="ViewModels\WidgetsFactory.cs" />
     <Compile Include="ViewModels\WidgetSize.cs" />
-    <Compile Include="ViewModels\WidgetType.cs" />
+    <Compile Include="Models\WidgetType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">

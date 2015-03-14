@@ -38,7 +38,7 @@ namespace WinHAB.Core.ViewModels
         case WidgetType.Setpoint:
           break;
         case WidgetType.Switch:
-          break;
+          return CreateSwitchWidget(data);
         case WidgetType.Colorpicker:
           break;
         case WidgetType.Text:
@@ -48,6 +48,17 @@ namespace WinHAB.Core.ViewModels
       }
 
       return null;
+    }
+
+    WidgetModelBase CreateSwitchWidget(Widget data)
+    {
+      if (data.Item != null && data.Item.Type == ItemType.Rollershutter)
+      {
+        // TODO: return Rollershutter widget
+        return null;
+      }
+
+      return _createWidgetFunc(typeof(SwitchWidgetModel), data);
     }
   }
 }

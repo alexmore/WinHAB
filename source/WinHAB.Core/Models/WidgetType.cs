@@ -1,4 +1,4 @@
-﻿namespace WinHAB.Core.ViewModels
+﻿namespace WinHAB.Core.Models
 {
   public enum WidgetType
   {
