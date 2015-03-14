@@ -9,6 +9,12 @@ namespace WinHAB.Core.Net
 {
   public static class RestClientExtensions
   {
+    public static async Task IsOkAsync(this Task<HttpResponseMessage> responseTask)
+    {
+      var response = await responseTask;
+      response.EnsureSuccessStatusCode();
+    }
+
     public static async Task<JObject> AsJObjectAsync(this Task<HttpResponseMessage> responseTask)
     {
       var response = await responseTask;
