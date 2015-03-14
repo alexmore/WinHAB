@@ -9,5 +9,6 @@ namespace WinHAB.Core.Net
   public interface IRestClient : IDisposable
   {
     Task<HttpResponseMessage> GetAsync(Uri query);
+    Task<HttpResponseMessage> PostAsync(Uri query, HttpContent content);
   }
 }
