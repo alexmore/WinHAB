@@ -49,6 +49,7 @@
     <Compile Include="Models\ModelExtensions.cs" />
     <Compile Include="Models\SitemapList.cs" />
     <Compile Include="Models\WidgetLabel.cs" />
+    <Compile Include="Models\WidgetPropertiesExtensions.cs" />
     <Compile Include="Net\IRestClient.cs" />
     <Compile Include="Net\IRestClientFactory.cs" />
     <Compile Include="Fx\ITimer.cs" />
