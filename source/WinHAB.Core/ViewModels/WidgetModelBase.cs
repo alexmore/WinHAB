@@ -97,9 +97,9 @@ namespace WinHAB.Core.ViewModels
 
     protected async Task<bool> PollItem(Uri itemLink)
     {
-      using (var cln = ClientFactory.Create())
+      try
       {
-        try
+        using (var cln = ClientFactory.Create())
         {
           var i =
             await cln.GetLongPollingAsync(itemLink, ItemPollingCancellationTokenSource.Token).AsItemAsync();
@@ -107,14 +107,15 @@ namespace WinHAB.Core.ViewModels
           OnItemChanged(i);
 
           ItemPollingCancellationTokenSource.Token.ThrowIfCancellationRequested();
-
+          await Task.Delay(800);
           return true;
         }
-        catch (OperationCanceledException oce)
-        {
-          return false;
-        }
       }
+      catch (OperationCanceledException oce)
+      {
+        return false;
+      }
+
     }
 
     public void StopItemPolling()
