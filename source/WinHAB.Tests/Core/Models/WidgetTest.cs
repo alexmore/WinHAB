@@ -58,11 +58,11 @@ namespace WinHAB.Tests.Core.Models
     [TestCase("Title[Value]", Result = "Title")]
     [TestCase("[WrongValue]Title [Value]", Result = "Title")]
     [TestCase("Title  [[Value ]", Result = "Title")]
-    [TestCase("{Tag}Title [Value]", Result = "Title")]
-    [TestCase("Title{Tag} [Value]", Result = "Title")]
+    [TestCase("{LabelTag}Title [Value]", Result = "Title")]
+    [TestCase("Title{LabelTag} [Value]", Result = "Title")]
     [TestCase("Title [Value]", Result = "Title")]
     [TestCase("[Value]", Result = null)]
-    [TestCase("{Tag}", Result = null)]
+    [TestCase("{LabelTag}", Result = null)]
     [TestCase(null, Result = null)]
     public string TitleProperty_ReturnsValidValue_(string label)
     {
@@ -72,11 +72,11 @@ namespace WinHAB.Tests.Core.Models
     [TestCase("Title", Result = null)]
     [TestCase("Title[Value]", Result = "Value")]
     [TestCase("Title  [[Value ]", Result = "[Value")]
-    [TestCase("{Tag}Title [Value]", Result = "Value")]
-    [TestCase("Title{Tag} [Value]", Result = "Value")]
+    [TestCase("{LabelTag}Title [Value]", Result = "Value")]
+    [TestCase("Title{LabelTag} [Value]", Result = "Value")]
     [TestCase("Title [Value]", Result = "Value")]
     [TestCase("[[Value]]", Result = "[Value")]
-    [TestCase("{Tag}", Result = null)]
+    [TestCase("{LabelTag}", Result = null)]
     [TestCase(null, Result = null)]
     public string ValueProperty_ReturnsValidValue(string label)
     {
@@ -87,17 +87,18 @@ namespace WinHAB.Tests.Core.Models
     [TestCase("Title[Value]", Result = null)]
     [TestCase("[WrongValue]Title [Value]", Result = null)]
     [TestCase("Title  [[Value ]", Result = null)]
-    [TestCase("{Tag}Title [Value]", Result = "Tag")]
-    [TestCase("Title{Tag} [Value]", Result = "Tag")]
+    [TestCase("{LabelTag}Title [Value]", Result = "LabelTag")]
+    [TestCase("Title{LabelTag} [Value]", Result = "LabelTag")]
     [TestCase("Title [Value]", Result = null)]
     [TestCase("[Value]", Result = null)]
-    [TestCase("{Tag}", Result = "Tag")]
-    [TestCase("{{Tag}", Result = "{Tag")]
-    [TestCase("{{Tag}}", Result = "{Tag")]
+    [TestCase("{LabelTag}", Result = "LabelTag")]
+    [TestCase("{{LabelTag}", Result = "{LabelTag")]
+    [TestCase("{{LabelTag}}", Result = "{LabelTag")]
     [TestCase(null, Result = null)]
     public string TagProperty_ReturnsValidValue(string label)
     {
-      return new Widget() { Label = label }.Tag;
+
+      return new Widget() {Label = label}.LabelTag.Value;
     }
   }
 }

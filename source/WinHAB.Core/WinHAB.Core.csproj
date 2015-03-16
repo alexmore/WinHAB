@@ -45,6 +45,7 @@
     <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
     <Compile Include="Models\Converters\ItemTypeJsonConverter.cs" />
     <Compile Include="Models\ItemType.cs" />
+    <Compile Include="Models\LabelTag.cs" />
     <Compile Include="Models\ModelExtensions.cs" />
     <Compile Include="Models\SitemapList.cs" />
     <Compile Include="Models\WidgetLabel.cs" />
