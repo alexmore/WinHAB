@@ -30,13 +30,13 @@ namespace WinHAB.Core.Models
       {
         if (key == null) return null;
         string res = null;
-        Items.TryGetValue(key, out res);
+        Items.TryGetValue(key.ToLower(), out res);
         return res;
       }
       set
       {
         if (string.IsNullOrWhiteSpace(key)) return;
-        Items[key] = value;
+        Items[key.ToLower()] = value.Trim();
       }
     }
 
@@ -54,7 +54,7 @@ namespace WinHAB.Core.Models
         .Select(i => i.Split(':'))
         .Where(keyValue => keyValue.Length > 1 && !string.IsNullOrWhiteSpace(keyValue[0])))
       {
-        Items[i[0].Trim()] = string.Join(":", i.Skip(1)).Trim();
+        Items[i[0].Trim().ToLower()] = string.Join(":", i.Skip(1)).Trim();
       }
     }
 
