@@ -18,7 +18,7 @@ namespace WinHAB.Core.ViewModels
       Data = data;
 
       Title = data.Title;
-      Value = data.FormattedValue;
+      Value = data.Value;
       Icon = data.Icon;
 
       if (data.LinkedPage != null && data.LinkedPage.Link != null)

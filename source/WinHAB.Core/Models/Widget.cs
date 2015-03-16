@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -11,12 +12,16 @@ namespace WinHAB.Core.Models
 {
   public class Widget
   {
+    public Widget()
+    {
+      LabelParts = new WidgetLabel();
+    }
+
     [JsonProperty("widgetId")]
     public string Id { get; set; }
     [JsonConverter(typeof(WidgetTypeJsonConverter))]
     public WidgetType Type { get; set; }
     public string Name { get; set; }
-    public string Label { get; set; }
     public string Icon { get; set; }
     public string LabelColor { get; set; }
     public string ValueColor { get; set; }
@@ -44,39 +49,25 @@ namespace WinHAB.Core.Models
     [JsonConverter(typeof(ToListJsonConverter<Widget>))]
     public List<Widget> Widgets { get; set; }
 
-    #region Calculated properties
+    #region Label
 
-    Tuple<string, string> ParseLabel(string labelValue)
+    private string _label;
+    public string Label
     {
-      if (labelValue == null) return new Tuple<string, string>(null, null);
-      
-      var match = Regex.Match(labelValue, @"\[(.*?)\]");
-
-      var resTitle = labelValue;
-      string resValue = null;
-
-      if (match.Success)
+      get { return _label; }
+      set
       {
-        var g = match.Groups[1];
-        if (g.Success)
-        {
-          resValue = g.Value.Trim();
-          resTitle = (labelValue.Substring(0, g.Index-1) + labelValue.Substring(g.Index+1 + g.Length)).Trim();
-        }
+        _label = value;
+        LabelParts = WidgetLabel.Parse(value);
       }
-
-      return new Tuple<string, string>(resTitle.Trim(), resValue);
     }
 
-    public string Title
-    {
-      get { return ParseLabel(Label).Item1; }
-    }
+    public WidgetLabel LabelParts { get; set; }
 
-    public string FormattedValue
-    {
-      get { return ParseLabel(Label).Item2; }
-    }
+    public string Title { get { return LabelParts.Title; } }
+    public string Value { get { return LabelParts.Value; } }
+    public string Tag { get { return LabelParts.Tag; }}
+
     #endregion
 
     #region Helpers

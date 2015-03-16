@@ -10,8 +10,8 @@ namespace WinHAB.Core.ViewModels.Widgets
     {
       Size = WidgetSize.Meduim;
       
-      if (!string.IsNullOrWhiteSpace(data.FormattedValue))
-      Size = data.FormattedValue.Length > 31 ? WidgetSize.Large : data.FormattedValue.Length > 15 ? WidgetSize.Wide : WidgetSize.Meduim; 
+      if (!string.IsNullOrWhiteSpace(Value))
+      Size = Value.Length > 31 ? WidgetSize.Large : Value.Length > 15 ? WidgetSize.Wide : WidgetSize.Meduim; 
     }
   }
 }

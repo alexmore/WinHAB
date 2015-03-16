@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
+using NUnit.Framework;
 using WinHAB.Core.Models;
 using WinHAB.Core.ViewModels;
 
@@ -52,23 +54,50 @@ namespace WinHAB.Tests.Core.Models
       return Widget.GetWidgetType(widgetType);
     }
 
-    [TestCase("Title 1", Result = "Title 1")]
-    [TestCase("Title 2 [12]", Result = "Title 2")]
-    [TestCase("Title 4 [[3]", Result = "Title 4")]
+    [TestCase("Title", Result = "Title")]
+    [TestCase("Title[Value]", Result = "Title")]
+    [TestCase("[WrongValue]Title [Value]", Result = "Title")]
+    [TestCase("Title  [[Value ]", Result = "Title")]
+    [TestCase("{Tag}Title [Value]", Result = "Title")]
+    [TestCase("Title{Tag} [Value]", Result = "Title")]
+    [TestCase("Title [Value]", Result = "Title")]
+    [TestCase("[Value]", Result = null)]
+    [TestCase("{Tag}", Result = null)]
     [TestCase(null, Result = null)]
-    public string TitleProperty_ReturnsParsedTitle_OnLabelWithTittleAndValue_(string label)
+    public string TitleProperty_ReturnsValidValue_(string label)
     {
       return new Widget() {Label = label}.Title;
     }
 
-    [TestCase("Title 1", Result = null)]
-    [TestCase("Title 2 [12]", Result = "12")]
-    [TestCase("[1]Title 3 [1]", Result = "1")]
-    [TestCase("Title 4 [[3 ]", Result = "[3")]
+    [TestCase("Title", Result = null)]
+    [TestCase("Title[Value]", Result = "Value")]
+    [TestCase("Title  [[Value ]", Result = "[Value")]
+    [TestCase("{Tag}Title [Value]", Result = "Value")]
+    [TestCase("Title{Tag} [Value]", Result = "Value")]
+    [TestCase("Title [Value]", Result = "Value")]
+    [TestCase("[[Value]]", Result = "[Value")]
+    [TestCase("{Tag}", Result = null)]
     [TestCase(null, Result = null)]
-    public string FormattedValueProperty_ReturnsParsedValue_OnLabelWithTitleAndValue(string label)
+    public string ValueProperty_ReturnsValidValue(string label)
     {
-      return new Widget() { Label = label }.FormattedValue;
+      return new Widget() { Label = label }.Value;
+    }
+
+    [TestCase("Title", Result = null)]
+    [TestCase("Title[Value]", Result = null)]
+    [TestCase("[WrongValue]Title [Value]", Result = null)]
+    [TestCase("Title  [[Value ]", Result = null)]
+    [TestCase("{Tag}Title [Value]", Result = "Tag")]
+    [TestCase("Title{Tag} [Value]", Result = "Tag")]
+    [TestCase("Title [Value]", Result = null)]
+    [TestCase("[Value]", Result = null)]
+    [TestCase("{Tag}", Result = "Tag")]
+    [TestCase("{{Tag}", Result = "{Tag")]
+    [TestCase("{{Tag}}", Result = "{Tag")]
+    [TestCase(null, Result = null)]
+    public string TagProperty_ReturnsValidValue(string label)
+    {
+      return new Widget() { Label = label }.Tag;
     }
   }
 }
