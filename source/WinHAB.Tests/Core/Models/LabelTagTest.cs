@@ -25,9 +25,11 @@ namespace WinHAB.Tests.Core.Models
     [TestCase("key1", Result = "val1")]
     [TestCase("key2", Result = "val2")]
     [TestCase("key3", Result = "")]
+    [TestCase("key3", Result = "")]
+    [TestCase("key5", Result = "val5 : val")]
     public string Parse_IsValid(string key)
     {
-      var lt = new LabelTag("key1:val1,     key2   : val2, key3 : ,");
+      var lt = new LabelTag("key1:val1,     key2   : val2, key3 : , , key5: val5 : val");
       return lt.Items[key];
     }
 
