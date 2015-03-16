@@ -25,9 +25,13 @@ namespace WinHAB.Core.ViewModels.Widgets
           "SwitchWidgetModel can not create instance for Widget with Mappings count greater than 1.");
 
       _navigation = navigation;
-      Size = WidgetSize.Meduim;
 
-      Icon = Data.Icon;
+      Size = WidgetSize.Meduim;
+      
+      if (Data != null && Data.Properties != null)
+        Size = Data.Properties.GetSize() ?? WidgetSize.Meduim;
+
+      Icon = Data == null ? Data.Icon : null;
 
       SetState(data);
 
@@ -80,6 +84,7 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     async Task Post()
     {
+      ShowProgressIndicator();
       using (var cln = ClientFactory.Create())
       {
         try
@@ -90,6 +95,7 @@ namespace WinHAB.Core.ViewModels.Widgets
         }
         catch (Exception e)
         {
+          HideProgressIndicator();
           _navigation.ShowMessage(Localization.Strings.MessageExceptionOnSwitchWidgetPostCommandTitle,
             Localization.Strings.MessageExceptionOnSwitchWidgetPostCommand + ":\r\n" + e.Message, () => { });
         }
