@@ -53,5 +53,25 @@ namespace WinHAB.Tests.Core.Models
       lt[key] = value;
       return lt[key];
     }
+
+    [Test]
+    public void GetValueNotCaseSensitiveKey()
+    {
+      var wp = new WidgetProperties();
+
+      wp["Key1"] = "Key1Value";
+      
+      Assert.That(wp["kEy1"], Is.EqualTo("Key1Value"));
+    }
+
+    [Test]
+    public void SetValueNotCaseSensitiveKey()
+    {
+      var wp = new WidgetProperties();
+
+      wp["Key1"] = "Key1Value";
+      wp["kEy1"] = "NewKey1Value";
+      Assert.That(wp["Key1"], Is.EqualTo("NewKey1Value"));
+    }
   }
 }
