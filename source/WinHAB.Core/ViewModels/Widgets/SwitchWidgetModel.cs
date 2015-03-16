@@ -31,7 +31,7 @@ namespace WinHAB.Core.ViewModels.Widgets
       if (Data != null && Data.Properties != null)
         Size = Data.Properties.GetSize() ?? WidgetSize.Meduim;
 
-      Icon = Data == null ? Data.Icon : null;
+      Icon = Data != null ? Data.Icon : null;
 
       SetState(data);
 
@@ -90,8 +90,6 @@ namespace WinHAB.Core.ViewModels.Widgets
         try
         {
           await cln.PostAsync(Data.Item.Link, new StringContent(GetCommandString())).IsOkAsync();
-          
-          if (!IsButton) ShowProgressIndicator();
         }
         catch (Exception e)
         {
@@ -100,6 +98,8 @@ namespace WinHAB.Core.ViewModels.Widgets
             Localization.Strings.MessageExceptionOnSwitchWidgetPostCommand + ":\r\n" + e.Message, () => { });
         }
       }
+
+      if (IsButton) HideProgressIndicator();
     }
   }
 }
