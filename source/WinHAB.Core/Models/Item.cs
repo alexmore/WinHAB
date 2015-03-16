@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using WinHAB.Core.Models.Converters;
 
 namespace WinHAB.Core.Models
@@ -9,7 +10,7 @@ namespace WinHAB.Core.Models
     public ItemType Type { get; set; }
     public string Name { get; set; }
     public string State { get; set; }
-    public string Link { get; set; }
+    public Uri Link { get; set; }
 
     public static ItemType GetItemType(string typeString)
     {

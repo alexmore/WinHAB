@@ -8,6 +8,14 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
   [TestFixture]
   public class TextWidgetModelTest
   {
+    [SetUp]
+    public void Setup()
+    {
+      _vmHelper = new ViewModelsTestHelper();
+    }
+
+    private ViewModelsTestHelper _vmHelper;
+
     [TestCase(null, Result = WidgetSize.Meduim)] // Null
     [TestCase("", Result = WidgetSize.Meduim)]
     // > 15 chars - Wide
@@ -16,7 +24,7 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     [TestCase("[12345678901234567890123456789012]", Result = WidgetSize.Large)]
     public WidgetSize Constructor_SetsWidgetSize_DependingOnValueLength(string label)
     {
-      var tw = new TextWidgetModel(new Widget() {Label = label});
+      var tw = new TextWidgetModel(new Widget() {Label = label}, _vmHelper.ClientFactory);
       return tw.Size;
     }
   }

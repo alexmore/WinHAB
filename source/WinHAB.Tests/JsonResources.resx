@@ -123,4 +123,7 @@
   <data name="Sitemaps" xml:space="preserve">
     <value>{"sitemap":{"name":"demo","label":"Main Menu","link":"http://localhost:8080/rest/sitemaps/demo","homepage":{"link":"http://localhost:8080/rest/sitemaps/demo/demo","leaf":"false"}}}</value>
   </data>
+  <data name="SwitchItem" xml:space="preserve">
+    <value>{"type":"SwitchItem","name":"DemoSwitch","state":"ON","link":"http://localhost:8080/rest/items/DemoSwitch"}</value>
+  </data>
 </root>

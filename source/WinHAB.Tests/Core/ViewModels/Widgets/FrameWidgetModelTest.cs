@@ -9,13 +9,21 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
   [TestFixture]
   public class FrameWidgetModelTest
   {
+    [SetUp]
+    public void Setup()
+    {
+      _vmHelper = new ViewModelsTestHelper();
+    }
+
+    private ViewModelsTestHelper _vmHelper;
+
     [Test]
     public void Cleanup_InvokesCleanup_ForEveryItemInWidgetsCollection()
     {
-      var f = new FrameWidgetModel(new Widget());
+      var f = new FrameWidgetModel(new Widget(), _vmHelper.ClientFactory);
 
-      var wMock1 = new Mock<WidgetModelBase>(new Widget());
-      var wMock2 = new Mock<WidgetModelBase>(new Widget());
+      var wMock1 = new Mock<WidgetModelBase>(new Widget(), _vmHelper.ClientFactory);
+      var wMock2 = new Mock<WidgetModelBase>(new Widget(), _vmHelper.ClientFactory);
 
       f.Widgets.Add(wMock1.Object);
       f.Widgets.Add(wMock2.Object);

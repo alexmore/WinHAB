@@ -22,7 +22,7 @@ namespace WinHAB.Tests.Core.ViewModels
     [Test]
     public void Create_ReturnsSwitchWidgetModel_WhenWidgetTypeIsSwtichAndMappingsIsEmpty()
     {
-      var wd = new Widget() {Type = WidgetType.Switch};
+      var wd = new Widget() {Type = WidgetType.Switch, Item = new Item() { Link = new Uri("http://some")}};
 
       Func<Type, Widget, WidgetModelBase> cw = (tp, wp) => new SwitchWidgetModel(wd, _vmHelper.ClientFactory, _vmHelper.Navigation);
       var wf = new WidgetsFactory(cw);
@@ -38,7 +38,8 @@ namespace WinHAB.Tests.Core.ViewModels
       var wd = new Widget()
       {
         Type = WidgetType.Switch,
-        Mappings = new List<Mapping>(new [] { new Mapping() { Command = "1", Label = "1"}})
+        Mappings = new List<Mapping>(new [] { new Mapping() { Command = "1", Label = "1"}}),
+        Item = new Item() { Link = new Uri("http://some") }
       };
 
       Func<Type, Widget, WidgetModelBase> cw = (tp, wp) => new SwitchWidgetModel(wd, _vmHelper.ClientFactory, _vmHelper.Navigation);

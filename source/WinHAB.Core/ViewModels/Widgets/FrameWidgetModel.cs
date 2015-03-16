@@ -1,12 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
+using WinHAB.Core.Net;
 
 namespace WinHAB.Core.ViewModels.Widgets
 {
   public class FrameWidgetModel : WidgetModelBase
   {
-    public FrameWidgetModel(Widget data) : base(data)
+    public FrameWidgetModel(Widget data, IRestClientFactory clientFactory)
+      : base(data, clientFactory)
     {
       Widgets = new ObservableCollection<WidgetModelBase>();
     }

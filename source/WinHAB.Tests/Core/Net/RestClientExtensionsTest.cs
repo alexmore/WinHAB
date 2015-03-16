@@ -3,39 +3,28 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using WinHAB.Core.Models;
 using WinHAB.Core.Net;
+using WinHAB.Tests.Core.ViewModels;
 
 namespace WinHAB.Tests.Core.Net
 {
   [TestFixture]
   public class RestClientExtensionsTest
   {
-    #region Test Fixture Setup
-
-    [TestFixtureSetUp]
-    public void SetupTestFixture()
+    [SetUp]
+    public void Setup()
     {
+      _vmHelper = new ViewModelsTestHelper();
     }
 
-    [TestFixtureTearDown]
-    public void CleanupTestFixture()
-    {
-    }
+    private ViewModelsTestHelper _vmHelper;
 
-    #endregion
 
-    #region Test Setup
-    [TearDown]
-    public void CleanupTest()
-    {
-    }
-    #endregion
-
-  
     [Test]
     public async Task AsJObjectAsync_ReturnsValidJObject_OnValidResponse()
     {
@@ -91,6 +80,40 @@ namespace WinHAB.Tests.Core.Net
 
       Assert.That(page.Widgets.Count, Is.EqualTo(4));
       Assert.That(page.Widgets, Has.All.InstanceOf<Widget>());
+    }
+
+    [Test]
+    public async Task GetLongPolling_Sets_XAtmosphereHeader()
+    {
+      var cln = new RestClient();
+
+      try
+      {
+        await cln.GetLongPollingAsync(new Uri("http://some/"), new CancellationToken());
+      }
+      catch
+      {
+        
+      }
+
+      Assert.That((cln as HttpClient).DefaultRequestHeaders.Contains("X-Atmosphere-Transport"), Is.True);
+    }
+
+    [Test]
+    public async Task GetLongPolling_Sets_TimeoutToInfinite()
+    {
+      var cln = new RestClient();
+
+      try
+      {
+        await cln.GetLongPollingAsync(new Uri("http://some/"), new CancellationToken());
+      }
+      catch
+      {
+
+      }
+
+      Assert.That(cln.Timeout, Is.EqualTo(Timeout.InfiniteTimeSpan));
     }
   }
 }

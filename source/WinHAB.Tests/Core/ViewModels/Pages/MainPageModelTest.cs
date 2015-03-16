@@ -28,8 +28,8 @@ namespace WinHAB.Tests.Core.ViewModels.Pages
     public void Widgets_CleanupPreviousWidgets_OnNewCollestionAssigned()
     {
       var mp = CreateMainPageModel();
-      var vm1Mock = new Mock<FrameWidgetModel>(new Widget());
-      var vm2Mock = new Mock<FrameWidgetModel>(new Widget());
+      var vm1Mock = new Mock<FrameWidgetModel>(new Widget(), _vmHelper.ClientFactory);
+      var vm2Mock = new Mock<FrameWidgetModel>(new Widget(), _vmHelper.ClientFactory);
       mp.Widgets = new ObservableCollection<FrameWidgetModel>() {vm1Mock.Object, vm2Mock.Object};
 
       mp.Widgets = null;

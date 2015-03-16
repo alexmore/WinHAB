@@ -34,6 +34,7 @@ namespace WinHAB.Tests.Core.ViewModels
     public Mock<IRestClientFactory> ClientFactoryMock { get; set; }
     public IRestClientFactory ClientFactory { get { return ClientFactoryMock.Object; }}
     public Mock<IRestClient> RestClientMock { get; set; }
+    public IRestClient RestClient { get { return RestClientMock.Object; } }
 
     public Mock<INavigationService> NavigationMock { get; set; }
     public INavigationService Navigation { get { return NavigationMock.Object; }}

@@ -12,13 +12,11 @@ namespace WinHAB.Core.ViewModels.Widgets
   public class ImageWidgetModel : WidgetModelBase
   {
     private readonly INavigationService _navigationService;
-    private readonly IRestClientFactory _clientFactory;
     private readonly ITimer _timer;
     
-    public ImageWidgetModel(INavigationService navigationService, Widget data, IRestClientFactory clientFactory, ITimer timer) : base(data)
+    public ImageWidgetModel(INavigationService navigationService, Widget data, IRestClientFactory clientFactory, ITimer timer) : base(data, clientFactory)
     {
       _navigationService = navigationService;
-      _clientFactory = clientFactory;
       _timer = timer;
       Size = WidgetSize.Large;
 
@@ -55,7 +53,7 @@ namespace WinHAB.Core.ViewModels.Widgets
 
       try
       {
-        using (var cln = _clientFactory.Create())
+        using (var cln = ClientFactory.Create())
         {
           var stream = await cln.GetAsync(url).AsStreamAsync();
           

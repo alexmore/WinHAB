@@ -45,6 +45,14 @@ namespace WinHAB.Core.Net
       return jobject.ToObject<Page>();
     }
 
+    public static async Task<Item> AsItemAsync(this Task<HttpResponseMessage> responseTask)
+    {
+      var jobject = await responseTask.AsJObjectAsync();
+      if (jobject == null) return null;
+
+      return jobject.ToObject<Item>();
+    }
+
 
   }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using WinHAB.Core.Fx;
@@ -13,34 +15,35 @@ namespace WinHAB.Core.ViewModels.Widgets
 {
   public class SwitchWidgetModel : WidgetModelBase
   {
-    private readonly IRestClientFactory _clientFactory;
     private readonly INavigationService _navigation;
 
     public SwitchWidgetModel(Widget data, IRestClientFactory clientFactory, INavigationService navigation)
-      : base(data)
+      : base(data, clientFactory)
     {
       if (data != null && data.Mappings != null && data.Mappings.Count > 1)
-        throw new ArgumentException("SwitchWidgetModel can not create instance for Widget with Mappings count greater than 1.");
+        throw new ArgumentException(
+          "SwitchWidgetModel can not create instance for Widget with Mappings count greater than 1.");
 
-      _clientFactory = clientFactory;
       _navigation = navigation;
       Size = WidgetSize.Meduim;
-      
+
       Icon = Data.Icon;
 
       SetState(data);
 
+      if (!IsButton)
+        ItemChanged += (sender, item) =>
+        {
+          Data.Item = item;
+          SetState(Data);
+        };
+
       PostCommand = new AsyncRelayCommand(Post);
     }
 
-
     private void SetState(Widget data)
     {
-      if (data == null || data.Item == null)
-      {
-        State = SwitchWidgetState.Disabled;
-        return;
-      }
+      HideProgressIndicator();
 
       if (data.Mappings != null && data.Mappings.Count == 1)
       {
@@ -77,11 +80,11 @@ namespace WinHAB.Core.ViewModels.Widgets
 
     async Task Post()
     {
-      using (var cln = _clientFactory.Create())
+      using (var cln = ClientFactory.Create())
       {
         try
         {
-          await cln.PostAsync(new Uri(Data.Item.Link), new StringContent(GetCommandString())).IsOkAsync();
+          await cln.PostAsync(Data.Item.Link, new StringContent(GetCommandString())).IsOkAsync();
           
           if (!IsButton) ShowProgressIndicator();
         }
