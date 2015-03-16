@@ -6,12 +6,12 @@ namespace WinHAB.Core.Models
   {
     public WidgetLabel()
     {
-      LabelTag = new LabelTag();
+      Properties = new WidgetProperties();
     }
 
     public string Title { get; set; }
     public string Value { get; set; }
-    public LabelTag LabelTag { get; set; }
+    public WidgetProperties Properties { get; set; }
 
     public static WidgetLabel Parse(string label)
     {
@@ -19,12 +19,12 @@ namespace WinHAB.Core.Models
 
       if (string.IsNullOrWhiteSpace(label)) return l;
 
-      // Extract LabelTag
-      var tagMatch = Regex.Match(label.Trim(), @"\{(.*?)\}");
-      if (tagMatch.Success)
+      // Extract Properties
+      var propertyMatch = Regex.Match(label.Trim(), @"\{(.*?)\}");
+      if (propertyMatch.Success)
       {
-        if (tagMatch.Groups[1].Success)
-          l.LabelTag = new LabelTag(tagMatch.Groups[1].Value.Trim());
+        if (propertyMatch.Groups[1].Success)
+          l.Properties = new WidgetProperties(propertyMatch.Groups[1].Value.Trim());
       }
       // Extract Value
       var valueMatch = Regex.Match(label.Trim(), @"\[(.*?)\]");

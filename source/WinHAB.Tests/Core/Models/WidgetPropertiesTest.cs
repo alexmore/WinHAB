@@ -5,19 +5,19 @@ using WinHAB.Core.ViewModels;
 namespace WinHAB.Tests.Core.Models
 {
   [TestFixture]
-  public class LabelTagTest
+  public class WidgetPropertiesTest
   {
     [Test]
     public void Items_IsNotNullAfeterCreate()
     {
-      var lt = new LabelTag();
+      var lt = new WidgetProperties();
       Assert.That(lt.Items, Is.Not.Null);
     }
 
     [Test]
     public void Value_ParsedOnSet()
     {
-      var lt = new LabelTag();
+      var lt = new WidgetProperties();
       lt.Parse("key1:val1,  key2 : val2");
       Assert.That(lt.Items, Is.Not.Empty);
     }
@@ -29,7 +29,7 @@ namespace WinHAB.Tests.Core.Models
     [TestCase("key5", Result = "val5 : val")]
     public string Parse_IsValid(string key)
     {
-      var lt = new LabelTag("key1:val1,     key2   : val2, key3 : , , key5: val5 : val");
+      var lt = new WidgetProperties("key1:val1,     key2   : val2, key3 : , , key5: val5 : val");
       return lt.Items[key];
     }
 
@@ -40,7 +40,7 @@ namespace WinHAB.Tests.Core.Models
     [TestCase(null, Result = null)]
     public string AccessToItemsGet_IsValid(string key)
     {
-      var lt = new LabelTag("key1:val1,     key2   : val2, key3 : ,");
+      var lt = new WidgetProperties("key1:val1,     key2   : val2, key3 : ,");
       return lt[key];
     }
 
@@ -49,7 +49,7 @@ namespace WinHAB.Tests.Core.Models
     [TestCase(null, "val1", Result = null)]
     public string AccessToItemsSet_IsValid(string key, string value)
     {
-      var lt = new LabelTag();
+      var lt = new WidgetProperties();
       lt[key] = value;
       return lt[key];
     }

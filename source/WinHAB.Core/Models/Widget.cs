@@ -66,7 +66,7 @@ namespace WinHAB.Core.Models
 
     public string Title { get { return LabelParts.Title; } }
     public string Value { get { return LabelParts.Value; } }
-    public LabelTag LabelTag { get { return LabelParts.LabelTag; }}
+    public WidgetProperties Properties { get { return LabelParts.Properties; }}
 
     #endregion
 

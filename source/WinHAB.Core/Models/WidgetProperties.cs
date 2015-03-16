@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace WinHAB.Core.Models
 {
-  public class LabelTag
+  public class WidgetProperties
   {
-    public LabelTag()
+    public WidgetProperties()
     {
     }
 
-    public LabelTag(string value)
+    public WidgetProperties(string value)
     {
       Value = value;
     }
