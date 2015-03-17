@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using WinHAB.Core.Fx.Mvvm;
@@ -123,6 +124,14 @@ namespace WinHAB.Core.ViewModels
       ItemPollingCancellationTokenSource.Cancel();
     }
     #endregion
+
+    public async Task SetItemState(string state)
+    {
+      using (var cln = ClientFactory.Create())
+      {
+        await cln.PostAsync(Data.Item.Link, new StringContent(state)).IsOkAsync();
+      }
+    }
 
     public override void Cleanup()
     {

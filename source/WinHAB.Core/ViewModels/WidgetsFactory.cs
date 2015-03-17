@@ -26,7 +26,7 @@ namespace WinHAB.Core.ViewModels
         case WidgetType.Image:
           return _createWidgetFunc(typeof (ImageWidgetModel), data);
         case WidgetType.Selection:
-          break;
+          return _createWidgetFunc(typeof(SelectionWidgetModel), data);
         case WidgetType.Slider:
           break;
         case WidgetType.Chart:
@@ -60,8 +60,7 @@ namespace WinHAB.Core.ViewModels
 
       if (data.Mappings != null && data.Mappings.Count > 1)
       {
-        // TODO: add selection widget for Switch with mappings
-        return null;
+        return _createWidgetFunc(typeof(SelectionWidgetModel), data);
       }
 
       return _createWidgetFunc(typeof(SwitchWidgetModel), data);

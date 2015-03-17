@@ -1,0 +1,121 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                    xmlns:configuration="clr-namespace:WinHAB.Desktop.Configuration"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:command="http://www.galasoft.ch/mvvmlight"
+                    xmlns:viewModels="clr-namespace:WinHAB.Core.ViewModels;assembly=WinHAB.Core"
+                    mc:Ignorable="d" >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/Colors.xaml" />
+        <ResourceDictionary Source="/Themes/Icons.xaml" />
+        <ResourceDictionary Source="WidgetSharedStyles.xaml"/>
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="SelectionWidgetTemplate" TargetType="ComboBox">
+        <Grid d:DataContext="{d:DesignInstance Type=vm:SelectionWidgetModel}">
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <mui:ModernProgressRing Grid.Row="0" Style="{DynamicResource WhiteProgressIndicatorStyle}" />
+
+                <Grid Name="SelectionGrid" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Path Name="IconPath" Grid.Column="0"
+                                      Visibility="{Binding Icon, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"
+                                      Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"
+                                      VerticalAlignment="Center" Width="25" Height="25" Stretch="Uniform" />
+                    <Border Name="SelectionSeparatorBorder" Width="5" Grid.Column="1" Background="Transparent"/>
+                    <TextBlock Name="ContentSite" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource TextWidgetValue}"
+                                           Visibility="{TemplateBinding Text, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter=inverse}"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </Grid>
+
+                <Grid Name="TitleGrid" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="TitleTextBlock" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                           Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}" />
+                    <Path Name="LinkPath" Grid.Column="1" 
+                                      Data="{StaticResource ArrowHeadDownIcon}" Fill="{TemplateBinding Foreground}"
+                                      VerticalAlignment="Bottom" Width="10" Height="10" Margin="0,0,0,2" Stretch="Uniform"/>
+                </Grid>
+            </Grid>
+
+            <ToggleButton x:Name="ToggleButton" Focusable="false" ClickMode="Press" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+
+            <Popup x:Name="Popup"
+                               Placement="Bottom"
+                               VerticalOffset="5"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               PopupAnimation="Slide">
+                <Grid x:Name="DropDown"
+                                  SnapsToDevicePixels="True"
+                                  MinWidth="{TemplateBinding ActualWidth}"
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <Border x:Name="DropDownBorder" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Background="{DynamicResource WindowBackground}">
+                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="IconPath" Property="Visibility" Value="Collapsed">
+                <Setter TargetName="SelectionSeparatorBorder" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger SourceName="ContentSite" Property="Visibility" Value="Collapsed">
+                <Setter TargetName="SelectionSeparatorBorder" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+
+            <Trigger Property="HasItems" Value="false">
+                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95" />
+            </Trigger>
+            <Trigger Property="IsGrouping" Value="true">
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="SelectionWidget" TargetType="ComboBox" BasedOn="{StaticResource WidgetComboBoxBaseStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="ItemsSource" Value="{Binding Mappings, Mode=TwoWay}"/>
+        <Setter Property="SelectedValue" Value="{Binding SelectedMapping}"/>
+        <Setter Property="DisplayMemberPath" Value="Label"/>
+        <Setter Property="Template" Value="{StaticResource SelectionWidgetTemplate}"/>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <ItemContainerTemplate>
+                    <TextBlock Name="ValueTextBlock" Text="{Binding Label}" Style="{StaticResource SelectionWidgetDropdownText}"
+                               VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                </ItemContainerTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

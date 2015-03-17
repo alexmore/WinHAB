@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\Pages\MainPageModel.cs" />
     <Compile Include="ViewModels\Widgets\FrameWidgetModel.cs" />
     <Compile Include="ViewModels\Pages\ImageWidgetPageModel.cs" />
+    <Compile Include="ViewModels\Widgets\SelectionWidgetModel.cs" />
     <Compile Include="ViewModels\Widgets\SwitchWidgetModel.cs" />
     <Compile Include="ViewModels\Widgets\ImageWidgetModel.cs" />
     <Compile Include="ViewModels\Widgets\SwitchWidgetState.cs" />

@@ -51,20 +51,27 @@ namespace WinHAB.Tests.Core.ViewModels
     }
 
     [Test]
-    public void Create_ReturnsNull_WhenWidgetTypeIsSwtichAndMappingsCountLargerThanOne()
+    public void Create_ReturnsSelectionWidgetModel_WhenWidgetTypeIsSwtichAndMappingsCountGreaterThanOne()
     {
       var wd = new Widget()
       {
         Type = WidgetType.Switch,
+        Item = new Item() { Link = new Uri("http://some")},
         Mappings = new List<Mapping>(new[] { new Mapping() { Command = "1", Label = "1" }, new Mapping() { Command = "1", Label = "1" } })
       };
 
-      Func<Type, Widget, WidgetModelBase> cw = (tp, wp) => new SwitchWidgetModel(wd, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      Func<Type, Widget, WidgetModelBase> cw = (tp, wp) =>
+      {
+        if (tp == typeof(SelectionWidgetModel)) return new SelectionWidgetModel(wd, _vmHelper.ClientFactory, _vmHelper.Navigation);
+        
+        return new SwitchWidgetModel(wd, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      };
+      
       var wf = new WidgetsFactory(cw);
 
       var w = wf.Create(wd);
 
-      Assert.That(w, Is.Null);
+      Assert.That(w, Is.InstanceOf<SelectionWidgetModel>());
     }
 
     [Test]
