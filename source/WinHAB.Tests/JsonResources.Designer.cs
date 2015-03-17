@@ -86,5 +86,14 @@ namespace WinHAB.Tests {
                 return ResourceManager.GetString("SwitchItem", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;widgetId&quot;:&quot;demo_1_0&quot;,&quot;type&quot;:&quot;Text&quot;,&quot;label&quot;:&quot;Outside Temperature {Size:Wide} [7,0 В°C]&quot;,&quot;icon&quot;:&quot;none&quot;}.
+        /// </summary>
+        internal static string WidgetWithIconNone {
+            get {
+                return ResourceManager.GetString("WidgetWithIconNone", resourceCulture);
+            }
+        }
     }
 }

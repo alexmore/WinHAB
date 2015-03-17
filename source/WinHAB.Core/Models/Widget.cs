@@ -22,6 +22,7 @@ namespace WinHAB.Core.Models
     [JsonConverter(typeof(WidgetTypeJsonConverter))]
     public WidgetType Type { get; set; }
     public string Name { get; set; }
+    [JsonConverter(typeof(IconStringJsonConverter))]
     public string Icon { get; set; }
     public string LabelColor { get; set; }
     public string ValueColor { get; set; }

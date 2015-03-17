@@ -126,4 +126,7 @@
   <data name="SwitchItem" xml:space="preserve">
     <value>{"type":"SwitchItem","name":"DemoSwitch","state":"ON","link":"http://localhost:8080/rest/items/DemoSwitch"}</value>
   </data>
+  <data name="WidgetWithIconNone" xml:space="preserve">
+    <value>{"widgetId":"demo_1_0","type":"Text","label":"Outside Temperature {Size:Wide} [7,0 В°C]","icon":"none"}</value>
+  </data>
 </root>

@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using WinHAB.Core.Models;
 using WinHAB.Core.ViewModels;
@@ -99,6 +101,14 @@ namespace WinHAB.Tests.Core.Models
     {
 
       return new Widget() {Label = label}.Properties.Value;
+    }
+
+    [Test]
+    public void DeserializingFromJson_IconSetsToNull_WhenIconStringEqualsToNone()
+    {
+      var w = JsonConvert.DeserializeObject<Widget>(JsonResources.WidgetWithIconNone);
+
+      Assert.That(w.Icon, Is.Null);
     }
   }
 }
