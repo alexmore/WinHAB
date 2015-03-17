@@ -10,7 +10,7 @@
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
-        <Button Style="{StaticResource TextWidgetView}" Command="{Binding DataContext.LoadLinkedPageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
+        <Button Style="{StaticResource TextWidget}" Command="{Binding DataContext.LoadLinkedPageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type widgetModels:ImageWidgetModel}">

@@ -8,6 +8,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/Icons.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
+        <ResourceDictionary Source="WidgetSharedStyles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
   
     <ControlTemplate x:Key="TextWidgetMediumTemplate" TargetType="{x:Type Button}">
@@ -88,45 +89,16 @@
                                Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}" />
                     <Path Name="LinkPath" Grid.Column="2" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
                           Data="{StaticResource ArrowHeadRightIcon}" Fill="{TemplateBinding Foreground}"
-                          VerticalAlignment="Bottom" Width="10" Height="10" Margin="0,0,0,2" Stretch="Uniform"/>
+                          VerticalAlignment="Center" Width="10" Height="10" Stretch="Uniform"/>
                 </Grid>
             </Grid>
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="TextWidgetView" TargetType="Button" >
-        <Setter Property="Background" Value="{DynamicResource Accent}"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource WidgetFocusBorder}"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="Width" Value="NaN" />
-        <Setter Property="Height" Value="NaN" />
-        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+    <Style x:Key="TextWidget" TargetType="Button" BasedOn="{StaticResource WidgetButtonBaseStyle}" >
         <Setter Property="IsEnabled" Value="{Binding IsLink}"/>
         <Setter Property="Template" Value="{StaticResource TextWidgetMediumTemplate}"/>
-        <Style.Triggers >
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-            </Trigger>
-            
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation 
-                             Storyboard.TargetProperty="Background.Opacity"
-                             To=".8" Duration="0"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-            </Trigger>
+        <Style.Triggers>
             <DataTrigger Binding="{Binding Size}" Value="{x:Static viewModels:WidgetSize.Wide}">
                 <Setter Property="Template" Value="{StaticResource TextWidgetWideLargeTemplate}"/>
             </DataTrigger>
