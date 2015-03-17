@@ -4,4 +4,7 @@
     <SolidColorBrush x:Key="InactiveSwitch" Color="{DynamicResource InactiveSwtichColor}"/>
     <Color x:Key="ActiveSwtichColor">#00C853</Color>
     <SolidColorBrush x:Key="ActiveSwitch" Color="{DynamicResource ActiveSwtichColor}"/>
+    
+    <Color x:Key="WidgetFocusBorderColor">White</Color>
+    <SolidColorBrush x:Key="WidgetFocusBorder" Color="{DynamicResource WidgetFocusBorderColor}" Opacity=".8"/>
 </ResourceDictionary>

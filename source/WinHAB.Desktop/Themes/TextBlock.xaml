@@ -77,12 +77,24 @@
 
     <Style x:Key="TextWidgetValue" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI Semilight" />
-        <Setter Property="FontSize" Value="25" />
+        <Setter Property="FontSize" Value="22" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
-        <Setter Property="LineHeight" Value="26" />
+        <Setter Property="LineHeight" Value="22" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="TextWidgetWideValue" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="18" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>

@@ -42,6 +42,7 @@
     <Compile Include="Fx\Mvvm\IViewFactory.cs" />
     <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
     <Compile Include="Fx\StringExtensions.cs" />
+    <Compile Include="Models\Converters\IconStringJsonConverter.cs" />
     <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
     <Compile Include="Models\Converters\ItemTypeJsonConverter.cs" />
     <Compile Include="Models\ItemType.cs" />

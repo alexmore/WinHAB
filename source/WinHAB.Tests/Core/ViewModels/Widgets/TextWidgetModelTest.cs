@@ -16,15 +16,14 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
 
     private ViewModelsTestHelper _vmHelper;
 
-    [TestCase(null, Result = WidgetSize.Meduim)] // Null
     [TestCase("", Result = WidgetSize.Meduim)]
-    // > 15 chars - Wide
-    [TestCase("[1234567890123456]", Result = WidgetSize.Wide)]
-    // > 31 chars - Large
-    [TestCase("[12345678901234567890123456789012]", Result = WidgetSize.Large)]
-    public WidgetSize Constructor_SetsWidgetSize_DependingOnValueLength(string label)
+    [TestCase("{ Size : Wide }", Result = WidgetSize.Wide)]
+    [TestCase("{ Size : Large }", Result = WidgetSize.Large)]
+    [TestCase("{ Size : Medium }", Result = WidgetSize.Meduim)]
+    [TestCase("{ Size : Wrong }", Result = WidgetSize.Meduim)]
+    public WidgetSize Constructor_SetsSize_DependingWidgetProperties(string label)
     {
-      var tw = new TextWidgetModel(new Widget() {Label = label}, _vmHelper.ClientFactory);
+      var tw = new TextWidgetModel(new Widget() { Label = label}, _vmHelper.ClientFactory);
       return tw.Size;
     }
   }
