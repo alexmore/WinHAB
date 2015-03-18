@@ -1,29 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WinHAB.Core.Fx;
+using WinHAB.Core.ViewModels;
 
 namespace WinHAB.Core.Models
 {
   public class WidgetProperties
   {
+    #region Constructor
     public WidgetProperties()
     {
     }
 
-    public WidgetProperties(string value)
+    public WidgetProperties(string propertiesString)
     {
-      Value = value;
+      PropertiesString = propertiesString;
     }
+    #endregion
 
-    private string _value;
-
-    public string Value
+    #region Values
+    private string _propertiesString;
+    public string PropertiesString
     {
-      get { return _value; }
-      set { _value = value; Parse(value); }
+      get { return _propertiesString; }
+      set { _propertiesString = value; Parse(value); }
     }
-
-    
 
     public string this[string key]
     {
@@ -47,6 +48,16 @@ namespace WinHAB.Core.Models
       get { return _items; }
     }
 
+    public override string ToString()
+    {
+      return PropertiesString;
+    }
+
+    public WidgetPropertiesValues Values { get { return new WidgetPropertiesValues(this);} }
+
+    #endregion
+
+    #region Parsing
     public void Parse(string labelTagString)
     {
       Items.Clear();
@@ -58,10 +69,7 @@ namespace WinHAB.Core.Models
         Items[i[0].Trim().ToLower()] = string.Join("=", i.Skip(1)).Trim();
       }
     }
+    #endregion
 
-    public override string ToString()
-    {
-      return Value;
-    }
   }
 }

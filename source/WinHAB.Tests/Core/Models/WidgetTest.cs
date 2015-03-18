@@ -100,7 +100,7 @@ namespace WinHAB.Tests.Core.Models
     public string PropertiesProperty_ReturnsValidValue(string label)
     {
 
-      return new Widget() {Label = label}.Properties.Value;
+      return new Widget() {Label = label}.Properties.PropertiesString;
     }
 
     [Test]

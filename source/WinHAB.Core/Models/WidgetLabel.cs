@@ -26,7 +26,7 @@ namespace WinHAB.Core.Models
         if (propertyMatch.Groups[1].Success)
           l.Properties = new WidgetProperties(propertyMatch.Groups[1].Value.Trim());
       }
-      // Extract Value
+      // Extract propertiesString
       var valueMatch = Regex.Match(label.Trim(), @"\[(.*?)\]");
       if (valueMatch.Success)
       {
