@@ -265,9 +265,6 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     [Test]
     public void EventChangedEventSubscriber_AndCallsSetState()
     {
-      _vmHelper.RestClientMock.Setup(x => x.GetLongPollingAsync(It.IsAny<Uri>(), It.IsAny<CancellationToken>()))
-        .Returns(JsonResources.SwitchItem.AsAsyncResponse);
-
       var w = new TestSwitchWidgetModel(new Widget()
       {
         Item = new Item() { State = "OFF", Link = new Uri("http://some") }

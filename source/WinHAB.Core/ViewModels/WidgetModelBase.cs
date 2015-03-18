@@ -15,6 +15,8 @@ namespace WinHAB.Core.ViewModels
 
     protected WidgetModelBase(Widget data, IRestClientFactory clientFactory)
     {
+      if (data == null)
+        throw new ArgumentException("Widget data argument can not be null");
       ClientFactory = clientFactory;
       Data = data;
 

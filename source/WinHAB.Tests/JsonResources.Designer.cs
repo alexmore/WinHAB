@@ -70,6 +70,15 @@ namespace WinHAB.Tests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {&quot;type&quot;:&quot;NumberItem&quot;,&quot;name&quot;:&quot;Scene_General&quot;,&quot;state&quot;:&quot;2&quot;,&quot;link&quot;:&quot;http://some&quot;}.
+        /// </summary>
+        internal static string SelectionWidget {
+            get {
+                return ResourceManager.GetString("SelectionWidget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {&quot;sitemap&quot;:{&quot;name&quot;:&quot;demo&quot;,&quot;label&quot;:&quot;Main Menu&quot;,&quot;link&quot;:&quot;http://localhost:8080/rest/sitemaps/demo&quot;,&quot;homepage&quot;:{&quot;link&quot;:&quot;http://localhost:8080/rest/sitemaps/demo/demo&quot;,&quot;leaf&quot;:&quot;false&quot;}}}.
         /// </summary>
         internal static string Sitemaps {

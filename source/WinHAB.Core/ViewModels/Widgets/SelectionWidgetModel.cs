@@ -22,9 +22,9 @@ namespace WinHAB.Core.ViewModels.Widgets
     public SelectionWidgetModel(Widget data, IRestClientFactory clientFactory, INavigationService navigation)
       : base(data, clientFactory)
     {
-      if (data != null && data.Mappings != null && data.Mappings.Count <= 1)
+      if (data == null || data.Mappings == null || data.Mappings.Count < 2)
         throw new ArgumentException(
-          "SelectionWidgetModel can not be created for the mappings count less than 2.");
+          "SelectionWidgetModel can not be created when Data is null, Mappings is null or contains less than two items.");
 
       _navigation = navigation;
 
@@ -32,8 +32,6 @@ namespace WinHAB.Core.ViewModels.Widgets
       
       if (Data != null && Data.Properties != null)
         Size = Data.Properties.GetSize() ?? WidgetSize.Meduim;
-
-      Icon = Data != null ? Data.Icon : null;
 
       Mappings = new ObservableCollection<Mapping>(data.Mappings);
 

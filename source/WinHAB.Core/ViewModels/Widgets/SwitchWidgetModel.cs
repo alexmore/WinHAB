@@ -31,8 +31,6 @@ namespace WinHAB.Core.ViewModels.Widgets
       if (Data != null && Data.Properties != null)
         Size = Data.Properties.GetSize() ?? WidgetSize.Meduim;
 
-      Icon = Data != null ? Data.Icon : null;
-
       SetState(data);
 
       if (!IsButton)
