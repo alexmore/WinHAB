@@ -140,6 +140,28 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     }
 
     [Test]
+    public void UpdateValue_SetsIsOffState_WhenMappingPropertiesHasIsOff()
+    {
+      _widget.Item.State = "1";
+      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff}" };
+
+      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      Assert.That(w.IsOffState, Is.True);
+    }
+
+    [Test]
+    public void UpdateValue_SetsIsOffStateFalse_WhenMappingPropertiesNotHasIsOff()
+    {
+      _widget.Item.State = "2";
+      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff}" };
+
+      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      Assert.That(w.IsOffState, Is.False);
+    }
+
+    [Test]
     public void SelectedMapping_Invokes_PostingSelection()
     {
       _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),

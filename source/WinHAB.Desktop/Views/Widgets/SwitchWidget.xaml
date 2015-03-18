@@ -55,7 +55,7 @@
     </ControlTemplate>
    
     <Style x:Key="SwitchWidget" TargetType="Button" BasedOn="{StaticResource WidgetButtonBaseStyle}">
-        <Setter Property="Background" Value="{DynamicResource InactiveSwitch}"/>
+        <Setter Property="Background" Value="{DynamicResource InactiveWidget}"/>
         <Setter Property="Command" Value="{Binding PostCommand}"/>
         <Setter Property="Template" Value="{StaticResource SwitchWidgetTemplate}"/>
         <Style.Triggers>
@@ -63,7 +63,7 @@
                 <Setter Property="Background" Value="{DynamicResource Accent}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Inactive}">
-                <Setter Property="Background" Value="{StaticResource InactiveSwitch}"/>
+                <Setter Property="Background" Value="{StaticResource InactiveWidget}"/>
                 <Setter Property="BorderBrush" Value="White"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Normal}">

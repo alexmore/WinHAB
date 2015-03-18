@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Color x:Key="InactiveSwtichColor">#B9B9B9</Color>
-    <SolidColorBrush x:Key="InactiveSwitch" Color="{DynamicResource InactiveSwtichColor}"/>
-    <Color x:Key="ActiveSwtichColor">#00C853</Color>
-    <SolidColorBrush x:Key="ActiveSwitch" Color="{DynamicResource ActiveSwtichColor}"/>
+    <Color x:Key="InactiveWidgetColor">#B9B9B9</Color>
+    <SolidColorBrush x:Key="InactiveWidget" Color="{DynamicResource InactiveWidgetColor}"/>
+    <Color x:Key="ActiveWidgetColor">#00C853</Color>
+    <SolidColorBrush x:Key="ActiveWidget" Color="{DynamicResource ActiveWidgetColor}"/>
     
     <Color x:Key="WidgetFocusBorderColor">White</Color>
     <SolidColorBrush x:Key="WidgetFocusBorder" Color="{DynamicResource WidgetFocusBorderColor}" Opacity=".8"/>

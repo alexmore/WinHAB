@@ -66,6 +66,13 @@ namespace WinHAB.Core.ViewModels.Widgets
           PostSelection(value);
       }
     }
+    
+    private bool _isOffState;
+    public bool IsOffState
+    {
+      get { return _isOffState; }
+      set { _isOffState = value; RaisePropertyChanged(()=>IsOffState); }
+    }
 
     void UpdateValue(Item item)
     {
@@ -77,9 +84,15 @@ namespace WinHAB.Core.ViewModels.Widgets
       SelectedMapping = Mappings.FirstOrDefault(x => x.Command == state);
       _PostSelectionOnUpdate = true;
       if (SelectedMapping != null)
+      {
         Value = SelectedMapping.Label;
+        IsOffState = SelectedMapping.Properties.Values.IsOff;
+      }
       else
+      {
         Value = null;
+        IsOffState = false;
+      }
     }
 
     async void PostSelection(Mapping mapping)

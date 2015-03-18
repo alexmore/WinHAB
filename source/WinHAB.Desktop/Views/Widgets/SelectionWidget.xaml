@@ -111,11 +111,16 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <ItemContainerTemplate>
-                    <TextBlock Name="ValueTextBlock" Text="{Binding Label}" Style="{StaticResource SelectionWidgetDropdownText}"
+                    <TextBlock Name="propertiesStringTextBlock" Text="{Binding Label}" Style="{StaticResource SelectionWidgetDropdownText}"
                                VerticalAlignment="Center" HorizontalAlignment="Stretch" />
                 </ItemContainerTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsOffState}" Value="True">
+                <Setter Property="Background" Value="{DynamicResource InactiveWidget}"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

@@ -7,7 +7,7 @@
         <ResourceDictionary Source="TextWidget.xaml" />
         <ResourceDictionary Source="ImageWidget.xaml" />
         <ResourceDictionary Source="SwitchWidget.xaml" />
-        <ResourceDictionary Source="SelecttionWidget.xaml" />
+        <ResourceDictionary Source="SelectionWidget.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
