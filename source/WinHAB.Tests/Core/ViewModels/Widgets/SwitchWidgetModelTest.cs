@@ -38,21 +38,21 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     [Test]
     public void Constructor_SetsSizeToWide_WhenPropertiesSizeIsWide()
     {
-      var w = new SwitchWidgetModel(new Widget() { Label = "{ Size : Wide }", Item = new Item() { Link = new Uri("http://some") } }, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SwitchWidgetModel(new Widget() { Label = "{ Size = Wide }", Item = new Item() { Link = new Uri("http://some") } }, _vmHelper.ClientFactory, _vmHelper.Navigation);
       Assert.That(w.Size, Is.EqualTo(WidgetSize.Wide));
     }
 
     [Test]
     public void Constructor_SetsSizeToLarge_WhenPropertiesSizeIsLarge()
     {
-      var w = new SwitchWidgetModel(new Widget() { Label = "{ Size : Large }", Item = new Item() { Link = new Uri("http://some") } }, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SwitchWidgetModel(new Widget() { Label = "{ Size = Large }", Item = new Item() { Link = new Uri("http://some") } }, _vmHelper.ClientFactory, _vmHelper.Navigation);
       Assert.That(w.Size, Is.EqualTo(WidgetSize.Large));
     }
 
     [Test]
     public void Constructor_SetsSizeToMedium_WhenPropertiesSizeIsWrong()
     {
-      var w = new SwitchWidgetModel(new Widget() { Label = "{ Size : VeryWide }", Item = new Item() { Link = new Uri("http://some") } }, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SwitchWidgetModel(new Widget() { Label = "{ Size = VeryWide }", Item = new Item() { Link = new Uri("http://some") } }, _vmHelper.ClientFactory, _vmHelper.Navigation);
       Assert.That(w.Size, Is.EqualTo(WidgetSize.Meduim));
     }
 

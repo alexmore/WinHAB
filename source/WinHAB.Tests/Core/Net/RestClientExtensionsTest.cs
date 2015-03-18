@@ -81,39 +81,5 @@ namespace WinHAB.Tests.Core.Net
       Assert.That(page.Widgets.Count, Is.EqualTo(4));
       Assert.That(page.Widgets, Has.All.InstanceOf<Widget>());
     }
-
-    [Test]
-    public async Task GetLongPolling_Sets_XAtmosphereHeader()
-    {
-      var cln = new RestClient();
-
-      try
-      {
-        await cln.GetLongPollingAsync(new Uri("http://some/"), new CancellationToken());
-      }
-      catch
-      {
-        
-      }
-
-      Assert.That((cln as HttpClient).DefaultRequestHeaders.Contains("X-Atmosphere-Transport"), Is.True);
-    }
-
-    [Test]
-    public async Task GetLongPolling_Sets_TimeoutToInfinite()
-    {
-      var cln = new RestClient();
-
-      try
-      {
-        await cln.GetLongPollingAsync(new Uri("http://some/"), new CancellationToken());
-      }
-      catch
-      {
-
-      }
-
-      Assert.That(cln.Timeout, Is.EqualTo(Timeout.InfiniteTimeSpan));
-    }
   }
 }

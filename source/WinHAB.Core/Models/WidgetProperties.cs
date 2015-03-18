@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using WinHAB.Core.Fx;
 
 namespace WinHAB.Core.Models
 {
@@ -51,10 +52,10 @@ namespace WinHAB.Core.Models
       Items.Clear();
 
       foreach (var i in labelTagString.Split(',')
-        .Select(i => i.Split(':'))
-        .Where(keyValue => keyValue.Length > 1 && !string.IsNullOrWhiteSpace(keyValue[0])))
+        .Select(i => i.Split('='))
+        .Where(keyValue => keyValue.Length > 0 && !keyValue[0].IsNullOrWhitespace()))
       {
-        Items[i[0].Trim().ToLower()] = string.Join(":", i.Skip(1)).Trim();
+        Items[i[0].Trim().ToLower()] = string.Join("=", i.Skip(1)).Trim();
       }
     }
 

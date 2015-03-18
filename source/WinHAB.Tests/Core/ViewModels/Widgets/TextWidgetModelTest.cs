@@ -17,10 +17,10 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     private ViewModelsTestHelper _vmHelper;
 
     [TestCase("", Result = WidgetSize.Meduim)]
-    [TestCase("{ Size : Wide }", Result = WidgetSize.Wide)]
-    [TestCase("{ Size : Large }", Result = WidgetSize.Large)]
-    [TestCase("{ Size : Medium }", Result = WidgetSize.Meduim)]
-    [TestCase("{ Size : Wrong }", Result = WidgetSize.Meduim)]
+    [TestCase("{ Size = Wide }", Result = WidgetSize.Wide)]
+    [TestCase("{ Size = Large }", Result = WidgetSize.Large)]
+    [TestCase("{ Size = Medium }", Result = WidgetSize.Meduim)]
+    [TestCase("{ Size = Wrong }", Result = WidgetSize.Meduim)]
     public WidgetSize Constructor_SetsSize_DependingWidgetProperties(string label)
     {
       var tw = new TextWidgetModel(new Widget() { Label = label}, _vmHelper.ClientFactory);
