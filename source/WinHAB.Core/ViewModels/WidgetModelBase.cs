@@ -108,7 +108,6 @@ namespace WinHAB.Core.ViewModels
           OnItemChanged(i);
 
           ItemPollingCancellationTokenSource.Token.ThrowIfCancellationRequested();
-          await Task.Delay(800);
           return true;
         }
       }
@@ -125,6 +124,7 @@ namespace WinHAB.Core.ViewModels
     }
     #endregion
 
+    #region REST
     public async Task SetItemState(string state)
     {
       using (var cln = ClientFactory.Create())
@@ -132,6 +132,7 @@ namespace WinHAB.Core.ViewModels
         await cln.PostAsync(Data.Item.Link, new StringContent(state)).IsOkAsync();
       }
     }
+    #endregion
 
     public override void Cleanup()
     {

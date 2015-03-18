@@ -82,21 +82,18 @@ namespace WinHAB.Core.ViewModels.Widgets
       return State == SwitchWidgetState.Active ? "OFF" : "ON";
     }
 
-    async Task Post()
+    private async Task Post()
     {
       ShowProgressIndicator();
-      using (var cln = ClientFactory.Create())
+      try
       {
-        try
-        {
-          await cln.PostAsync(Data.Item.Link, new StringContent(GetCommandString())).IsOkAsync();
-        }
-        catch (Exception e)
-        {
-          HideProgressIndicator();
-          _navigation.ShowMessage(Localization.Strings.MessageExceptionOnSwitchWidgetPostCommandTitle,
-            Localization.Strings.MessageExceptionOnSwitchWidgetPostCommand + ":\r\n" + e.Message, () => { });
-        }
+        await SetItemState(GetCommandString());
+      }
+      catch (Exception e)
+      {
+        HideProgressIndicator();
+        _navigation.ShowMessage(Localization.Strings.MessageExceptionOnWidgetSetItemStateTitle,
+          Localization.Strings.MessageExceptionOnWidgetSetItemState + ":\r\n" + e.Message, () => { });
       }
 
       if (IsButton) HideProgressIndicator();

@@ -96,8 +96,8 @@ namespace WinHAB.Core.ViewModels.Widgets
       catch (Exception e)
       {
         HideProgressIndicator();
-        _navigation.ShowMessage(Localization.Strings.MessageExceptionOnSwitchWidgetPostCommandTitle,
-          Localization.Strings.MessageExceptionOnSwitchWidgetPostCommand + ":\r\n" + e.Message, () => { });
+        _navigation.ShowMessage(Localization.Strings.MessageExceptionOnWidgetSetItemStateTitle,
+          Localization.Strings.MessageExceptionOnWidgetSetItemState + ":\r\n" + e.Message, () => { });
       }
     }
   }

@@ -80,20 +80,20 @@ namespace WinHAB.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error has occured on posing command.
+        ///   Looks up a localized string similar to An error has occured when trying set the item state.
         /// </summary>
-        internal static string MessageExceptionOnSwitchWidgetPostCommand {
+        internal static string MessageExceptionOnWidgetSetItemState {
             get {
-                return ResourceManager.GetString("MessageExceptionOnSwitchWidgetPostCommand", resourceCulture);
+                return ResourceManager.GetString("MessageExceptionOnWidgetSetItemState", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Switch widget command error.
+        ///   Looks up a localized string similar to Set item state error.
         /// </summary>
-        internal static string MessageExceptionOnSwitchWidgetPostCommandTitle {
+        internal static string MessageExceptionOnWidgetSetItemStateTitle {
             get {
-                return ResourceManager.GetString("MessageExceptionOnSwitchWidgetPostCommandTitle", resourceCulture);
+                return ResourceManager.GetString("MessageExceptionOnWidgetSetItemStateTitle", resourceCulture);
             }
         }
         
