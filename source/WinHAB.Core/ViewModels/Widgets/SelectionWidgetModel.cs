@@ -62,6 +62,7 @@ namespace WinHAB.Core.ViewModels.Widgets
       {
         _selectedMapping = value;
         RaisePropertyChanged(() => SelectedMapping);
+        RaisePropertyChanged(() => ValueIcon);
         if (_PostSelectionOnUpdate)
           PostSelection(value);
       }
@@ -72,6 +73,17 @@ namespace WinHAB.Core.ViewModels.Widgets
     {
       get { return _isOffState; }
       set { _isOffState = value; RaisePropertyChanged(()=>IsOffState); }
+    }
+
+    public string ValueIcon
+    {
+      get
+      {
+        if (SelectedMapping != null && !SelectedMapping.Properties.Values.Icon.IsNullOrWhitespace())
+          return SelectedMapping.Properties.Values.Icon;
+        
+        return null;
+      }
     }
 
     void UpdateValue(Item item)

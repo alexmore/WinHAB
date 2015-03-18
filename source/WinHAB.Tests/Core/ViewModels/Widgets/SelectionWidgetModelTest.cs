@@ -162,6 +162,28 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     }
 
     [Test]
+    public void ValueIcon_ReturnsMappingPropertyIcon()
+    {
+      _widget.Item.State = "1";
+      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff, Icon=icon}" };
+
+      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      Assert.That(w.SelectedMapping.Properties.Values.Icon, Is.EqualTo("icon"));
+    }
+
+    [Test]
+    public void ValueIcon_ReturnsNull_WhenMappingPropertyIconMissing()
+    {
+      _widget.Item.State = "1";
+      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff}" };
+
+      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      Assert.That(w.SelectedMapping.Properties.Values.Icon, Is.Null);
+    }
+
+    [Test]
     public void SelectedMapping_Invokes_PostingSelection()
     {
       _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
