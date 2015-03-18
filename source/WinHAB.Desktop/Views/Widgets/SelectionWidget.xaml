@@ -10,7 +10,6 @@
                     xmlns:viewModels="clr-namespace:WinHAB.Core.ViewModels;assembly=WinHAB.Core"
                     mc:Ignorable="d" >
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Themes/Colors.xaml" />
         <ResourceDictionary Source="/Themes/Icons.xaml" />
         <ResourceDictionary Source="WidgetSharedStyles.xaml"/>
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
@@ -18,15 +17,14 @@
 
     <ControlTemplate x:Key="SelectionWidgetTemplate" TargetType="ComboBox">
         <Grid d:DataContext="{d:DesignInstance Type=vm:SelectionWidgetModel}">
-            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <mui:ModernProgressRing Grid.Row="0" Style="{DynamicResource WhiteProgressIndicatorStyle}" />
+                <mui:ModernProgressRing Grid.Row="0" Style="{DynamicResource WidgetProgressIndicatorStyle}" />
 
                 <Grid Name="SelectionGrid" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsProgressIndicatorVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" >
                     <Grid.ColumnDefinitions>
@@ -36,13 +34,10 @@
                     </Grid.ColumnDefinitions>
 
                     <Path Name="IconPath" Grid.Column="0"
-                                      Visibility="{Binding Data, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"
-                                      Data="{Binding ValueIcon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"
-                                      VerticalAlignment="Center" Width="25" Height="25" Stretch="Uniform" />
+                          Style="{StaticResource ValueIcon}"
+                          Data="{Binding ValueIcon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
                     <Border Name="SelectionSeparatorBorder" Width="5" Grid.Column="1" Background="Transparent"/>
-                    <TextBlock Name="ContentSite" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource TextWidgetValue}"
-                                           Visibility="{TemplateBinding Text, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter=inverse}"
-                                           VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Name="ContentSite" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource WidgetValueText}"/>
                 </Grid>
 
                 <Grid Name="TitleGrid" Grid.Row="1">
@@ -52,14 +47,10 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Path Name="TextIconPath" Grid.Column="0"
-                          Visibility="{Binding Data, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"
-                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"
-                          VerticalAlignment="Center" Width="20" Height="20" Margin="0,0,5,0" Stretch="Uniform"/>
-                    <TextBlock Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                                           Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}" />
-                    <Path Name="LinkPath" Grid.Column="2" 
-                                      Data="{StaticResource ArrowHeadDownIcon}" Fill="{TemplateBinding Foreground}"
-                                      VerticalAlignment="Bottom" Width="10" Height="10" Margin="0,0,0,2" Stretch="Uniform"/>
+                          Style="{StaticResource TitleIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
+                    <TextBlock Name="TitleTextBlock" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" />
+                    <Path Name="LinkPath" Grid.Column="2" Fill="{TemplateBinding Foreground}" Style="{StaticResource ArrowDownIconPath}" />
                 </Grid>
             </Grid>
 
@@ -83,7 +74,7 @@
                                   MinWidth="{TemplateBinding ActualWidth}"
                                   MaxHeight="{TemplateBinding MaxDropDownHeight}">
                     <Border x:Name="DropDownBorder" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Background="{DynamicResource WindowBackground}">
-                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                        <ScrollViewer Margin="5" SnapsToDevicePixels="True">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                         </ScrollViewer>
                     </Border>
@@ -104,6 +95,10 @@
             <Trigger Property="IsGrouping" Value="true">
                 <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
             </Trigger>
+
+            <DataTrigger Binding="{Binding IsOffState}" Value="True">
+                <Setter Property="Background" Value="{DynamicResource InactiveWidget}"/>
+            </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -115,22 +110,14 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <ItemContainerTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Path Name="IconPath"
-                              Visibility="{Binding Data, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"
-                              Data="{Binding Properties.Values.Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{Binding Foreground, ElementName=MappingStringTextBlock}"
-                              VerticalAlignment="Center" Width="16" Height="16" Stretch="Uniform" Margin="0,0,10,0" />
-                        <TextBlock Name="MappingStringTextBlock" Text="{Binding Label}" Style="{StaticResource SelectionWidgetDropdownText}"
-                               VerticalAlignment="Center" />
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Path Name="IconPath" Style="{StaticResource DropdownListIcon}"
+                              Data="{Binding Properties.Values.Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{Binding Foreground, ElementName=MappingStringTextBlock}"/>
+                        <TextBlock Name="MappingStringTextBlock" Text="{Binding Label}" Style="{StaticResource SelectionWidgetDropdownText}" />
                     </StackPanel>
                 </ItemContainerTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding IsOffState}" Value="True">
-                <Setter Property="Background" Value="{DynamicResource InactiveWidget}"/>
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

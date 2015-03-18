@@ -6,7 +6,6 @@
                     xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                     mc:Ignorable="d" >
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Themes/Colors.xaml" />
         <ResourceDictionary Source="/Themes/Icons.xaml" />
         <ResourceDictionary Source="WidgetSharedStyles.xaml"/>
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
@@ -14,15 +13,14 @@
 
     <ControlTemplate x:Key="SwitchWidgetTemplate" TargetType="{x:Type Button}">
         <Grid d:DataContext="{d:DesignInstance Type=vm:TextWidgetModel}">
-            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <mui:ModernProgressRing Grid.Row="0" Style="{DynamicResource WhiteProgressIndicatorStyle}" />
+                <mui:ModernProgressRing Grid.Row="0" Style="{DynamicResource WidgetProgressIndicatorStyle}" />
 
                 <Grid Name="ValueGrid" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -32,16 +30,13 @@
                     </Grid.ColumnDefinitions>
 
                     <Path Name="IconPath" Grid.Column="0"
-                          Visibility="{Binding Icon, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"
-                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"
-                          VerticalAlignment="Center" Width="35" Height="35" Stretch="Uniform" />
+                          Style="{StaticResource ValueIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
                     <Border Name="ValueSeparatorBorder" Width="5" Grid.Column="1" Background="Transparent"/>
-                    <TextBlock Name="ValueTextBlock" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource TextWidgetValue}"
-                               Visibility="{Binding Value, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter=inverse}"
-                               VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Name="ValueTextBlock" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource WidgetValueText}" />
                 </Grid>
 
-                <TextBlock Name="TitleTextBlock"  Grid.Row="1" Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                <TextBlock Name="TitleTextBlock"  Grid.Row="1" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" />
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
@@ -51,6 +46,16 @@
             <Trigger SourceName="ValueTextBlock" Property="Visibility" Value="Collapsed">
                 <Setter TargetName="ValueSeparatorBorder" Property="Visibility" Value="Collapsed"/>
             </Trigger>
+
+            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Active}">
+                <Setter Property="Background" Value="{DynamicResource Accent}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Inactive}">
+                <Setter Property="Background" Value="{StaticResource InactiveWidget}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Normal}">
+                <Setter Property="Background" Value="{DynamicResource Accent}"/>
+            </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
    
@@ -58,18 +63,6 @@
         <Setter Property="Background" Value="{DynamicResource InactiveWidget}"/>
         <Setter Property="Command" Value="{Binding PostCommand}"/>
         <Setter Property="Template" Value="{StaticResource SwitchWidgetTemplate}"/>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Active}">
-                <Setter Property="Background" Value="{DynamicResource Accent}"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Inactive}">
-                <Setter Property="Background" Value="{StaticResource InactiveWidget}"/>
-                <Setter Property="BorderBrush" Value="White"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:SwitchWidgetState.Normal}">
-                <Setter Property="Background" Value="{DynamicResource Accent}"/>
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

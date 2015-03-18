@@ -1,55 +1,123 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="WidgetFocusVisualStyle">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/Icons.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Color x:Key="WidgetForegroundColor">White</Color>
+    <SolidColorBrush x:Key="WidgetForeground" Color="{DynamicResource WidgetForegroundColor}"/>
+    <SolidColorBrush x:Key="WidgetBackgroundPressed" Color="{DynamicResource AccentColor}" Opacity=".8"/>
+    
+    <Color x:Key="InactiveWidgetColor">#B9B9B9</Color>
+    <SolidColorBrush x:Key="InactiveWidget" Color="{DynamicResource InactiveWidgetColor}"/>
+    <Color x:Key="ActiveWidgetColor">#00C853</Color>
+    <SolidColorBrush x:Key="ActiveWidget" Color="{DynamicResource ActiveWidgetColor}"/>
+
+    <Color x:Key="WidgetFocusBorderColor">White</Color>
+    <SolidColorBrush x:Key="WidgetFocusBorder" Color="{DynamicResource WidgetFocusBorderColor}" Opacity=".8"/>
+
+    
+    
+    <Style x:Key="WidgetProgressIndicatorStyle" TargetType="{x:Type mui:ModernProgressRing}" BasedOn="{StaticResource ThreeBounceProgressRingStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource WidgetForeground}"/>
+        <Setter Property="IsActive" Value="True"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Visibility" Value="{Binding IsProgressIndicatorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
     </Style>
 
-    <Style x:Key="WidgetButtonBaseStyle" TargetType="ButtonBase">
-        <Setter Property="Background" Value="{DynamicResource Accent}"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource WidgetFocusBorder}"/>
+    <Style x:Key="Icon" TargetType="Path">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <Style x:Key="CollapsableIcon" TargetType="Path" BasedOn="{StaticResource Icon}">
+        <Setter Property="Visibility" Value="{Binding Data, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"/>
+    </Style>
+
+    <Style x:Key="TitleIcon" TargetType="Path" BasedOn="{StaticResource CollapsableIcon}">
+        <Setter Property="Margin" Value="0,0,5,0"/>
+    </Style>
+
+    <Style x:Key="ValueIcon" TargetType="Path" BasedOn="{StaticResource CollapsableIcon}">
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="DropdownListIcon" TargetType="Path" BasedOn="{StaticResource Icon}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="0,0,10,0"/>
+    </Style>
+
+    <Style x:Key="ArrowDownIconPath" TargetType="Path" BasedOn="{StaticResource Icon}">
+        <Setter Property="Data" Value="{StaticResource ArrowHeadDownIcon}"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Width" Value="10"/>
+        <Setter Property="Height" Value="10"/>
+        <Setter Property="Margin" Value="0,0,0,3"/>
+    </Style>
+
+    <Style x:Key="ArrowRightIconPath" TargetType="Path" BasedOn="{StaticResource ArrowDownIconPath}">
+        <Setter Property="Data" Value="{StaticResource ArrowHeadRightIcon}"/>
+    </Style>
+
+    <Style x:Key="WidgetValueText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="22" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Width" Value="NaN" />
-        <Setter Property="Height" Value="NaN" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource WidgetFocusVisualStyle}"/>
-        <Style.Triggers >
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-            </Trigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True"/>
-                    <Condition Property="IsFocused" Value="True"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="BorderBrush" Value="White"/>
-            </MultiTrigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity" To=".8" Duration="0"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity" To="1" Duration="0"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Visibility" Value="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter=inverse}"/>
     </Style>
 
-    <Style x:Key="WidgetComboBoxBaseStyle" TargetType="ComboBox">
+    <Style x:Key="SelectionWidgetDropdownText" TargetType="TextBlock" BasedOn="{StaticResource WidgetValueText}">
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style x:Key="WidgetTitleText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="15" />
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="WidgetFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle StrokeThickness="1" Stroke="{DynamicResource WidgetForeground}" SnapsToDevicePixels="true"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WidgetBaseStyle" TargetType="Control">
         <Setter Property="Background" Value="{DynamicResource Accent}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource WidgetForeground}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="{DynamicResource WidgetFocusBorder}"/>
         <Setter Property="Padding" Value="0"/>
@@ -60,6 +128,25 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource WidgetFocusVisualStyle}"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Style.Triggers >
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderThickness" Value="1"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderThickness" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WidgetButtonBaseStyle" TargetType="ButtonBase" BasedOn="{StaticResource WidgetBaseStyle}">
+        <Style.Triggers >
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource WidgetBackgroundPressed}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WidgetComboBoxBaseStyle" TargetType="ComboBox" BasedOn="{StaticResource WidgetBaseStyle}">
         <Style.Resources>
             <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
                 <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
@@ -97,27 +184,8 @@
         </Style.Resources>
 
         <Style.Triggers >
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-            </Trigger>
             <Trigger Property="IsDropDownOpen" Value="True">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity" To=".8" Duration="0"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity" To="1" Duration="0"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
+                <Setter Property="Background" Value="{DynamicResource WidgetBackgroundPressed}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

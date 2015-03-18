@@ -13,8 +13,7 @@
   
     <ControlTemplate x:Key="TextWidgetMediumTemplate" TargetType="{x:Type Button}">
         <Grid d:DataContext="{d:DesignInstance Type=vm:TextWidgetModel}">
-            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -29,13 +28,10 @@
                     </Grid.ColumnDefinitions>
 
                     <Path Name="IconPath" Grid.Column="0"
-                          Visibility="{Binding Icon, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"
-                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"
-                          VerticalAlignment="Center" Width="35" Height="35" Stretch="Uniform" />
+                          Style="{StaticResource ValueIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
                     <Border Name="ValueSeparatorBorder" Width="5" Grid.Column="1" Background="Transparent"/>
-                    <TextBlock Name="ValueTextBlock" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource TextWidgetValue}"
-                               Visibility="{Binding Value, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter=inverse}"
-                               VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Name="ValueTextBlock" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource WidgetValueText}"/>
                 </Grid>
                 
                 <Grid Name="TitleGrid" Grid.Row="1">
@@ -43,11 +39,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Name="TitleTextBlock" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                               Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}" />
+                    <TextBlock Name="TitleTextBlock" Grid.Column="0" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" />
                     <Path Name="LinkPath" Grid.Column="1" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
-                          Data="{StaticResource ArrowHeadRightIcon}" Fill="{TemplateBinding Foreground}"
-                          VerticalAlignment="Bottom" Width="10" Height="10" Margin="0,0,0,2" Stretch="Uniform"/>
+                          Style="{StaticResource ArrowRightIconPath}" Fill="{TemplateBinding Foreground}" />
                 </Grid>
             </Grid>
         </Grid>
@@ -63,8 +57,7 @@
 
     <ControlTemplate x:Key="TextWidgetWideLargeTemplate" TargetType="{x:Type Button}">
         <Grid d:DataContext="{d:DesignInstance Type=vm:TextWidgetModel}">
-            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -72,7 +65,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Name="ValueGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <TextBlock Name="ValueTextBlock" Text="{Binding Value}" Style="{StaticResource TextWidgetWideValue}"/>
+                    <TextBlock Name="ValueTextBlock" Text="{Binding Value}" Style="{StaticResource WidgetValueText}" VerticalAlignment="Top" Margin="5"/>
                 </Grid>
 
                 <Grid Name="TitleGrid" Grid.Row="1">
@@ -82,14 +75,11 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Path Name="TextIconPath" Grid.Column="0"
-                          Visibility="{Binding Icon, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"
-                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"
-                          VerticalAlignment="Center" Width="25" Height="25" Margin="0,0,5,0" Stretch="Uniform"/>
-                    <TextBlock Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                               Text="{Binding Title}" Style="{StaticResource TextWidgetTitle}" />
+                          Style="{StaticResource TitleIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
+                    <TextBlock Name="TitleTextBlock" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" />
                     <Path Name="LinkPath" Grid.Column="2" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
-                          Data="{StaticResource ArrowHeadRightIcon}" Fill="{TemplateBinding Foreground}"
-                          VerticalAlignment="Bottom" Width="10" Height="10" Margin="0,0,0,2" Stretch="Uniform"/>
+                          Style="{StaticResource ArrowRightIconPath}" Fill="{TemplateBinding Foreground}"/>
                 </Grid>
             </Grid>
         </Grid>

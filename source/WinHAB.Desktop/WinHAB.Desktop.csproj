@@ -139,10 +139,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Colors.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Themes\Converters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,7 +251,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Widgets\Styles\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WinHAB.Core\WinHAB.Core.csproj">
       <Project>{0e01f4b2-4524-4286-92d5-190bb7ee5cf8}</Project>

@@ -46,7 +46,7 @@
                                    Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
 
-                        <mui:ModernProgressRing Style="{DynamicResource WhiteProgressIndicatorStyle}"/>
+                        <mui:ModernProgressRing Style="{DynamicResource WidgetProgressIndicatorStyle}"/>
 
                         <ToggleButton Name = "button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <ToggleButton.Template>
