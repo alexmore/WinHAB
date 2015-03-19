@@ -86,6 +86,8 @@
     </ControlTemplate>
 
     <Style x:Key="TextWidget" TargetType="Button" BasedOn="{StaticResource WidgetButtonBaseStyle}" >
+        <Setter Property="Command" Value="{Binding NavigateLinkedPageCommand}"/>
+        <Setter Property="CommandParameter" Value="{Binding}"/>
         <Setter Property="IsEnabled" Value="{Binding IsLink}"/>
         <Setter Property="Template" Value="{StaticResource TextWidgetMediumTemplate}"/>
         <Style.Triggers>

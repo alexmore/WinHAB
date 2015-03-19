@@ -113,7 +113,7 @@ namespace WinHAB.Core.ViewModels
           return true;
         }
       }
-      catch (OperationCanceledException oce)
+      catch (OperationCanceledException)
       {
         return false;
       }

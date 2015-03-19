@@ -69,6 +69,8 @@ namespace WinHAB.Core.ViewModels.Pages
 
         foreach (var widget in frameData.Widgets.Select(widgetData => _widgetsFactory.Create(widgetData)).Where(widget => widget != null))
         {
+          if (widget is INavigationWidget)
+            (widget as INavigationWidget).NavigateLinkedPageCommand = LoadLinkedPageCommand;
           frame.Widgets.Add(widget);
           widgetsInitializators.Add(widget.InitializeAsync(null));
         }

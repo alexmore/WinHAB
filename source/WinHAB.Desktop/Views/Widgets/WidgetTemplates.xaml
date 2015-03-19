@@ -11,8 +11,8 @@
         <ResourceDictionary Source="SetpointWidget.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
-    <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
-        <Button Style="{StaticResource TextWidget}" Command="{Binding DataContext.LoadLinkedPageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
+   <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
+        <Button Style="{StaticResource TextWidget}" />
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type widgetModels:ImageWidgetModel}">
