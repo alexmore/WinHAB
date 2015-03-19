@@ -4,9 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using WinHAB.Core.Fx;
+using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Models;
+using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
+using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
+using WinHAB.Desktop.Views.Pages;
 
 namespace WinHAB.Tests.Core.ViewModels.Widgets
 {
@@ -21,58 +26,87 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
 
     private ViewModelsTestHelper _vmHelper;
 
-    private ImageWidgetModel CreateImageWidgetModel(Widget data)
-    {
-      return new ImageWidgetModel(_vmHelper.Navigation, data, _vmHelper.ClientFactory, _vmHelper.Timer);
-    }
-
     [Test]
     public void Constructor_SetsWidgetSize_ToLarge()
     {
-      var iw = new ImageWidgetModel(_vmHelper.Navigation, new Widget(), _vmHelper.ClientFactory, _vmHelper.Timer);
-
-      Assert.That(iw.Size, Is.EqualTo(WidgetSize.Large));
+      var w = new ImageWidgetModel(new Widget(), _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
+      Assert.That(w.Size, Is.EqualTo(WidgetSize.Large));
     }
 
     [Test]
-    public void Constructor_InitsViewImageCommand()
+    public void Constructor_Adds2DropDownsWhenLinkedPageIsNull()
     {
-      var iw = new ImageWidgetModel(_vmHelper.Navigation, new Widget(), _vmHelper.ClientFactory, _vmHelper.Timer);
-
-      Assert.That(iw.ViewImageCommand, Is.Not.Null);
+      var w = new ImageWidgetModel(new Widget(), _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
+      Assert.That(w.Dropdowns.Count, Is.EqualTo(2));
+      Assert.That(w.Dropdowns[0].Command, Is.EqualTo("FullScreen"));
+      Assert.That(w.Dropdowns[1].Command, Is.EqualTo("Refresh"));
     }
+
+    [Test]
+    public void Constructor_Adds3DropDownsWhenLinkedPageIsNull()
+    {
+      var w = new ImageWidgetModel(new Widget() { LinkedPage = new Page()}, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
+      Assert.That(w.Dropdowns.Count, Is.EqualTo(3));
+      Assert.That(w.Dropdowns[0].Command, Is.EqualTo("FullScreen"));
+      Assert.That(w.Dropdowns[1].Command, Is.EqualTo("Refresh"));
+      Assert.That(w.Dropdowns[2].Command, Is.EqualTo("NavigateLinkedPage"));
+    }
+
+   
+    [Test]
+    public void SelectedDropDownItemCommand_WhenFullScreen_NavigatesToImageWidgetPageModel()
+    {
+      var w = new ImageWidgetModel(new Widget() { LinkedPage = new Page() }, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
+
+      w.SelectedDropDownItem = new ImageWidgetModel.ImageDropDownItem() {Command = "FullScreen"};
+      _vmHelper.NavigationMock.Verify(m=>m.NavigateAsync<ImageWidgetPageModel>(It.Is<ImageWidgetModel>(x=>x == w)) );
+    }
+
+    [Test]
+    public void SelectedDropDownItemCommand_WhenRefresh_LoadsImage()
+    {
+      var data = new byte[] { 0, 1, 2, 3, 4, 5, 6, 8 };
+      _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Returns(data.AsAsyncResponse);
+      
+      var w = new ImageWidgetModel(new Widget() { LinkedPage = new Page(), Url = new Uri("http://some")}, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
+
+      w.SelectedDropDownItem = new ImageWidgetModel.ImageDropDownItem() { Command = "Refresh" };
+      Assert.That(w.ImageStream, Is.Not.Null);
+      Assert.That((w.ImageStream as MemoryStream).ToArray(), Is.EquivalentTo(data));
+    }
+
+    [Test]
+    public void SelectedDropDownItemCommand_WhenLoadLinkedPage_ExecutesNavigateLinkedPageCommand()
+    {
+      bool isCommandExecuted = false;
+
+      var w = new ImageWidgetModel(new Widget() { LinkedPage = new Page(), Url = new Uri("http://some") }, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
+      w.NavigateLinkedPageCommand = new AsyncRelayCommand<WidgetModelBase>(async x => isCommandExecuted = x == w ? true : false);
+
+      w.SelectedDropDownItem = new ImageWidgetModel.ImageDropDownItem() { Command = "NavigateLinkedPage" };
+      Assert.That(isCommandExecuted, Is.True);
+    }
+
 
     [Test]
     public async Task InitializeAsync_DoesNotThrow_WhenDataLinkIsNull()
     {
-      var iw = CreateImageWidgetModel(new Widget());
-      
-      Assert.That(async ()=> await iw.InitializeAsync(null), Throws.Nothing);
-    }
-
-    [Test]
-    public async Task InitializeAsync_HidesTaskProgress_WhenDataLinkIsNull()
-    {
-      var iw = CreateImageWidgetModel(new Widget());
-
-      await iw.InitializeAsync(null);
-
-      Assert.That(iw.IsProgressIndicatorVisible, Is.False);
+      var w = new ImageWidgetModel(new Widget(), _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
+      Assert.That(async ()=> await w.InitializeAsync(null), Throws.Nothing);
     }
 
     [Test]
     public async Task InitializeAsync_LoadsImage()
     {
-      byte[] data = new byte[] {0, 1, 2, 3, 4, 5, 6, 8};
+      var data = new byte[] {0, 1, 2, 3, 4, 5, 6, 8};
       _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Returns(data.AsAsyncResponse);
 
-      var iw = CreateImageWidgetModel(new Widget() {Url = new Uri("http://localhost")});
+      var w = new ImageWidgetModel(new Widget() { Url = new Uri("http://localhost")}, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
 
-      await iw.InitializeAsync(null);
+      await w.InitializeAsync(null);
 
-      Assert.That(iw.ImageStream, Is.Not.Null);
-      Assert.That((iw.ImageStream as MemoryStream).ToArray(), Is.EquivalentTo(data));
-      Assert.That(iw.IsImageLoadingFailed, Is.False);
+      Assert.That(w.ImageStream, Is.Not.Null);
+      Assert.That((w.ImageStream as MemoryStream).ToArray(), Is.EquivalentTo(data));
     }
 
     [Test]
@@ -80,23 +114,12 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     {
       _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Throws<Exception>();
 
-      var iw = CreateImageWidgetModel(new Widget() { Url = new Uri("http://localhost") });
+      var w = new ImageWidgetModel(new Widget() {Url = new Uri("http://localhost")}, _vmHelper.ClientFactory,
+      _vmHelper.Navigation, _vmHelper.Timer);
 
-      await iw.InitializeAsync(null);
+      await w.InitializeAsync(null);
 
-     Assert.That(iw.ImageStream, Is.Null);
-    }
-
-    [Test]
-    public async Task InitializeAsync_SetsImageLoadingFailsLabel_WhenLoadingFails()
-    {
-      _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Throws<Exception>();
-
-      var iw = CreateImageWidgetModel(new Widget() { Url = new Uri("http://localhost") });
-
-      await iw.InitializeAsync(null);
-
-      Assert.That(iw.IsImageLoadingFailed, Is.True);
+      Assert.That(w.ImageStream, Is.Null);
     }
 
     [Test]
@@ -104,9 +127,9 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     {
       _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Throws<Exception>();
 
-      var iw = CreateImageWidgetModel(new Widget() { Url = new Uri("http://localhost") });
+      var w = new ImageWidgetModel(new Widget() { Url = new Uri("http://localhost")}, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
 
-      await iw.InitializeAsync(null);
+      await w.InitializeAsync(null);
 
       _vmHelper.TimerMock.Verify(x=>x.Start(), Times.Never);
     }
@@ -116,9 +139,9 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     {
       _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Throws<Exception>();
 
-      var iw = CreateImageWidgetModel(new Widget() { Url = new Uri("http://localhost"), Refresh = 10 });
+      var w = new ImageWidgetModel(new Widget() { Url = new Uri("http://localhost"), Refresh = 10}, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
 
-      await iw.InitializeAsync(null);
+      await w.InitializeAsync(null);
 
       _vmHelper.TimerMock.Verify(x => x.Start(), Times.Once);
     }
@@ -129,18 +152,17 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
       byte[] data = new byte[] { 0, 1, 2, 3, 4, 5, 6, 8 };
       _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Returns(data.AsAsyncResponse);
 
-      var iw = CreateImageWidgetModel(new Widget() { Url = new Uri("http://localhost"), Refresh = 10});
+      var w = new ImageWidgetModel(new Widget() { Url = new Uri("http://localhost"), Refresh = 10}, _vmHelper.ClientFactory, _vmHelper.Navigation, _vmHelper.Timer);
       
-      await iw.InitializeAsync(null);
+      await w.InitializeAsync(null);
 
       byte[] timerData = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
       _vmHelper.RestClientMock.Setup(x => x.GetAsync(It.IsAny<Uri>())).Returns(timerData.AsAsyncResponse);
 
       _vmHelper.TimerMock.Raise(x=>x.Tick += null, EventArgs.Empty);
 
-      Assert.That(iw.ImageStream, Is.Not.Null);
-      Assert.That((iw.ImageStream as MemoryStream).ToArray(), Is.EquivalentTo(timerData));
+      Assert.That(w.ImageStream, Is.Not.Null);
+      Assert.That((w.ImageStream as MemoryStream).ToArray(), Is.EquivalentTo(timerData));
     }
-
   }
 }

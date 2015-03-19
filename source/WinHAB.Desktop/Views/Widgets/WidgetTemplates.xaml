@@ -11,12 +11,12 @@
         <ResourceDictionary Source="SetpointWidget.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
-   <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
+    <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
         <Button Style="{StaticResource TextWidget}" />
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type widgetModels:ImageWidgetModel}">
-        <widgets:ImageWidget GotoChildPageCommand="{Binding DataContext.LoadLinkedPageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" GotoChildPageCommandParameter="{Binding}"/>
+    <DataTemplate DataType="{x:Type widgetModels:ImageWidgetModel}" >
+        <ComboBox Style="{StaticResource ImageWidget}" />
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type widgetModels:SwitchWidgetModel}">

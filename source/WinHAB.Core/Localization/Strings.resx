@@ -147,4 +147,10 @@
   <data name="MessageExceptionOnWidgetSetItemStateTitle" xml:space="preserve">
     <value>Set item state error</value>
   </data>
+  <data name="ButtonRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ButtonViewImage" xml:space="preserve">
+    <value>View image</value>
+  </data>
 </root>

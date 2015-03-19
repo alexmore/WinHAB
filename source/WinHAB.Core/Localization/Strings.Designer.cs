@@ -62,6 +62,24 @@ namespace WinHAB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string ButtonRefresh {
+            get {
+                return ResourceManager.GetString("ButtonRefresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View image.
+        /// </summary>
+        internal static string ButtonViewImage {
+            get {
+                return ResourceManager.GetString("ButtonViewImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not load sitemaps list. Details:.
         /// </summary>
         internal static string MessageConnectionError {

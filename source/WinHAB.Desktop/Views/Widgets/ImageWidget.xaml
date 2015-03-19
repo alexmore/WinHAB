@@ -11,96 +11,105 @@
                     mc:Ignorable="d" >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/Icons.xaml" />
+        <ResourceDictionary Source="WidgetSharedStyles.xaml"/>
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type widgets:ImageWidget}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="{x:Null}"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="Width" Value="NaN" />
-        <Setter Property="Height" Value="NaN" />
-        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
-        <Setter Property="IsEnabled" Value="True"/>
-        <Setter Property="Template">
+    <ControlTemplate x:Key="ImageWidgetTemplate" TargetType="ComboBox">
+        <Grid d:DataContext="{d:DesignInstance Type=vm:ImageWidgetModel}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Name="BackgroundBorder" Grid.Row="0" Grid.RowSpan="2"  Background="{TemplateBinding Background}" BorderThickness="0"/>
+            <Path Grid.Row="0" Style="{StaticResource Icon}" Width="40" Height="40" Data="{StaticResource ImageIcon}" Fill="{TemplateBinding Foreground}" />
+            
+            <Image Name="Image"  Grid.Row="0" Grid.RowSpan="2" Source="{Binding ImageStream, Converter={StaticResource StreamToWidgetImageConverter}}" 
+                   Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+            <mui:ModernProgressRing Grid.Row="0" Style="{DynamicResource WidgetProgressIndicatorStyle}"/>
+
+            <Border Name="TitleBackgroundBorder" Grid.Row="1" Background="{TemplateBinding Background}" Opacity=".6" Grid.ColumnSpan="3" />
+            <Grid Name="TitleGrid" Grid.Row="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Path Name="TextIconPath" Grid.Column="0"
+                          Style="{StaticResource TitleIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
+                <TextBlock Name="TitleTextBlock" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" />
+                <Path Name="LinkPath" Grid.Column="2" Fill="{TemplateBinding Foreground}" Style="{StaticResource ArrowDownIconPath}" />
+            </Grid>
+
+            <Border Name="FocusBorder" Grid.Row="0" Grid.RowSpan="2"  Background="Transparent" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Border Name="FocusAccentBorder" Grid.Row="0" Grid.RowSpan="2"  Background="Transparent" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{StaticResource Accent}"
+                    Visibility="{Binding ElementName=Image, Path=Source,  Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"/>
+
+            <ToggleButton x:Name="ToggleButton" Grid.Row="0" Grid.RowSpan="2" Focusable="false" ClickMode="Press" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+
+            <Popup x:Name="Popup" Grid.Row="0" Grid.RowSpan="2"
+                   Placement="Bottom"
+                   VerticalOffset="5"
+                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                   AllowsTransparency="True"
+                   Focusable="False"
+                   PopupAnimation="Slide">
+                <Grid x:Name="DropDown"
+                                  SnapsToDevicePixels="True"
+                                  MinWidth="{TemplateBinding ActualWidth}"
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <Border x:Name="DropDownBorder" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Background="{DynamicResource WindowBackground}">
+                        <ScrollViewer Margin="5" SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="TitleBackgroundBorder" Property="Opacity" Value="1"/>
+            </Trigger>
+            <Trigger Property="HasItems" Value="false">
+                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95" />
+            </Trigger>
+            <Trigger Property="IsGrouping" Value="true">
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            </Trigger>
+
+            <DataTrigger Binding="{Binding IsOffState}" Value="True">
+                <Setter Property="Background" Value="{DynamicResource InactiveWidget}"/>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="ImageWidget" TargetType="ComboBox" BasedOn="{StaticResource WidgetComboBoxBaseStyle}">
+        <Setter Property="Tag" Value="{Binding TagValue, Mode=OneWayToSource}"/>
+        <Setter Property="ItemsSource" Value="{Binding Dropdowns, Mode=TwoWay}"/>
+        <Setter Property="SelectedValue" Value="{Binding SelectedDropDownItem}"/>
+        <Setter Property="Template" Value="{StaticResource ImageWidgetTemplate}"/>
+        <Setter Property="ItemTemplate">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type widgets:ImageWidget}">
-                    <Grid  d:DataContext="{d:DesignInstance Type=vm:ImageWidgetModel}" >
-                        <Border Name="BackgroundBorder" Background="{DynamicResource Accent}" Visibility="{Binding ElementName=Image, Path=Source,  Converter={StaticResource NullToVisibilityConverter}}">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Path Data="{StaticResource ImageIcon}" Width="80" Height="80" Stretch="Uniform"
-                                              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
-                                              HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                      Opacity=".2"/>
-                                <TextBlock Text="{Binding Data.Url}" TextAlignment="Center"  Style="{StaticResource TextWidgetTitle}" Opacity=".2" Margin="0,5,0,0"/>
-                            </StackPanel>
-                        </Border>
-                        <Grid Name="ImageGrid">
-                            <Image Name="Image"
-                                   Source="{Binding ImageStream, Converter={StaticResource StreamToWidgetImageConverter}}" 
-                                   Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-
-                        <mui:ModernProgressRing Style="{DynamicResource WidgetProgressIndicatorStyle}"/>
-
-                        <ToggleButton Name = "button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <ToggleButton.Template>
-                                <ControlTemplate TargetType="ToggleButton">
-                                    <Border Background="Transparent"></Border>
-                                </ControlTemplate>
-                            </ToggleButton.Template>
-                        </ToggleButton>
-                        <Popup StaysOpen="False" Name="LinksPopup" IsOpen="{Binding IsChecked, ElementName=button}"
-                               PlacementTarget="{Binding ElementName=button}" Placement="Center">
-                            <Border Name="Links"  Background="{DynamicResource Accent}" 
-                                VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Padding="10">
-                                <Grid HorizontalAlignment="Left" >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Button Grid.Row="0" Style="{StaticResource HeaderLinkButton}" Command="{Binding ViewImageCommand}" Foreground="White"
-                                            HorizontalAlignment="Left"
-                                        Margin="0,0,0,0">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Path Data="{StaticResource FullScreenIcon}" Width="14" Height="14" Stretch="Uniform"
-                                              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
-                                              Margin="0,0,5,0"/>
-                                            <TextBlock Text="{x:Static loc:Strings.ButtonViewImage}" Style="{StaticResource TitleH4}" />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button Grid.Row="1" Style="{StaticResource HeaderLinkButton}" Command="{TemplateBinding GotoChildPageCommand}" CommandParameter="{TemplateBinding GotoChildPageCommandParameter}"
-                                            HorizontalAlignment="Left"
-                                        Foreground="White"
-                                        Margin="0,5,0,0">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Path Data="{StaticResource LinkIcon}" Width="14" Height="14" Stretch="Uniform"
-                                              Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
-                                              Margin="0,0,5,0"/>
-                                            <TextBlock Text="{Binding Title}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"  Style="{StaticResource TitleH4}"/>
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-                            </Border>
-                        </Popup>
-                        
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="BackgroundBorder" Property="Opacity" Value=".8"/>
-                            <Setter TargetName="ImageGrid" Property="Opacity" Value=".8"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
+                <ItemContainerTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Path Name="IconPath" Style="{StaticResource DropdownListIcon}"
+                              Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{Binding Foreground, ElementName=MappingStringTextBlock}"/>
+                        <TextBlock Name="MappingStringTextBlock" Text="{Binding Title}" Style="{StaticResource SelectionWidgetDropdownText}" />
+                    </StackPanel>
+                </ItemContainerTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
     </Style>
-
 </ResourceDictionary>
