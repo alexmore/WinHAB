@@ -1,0 +1,150 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:WinHAB.Core.ViewModels.Widgets;assembly=WinHAB.Core"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:WinHAB.Core.ViewModels;assembly=WinHAB.Core"
+                    xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                    mc:Ignorable="d" >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/Icons.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
+        <ResourceDictionary Source="WidgetSharedStyles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+  
+    <ControlTemplate x:Key="SetpointWidgetMediumTemplate" TargetType="{x:Type UserControl}">
+        <Grid d:DataContext="{d:DesignInstance Type=vm:SetpointWidgetModel}">
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Button Name="UpButton" Grid.Row="0" Style="{StaticResource WidgetEmbeddedButton}" Command="{Binding UpCommand}"
+                        Visibility="{Binding IsValueMax, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                    <Path Data="{StaticResource ArrowUpIcon}" Width="20" Height="20"  Style="{StaticResource Icon}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                </Button>
+
+                <mui:ModernProgressRing Grid.Row="1" Style="{DynamicResource WidgetProgressIndicatorStyle}" />
+                
+                <Grid Name="ValueGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
+                      Visibility="{Binding IsProgressIndicatorVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Path Name="IconPath" Grid.Column="0"
+                          Style="{StaticResource ValueIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
+                    <Border Name="ValueSeparatorBorder" Width="5" Grid.Column="1" Background="Transparent"/>
+                    <TextBlock Name="ValueTextBlock" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource WidgetValueText}"/>
+                </Grid>
+
+                <Button Name="DownButton" Grid.Row="2" Style="{StaticResource WidgetEmbeddedButton}" Command="{Binding DownCommand}"
+                        Visibility="{Binding IsValueMin, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                    <Path Data="{StaticResource ArrowDownIcon}" Width="20" Height="20"  Style="{StaticResource Icon}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                </Button>
+
+                <Grid Name="TitleGrid" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="TitleTextBlock" Grid.Column="0" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" />
+                    <Path Name="LinkPath" Grid.Column="1" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Style="{StaticResource ArrowRightIconPath}" Fill="{TemplateBinding Foreground}" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="IconPath" Property="Visibility" Value="Collapsed">
+                <Setter TargetName="ValueSeparatorBorder" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger SourceName="ValueTextBlock" Property="Visibility" Value="Collapsed">
+                <Setter TargetName="ValueSeparatorBorder" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SetpointWidgetWideTemplate" TargetType="{x:Type UserControl}">
+        <Grid d:DataContext="{d:DesignInstance Type=vm:SetpointWidgetModel}">
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <mui:ModernProgressRing Grid.Row="0" Grid.Column="0" Style="{DynamicResource WidgetProgressIndicatorStyle}" />
+
+                <Grid Name="ValueGrid" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                      Visibility="{Binding IsProgressIndicatorVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Path Name="IconPath" Grid.Column="0"
+                          Style="{StaticResource ValueIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" Fill="{TemplateBinding Foreground}"/>
+                    <Border Name="ValueSeparatorBorder" Width="5" Grid.Column="1" Background="Transparent"/>
+                    <TextBlock Name="ValueTextBlock" Grid.Column="2" Text="{Binding Value}" Style="{StaticResource WidgetValueText}"/>
+                </Grid>
+
+                <Grid Name="TitleGrid" Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="TitleTextBlock" Grid.Column="0" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" />
+                    <Path Name="LinkPath" Grid.Column="1" Visibility="{Binding IsLink, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Style="{StaticResource ArrowRightIconPath}" Fill="{TemplateBinding Foreground}" />
+                </Grid>
+                
+                <Grid Name="ButtonsGrid" Grid.Row="0" Grid.Column="1" Width="40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="UpButton" Grid.Row="0" Style="{StaticResource WidgetEmbeddedButton}" Command="{Binding UpCommand}"
+                        Visibility="{Binding IsValueMax, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                        <Path Data="{StaticResource ArrowUpIcon}" Width="20" Height="20"  Style="{StaticResource Icon}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                    </Button>
+                    <Button Name="DownButton" Grid.Row="1" Style="{StaticResource WidgetEmbeddedButton}" Command="{Binding DownCommand}"
+                        Visibility="{Binding IsValueMin, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                        <Path Data="{StaticResource ArrowDownIcon}" Width="20" Height="20"  Style="{StaticResource Icon}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="IconPath" Property="Visibility" Value="Collapsed">
+                <Setter TargetName="ValueSeparatorBorder" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger SourceName="ValueTextBlock" Property="Visibility" Value="Collapsed">
+                <Setter TargetName="ValueSeparatorBorder" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="SetpointWidget" TargetType="UserControl" BasedOn="{StaticResource WidgetBaseStyle}" >
+        <Setter Property="Template" Value="{StaticResource SetpointWidgetMediumTemplate}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderThickness" Value="0"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding Size}" Value="{x:Static viewModels:WidgetSize.Wide}">
+                <Setter Property="Template" Value="{StaticResource SetpointWidgetWideTemplate}"/>
+            </DataTrigger>            
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

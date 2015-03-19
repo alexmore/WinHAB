@@ -8,6 +8,7 @@
         <ResourceDictionary Source="ImageWidget.xaml" />
         <ResourceDictionary Source="SwitchWidget.xaml" />
         <ResourceDictionary Source="SelectionWidget.xaml" />
+        <ResourceDictionary Source="SetpointWidget.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
@@ -24,5 +25,9 @@
 
     <DataTemplate DataType="{x:Type widgetModels:SelectionWidgetModel}">
         <ComboBox Style="{StaticResource SelectionWidget}" />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type widgetModels:SetpointWidgetModel}">
+        <UserControl Style="{StaticResource SetpointWidget}"/>
     </DataTemplate>
 </ResourceDictionary>

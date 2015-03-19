@@ -19,8 +19,6 @@
 
     <Color x:Key="WidgetFocusBorderColor">White</Color>
     <SolidColorBrush x:Key="WidgetFocusBorder" Color="{DynamicResource WidgetFocusBorderColor}" Opacity=".8"/>
-
-    
     
     <Style x:Key="WidgetProgressIndicatorStyle" TargetType="{x:Type mui:ModernProgressRing}" BasedOn="{StaticResource ThreeBounceProgressRingStyle}">
         <Setter Property="Foreground" Value="{DynamicResource WidgetForeground}"/>
@@ -60,15 +58,16 @@
     </Style>
 
     <Style x:Key="ArrowDownIconPath" TargetType="Path" BasedOn="{StaticResource Icon}">
-        <Setter Property="Data" Value="{StaticResource ArrowHeadDownIcon}"/>
+        <Setter Property="Data" Value="{StaticResource ArrowDownIcon}"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
-        <Setter Property="Width" Value="10"/>
-        <Setter Property="Height" Value="10"/>
-        <Setter Property="Margin" Value="0,0,0,3"/>
+        <Setter Property="Width" Value="13"/>
+        <Setter Property="Height" Value="13"/>
+        <Setter Property="Margin" Value="0,0,0,2"/>
     </Style>
 
     <Style x:Key="ArrowRightIconPath" TargetType="Path" BasedOn="{StaticResource ArrowDownIconPath}">
-        <Setter Property="Data" Value="{StaticResource ArrowHeadRightIcon}"/>
+        <Setter Property="Data" Value="{StaticResource ArrowRightIcon}"/>
+        <Setter Property="Margin" Value="0,0,0,2"/>
     </Style>
 
     <Style x:Key="WidgetValueText" TargetType="TextBlock">
@@ -115,6 +114,23 @@
         </Setter>
     </Style>
 
+    <SolidColorBrush x:Key="WidgetEmbeddedButtonBackgroundPressed" Color="{DynamicResource WidgetForegroundColor}" Opacity=".6"/>
+
+    <Style x:Key="WidgetEmbeddedButton" TargetType="ButtonBase" BasedOn="{StaticResource SystemButtonBase}">
+        <Setter Property="Foreground" Value="{DynamicResource WidgetForeground}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource WidgetForeground}" />
+                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource WidgetEmbeddedButtonBackgroundPressed}" />
+                <Setter Property="Foreground" Value="{DynamicResource WidgetForeground}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="WidgetBaseStyle" TargetType="Control">
         <Setter Property="Background" Value="{DynamicResource Accent}"/>
         <Setter Property="Foreground" Value="{DynamicResource WidgetForeground}"/>
@@ -129,9 +145,6 @@
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Style.Triggers >
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderThickness" Value="1"/>
-            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderThickness" Value="1"/>
             </Trigger>

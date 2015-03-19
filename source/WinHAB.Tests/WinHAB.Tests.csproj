@@ -105,6 +105,7 @@
     <Compile Include="Core\ViewModels\WidgetModelBaseTest.cs" />
     <Compile Include="Core\ViewModels\Widgets\FrameWidgetModelTest.cs" />
     <Compile Include="Core\ViewModels\Widgets\ImageWidgetModelTest.cs" />
+    <Compile Include="Core\ViewModels\Widgets\SetpointWidgetModelTest.cs" />
     <Compile Include="Core\ViewModels\Widgets\SelectionWidgetModelTest.cs" />
     <Compile Include="Core\ViewModels\Widgets\SwitchWidgetModelTest.cs" />
     <Compile Include="Core\ViewModels\Widgets\TextWidgetModelTest.cs" />

@@ -36,7 +36,7 @@ namespace WinHAB.Core.ViewModels
         case WidgetType.Webview:
           break;
         case WidgetType.Setpoint:
-          break;
+          return _createWidgetFunc(typeof (SetpointWidgetModel), data);
         case WidgetType.Switch:
           return CreateSwitchWidget(data);
         case WidgetType.Colorpicker:
