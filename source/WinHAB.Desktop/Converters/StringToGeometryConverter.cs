@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using WinHAB.Core.Fx;
 using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.Assets;
 using WinHAB.Desktop.Configuration;
@@ -37,9 +38,17 @@ namespace WinHAB.Desktop.Converters
 
     Geometry GetIconGeometry(string iconString)
     {
+      if (iconString.IsNullOrWhitespace()) return null;
+
       var resourceKey = UserResources.Icons.GetResourceKeys().FirstOrDefault(x =>
         x.ToLower() == iconString.ToLower().Trim() ||
         x.ToLower() == (iconString.Trim() + "icon").ToLower());
+
+      if (resourceKey == null)
+      {
+        var g = Application.Current.TryFindResource(iconString) as Geometry;
+        return g;
+      }
 
       return resourceKey != null ? UserResources.Icons[resourceKey] as Geometry : null;
     }
