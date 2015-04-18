@@ -57,7 +57,7 @@ namespace WinHAB.Core.ViewModels.Widgets
     private void SetValue(string itemState)
     {
       HideProgressIndicator();
-      var val = itemState.TryParse();
+      var val = itemState.ToDecimal();
       if (val.HasValue)
       {
         DecimalValue = val.Value;

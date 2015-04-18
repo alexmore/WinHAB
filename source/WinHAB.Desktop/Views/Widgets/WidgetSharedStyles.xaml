@@ -104,6 +104,23 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
+    <Style x:Key="WidgetTitleBoldText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="15" />
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+
     <Style x:Key="WidgetFocusVisualStyle">
         <Setter Property="Control.Template">
             <Setter.Value>

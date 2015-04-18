@@ -28,7 +28,7 @@ namespace WinHAB.Core.ViewModels
         case WidgetType.Selection:
           return _createWidgetFunc(typeof(SelectionWidgetModel), data);
         case WidgetType.Slider:
-          break;
+          return _createWidgetFunc(typeof(SliderWidgetModel), data);
         case WidgetType.Chart:
           break;
         case WidgetType.Video:

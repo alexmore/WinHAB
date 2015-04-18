@@ -9,12 +9,12 @@ namespace WinHAB.Core.Fx
       return string.IsNullOrWhiteSpace(s);
     }
 
-    public static string Format(this string format, params object [] args)
+    public static string FormatString(this string format, params object [] args)
     {
       return string.Format(format, args);
     }
 
-    public static string Format(this string format, IFormatProvider provider, params object[] args)
+    public static string FormatString(this string format, IFormatProvider provider, params object[] args)
     {
       return string.Format(provider, format, args);
     }

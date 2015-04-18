@@ -9,6 +9,7 @@
         <ResourceDictionary Source="SwitchWidget.xaml" />
         <ResourceDictionary Source="SelectionWidget.xaml" />
         <ResourceDictionary Source="SetpointWidget.xaml" />
+        <ResourceDictionary Source="SliderWidget.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate DataType="{x:Type widgetModels:TextWidgetModel}">
@@ -29,5 +30,9 @@
 
     <DataTemplate DataType="{x:Type widgetModels:SetpointWidgetModel}">
         <UserControl Style="{StaticResource SetpointWidget}"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type widgetModels:SliderWidgetModel}">
+        <UserControl Style="{StaticResource SliderWidget}"/>
     </DataTemplate>
 </ResourceDictionary>
