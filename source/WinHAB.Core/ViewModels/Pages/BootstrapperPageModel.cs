@@ -33,7 +33,7 @@ namespace WinHAB.Core.ViewModels.Pages
     public override async Task InitializeAsync(object parameter)
     {
       ShowTaskProgress(Strings.TaskStarting);
-
+      
       if (string.IsNullOrWhiteSpace(ServerAddress) || _config.Runtime.IsRestarting)
       {
         _config.Runtime.IsRestarting = false;

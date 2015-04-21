@@ -36,6 +36,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
 
       ChangeServerCommand = new AsyncRelayCommand(async () =>
       {
+        IsPopupOpened = false;
         Navigation.ClearHistory();
         AppConfig.Runtime.IsRestarting = true;
         await Navigation.NavigateAsync<BootstrapperPageModel>();
@@ -43,6 +44,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
 
       ChangeSitemapCommand = new AsyncRelayCommand(async () =>
       {
+        IsPopupOpened = false;
         AppConfig.Sitemap = null;
         Navigation.ClearHistory();
         await Navigation.NavigateAsync<BootstrapperPageModel>();
@@ -69,6 +71,9 @@ namespace WinHAB.Desktop.ViewModels.Pages
 
       await base.InitializeAsync((object) parameter);
     }
+
+    private bool _IsPopupOpened;
+    public bool IsPopupOpened { get { return _IsPopupOpened; } set { _IsPopupOpened = value; RaisePropertyChanged(()=>IsPopupOpened); }}
 
     public DesktopConfiguration AppConfig { get; private set; }
 

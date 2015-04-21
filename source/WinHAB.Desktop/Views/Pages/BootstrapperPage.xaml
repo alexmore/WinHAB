@@ -9,9 +9,8 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:BootstrapperPageModel}"
-             Background="{DynamicResource WindowBackground}"
-             Foreground="{DynamicResource WindowText}"
-             Padding="20"
+             Foreground="{DynamicResource HostWindowText}"
+             Margin="0,-50,0,0"
              VerticalAlignment=" Center" HorizontalAlignment="Center">
     
     <Grid>
@@ -21,15 +20,16 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <StackPanel Orientation="Vertical" Margin="0,0,0,20">
-            <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource Accent}" Width="50" Height="50" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Vertical">
+            <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource HostWindowText}" Width="60" Height="60" HorizontalAlignment="Center"/>
             <TextBlock Text="WinHAB" Style="{StaticResource TitleH2}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
             <TextBlock Text="{x:Static loc:Strings.LabelWinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
         </StackPanel>
 
-        <mui:ModernProgressRing  Grid.Row="1" Grid.RowSpan="2" Style="{DynamicResource ProgressIndicatorStyle}"/>
+        <mui:ModernProgressRing  Grid.Row="1" Grid.RowSpan="2" Style="{DynamicResource ProgressIndicatorStyle}" Foreground="{DynamicResource HostWindowText}"/>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
+        <StackPanel Orientation="Vertical" Grid.Row="1" Width="300" HorizontalAlignment="Center" Visibility="{Binding IsServerAddressVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Margin="0,20,0,0" >
             <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelYourOpenHabServerUrl}, Converter={StaticResource ToUpperConverter}}" 
                        Style="{StaticResource HeaderH3}" HorizontalAlignment="Center" />
             <TextBlock Text="{x:Static loc:Strings.LabelServerAddressExample}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
@@ -37,7 +37,8 @@
             <Button Name="ConnectButton" Content="{x:Static loc:Strings.ButtonConnect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
         </StackPanel>
 
-        <Grid Grid.Row="2" Width="300" MaxHeight="300" Visibility="{Binding IsSitemapsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Grid.Row="2" Width="300" MaxHeight="300" Visibility="{Binding IsSitemapsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Margin="0,20,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

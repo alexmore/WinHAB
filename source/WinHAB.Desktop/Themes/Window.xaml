@@ -62,6 +62,7 @@
                                     </Grid.RowDefinitions>
                                     <!-- window background content -->
                                     <Grid Grid.RowSpan="2">
+                                        <Border Background="#252526"/>
                                         <ContentControl Content="{TemplateBinding BackgroundContent}" />
                                         <!-- Background mask-->
                                         <Border Background="{DynamicResource WindowMask}"/>
@@ -78,7 +79,8 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <Grid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                                <ToggleButton Name="TitleToggleButton" Style="{StaticResource LinkToggleButton}" Foreground="{DynamicResource HostWindowText}">
+                                                <ToggleButton Name="TitleToggleButton" Style="{StaticResource LinkToggleButton}" Foreground="{DynamicResource HostWindowText}"
+                                                              IsChecked="{Binding IsPopupOpened}">
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="WinHAB" Style="{StaticResource TitleH1}" Margin="0,-10"/>
                                                         <Path Data="{StaticResource ExpanderDownIcon}" VerticalAlignment="Center" Margin="10,6,0,0" Width="14" Height="14" Fill="{Binding Foreground, ElementName=TitleToggleButton}" Stretch="Uniform"/>
