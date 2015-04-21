@@ -39,17 +39,7 @@
                 </ListBox.ItemTemplate>
                
             </ListBox>
-            <Grid Margin="0,5,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Source={x:Static loc:Strings.LabelTheme}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH4}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-
-                <ComboBox Name="ThemeComboBox" Grid.Column="1" Margin="10,5,0,0" Width="150" HorizontalAlignment="Right"
-                      ItemsSource="{Binding AppConfig.Themes}"  SelectedItem="{Binding SelectedTheme}"
-                      DisplayMemberPath="Key" />
-            </Grid>
+            
             <Grid Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -57,10 +47,6 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding Source={x:Static loc:Strings.LabelBackground}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH4}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,5,0,0">
-                    <controls:IconLinkButton x:Name="ResetBackgroundImageButton" IconData="{StaticResource DeleteIcon}" 
-                                             Content="{x:Static loc:Strings.ButtonResetBackground}" 
-                                             FontSize="12" Margin="0,0,10,0" Visibility="{Binding IsResetBackgroundAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                             Command="{Binding ResetBackgroundCommand}"/>
                     <controls:IconLinkButton IconData="{StaticResource ImagesIcon}" Content="{x:Static loc:Strings.ButtonSelectBackground}" 
                                              FontSize="12" Margin="0"  Command="{Binding SelectBackgroundCommand}" />
                 </StackPanel>

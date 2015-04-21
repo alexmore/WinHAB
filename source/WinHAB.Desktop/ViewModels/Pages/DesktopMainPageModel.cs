@@ -29,11 +29,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
 
       _SelectedAccentColor =
         AppConfig.AccentColors.FirstOrDefault(x => x.ToColor() == MUI.AppearanceManager.Current.AccentColor);
-
-      _SelectedTheme =
-        AppConfig.Themes.FirstOrDefault(
-          x => x.Value.OriginalString.ToLower() == MUI.AppearanceManager.Current.ThemeSource.OriginalString.ToLower());
-
+      
       ChangeServerCommand = new AsyncRelayCommand(async () =>
       {
         IsPopupOpened = false;
@@ -55,8 +51,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
         System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
         Application.Current.Shutdown();
       });
-
-      ResetBackgroundCommand = new RelayCommand(() => { AppConfig.SetBackground(null); RaisePropertyChanged(()=>IsResetBackgroundAvailable); });
+      
       SelectBackgroundCommand = new RelayCommand(SelectBackground);
       
     }
@@ -83,30 +78,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
     public AsyncRelayCommand ChangeSitemapCommand { get; set; }
 
     #endregion
-
-    #region Theme
-
-    private KeyValuePair<string, Uri> _SelectedTheme;
-
-    public KeyValuePair<string, Uri> SelectedTheme
-    {
-      get { return _SelectedTheme; }
-      set
-      {
-        _SelectedTheme = value;
-        RaisePropertyChanged(() => SelectedTheme);
-
-        MUI.AppearanceManager.Current.ThemeSource = value.Value;
-        if (AppConfig != null)
-        {
-          AppConfig.Theme = value.Value.OriginalString;
-          AppConfig.Save();
-        }
-      }
-    }
-
-    #endregion
-
+    
     #region Language
 
     public RelayCommand RestartApplicationCommand { get; set; }
@@ -136,14 +108,8 @@ namespace WinHAB.Desktop.ViewModels.Pages
     #endregion
 
     #region Background
-
-    public RelayCommand ResetBackgroundCommand { get; set; }
+    
     public RelayCommand SelectBackgroundCommand { get; set; }
-
-    public bool IsResetBackgroundAvailable
-    {
-      get { return !string.IsNullOrWhiteSpace(AppConfig.BackgroundImage); }
-    }
 
     private void SelectBackground()
     {
@@ -163,8 +129,6 @@ namespace WinHAB.Desktop.ViewModels.Pages
             Localization.Strings.MessageExceptionOnApplyImageToBackground + "\r\n" + ex.Message, () => { });
         }
       }
-
-      RaisePropertyChanged(()=>IsResetBackgroundAvailable);
     }
     #endregion
 

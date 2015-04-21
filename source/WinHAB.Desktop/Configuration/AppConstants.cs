@@ -24,7 +24,6 @@ namespace WinHAB.Desktop.Configuration
     }
 
     public static Color DefaultAccentColor { get { return "#FA6800".ToColor(); } }
-    public static Uri DefaultThemeSource { get { return AppearanceManager.LightThemeSource; } }
 
     #region Widget sizes
     public static Size WidgetMediumSize { get { return new Size(120, 120); } }

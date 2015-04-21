@@ -70,17 +70,6 @@ namespace WinHAB.Desktop
     
       try
       {
-        AppearanceManager.Current.ThemeSource = new Uri(cfg.Theme, UriKind.Relative);
-      }
-      catch (Exception)
-      {
-        cfg.Theme = AppConstants.DefaultThemeSource.OriginalString;
-        cfg.Save();
-        AppearanceManager.Current.ThemeSource = AppConstants.DefaultThemeSource;
-      }
-
-      try
-      {
         cfg.SetBackground(cfg.BackgroundImage);
       }
       catch (Exception)
