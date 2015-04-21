@@ -30,7 +30,7 @@ namespace WinHAB.Desktop.Configuration
        "#D80073", // Magenta
        "#A20025", // Crimson
        "#E51400", // Red
-       "#FA6800", // Orange
+       "#ff6600", // Orange
        "#825A2C", // Brown
        "#6D8764", // Olive
        "#647687", // Steel
