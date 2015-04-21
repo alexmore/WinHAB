@@ -19,19 +19,6 @@ namespace WinHAB.Desktop.Views.Pages
     {
       InitializeComponent();
 
-      Action setCurrentDateTime = () =>
-      {
-        TimeTextBlock.Text = DateTime.Now.ToShortTimeString();
-        DateTextBlock.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
-      };
-
-      setCurrentDateTime();
-
-      var timer = new DispatcherTimer();
-      timer.Interval = new TimeSpan(0,0,0,1);
-      timer.Tick += (sender, args) => setCurrentDateTime();
-      timer.Start();
-
       this.Loaded += OnLoaded;
     }
 
