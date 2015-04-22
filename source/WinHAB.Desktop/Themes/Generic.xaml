@@ -9,6 +9,7 @@
         <ResourceDictionary Source="/Themes/TextBlock.xaml" />
         <ResourceDictionary Source="/Themes/ToggleButton.xaml" />
         <ResourceDictionary Source="/Themes/Window.xaml" />
+        <ResourceDictionary Source="/Themes/Slider.xaml" />
         <ResourceDictionary Source="/Themes/ModernProgressRing.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

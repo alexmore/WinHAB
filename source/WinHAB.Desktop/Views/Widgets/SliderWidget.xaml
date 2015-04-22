@@ -18,23 +18,21 @@
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="35"/>
                 </Grid.ColumnDefinitions>
 
-                <Path Name="IconPath" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                <Path Name="IconPath" Grid.Row="0" Grid.Column="0"
                           Style="{StaticResource ValueIcon}"
                           Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" 
                           Fill="{TemplateBinding Foreground}" 
                           Visibility="{Binding IsProgressIndicatorVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}"/>
-                <mui:ModernProgressRing Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2" Style="{DynamicResource WidgetProgressIndicatorStyle}" Width="40" Height="40" />
+                <mui:ModernProgressRing Grid.Row="0"  Grid.Column="0" Style="{DynamicResource WidgetProgressIndicatorStyle}" Width="40" Height="40" />
 
-                <Grid Name="TitleGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid Name="TitleGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -43,44 +41,18 @@
                     <TextBlock Name="ValueTextBlock" Grid.Column="1" Text="{Binding Value}" Style="{StaticResource WidgetTitleBoldText}" Margin="5,0,0,0"/>
                 </Grid>
 
-                <Button Name="OnButton" Style="{x:Null}" Command="{Binding OnOffCommand}" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3">
+                <Button Name="OnButton" Style="{x:Null}" Command="{Binding OnOffCommand}" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="Transparent"/>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-
-                <ItemsControl Name="LevelsItems" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" ItemsSource="{Binding Levels}" Panel.ZIndex="2">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource WidgetEmbeddedButton}"
-                                        Command="{Binding DataContext.SetPercentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                        CommandParameter="{Binding Percent}">
-                                <Grid  Margin="2,3,3,2">
-                                    <Rectangle Width="15" Height="4" StrokeThickness="1"
-                                                   Stroke="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Opacity=".5"/>
-                                    <Rectangle Width="15" Height="4" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
-                                                   Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                                </Grid>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                <Button Name="UpButton" Grid.Row="0" Grid.Column="2" Style="{StaticResource WidgetEmbeddedButton}" Command="{Binding IncreaseCommand}" Panel.ZIndex="2">
-                    <Path Data="{StaticResource ArrowUpIcon}" Width="20" Height="20"  Style="{StaticResource Icon}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
-                </Button>
-
-                <Button Name="DownButton" Grid.Row="1" Grid.Column="2" Style="{StaticResource WidgetEmbeddedButton}" Command="{Binding DecreaseCommand}" Panel.ZIndex="2">
-                    <Path Data="{StaticResource ArrowDownIcon}" Width="20" Height="20"  Style="{StaticResource Icon}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
-                </Button>
-               
+                
+                <Slider Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="5"
+                        Style="{DynamicResource WidgetSlider}" Focusable="False"
+                        Value="{Binding PercentValue, Delay=300}" Minimum="0" Maximum="100" SmallChange="1" LargeChange="0" 
+                        TickPlacement="BottomRight" TickFrequency="10" Ticks="0,25,50,75,100"/>
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
@@ -96,18 +68,77 @@
             <Trigger SourceName="OnButton" Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="{DynamicResource WidgetBackgroundPressed}"/>
             </Trigger>
-            <DataTrigger Binding="{Binding IsSwitchSupport}" Value="False">
-                <Setter TargetName="OnButton" Property="IsEnabled" Value="False"/>
-            </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
- 
+
+    <ControlTemplate x:Key="SliderWidgetWideTemplate" TargetType="{x:Type UserControl}">
+        <Grid d:DataContext="{d:DesignInstance Type=vm:SliderWidgetModel}">
+            <Border Name="BackgroundBorder"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Path Name="IconPath" Grid.Row="0" Grid.Column="0" Margin="10,0"
+                          Style="{StaticResource ValueIcon}"
+                          Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" 
+                          Fill="{TemplateBinding Foreground}" 
+                          Visibility="{Binding IsProgressIndicatorVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}"/>
+                <mui:ModernProgressRing Grid.Row="0"  Grid.Column="0" Style="{DynamicResource WidgetProgressIndicatorStyle}" Width="25" Height="25" />
+
+                <Grid Name="TitleGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="TitleTextBlock" Grid.Column="0" Text="{Binding Title}" Style="{StaticResource WidgetTitleText}" MaxHeight="15"/>
+                    <TextBlock Name="ValueTextBlock" Grid.Column="1" Text="{Binding Value}" Style="{StaticResource WidgetTitleBoldText}" Margin="5,0,0,0"/>
+                </Grid>
+
+                <Button Name="OnButton" Style="{x:Null}" Command="{Binding OnOffCommand}" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="Transparent"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Slider Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center"
+                        Style="{DynamicResource WidgetSlider}" 
+                        Value="{Binding PercentValue, Delay=300}" Minimum="0" Maximum="100" SmallChange="1" LargeChange="5" 
+                        TickPlacement="BottomRight" TickFrequency="10" Ticks="0,25,50,75,100"/>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsOff}" Value="True">
+                <Setter Property="Background" Value="{DynamicResource InactiveWidget}"/>
+            </DataTrigger>
+            <Trigger SourceName="OnButton" Property="IsMouseOver" Value="True">
+                <Setter Property="BorderThickness" Value="1"/>
+            </Trigger>
+            <Trigger SourceName="OnButton" Property="IsMouseOver" Value="False">
+                <Setter Property="BorderThickness" Value="0"/>
+            </Trigger>
+            <Trigger SourceName="OnButton" Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource WidgetBackgroundPressed}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
 
     <Style x:Key="SliderWidget" TargetType="UserControl" BasedOn="{StaticResource WidgetBaseStyle}" >
         <Setter Property="Template" Value="{StaticResource SliderWidgetMediumTemplate}"/>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding IsSwitchSupport}" Value="False">
+            <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderThickness" Value="0"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding Size}" Value="{x:Static viewModels:WidgetSize.Wide}">
+                <Setter Property="Template" Value="{StaticResource SliderWidgetWideTemplate}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
