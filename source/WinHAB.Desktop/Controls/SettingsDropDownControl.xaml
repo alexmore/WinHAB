@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
              xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
-             xmlns:vm="clr-namespace:WinHAB.Desktop.ViewModels.Pages"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:desktop="clr-namespace:WinHAB.Desktop"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=vm:DesktopMainPageModel}"
+             d:DataContext="{d:DesignInstance Type=desktop:HostWindowModel}"
              Foreground="{DynamicResource WindowText}"
              Name="HeaderDropDown">
     <StackPanel Orientation="Vertical">

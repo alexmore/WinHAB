@@ -21,8 +21,7 @@ using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Fx.Windows;
-using WinHAB.Desktop.ViewModels;
-using WinHAB.Desktop.ViewModels.Pages;
+using WinHAB.Desktop.Views.Pages;
 
 namespace WinHAB.Desktop
 {
@@ -50,8 +49,9 @@ namespace WinHAB.Desktop
       Thread.CurrentThread.CurrentCulture = ci;
       Thread.CurrentThread.CurrentUICulture = ci;
 
-
-      MainWindow.DataContext = kernel.Get<DesktopMainPageModel>();
+      var hostWindowModel = kernel.Get<HostWindowModel>();
+      await hostWindowModel.InitializeAsync(null);
+      MainWindow.DataContext = hostWindowModel;
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();

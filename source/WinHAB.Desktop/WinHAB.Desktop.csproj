@@ -94,7 +94,7 @@
     <Compile Include="Converters\StringToGeometryConverter.cs" />
     <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
     <Compile Include="Fx\Net\DesktopRestClientExtensions.cs" />
-    <Compile Include="ViewModels\Pages\DesktopMainPageModel.cs" />
+    <Compile Include="HostWindowModel.cs" />
     <Compile Include="Views\Pages\BootstrapperPage.xaml.cs">
       <DependentUpon>BootstrapperPage.xaml</DependentUpon>
     </Compile>

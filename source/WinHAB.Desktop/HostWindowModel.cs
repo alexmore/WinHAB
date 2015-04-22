@@ -1,34 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Win32;
-using WinHAB.Desktop.Fx.Windows;
-using MUI = FirstFloor.ModernUI.Presentation;
 using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx.Mvvm;
-using WinHAB.Core.Models;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Assets;
 using WinHAB.Desktop.Configuration;
-using GalaSoft.MvvmLight.CommandWpf;
+using WinHAB.Desktop.Fx.Windows;
+using RelayCommand = GalaSoft.MvvmLight.CommandWpf.RelayCommand;
 
-namespace WinHAB.Desktop.ViewModels.Pages
+namespace WinHAB.Desktop
 {
-  public class DesktopMainPageModel : MainPageModel
+  public class HostWindowModel : PageModelBase
   {
-    public DesktopMainPageModel(INavigationService navigationService, AppConfiguration appConfig,
-      IRestClientFactory clientFactory, WidgetsFactory widgetsFactory) :
-        base(navigationService, clientFactory, widgetsFactory)
+    private readonly IRestClientFactory _clientFactory;
+
+    public HostWindowModel(INavigationService navigationService, AppConfiguration appConfig,
+      IRestClientFactory clientFactory) : base(navigationService)
     {
+      _clientFactory = clientFactory;
       AppConfig = appConfig as DesktopConfiguration;
 
       _SelectedAccentColor =
-        AppConfig.AccentColors.FirstOrDefault(x => x.ToColor() == MUI.AppearanceManager.Current.AccentColor);
+        AppConfig.AccentColors.FirstOrDefault(x => x.ToColor() == FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
       
       ChangeServerCommand = new AsyncRelayCommand(async () =>
       {
@@ -59,7 +58,7 @@ namespace WinHAB.Desktop.ViewModels.Pages
     public override async Task InitializeAsync(object parameter)
     {
       ShowProgressIndicator();
-      await UserResources.LoadUserResources(AppConfig.Server, ClientFactory);
+      await UserResources.LoadUserResources(AppConfig.Server, _clientFactory);
       HideProgressIndicator();
 
       SelectedLanguageCulture = AppConfig.Language;
@@ -148,9 +147,9 @@ namespace WinHAB.Desktop.ViewModels.Pages
 
     void SetAccentColor(Color color)
     {
-      MUI.AppearanceManager.Current.AccentColor = color;
+      FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor = color;
       
-      AppConfig.AccentColor = MUI.AppearanceManager.Current.AccentColor.ToHexString();
+      AppConfig.AccentColor = FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor.ToHexString();
       AppConfig.Save();
     }
     #endregion

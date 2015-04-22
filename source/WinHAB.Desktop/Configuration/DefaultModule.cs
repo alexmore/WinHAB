@@ -14,8 +14,6 @@ using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Core.ViewModels.Widgets;
 using WinHAB.Desktop.Fx;
 using WinHAB.Desktop.Fx.Mvvm;
-using WinHAB.Desktop.ViewModels;
-using WinHAB.Desktop.ViewModels.Pages;
 using WinHAB.Desktop.Views;
 
 namespace WinHAB.Desktop.Configuration
@@ -44,8 +42,6 @@ namespace WinHAB.Desktop.Configuration
       Bind<string>().ToMethod(x => GetServerAddress(x.Kernel)).WhenInjectedInto<RestClientFactory>();
       Bind<IRestClient>().To<RestClient>();
       Bind<IRestClientFactory>().To<RestClientFactory>();
-      
-      Bind<MainPageModel>().To<DesktopMainPageModel>();
 
       var viewFactory = Kernel.Get<DesktopViewFactory>();
       viewFactory.ScanAssembly(this.GetType().Assembly);
