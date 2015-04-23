@@ -17,13 +17,7 @@ namespace WinHAB.Desktop.Configuration
     public DesktopConfiguration(IConfigurationProvider provider, HostWindow hostWindow) : base(provider)
     {
       _hostWindow = hostWindow;
-
-      Themes = new[]
-      {
-        new KeyValuePair<string, Uri>(Localization.Strings.LabelThemeDark, AppearanceManager.DarkThemeSource),
-        new KeyValuePair<string, Uri>(Localization.Strings.LabelThemeLight, AppearanceManager.LightThemeSource)
-      };
-
+      
       AccentColors = new[]
       {
        "#60A917", // Green
@@ -36,7 +30,7 @@ namespace WinHAB.Desktop.Configuration
        "#D80073", // Magenta
        "#A20025", // Crimson
        "#E51400", // Red
-       "#FA6800", // Orange
+       "#ff6600", // Orange
        "#825A2C", // Brown
        "#6D8764", // Olive
        "#647687", // Steel
@@ -54,15 +48,7 @@ namespace WinHAB.Desktop.Configuration
       get { return Provider.Get(this.GetPropertyName(() => AccentColor)); }
       set { Provider.Set(this.GetPropertyName(() => AccentColor), value); }
     }
-
-    public KeyValuePair<string, Uri>[] Themes { get; private set; }
-
-    public string Theme
-    {
-      get { return Provider.Get(this.GetPropertyName(() => Theme)); }
-      set { Provider.Set(this.GetPropertyName(() => Theme), value); }
-    }
-
+    
     public string BackgroundImage
     {
       get { return Provider.Get(this.GetPropertyName(() => BackgroundImage)); }

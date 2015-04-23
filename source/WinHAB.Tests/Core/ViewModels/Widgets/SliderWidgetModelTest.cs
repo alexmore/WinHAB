@@ -35,42 +35,9 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     private Widget _widget;
 
     [Test]
-    public void Constructor_ThrowsArgumentException_WhenDataIsNull()
-    {
-      Assert.That(
-        () =>
-          new SelectionWidgetModel(null,
-            _vmHelper.ClientFactory, _vmHelper.Navigation),
-        Throws.ArgumentException);
-
-    }
-    
-    [Test]
-    public void Constructor_ThrowsArgumentException_WhenMappingsIsNull()
-    {
-      Assert.That(
-        () =>
-          new SelectionWidgetModel(new Widget(), 
-            _vmHelper.ClientFactory, _vmHelper.Navigation),
-        Throws.ArgumentException);
-
-    }
-
-    [Test]
-    public void Constructor_ThrowsArgumentException_WhenMappingsHasLessThanTwoItems()
-    {
-      Assert.That(
-        () =>
-          new SelectionWidgetModel(new Widget() { Mappings = new List<Mapping>(new [] { new Mapping() })},
-            _vmHelper.ClientFactory, _vmHelper.Navigation),
-        Throws.ArgumentException);
-
-    }
-
-    [Test]
     public void Constructor_SetsSize_ToMedium()
     {
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
       Assert.That(w.Size, Is.EqualTo(WidgetSize.Meduim));
     }
 
@@ -78,7 +45,7 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     public void Constructor_SetsSizeToWide_WhenPropertiesSizeIsWide()
     {
       _widget.Label = "{ Size = Wide }";
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
       Assert.That(w.Size, Is.EqualTo(WidgetSize.Wide));
     }
 
@@ -86,140 +53,167 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     public void Constructor_SetsSizeToLarge_WhenPropertiesSizeIsLarge()
     {
       _widget.Label = "{ Size = Large }";
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-      Assert.That(w.Size, Is.EqualTo(WidgetSize.Large));
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      Assert.That(w.Size, Is.EqualTo(WidgetSize.Wide));
     }
 
     [Test]
     public void Constructor_SetsSizeToMedium_WhenPropertiesSizeIsWrong()
     {
       _widget.Label = "{ Size = VeryWide }";
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
       Assert.That(w.Size, Is.EqualTo(WidgetSize.Meduim));
     }
 
     [Test]
-    public void Constructor_CreatesMappings_ObservableCollection()
+    public void Constructor_SetsPercentValue()
     {
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-      Assert.That(w.Mappings, Is.EqualTo(_widget.Mappings));
+      _widget.Item.State = "25";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      Assert.That(w.PercentValue, Is.EqualTo(25));
     }
 
     [Test]
-    public void Constructor_UpdatesValue()
+    public void Constructor_SetsPercentValueToNull_WhenStateIsNotNumber()
     {
-      _widget.Item.State = "2";
-
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation); 
-      
-      Assert.That(w.Value, Is.EqualTo("Map 2"));
-      Assert.That(w.SelectedMapping.Label, Is.EqualTo("Map 2"));
-      
+      _widget.Item.State = "Hello";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      Assert.That(w.PercentValue, Is.Null);
     }
 
     [Test]
-    public void Constructor_UpdatesValueToNull_WhenStateIsUnknown()
+    public void Constructor_SetsPercentValueToMax_WhenStateIsLarge()
     {
-      _widget.Item.State = "0";
-
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-
-      Assert.That(w.Value, Is.Null);
-      Assert.That(w.SelectedMapping, Is.Null);
-
+      _widget.Item.State = "150";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      Assert.That(w.PercentValue, Is.EqualTo(100));
     }
 
     [Test]
-    public void UpdateValue_SuspendPostSelection()
+    public void Constructor_SetsPercentValueToMin_WhenStateIsLess()
     {
-      _widget.Item.State = "1";
-
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-
-      _vmHelper.RestClientMock.Verify(x=>x.PostAsync(It.IsAny<Uri>(), It.IsAny<HttpContent>()), Times.Never());
+      _widget.Item.State = "-20";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      Assert.That(w.PercentValue, Is.EqualTo(0));
     }
 
     [Test]
-    public void UpdateValue_SetsIsOffState_WhenMappingPropertiesHasIsOff()
-    {
-      _widget.Item.State = "1";
-      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff}" };
-
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-
-      Assert.That(w.IsOffState, Is.True);
-    }
-
-    [Test]
-    public void UpdateValue_SetsIsOffStateFalse_WhenMappingPropertiesNotHasIsOff()
-    {
-      _widget.Item.State = "2";
-      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff}" };
-
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-
-      Assert.That(w.IsOffState, Is.False);
-    }
-
-    [Test]
-    public void ValueIcon_ReturnsMappingPropertyIcon()
-    {
-      _widget.Item.State = "1";
-      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff, Icon=icon}" };
-
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-
-      Assert.That(w.SelectedMapping.Properties.Values.Icon, Is.EqualTo("icon"));
-    }
-
-    [Test]
-    public void ValueIcon_ReturnsNull_WhenMappingPropertyIconMissing()
-    {
-      _widget.Item.State = "1";
-      _widget.Mappings[0] = new Mapping() { Command = "1", Label = "Map 1 {IsOff}" };
-
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
-
-      Assert.That(w.SelectedMapping.Properties.Values.Icon, Is.Null);
-    }
-
-    [Test]
-    public void SelectedMapping_Invokes_PostingSelection()
+    public void PercentValueChanging_InvokesPercentPost()
     {
       _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
-        It.Is<StringContent>(c => _vmHelper.CheckStringContent("2", c))))
+        It.Is<StringContent>(c => _vmHelper.CheckStringContent("20", c))))
         .Returns(_vmHelper.OkHttpResonseMessageTask);
 
       _widget.Item.State = "1";
-      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
 
-      w.SelectedMapping = new Mapping() {Label = "Map 2", Command = "2"};
+      w.PercentValue = 20;
 
       _vmHelper.RestClientMock.Verify(
         x => x.PostAsync(
           It.IsAny<Uri>(),
-          It.Is<StringContent>(c => _vmHelper.CheckStringContent("2", c))
+          It.Is<StringContent>(c => _vmHelper.CheckStringContent("20", c))
           ));
     }
 
     [Test]
-    public void Constructor_SubscribesToStateChanged()
+    public async Task OffCommand_PostsOffAndUpdatesPercentValue()
     {
-      var w = new SwitchWidgetModel(new Widget()
-      {
-        Item = new Item() { State = "OFF", Link = new Uri("http://some") }
-      }, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
+        It.Is<StringContent>(c => _vmHelper.CheckStringContent("OFF", c))))
+        .Returns(_vmHelper.OkHttpResonseMessageTask);
 
-      Assert.That(
-        typeof(WidgetModelBase)
-        .GetField("_itemChanged", BindingFlags.NonPublic | BindingFlags.Instance)
-        .GetValue(w),
-        Is.Not.Null);
+      _widget.Item.State = "1";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      await w.OffCommand.ExecuteAsync(null);
+
+      _vmHelper.RestClientMock.Verify(
+        x => x.PostAsync(
+          It.IsAny<Uri>(),
+          It.Is<StringContent>(c => _vmHelper.CheckStringContent("OFF", c))
+          ));
     }
 
-    class TestSelectionWidgetModel : SelectionWidgetModel
+    [Test]
+    public async Task OnCommand_PostsOffAndUpdatesPercentValue()
     {
-      public TestSelectionWidgetModel(Widget data, IRestClientFactory clientFactory, INavigationService navigation)
+      _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
+        It.Is<StringContent>(c => _vmHelper.CheckStringContent("ON", c))))
+        .Returns(_vmHelper.OkHttpResonseMessageTask);
+
+      _widget.Item.State = "1";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      await w.OnCommand.ExecuteAsync(null);
+
+      _vmHelper.RestClientMock.Verify(
+        x => x.PostAsync(
+          It.IsAny<Uri>(),
+          It.Is<StringContent>(c => _vmHelper.CheckStringContent("ON", c))
+          ));
+    }
+
+    [Test]
+    public async Task OnOffCommand_PostsOffWhenPercentValueIsGreaterThan0()
+    {
+      _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
+        It.Is<StringContent>(c => _vmHelper.CheckStringContent("OFF", c))))
+        .Returns(_vmHelper.OkHttpResonseMessageTask);
+
+      _widget.Item.State = "1";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      await w.OnOffCommand.ExecuteAsync(null);
+
+      _vmHelper.RestClientMock.Verify(
+        x => x.PostAsync(
+          It.IsAny<Uri>(),
+          It.Is<StringContent>(c => _vmHelper.CheckStringContent("OFF", c))
+          ));
+    }
+
+    [Test]
+    public async Task OnOffCommand_PostsOnWhenPercentValueIs0()
+    {
+      _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
+        It.Is<StringContent>(c => _vmHelper.CheckStringContent("ON", c))))
+        .Returns(_vmHelper.OkHttpResonseMessageTask);
+
+      _widget.Item.State = "0";
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      await w.OnOffCommand.ExecuteAsync(null);
+
+      _vmHelper.RestClientMock.Verify(
+        x => x.PostAsync(
+          It.IsAny<Uri>(),
+          It.Is<StringContent>(c => _vmHelper.CheckStringContent("ON", c))
+          ));
+    }
+
+    [Test]
+    public async Task OnOffCommand_PostsOnWhenPercentValueIsNull()
+    {
+      _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
+        It.Is<StringContent>(c => _vmHelper.CheckStringContent("ON", c))))
+        .Returns(_vmHelper.OkHttpResonseMessageTask);
+
+      _widget.Item.State = null;
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      await w.OnOffCommand.ExecuteAsync(null);
+
+      _vmHelper.RestClientMock.Verify(
+        x => x.PostAsync(
+          It.IsAny<Uri>(),
+          It.Is<StringContent>(c => _vmHelper.CheckStringContent("ON", c))
+          ));
+    }
+
+    class TestSliderWidgetModel : SliderWidgetModel
+    {
+      public TestSliderWidgetModel(Widget data, IRestClientFactory clientFactory, INavigationService navigation)
         : base(data, clientFactory, navigation)
       {
       }
@@ -241,15 +235,17 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     public void EventChangedEventSubscriber_AndCallsSetState()
     {
       _widget.Item.State = "1";
-      var w = new TestSelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new TestSliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
       w.ShowProgressIndicator();
       w.CallOnItemChanged(new Item() { State = "2" });
 
       Assert.That(w.Data.Item.State, Is.EqualTo("2"));
       Assert.That(w.IsProgressIndicatorVisible, Is.False);
-      Assert.That(w.Value, Is.EqualTo("Map 2"));
-      Assert.That(w.SelectedMapping.Label, Is.EqualTo("Map 2"));
+      Assert.That(w.Value, Is.EqualTo("2%"));
+      Assert.That(w.PercentValue, Is.EqualTo(2));
     }
+
+
 
   }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 
@@ -24,9 +25,16 @@ namespace WinHAB.Core.Fx.Mvvm
     
     public abstract Task ShowMessageAsync(string title, string text);
     public abstract void ShowMessage(string title, string text, Action onClose);
+    public abstract Task<bool> ShowQuestionAsync(string title, string text);
 
     public virtual async Task<IViewModel> NavigateAsync(Type viewModelType, object parameter)
     {
+      if (CurrentView != null && CurrentView.DataContext != null)
+      {
+        if (CurrentView.DataContext.GetType() == viewModelType &&
+            viewModelType.GetTypeInfo().GetCustomAttribute<SingletonViewModelAttribute>() != null)
+          return (IViewModel) CurrentView.DataContext;
+      }
       var view = Factory.Create(viewModelType);
       if (view == null)
         throw new ArgumentException("Fails to create instance of view for view model" + viewModelType + ". May be view doesn't have ViewModelAttribute.");

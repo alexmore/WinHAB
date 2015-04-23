@@ -21,7 +21,7 @@ using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Fx.Windows;
-using WinHAB.Desktop.ViewModels;
+using WinHAB.Desktop.Views.Pages;
 
 namespace WinHAB.Desktop
 {
@@ -48,7 +48,10 @@ namespace WinHAB.Desktop
       var ci = new CultureInfo(cfg.Language);
       Thread.CurrentThread.CurrentCulture = ci;
       Thread.CurrentThread.CurrentUICulture = ci;
-      
+
+      var hostWindowModel = kernel.Get<HostWindowModel>();
+      await hostWindowModel.InitializeAsync(null);
+      MainWindow.DataContext = hostWindowModel;
       MainWindow.Show();
 
       var navigation = kernel.Get<INavigationService>();
@@ -65,17 +68,6 @@ namespace WinHAB.Desktop
 
       AppearanceManager.Current.AccentColor = cfg.AccentColor.ToColor();
     
-      try
-      {
-        AppearanceManager.Current.ThemeSource = new Uri(cfg.Theme, UriKind.Relative);
-      }
-      catch (Exception)
-      {
-        cfg.Theme = AppConstants.DefaultThemeSource.OriginalString;
-        cfg.Save();
-        AppearanceManager.Current.ThemeSource = AppConstants.DefaultThemeSource;
-      }
-
       try
       {
         cfg.SetBackground(cfg.BackgroundImage);

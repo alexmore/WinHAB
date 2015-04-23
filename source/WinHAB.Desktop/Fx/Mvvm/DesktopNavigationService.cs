@@ -29,9 +29,25 @@ namespace WinHAB.Desktop.Fx.Mvvm
       return tcs.Task;
     }
 
+    public override Task<bool> ShowQuestionAsync(string title, string text)
+    {
+      var tcs = new TaskCompletionSource<bool>();
+      if (ModernDialog.ShowMessage(text, title, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+        tcs.SetResult(true);
+      else
+        tcs.SetResult(false);
+      
+      return tcs.Task;
+    }
+
     public override void ShowMessage(string title, string text, Action onClose)
     {
-      ModernDialog.ShowMessage(text, title, MessageBoxButton.OK);
+      ShowMessage(title, text, onClose, MessageBoxButton.OK);
+    }
+
+    private void ShowMessage(string title, string text, Action onClose, MessageBoxButton buttons)
+    {
+      ModernDialog.ShowMessage(text, title, buttons);
       onClose();
     }
   }

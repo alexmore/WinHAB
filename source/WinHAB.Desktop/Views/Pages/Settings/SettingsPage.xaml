@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="WinHAB.Desktop.Views.Pages.Settings.SettingsPage"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:viewModels="clr-namespace:WinHAB.Desktop.ViewModels"
+             xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             xmlns:pages="clr-namespace:WinHAB.Desktop.Views.Pages"
+             xmlns:settings="clr-namespace:WinHAB.Desktop.ViewModels.Settings"
+             xmlns:settings1="clr-namespace:WinHAB.Desktop.Views.Pages.Settings"
+             d:DataContext="{d:DesignInstance Type=settings:SettingsPageModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000"
+             Name="MainViewControl"
+             Foreground="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Name="HistoryBackButton" Grid.Row="0" Grid.Column="0" Style="{StaticResource HeaderLinkButton}" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,1"
+                Command="{Binding BackCommand}">
+            <Path Data="{StaticResource CircledArrowLeftIcon}" VerticalAlignment="Center" Width="30" Height="30" 
+                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Stretch="Uniform"/>
+        </Button>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static loc:Strings.TitleSettingsPage}" Style="{StaticResource TitleH2}" />
+        
+        <mui:ModernProgressRing  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource ProgressIndicatorStyle}" />
+        
+        <Grid Grid.Column="1" Grid.Row="1" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Name="NavigationListBox" Grid.Column="0" Margin="0,20,0,0" ItemsSource="{Binding ViewModels}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedViewModel}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="true">
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ItemBackgroundHover}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource ItemTextHover}" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource WindowBackground}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource WindowText}"/>
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Foreground" Value="{DynamicResource ItemTextDisabled}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            <Border Grid.Column="1" BorderBrush="{DynamicResource WindowBackground}" Margin="0,0,0,20" BorderThickness="1,0,0,0">
+                <controls:TransitioningContentControl x:Name="Transition" Content="{Binding SelectedItem, ElementName=NavigationListBox}" Margin="10,0,0,0">
+                    <controls:TransitioningContentControl.Resources>
+                        <DataTemplate DataType="{x:Type settings:SettingsConnectionViewModel}">
+                            <settings1:SettingsConnectionView/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type settings:SettingsAppearanceViewModel}">
+                            <settings1:SettingsAppearanceView/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type settings:SettingsIconsViewModel}">
+                            <settings1:SettingsIconsView/>
+                        </DataTemplate>
+                    </controls:TransitioningContentControl.Resources>
+                </controls:TransitioningContentControl>
+            </Border>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -23,8 +23,12 @@ namespace WinHAB.Desktop.Configuration
       get { return Path.Combine(ConfigurationFolder, "WinHAB.json"); }
     }
 
-    public static Color DefaultAccentColor { get { return "#FA6800".ToColor(); } }
-    public static Uri DefaultThemeSource { get { return AppearanceManager.LightThemeSource; } }
+    public static string CustomIconsFile
+    {
+      get { return Path.Combine(ConfigurationFolder, "CustomIcons.json"); }
+    }
+
+    public static Color DefaultAccentColor { get { return "#ff6600".ToColor(); } }
 
     #region Widget sizes
     public static Size WidgetMediumSize { get { return new Size(120, 120); } }

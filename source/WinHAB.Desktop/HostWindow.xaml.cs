@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WinHAB.Desktop
 {
@@ -22,6 +23,24 @@ namespace WinHAB.Desktop
   /// </summary>
   public partial class HostWindow : INavigationHost
   {
+    public static readonly DependencyProperty CurrentTimeProperty = DependencyProperty.Register(
+      "CurrentTime", typeof (string), typeof (HostWindow), new PropertyMetadata(default(string)));
+
+    public string CurrentTime
+    {
+      get { return (string) GetValue(CurrentTimeProperty); }
+      set { SetValue(CurrentTimeProperty, value); }
+    }
+
+    public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register(
+      "CurrentDate", typeof (string), typeof (HostWindow), new PropertyMetadata(default(string)));
+
+    public string CurrentDate
+    {
+      get { return (string) GetValue(CurrentDateProperty); }
+      set { SetValue(CurrentDateProperty, value); }
+    }
+
     #region Fixes Popup placement issue on Tablet PC or desktop touch screens
     private static readonly FieldInfo _menuDropAlignmentField;
     static HostWindow()
@@ -50,6 +69,24 @@ namespace WinHAB.Desktop
     public HostWindow()
     {
       InitializeComponent();
+
+      Loaded += HostWindow_Loaded;
+    }
+
+    void HostWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+      Action setCurrentDateTime = () =>
+      {
+        CurrentTime = DateTime.Now.ToShortTimeString();
+        CurrentDate = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+      };
+
+      setCurrentDateTime();
+
+      var timer = new DispatcherTimer();
+      timer.Interval = new TimeSpan(0, 0, 0, 1);
+      timer.Tick += (s, args) => setCurrentDateTime();
+      timer.Start();
     }
   }
 }

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="WinHAB.Desktop.HostWindowMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:WinHAB.Desktop.Controls"
+             xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:desktop="clr-namespace:WinHAB.Desktop"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=desktop:HostWindowModel}"
+             Foreground="{DynamicResource WindowText}"
+             Name="HeaderDropDown"
+             Width="350">
+    <StackPanel Orientation="Vertical">
+        <!-- SETTINGS -->
+        <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelSettings}, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderH3}" />
+        <UniformGrid Columns="3" Margin="10,0,0,0">
+            <controls:IconLinkButton Margin="5" IconData="{StaticResource GraphDiagramIcon}" Content="{x:Static loc:Strings.TitleConnectionView}" 
+                                     Command="{Binding SettingsConectionCommand}"/>
+            <controls:IconLinkButton Margin="5" IconData="{StaticResource PaletteIcon}" Content="{x:Static loc:Strings.TitleAppearance}" 
+                                     Command="{Binding SettingsAppearanceCommand}"/>
+            <controls:IconLinkButton Margin="5" IconData="{StaticResource IconsIcon}" Content="{x:Static loc:Strings.TitleIcons}"
+                                     Command="{Binding SettingsIconsCommand}"/>
+            
+            <controls:IconLinkButton Margin="5" IconData="{StaticResource SettingsIcon}" Content="{x:Static loc:Strings.ButtonAllSettings}" 
+                                     Command="{Binding SettingsCommand}"/>
+        </UniformGrid>
+        <!-- Help -->
+        <TextBlock Text="{Binding Source={x:Static loc:Strings.TitleHelp}, Converter={StaticResource ToUpperConverter}}" Margin="0,10,0,0" Style="{StaticResource HeaderH3}"/>
+        <UniformGrid Columns="3" Margin="10,0,0,0">
+            <controls:IconLinkButton Margin="0,5,5,0" IconData="{StaticResource HelpIcon}" Content="{x:Static loc:Strings.TitleHelp}" 
+                                     Command="{Binding HelpCommand}"/>
+            <controls:IconLinkButton Margin="0,5,5,0" IconData="{StaticResource AboutDialogIcon}" Content="{x:Static loc:Strings.TitleAbout}" 
+                                     Command="{Binding AboutCommand}"/>
+        </UniformGrid>
+
+        <!-- Application -->
+        <TextBlock Text="{Binding Source={x:Static loc:Strings.TitleApplication}, Converter={StaticResource ToUpperConverter}}" Margin="0,10,0,0" Style="{StaticResource HeaderH3}"/>
+        <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+            <controls:IconLinkButton Margin="0,5,5,0" IconData="{StaticResource ExitIcon}" Content="{x:Static loc:Strings.ButtonExit}" 
+                                     Command="{Binding ExitCommand}"/>
+        </StackPanel>
+
+
+    </StackPanel>
+</UserControl>

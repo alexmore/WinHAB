@@ -205,10 +205,7 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     [Test]
     public void Constructor_SubscribesToStateChanged()
     {
-      var w = new SwitchWidgetModel(new Widget()
-      {
-        Item = new Item() { State = "OFF", Link = new Uri("http://some") }
-      }, _vmHelper.ClientFactory, _vmHelper.Navigation);
+      var w = new SelectionWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
 
       Assert.That(
         typeof(WidgetModelBase)

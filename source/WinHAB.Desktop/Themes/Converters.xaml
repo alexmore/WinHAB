@@ -6,4 +6,5 @@
     <converters:StringToGeometryConverter x:Key="StringToGeometryConverter" />
     <converters:StreamToWidgetImageConverter x:Key="StreamToWidgetImageConverter" />
     <converters:StreamToImageConverter x:Key="StreamToImageConverter" />
+    <converters:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
 </ResourceDictionary>

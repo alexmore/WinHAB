@@ -81,11 +81,12 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\DesktopConfiguration.cs" />
     <Compile Include="Configuration\JsonConfigurationProvider.cs" />
+    <Compile Include="Converters\CountToVisibilityConverter.cs" />
     <Compile Include="Fx\Mvvm\DesktopViewFactory.cs" />
     <Compile Include="Assets\UserResources.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />
-    <Compile Include="Controls\SettingsDropDownControl.xaml.cs">
-      <DependentUpon>SettingsDropDownControl.xaml</DependentUpon>
+    <Compile Include="HostWindowMenuView.xaml.cs">
+      <DependentUpon>HostWindowMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\IconLinkButton.cs" />
     <Compile Include="Controls\WidgetsPanel.cs" />
@@ -94,7 +95,13 @@
     <Compile Include="Converters\StringToGeometryConverter.cs" />
     <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
     <Compile Include="Fx\Net\DesktopRestClientExtensions.cs" />
-    <Compile Include="ViewModels\Pages\DesktopMainPageModel.cs" />
+    <Compile Include="HostWindowModel.cs" />
+    <Compile Include="ViewModels\Settings\CustomIconsService.cs" />
+    <Compile Include="ViewModels\Settings\SettingsIconsAddIconDialogModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsIconsViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsAppearanceViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsConnectionViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsPageModel.cs" />
     <Compile Include="Views\Pages\BootstrapperPage.xaml.cs">
       <DependentUpon>BootstrapperPage.xaml</DependentUpon>
     </Compile>
@@ -107,6 +114,21 @@
     <Compile Include="Fx\Windows\ColorExtensions.cs" />
     <Compile Include="Fx\DesktopTimer.cs" />
     <Compile Include="Fx\Windows\ResourceDictionaryExtensions.cs" />
+    <Compile Include="Views\Pages\Settings\SettingsAppearanceView.xaml.cs">
+      <DependentUpon>SettingsAppearanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\SettingsConnectionView.xaml.cs">
+      <DependentUpon>SettingsConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\SettingsIconsAddIconDialog.xaml.cs">
+      <DependentUpon>SettingsIconsAddIconDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\SettingsIconsView.xaml.cs">
+      <DependentUpon>SettingsIconsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Assets\DefaultOpenHabIcons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -115,7 +137,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SettingsDropDownControl.xaml">
+    <Page Include="HostWindowMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\TextBlock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -183,6 +209,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ImageWidgetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Settings\SettingsAppearanceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Settings\SettingsConnectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Settings\SettingsIconsAddIconDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Settings\SettingsIconsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Settings\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -243,6 +289,7 @@
     <EmbeddedResource Include="Localization\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -264,6 +311,13 @@
       <Project>{0e01f4b2-4524-4286-92d5-190bb7ee5cf8}</Project>
       <Name>WinHAB.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Backgrounds\Background-Desert.jpg" />
+    <Resource Include="Assets\Backgrounds\Background-Sunflower.jpg" />
+    <Resource Include="Assets\Backgrounds\Background-Town.jpg" />
+    <Resource Include="Assets\Backgrounds\Background-WetGlass.jpg" />
+    <Resource Include="Assets\Backgrounds\Background-Wheat.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -40,7 +40,10 @@
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\Language.cs" />
     <Compile Include="Fx\DecimalExtensions.cs" />
+    <Compile Include="Fx\Mvvm\IDialogViewModel.cs" />
+    <Compile Include="Fx\Mvvm\ITitledViewModel.cs" />
     <Compile Include="Fx\Mvvm\IViewFactory.cs" />
+    <Compile Include="Fx\Mvvm\SingletonViewModelAttribute.cs" />
     <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
     <Compile Include="Fx\ObjectExtensions.cs" />
     <Compile Include="Fx\StringExtensions.cs" />

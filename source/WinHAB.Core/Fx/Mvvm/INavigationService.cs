@@ -21,6 +21,7 @@ namespace WinHAB.Core.Fx.Mvvm
     RelayCommand GoBackCommand { get; }
 
     Task ShowMessageAsync(string title, string text);
+    Task<bool> ShowQuestionAsync(string title, string text);
     void ShowMessage(string title, string text, Action onClose);
   }
 }
