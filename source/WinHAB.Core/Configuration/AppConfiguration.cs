@@ -33,7 +33,7 @@ namespace WinHAB.Core.Configuration
     {
       get
       {
-        return new[] {new Language(Strings.LabelLanguageAuto, "Auto"),  new Language("English", "en"), new Language("Русский", "ru"), new Language("Deutsch", "de")};
+        return new[] {new Language(Strings.LabelLanguageAuto, "Auto"),  new Language("English", "en")};
       }
     }
 
