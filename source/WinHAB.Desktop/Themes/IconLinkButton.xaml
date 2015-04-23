@@ -63,4 +63,8 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
+    <Style x:Key="AccentIconLinkButton" TargetType="controls:IconLinkButton" BasedOn="{StaticResource {x:Type controls:IconLinkButton}}" >
+        <Setter Property="Foreground" Value="{DynamicResource Accent}"/>
+    </Style>
+
 </ResourceDictionary>

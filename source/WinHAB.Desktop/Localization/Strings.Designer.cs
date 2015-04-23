@@ -169,6 +169,15 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Try OpenHAB demo.
+        /// </summary>
+        public static string ButtonTryOpenHABDemoServer {
+            get {
+                return ResourceManager.GetString("ButtonTryOpenHABDemoServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View image.
         /// </summary>
         public static string ButtonViewImage {
@@ -264,6 +273,15 @@ namespace WinHAB.Desktop.Localization {
         public static string LabelOpenHABServer {
             get {
                 return ResourceManager.GetString("LabelOpenHABServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to or.
+        /// </summary>
+        public static string LabelOr {
+            get {
+                return ResourceManager.GetString("LabelOr", resourceCulture);
             }
         }
         

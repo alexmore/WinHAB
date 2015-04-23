@@ -153,6 +153,9 @@
   <data name="ButtonSelectBackground" xml:space="preserve">
     <value>Choose image</value>
   </data>
+  <data name="ButtonTryOpenHABDemoServer" xml:space="preserve">
+    <value>Try OpenHAB demo</value>
+  </data>
   <data name="ButtonViewImage" xml:space="preserve">
     <value>View image</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="LabelOpenHABServer" xml:space="preserve">
     <value>OpenHAB server</value>
+  </data>
+  <data name="LabelOr" xml:space="preserve">
+    <value>or</value>
   </data>
   <data name="LabelPathData" xml:space="preserve">
     <value>Path data</value>

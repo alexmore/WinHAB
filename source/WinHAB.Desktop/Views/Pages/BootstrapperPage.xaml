@@ -35,6 +35,10 @@
             <TextBlock Text="{x:Static loc:Strings.LabelServerAddressExample}" Style="{StaticResource Small}" HorizontalAlignment="Center"/>
             <TextBox Name="ServerAddressTextBox" Text="{Binding ServerAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" HorizontalAlignment="Stretch" KeyDown="ConnectToServer"/>
             <Button Name="ConnectButton" Content="{x:Static loc:Strings.ButtonConnect}" Command="{Binding ConnectCommand}" CommandParameter="{Binding Text, ElementName=ServerAddressTextBox}" HorizontalAlignment="Stretch" />
+            <TextBlock Text="{x:Static loc:Strings.LabelOr}"  HorizontalAlignment="Center" Margin="0,5"/>
+            <Button Content="{x:Static loc:Strings.ButtonTryOpenHABDemoServer}" HorizontalAlignment="Center"
+                    Command="{Binding ConnectCommand}" CommandParameter="http://demo.openhab.org:8080"/>
+            
         </StackPanel>
 
         <Grid Grid.Row="2" Width="300" MaxHeight="300" Visibility="{Binding IsSitemapsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
