@@ -153,4 +153,7 @@
   <data name="ButtonViewImage" xml:space="preserve">
     <value>View image</value>
   </data>
+  <data name="LabelLanguageAuto" xml:space="preserve">
+    <value>Auto (Same as Microsoft Windows)</value>
+  </data>
 </root>

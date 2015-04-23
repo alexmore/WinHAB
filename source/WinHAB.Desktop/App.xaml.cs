@@ -45,9 +45,18 @@ namespace WinHAB.Desktop
       // Appearance settings
       SetAppearance(cfg);
 
-      var ci = new CultureInfo(cfg.Language);
-      Thread.CurrentThread.CurrentCulture = ci;
-      Thread.CurrentThread.CurrentUICulture = ci;
+      if (cfg.Language == null)
+      {
+        cfg.Language = "Auto";
+        await cfg.SaveAsync();
+      }
+
+      if (cfg.Language != "Auto")
+      {
+        var ci = new CultureInfo(cfg.Language);
+        Thread.CurrentThread.CurrentCulture = ci;
+        Thread.CurrentThread.CurrentUICulture = ci;
+      }
 
       var hostWindowModel = kernel.Get<HostWindowModel>();
       await hostWindowModel.InitializeAsync(null);

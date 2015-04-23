@@ -16,7 +16,7 @@
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelInterfaceLanguage}, Converter={StaticResource ToUpperConverter}}"  Style="{StaticResource HeaderH3}" VerticalAlignment="Center"/>
                 <ComboBox Name="LanguageComboBox" 
-                      Margin="10,0,0,0" Width="150" HorizontalAlignment="Right"
+                      Margin="10,0,0,0" Width="250" HorizontalAlignment="Right"
                       ItemsSource="{Binding Languages}" 
                       DisplayMemberPath="Title" SelectedValuePath="Culture" SelectedValue="{Binding SelectedLanguageCulture}" />
                 <controls:IconLinkButton x:Name="RestartToApplyButton" IconData="{StaticResource ReloadIcon}" Content="{x:Static loc:Strings.ButtonRestartToApply}" 

@@ -80,6 +80,15 @@ namespace WinHAB.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto (Same as Microsoft Windows).
+        /// </summary>
+        internal static string LabelLanguageAuto {
+            get {
+                return ResourceManager.GetString("LabelLanguageAuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not load sitemaps list. Details:.
         /// </summary>
         internal static string MessageConnectionError {

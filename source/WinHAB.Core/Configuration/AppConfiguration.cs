@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using WinHAB.Core.Fx;
+using WinHAB.Core.Localization;
 
 namespace WinHAB.Core.Configuration
 {
@@ -24,7 +25,7 @@ namespace WinHAB.Core.Configuration
 
     public string Language
     {
-      get { return Provider.Get(this.GetPropertyName(() => Language)) ?? "en"; }
+      get { return Provider.Get(this.GetPropertyName(() => Language)); }
       set { Provider.Set(this.GetPropertyName(() => Language), value); }
     }
 
@@ -32,7 +33,7 @@ namespace WinHAB.Core.Configuration
     {
       get
       {
-        return new[] {new Language("English", "en"), new Language("Русский", "ru"), new Language("Deutsch", "de")};
+        return new[] {new Language(Strings.LabelLanguageAuto, "Auto"),  new Language("English", "en"), new Language("Русский", "ru"), new Language("Deutsch", "de")};
       }
     }
 

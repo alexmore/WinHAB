@@ -38,6 +38,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
       });
 
       Languages = new ObservableCollection<Language>(_appConfig.AvailableLanguages);
+      _originalCulture = _appConfig.Language;
       SelectedLanguageCulture = _appConfig.Language;
     }
 
@@ -100,6 +101,8 @@ namespace WinHAB.Desktop.ViewModels.Settings
       }
     }
 
+    private string _originalCulture = null;
+
     private ObservableCollection<Language> _Languages;
     public ObservableCollection<Language> Languages { get { return _Languages; } set { _Languages = value; RaisePropertyChanged(()=>Languages); }}
 
@@ -124,7 +127,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
       RaisePropertyChanged(() => _appConfig.Language);
       _appConfig.Save();
 
-      IsRestartRequired = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower() != _appConfig.Language.ToLower();
+      IsRestartRequired = (_originalCulture??"").ToLower() != _appConfig.Language.ToLower();
     }
   }
 }
