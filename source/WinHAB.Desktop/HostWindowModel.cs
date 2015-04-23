@@ -65,8 +65,6 @@ namespace WinHAB.Desktop
       ShowProgressIndicator();
       await UserResources.LoadUserResources(_appConfig.Server, _clientFactory);
       HideProgressIndicator();
-
-      await base.InitializeAsync((object) parameter);
     }
 
     private bool _IsPopupOpened;

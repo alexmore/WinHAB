@@ -331,6 +331,15 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Starting....
+        /// </summary>
+        public static string LabelStarting {
+            get {
+                return ResourceManager.GetString("LabelStarting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microsoft Windows desktop client for OpenHAB.
         /// </summary>
         public static string LabelWinHABDescription {

@@ -2,11 +2,25 @@
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:loc="clr-namespace:WinHAB.Desktop.Localization"
+                  xmlns:desktop="clr-namespace:WinHAB.Desktop"
+                  mc:Ignorable="d" 
                   Width="1200" Height="708"
                   WindowStartupLocation="CenterScreen"
                   Style="{StaticResource HostWindowStyle}"
                   Padding="0" 
-                  Name="HostWindowName" >
+                  Name="HostWindowName"
+                  d:DataContext="{d:DesignInstance Type={x:Type desktop:HostWindowModel}}" >
     <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding IsProgressIndicatorVisible, Converter={StaticResource BooleanToVisibilityConverter} }">
+            <Path Data="{StaticResource OpenHabIcon}" Stretch="Uniform" Fill="{DynamicResource HostWindowText}" Width="60" Height="60" HorizontalAlignment="Center"/>
+            <TextBlock Text="WinHAB" Style="{StaticResource TitleH2}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            <TextBlock Text="{x:Static loc:Strings.LabelWinHABDescription}" Style="{StaticResource TitleH4}"  HorizontalAlignment="Center" />
+            <mui:ModernProgressRing  Style="{DynamicResource ProgressIndicatorStyle}" />
+        </StackPanel>
+
+        
     </Grid>
 </mui:ModernWindow>

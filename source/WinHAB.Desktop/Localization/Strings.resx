@@ -207,6 +207,9 @@
   <data name="LabelSitemap" xml:space="preserve">
     <value>Sitemap</value>
   </data>
+  <data name="LabelStarting" xml:space="preserve">
+    <value>Starting...</value>
+  </data>
   <data name="LabelWinHABDescription" xml:space="preserve">
     <value>Microsoft Windows desktop client for OpenHAB</value>
   </data>

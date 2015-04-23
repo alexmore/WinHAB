@@ -59,9 +59,9 @@ namespace WinHAB.Desktop
       }
 
       var hostWindowModel = kernel.Get<HostWindowModel>();
-      await hostWindowModel.InitializeAsync(null);
       MainWindow.DataContext = hostWindowModel;
       MainWindow.Show();
+      await hostWindowModel.InitializeAsync(null);
 
       var navigation = kernel.Get<INavigationService>();
       await navigation.NavigateAsync<BootstrapperPageModel>();
