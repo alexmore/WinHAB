@@ -67,7 +67,13 @@ namespace WinHAB.Desktop
       }
 
       AppearanceManager.Current.AccentColor = cfg.AccentColor.ToColor();
-    
+
+
+      if (cfg.BackgroundImage == null)
+      {
+        cfg.BackgroundImage = "pack://application:,,,/Assets/Backgrounds/Background-WetGlass.jpg";
+        cfg.Save();
+      }
       try
       {
         cfg.SetBackground(cfg.BackgroundImage);
