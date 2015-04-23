@@ -3,7 +3,7 @@
                     xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls;assembly=FirstFloor.ModernUI"
                     xmlns:modernui="clr-namespace:FirstFloor.ModernUI;assembly=FirstFloor.ModernUI"
                     xmlns:desktop="clr-namespace:WinHAB.Desktop"
-                    xmlns:controls1="clr-namespace:WinHAB.Desktop.Controls">
+                    xmlns:local="clr-namespace:WinHAB.Desktop">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
@@ -88,7 +88,7 @@
                                                 </ToggleButton>
                                                 <Popup IsOpen="{Binding IsChecked, ElementName=TitleToggleButton}" Name="HeaderDropDownPopup" StaysOpen="False" PlacementTarget="{Binding ElementName=TitleToggleButton}" >
                                                     <Border Background="{DynamicResource WindowBackground}" BorderThickness="1" BorderBrush="{DynamicResource Accent}" Padding="10" >
-                                                        <controls1:SettingsDropDownControl />
+                                                        <local:HostWindowMenuView />
                                                     </Border>
                                                 </Popup>
                                             </Grid>

@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="controls:IconLinkButton" BasedOn="{StaticResource SystemButtonBase}" >
-        <Setter Property="Foreground" Value="{DynamicResource WindowText}"/>
+        <!--<Setter Property="Foreground" Value="{DynamicResource Accent}"/>-->
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Width" Value="NaN" />
         <Setter Property="Height" Value="NaN" />
@@ -57,6 +57,10 @@
                 <Setter Property="Opacity" Value=".4" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WhiteIconLinkButton" TargetType="controls:IconLinkButton" BasedOn="{StaticResource {x:Type controls:IconLinkButton}}" >
+        <Setter Property="Foreground" Value="White"/>
     </Style>
 
 </ResourceDictionary>

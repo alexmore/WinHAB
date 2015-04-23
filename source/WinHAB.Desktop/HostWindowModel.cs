@@ -12,56 +12,59 @@ using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Assets;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Fx.Windows;
+using WinHAB.Desktop.ViewModels;
+using WinHAB.Desktop.ViewModels.Settings;
 using RelayCommand = GalaSoft.MvvmLight.CommandWpf.RelayCommand;
 
 namespace WinHAB.Desktop
 {
   public class HostWindowModel : PageModelBase
   {
+    private readonly AppConfiguration _appConfig;
     private readonly IRestClientFactory _clientFactory;
 
     public HostWindowModel(INavigationService navigationService, AppConfiguration appConfig,
       IRestClientFactory clientFactory) : base(navigationService)
     {
+      _appConfig = appConfig;
       _clientFactory = clientFactory;
-      AppConfig = appConfig as DesktopConfiguration;
-
-      _SelectedAccentColor =
-        AppConfig.AccentColors.FirstOrDefault(x => x.ToColor() == FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor);
       
-      ChangeServerCommand = new AsyncRelayCommand(async () =>
+      SettingsCommand = new RelayCommand(async () =>
       {
         IsPopupOpened = false;
-        Navigation.ClearHistory();
-        AppConfig.Runtime.IsRestarting = true;
-        await Navigation.NavigateAsync<BootstrapperPageModel>();
+        await Navigation.NavigateAsync<SettingsPageModel>();
       });
 
-      ChangeSitemapCommand = new AsyncRelayCommand(async () =>
+      SettingsConectionCommand = new RelayCommand(async () =>
       {
         IsPopupOpened = false;
-        AppConfig.Sitemap = null;
-        Navigation.ClearHistory();
-        await Navigation.NavigateAsync<BootstrapperPageModel>();
+        await Navigation.NavigateAsync<SettingsPageModel>(typeof(SettingsConnectionViewModel));
       });
 
-      RestartApplicationCommand = new RelayCommand(() =>
+      SettingsAppearanceCommand = new RelayCommand(async () =>
       {
-        System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-        Application.Current.Shutdown();
+        IsPopupOpened = false;
+        await Navigation.NavigateAsync<SettingsPageModel>(typeof(SettingsAppearanceViewModel));
       });
-      
-      SelectBackgroundCommand = new RelayCommand(SelectBackground);
-      
+
+      SettingsIconsCommand = new RelayCommand(async () =>
+      {
+        IsPopupOpened = false;
+        await Navigation.NavigateAsync<SettingsPageModel>(typeof(SettingsIconsViewModel));
+      });
+
+      HelpCommand = new RelayCommand(() => { });
+      AboutCommand = new RelayCommand(() => { });
+
+      ExitCommand = new RelayCommand(Application.Current.Shutdown);
+
     }
 
     public override async Task InitializeAsync(object parameter)
     {
       ShowProgressIndicator();
-      await UserResources.LoadUserResources(AppConfig.Server, _clientFactory);
+      await UserResources.LoadUserResources(_appConfig.Server, _clientFactory);
       HideProgressIndicator();
-
-      SelectedLanguageCulture = AppConfig.Language;
 
       await base.InitializeAsync((object) parameter);
     }
@@ -69,90 +72,15 @@ namespace WinHAB.Desktop
     private bool _IsPopupOpened;
     public bool IsPopupOpened { get { return _IsPopupOpened; } set { _IsPopupOpened = value; RaisePropertyChanged(()=>IsPopupOpened); }}
 
-    public DesktopConfiguration AppConfig { get; private set; }
+    public RelayCommand SettingsCommand { get; set; }
+    public RelayCommand SettingsConectionCommand { get; set; }
+    public RelayCommand SettingsAppearanceCommand { get; set; }
+    public RelayCommand SettingsIconsCommand { get; set; }
 
-    #region Settings
+    public RelayCommand AboutCommand { get; set; }
+    public RelayCommand HelpCommand { get; set; }
 
-    public AsyncRelayCommand ChangeServerCommand { get; set; }
-    public AsyncRelayCommand ChangeSitemapCommand { get; set; }
-
-    #endregion
-    
-    #region Language
-
-    public RelayCommand RestartApplicationCommand { get; set; }
-
-    private bool _IsRestartRequired;
-    public bool IsRestartRequired { get { return _IsRestartRequired; } set { _IsRestartRequired = value; RaisePropertyChanged(() => IsRestartRequired); } }
-
-    private string _SelectedLanguageCulture;
-
-    public string SelectedLanguageCulture
-    {
-      get { return _SelectedLanguageCulture; } 
-      set { _SelectedLanguageCulture = value; RaisePropertyChanged(() => SelectedLanguageCulture); SetLanguage(value);}
-    }
-    
-    void SetLanguage(string culture)
-    {
-      if (culture == null) return;
-
-      AppConfig.Language = culture;
-      RaisePropertyChanged(() => AppConfig.Language);
-      AppConfig.Save();
-
-      IsRestartRequired = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower() != AppConfig.Language.ToLower();
-    }
-
-    #endregion
-
-    #region Background
-    
-    public RelayCommand SelectBackgroundCommand { get; set; }
-
-    private void SelectBackground()
-    {
-      var d = new OpenFileDialog();
-      d.DefaultExt = "*.jpg";
-      d.Filter = Localization.Strings.LabelImageFiles + "|*.jpg";
-      bool? dRes = d.ShowDialog();
-      if (dRes.HasValue && dRes.Value)
-      {
-        try
-        {
-          AppConfig.SetBackground(d.FileName);
-        }
-        catch (Exception ex)
-        {
-          Navigation.ShowMessage(Localization.Strings.MessageExceptionOnApplyImageToBackgroundTitle,
-            Localization.Strings.MessageExceptionOnApplyImageToBackground + "\r\n" + ex.Message, () => { });
-        }
-      }
-    }
-    #endregion
-
-    #region Accent color
-
-    private string _SelectedAccentColor;
-    public string SelectedAccentColor
-    {
-      get { return _SelectedAccentColor; }
-      set
-      {
-        _SelectedAccentColor = value;
-        RaisePropertyChanged(() => SelectedAccentColor);
-        SetAccentColor(value.ToColor());
-      }
-    }
-
-    void SetAccentColor(Color color)
-    {
-      FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor = color;
-      
-      AppConfig.AccentColor = FirstFloor.ModernUI.Presentation.AppearanceManager.Current.AccentColor.ToHexString();
-      AppConfig.Save();
-    }
-    #endregion
+    public RelayCommand ExitCommand { get; set; }
 
   }
 }
