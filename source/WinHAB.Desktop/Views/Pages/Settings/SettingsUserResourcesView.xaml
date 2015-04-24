@@ -28,13 +28,13 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <TextBlock Text="{Binding Title, Converter={StaticResource ToUpperConverter}}" VerticalAlignment="Center" Style="{StaticResource HeaderH3}" Margin="0,10,10,0"/>
-            <controls:IconLinkButton IconData="{StaticResource OpenIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonOpen}" Margin="5,10,5,0" VerticalAlignment="Center" 
-                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="14" Command="{Binding OpenCommand}"/>
-            <controls:IconLinkButton IconData="{StaticResource FolderOkIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonOpenDefault}" Margin="5,10,5,0" VerticalAlignment="Center" 
-                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="14" Command="{Binding OpenDefaultCommand}"/>
-            <controls:IconLinkButton IconData="{StaticResource SaveAsIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonSaveAs}" Margin="5,10,5,0" VerticalAlignment="Center" 
-                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="14" Command="{Binding SaveAsCommand}"/>
+            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Style="{StaticResource TitleH2}" Margin="0,0,20,0"/>
+            <controls:IconLinkButton IconData="{StaticResource OpenIcon}" IconSize="16" Content="{x:Static loc:Strings.ButtonOpen}" Margin="0,5,0,0" VerticalAlignment="Center" 
+                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="16" Command="{Binding OpenCommand}"/>
+            <controls:IconLinkButton IconData="{StaticResource FolderOkIcon}" IconSize="16" Content="{x:Static loc:Strings.ButtonOpenDefault}" Margin="10,5,5,0" VerticalAlignment="Center" 
+                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="16" Command="{Binding OpenDefaultCommand}"/>
+            <controls:IconLinkButton IconData="{StaticResource SaveAsIcon}" IconSize="16" Content="{x:Static loc:Strings.ButtonSaveAs}" Margin="10,5,5,0" VerticalAlignment="Center" 
+                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="16" Command="{Binding SaveAsCommand}"/>
         </StackPanel>
         <TextBlock Grid.Row="1" Text="{Binding ResourceFile}" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2">

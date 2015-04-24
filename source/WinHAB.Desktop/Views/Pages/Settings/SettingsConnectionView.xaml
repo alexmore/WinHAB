@@ -13,6 +13,7 @@
              Foreground="White">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,60,0">
+            <TextBlock Text="{Binding Source={x:Static loc:Strings.TitleConnectionView}}"  Style="{StaticResource TitleH2}" VerticalAlignment="Center" Margin="0,0,0,10"/>
             <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelOpenHABServer}, Converter={StaticResource ToUpperConverter}}" VerticalAlignment="Center" Style="{StaticResource HeaderH3}" Margin="0,5"/>
             <TextBox Text="{Binding Server}" VerticalAlignment="Center" Width="300" IsReadOnly="True" Foreground="{DynamicResource  WindowText}" Margin="10,0"/>
             <Button Margin="10,5" Content="{x:Static loc:Strings.ButtonChangeServer}" Command="{Binding ChangeServerCommand}" HorizontalAlignment="Left"  />

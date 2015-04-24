@@ -13,6 +13,7 @@
              Foreground="White">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,60,0">
+            <TextBlock Text="{Binding Source={x:Static loc:Strings.TitleAppearance}}"  Style="{StaticResource TitleH2}" VerticalAlignment="Center" Margin="0,0,0,10"/>
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelInterfaceLanguage}, Converter={StaticResource ToUpperConverter}}"  Style="{StaticResource HeaderH3}" VerticalAlignment="Center"/>
                 <ComboBox Name="LanguageComboBox" 
