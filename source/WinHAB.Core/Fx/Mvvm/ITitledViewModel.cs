@@ -1,6 +1,6 @@
 ﻿namespace WinHAB.Core.Fx.Mvvm
 {
-  public interface ITitledViewModel
+  public interface ITitledViewModel : IViewModel
   {
     string Title { get; set; }
   }

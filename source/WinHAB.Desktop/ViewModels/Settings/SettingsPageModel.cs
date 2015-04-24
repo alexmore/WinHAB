@@ -24,6 +24,11 @@ namespace WinHAB.Desktop.ViewModels.Settings
 
     public override async Task InitializeAsync(object parameter)
     {
+      foreach (var i in ViewModels)
+      {
+        await i.InitializeAsync(null);
+      }
+
       var viewModel = ViewModels.FirstOrDefault();
       if (parameter != null)
         viewModel = ViewModels.FirstOrDefault(x => x.GetType() == (Type) parameter) ?? viewModel;

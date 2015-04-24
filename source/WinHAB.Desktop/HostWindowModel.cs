@@ -9,7 +9,6 @@ using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Core.Net;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
-using WinHAB.Desktop.Assets;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Fx.Windows;
 using WinHAB.Desktop.ViewModels;
@@ -58,13 +57,6 @@ namespace WinHAB.Desktop
 
       ExitCommand = new RelayCommand(Application.Current.Shutdown);
 
-    }
-
-    public override async Task InitializeAsync(object parameter)
-    {
-      ShowProgressIndicator();
-      await UserResources.LoadUserResources(_appConfig.Server, _clientFactory);
-      HideProgressIndicator();
     }
 
     private bool _IsPopupOpened;

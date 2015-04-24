@@ -124,6 +124,15 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string ButtonExport {
+            get {
+                return ResourceManager.GetString("ButtonExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export XAML.
         /// </summary>
         public static string ButtonExportXAML {

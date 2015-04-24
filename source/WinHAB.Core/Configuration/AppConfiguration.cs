@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WinHAB.Core.Fx;
 using WinHAB.Core.Localization;
@@ -13,9 +14,13 @@ namespace WinHAB.Core.Configuration
     {
       Provider = provider;
       Runtime = new AppRuntimeConfiguration();
+      UserResources = new UserResources();
     }
 
     public AppRuntimeConfiguration Runtime { get; set; }
+    
+    public UserResources UserResources { get; set; }
+    public Uri UserResourcesUri { get { return new Uri((Server??"")+"/winhab/WinHAB.Resources.json");}}
 
     public void Load() { Provider.Load(); }
     public async Task LoadAsync() { await Provider.LoadAsync(); }

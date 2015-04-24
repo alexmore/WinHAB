@@ -35,6 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration\AppRuntimeConfiguration.cs" />
+    <Compile Include="Configuration\UserResources.cs" />
+    <Compile Include="Configuration\UserResourcesData.cs" />
     <Compile Include="Fx\CollectionExtensions.cs" />
     <Compile Include="Configuration\AppConfiguration.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />

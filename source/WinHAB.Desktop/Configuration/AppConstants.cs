@@ -23,9 +23,9 @@ namespace WinHAB.Desktop.Configuration
       get { return Path.Combine(ConfigurationFolder, "WinHAB.json"); }
     }
 
-    public string CustomIconsFile
+    public string UserResourcesFile
     {
-      get { return Path.Combine(ConfigurationFolder, "CustomIcons.json"); }
+      get { return Path.Combine(ConfigurationFolder, "WinHAB.Resources.json"); }
     }
 
     public string DefaultAccentColor { get { return "#ff6600"; } } // Orange

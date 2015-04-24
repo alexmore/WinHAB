@@ -138,6 +138,9 @@
   <data name="ButtonExit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="ButtonExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
   <data name="ButtonExportXAML" xml:space="preserve">
     <value>Export XAML</value>
   </data>

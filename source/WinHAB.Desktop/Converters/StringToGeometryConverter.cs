@@ -6,7 +6,6 @@ using System.Windows.Data;
 using System.Windows.Media;
 using WinHAB.Core.Fx;
 using WinHAB.Core.ViewModels.Widgets;
-using WinHAB.Desktop.Assets;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Fx.Windows;
 
@@ -40,17 +39,21 @@ namespace WinHAB.Desktop.Converters
     {
       if (iconString.IsNullOrWhitespace()) return null;
 
-      var resourceKey = UserResources.Icons.GetResourceKeys().FirstOrDefault(x =>
-        x.ToLower() == iconString.ToLower().Trim() ||
-        x.ToLower() == (iconString.Trim() + "icon").ToLower());
+      // UserResources
+      var userIcon = ConvertersStaticHelper.UserResources.Data.Icons
+        .FirstOrDefault(x => x.Key.ToLower() == iconString.ToLower().Trim() || x.Key.ToLower() == (iconString.Trim() + "icon").ToLower());
 
-      if (resourceKey == null)
+      if (userIcon != null)
       {
-        var g = Application.Current.TryFindResource(iconString) as Geometry;
-        return g;
+        try
+        {
+          return Geometry.Parse(userIcon.PathData);
+        }
+        catch {}
       }
-
-      return resourceKey != null ? UserResources.Icons[resourceKey] as Geometry : null;
+      
+      
+      return Application.Current.TryFindResource(iconString.ToLower()) as Geometry;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

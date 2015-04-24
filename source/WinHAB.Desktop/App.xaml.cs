@@ -20,6 +20,7 @@ using WinHAB.Core.Models;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Pages;
 using WinHAB.Desktop.Configuration;
+using WinHAB.Desktop.Converters;
 using WinHAB.Desktop.Fx.Windows;
 using WinHAB.Desktop.Views.Pages;
 
@@ -35,6 +36,7 @@ namespace WinHAB.Desktop
     {
       MainWindow = new HostWindow();
       var kernel = new StandardKernel(new DefaultModule(MainWindow as HostWindow));
+      ConvertersStaticHelper.Kernel = kernel;
       
       // Configuration
       var cfg = kernel.Get<AppConfiguration>() as DesktopConfiguration;

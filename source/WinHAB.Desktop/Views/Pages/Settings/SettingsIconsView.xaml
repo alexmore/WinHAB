@@ -55,8 +55,8 @@
                 <TextBlock Text="{Binding Source={x:Static loc:Strings.LabelCustomIcons}, Converter={StaticResource ToUpperConverter}}" VerticalAlignment="Center" Style="{StaticResource HeaderH3}" Margin="0,10,10,5"/>
                 <controls:IconLinkButton IconData="{StaticResource PlusIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonAdd}" Margin="5,10,5,5" VerticalAlignment="Center" 
                                          Style="{StaticResource WhiteIconLinkButton}" FontSize="14" Command="{Binding AddCustomIconCommand}"/>
-                <controls:IconLinkButton IconData="{StaticResource ExportIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonExportXAML}" Margin="5,10,5,5" VerticalAlignment="Center" 
-                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="14" Command="{Binding ExportXamlCommand}"/>
+                <controls:IconLinkButton IconData="{StaticResource ExportIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonExport}" Margin="5,10,5,5" VerticalAlignment="Center" 
+                                         Style="{StaticResource WhiteIconLinkButton}" FontSize="14" Command="{Binding ExportCommand}"/>
             </StackPanel>
 
             <ScrollViewer Name="CustomIconScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"  Mouse.PreviewMouseWheel="HorizontalScroll"
@@ -65,8 +65,8 @@
                 <Grid>
                     <TextBlock Text="{x:Static loc:Strings.MessageNoCustomIcons}" TextAlignment="Center"
                                HorizontalAlignment="Center" VerticalAlignment="Center" 
-                               Visibility="{Binding CustomIcons.Icons.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter=inverse}"/>
-                    <ItemsControl ItemsSource="{Binding CustomIcons.Icons}">
+                               Visibility="{Binding UserResources.Data.Icons.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter=inverse}"/>
+                    <ItemsControl ItemsSource="{Binding UserResources.Data.Icons}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel  Orientation="Vertical" />

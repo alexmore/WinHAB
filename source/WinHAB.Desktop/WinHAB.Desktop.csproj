@@ -81,9 +81,9 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\DesktopConfiguration.cs" />
     <Compile Include="Configuration\JsonConfigurationProvider.cs" />
+    <Compile Include="Converters\ConvertersStaticHelper.cs" />
     <Compile Include="Converters\CountToVisibilityConverter.cs" />
     <Compile Include="Fx\Mvvm\DesktopViewFactory.cs" />
-    <Compile Include="Assets\UserResources.cs" />
     <Compile Include="Controls\TransitioningContentControl.cs" />
     <Compile Include="HostWindowMenuView.xaml.cs">
       <DependentUpon>HostWindowMenuView.xaml</DependentUpon>
@@ -96,7 +96,6 @@
     <Compile Include="Converters\TextWidgetValueToVisibilityConverter.cs" />
     <Compile Include="Fx\Net\DesktopRestClientExtensions.cs" />
     <Compile Include="HostWindowModel.cs" />
-    <Compile Include="ViewModels\Settings\CustomIconsService.cs" />
     <Compile Include="ViewModels\Settings\SettingsIconsAddIconDialogModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsIconsViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsAppearanceViewModel.cs" />

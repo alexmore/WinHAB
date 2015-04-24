@@ -114,6 +114,8 @@ namespace WinHAB.Core.ViewModels.Pages
           await _config.SaveAsync();
         }
 
+        await _config.UserResources.LoadAsync(_config.UserResourcesUri, _clientFactory);
+
         var savedSitemap = Sitemaps.FirstOrDefault(x => x.Name == _config.Sitemap);
         if (savedSitemap == null || showSitemaps) 
           ShowSitemaps();
