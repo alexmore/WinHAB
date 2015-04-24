@@ -25,7 +25,7 @@ namespace WinHAB.Core.Configuration
 
     public string Language
     {
-      get { return Provider.Get(this.GetPropertyName(() => Language)); }
+      get { return Provider.Get(this.GetPropertyName(() => Language))??"Auto"; }
       set { Provider.Set(this.GetPropertyName(() => Language), value); }
     }
 

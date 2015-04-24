@@ -70,12 +70,6 @@ namespace WinHAB.Desktop
 
     private async Task SetCulture(DesktopConfiguration cfg)
     {
-      if (cfg.Language == null)
-      {
-        cfg.Language = "Auto";
-        await cfg.SaveAsync();
-      }
-
       if (cfg.Language != "Auto")
       {
         var ci = new CultureInfo(cfg.Language);
