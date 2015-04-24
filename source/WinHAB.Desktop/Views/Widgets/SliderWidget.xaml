@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
+                
                 <Path Name="IconPath" Grid.Row="0" Grid.Column="0"
                           Style="{StaticResource ValueIcon}"
                           Data="{Binding Icon, Converter={StaticResource StringToGeometryConverter}}" 
@@ -48,11 +48,31 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                
-                <Slider Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="5"
+
+                <Grid Grid.Column="1" Grid.Row="0" Margin="5,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Slider Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Orientation="Vertical" Margin="5,5"
                         Style="{DynamicResource WidgetSlider}" Focusable="False"
-                        Value="{Binding PercentValue, Delay=300}" Minimum="0" Maximum="100" SmallChange="1" LargeChange="0" 
-                        TickPlacement="BottomRight" TickFrequency="10" Ticks="0,25,50,75,100"/>
+                        Value="{Binding PercentValue, Delay=300}" Minimum="0" Maximum="100" SmallChange="1" LargeChange="5" 
+                        TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                    
+                    <Border Grid.Row="0" Grid.Column="1" BorderThickness="0,1,0,0" BorderBrush="White" Width="10" Height="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0,1,0,0" BorderBrush="White" Width="5" Height="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    <Border Grid.Row="2" Grid.Column="1" BorderThickness="0,1,0,0" BorderBrush="White" Width="10" Height="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    <Border Grid.Row="3" Grid.Column="1" BorderThickness="0,1,0,0" BorderBrush="White" Width="5" Height="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    <Border Grid.Row="4" Grid.Column="1" BorderThickness="0,1,0,0" BorderBrush="White" Width="10" Height="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                </Grid>
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
@@ -108,10 +128,44 @@
                     </Button.Template>
                 </Button>
 
-                <Slider Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center"
+                <Grid Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,-10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Slider Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="11" Orientation="Horizontal" Margin="3,5" VerticalAlignment="Center"
                         Style="{DynamicResource WidgetSlider}" 
                         Value="{Binding PercentValue, Delay=300}" Minimum="0" Maximum="100" SmallChange="1" LargeChange="5" 
-                        TickPlacement="BottomRight" TickFrequency="10" Ticks="0,25,50,75,100"/>
+                        TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+
+                    <Border Grid.Row="1" Grid.Column="0" BorderThickness="1,0,0,0" BorderBrush="White" Height="10" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="2" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="3" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="4" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="5" BorderThickness="1,0,0,0" BorderBrush="White" Height="10" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="6" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="7" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="8" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="9" BorderThickness="1,0,0,0" BorderBrush="White" Height="5" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Border Grid.Row="1" Grid.Column="10" BorderThickness="1,0,0,0" BorderBrush="White" Height="10" Width="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                </Grid>
+
+                
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>

@@ -45,9 +45,21 @@ namespace WinHAB.Core.ViewModels.Widgets
     private bool _suspendPost = false;
 
     private decimal? _PercentValue;
-    public decimal? PercentValue { get { return _PercentValue; } set { _PercentValue = value; RaisePropertyChanged(()=>PercentValue);
-      if (!_suspendPost) PostValue(value != null ? value.ToString() : "0");
-    }}
+    public decimal? PercentValue 
+    {
+      get
+      {
+        return _PercentValue; 
+      }
+      set
+      {
+        if (value.HasValue)
+          value = Math.Truncate(value.Value);
+        _PercentValue = value;
+        RaisePropertyChanged(() => PercentValue);
+        if (!_suspendPost) PostValue(value != null ? value.ToString() : "0");
+      }
+    }
 
     readonly ReaderWriterLockSlim _locker = new ReaderWriterLockSlim();
 

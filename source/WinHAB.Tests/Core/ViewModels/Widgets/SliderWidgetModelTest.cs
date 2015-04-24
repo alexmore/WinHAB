@@ -117,6 +117,15 @@ namespace WinHAB.Tests.Core.ViewModels.Widgets
     }
 
     [Test]
+    public void PercentValueChanging_TruncateValue_IfNotInteger()
+    {
+      var w = new SliderWidgetModel(_widget, _vmHelper.ClientFactory, _vmHelper.Navigation);
+
+      w.PercentValue = 20.5m;
+      Assert.That(w.PercentValue, Is.EqualTo(20m));
+    }
+
+    [Test]
     public async Task OffCommand_PostsOffAndUpdatesPercentValue()
     {
       _vmHelper.RestClientMock.Setup(x => x.PostAsync(It.IsAny<Uri>(),
