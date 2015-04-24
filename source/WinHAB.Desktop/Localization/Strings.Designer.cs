@@ -115,6 +115,24 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string ButtonDelete {
+            get {
+                return ResourceManager.GetString("ButtonDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string ButtonEdit {
+            get {
+                return ResourceManager.GetString("ButtonEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string ButtonExit {
@@ -133,20 +151,29 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export XAML.
-        /// </summary>
-        public static string ButtonExportXAML {
-            get {
-                return ResourceManager.GetString("ButtonExportXAML", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string ButtonOK {
             get {
                 return ResourceManager.GetString("ButtonOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string ButtonOpen {
+            get {
+                return ResourceManager.GetString("ButtonOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open default.
+        /// </summary>
+        public static string ButtonOpenDefault {
+            get {
+                return ResourceManager.GetString("ButtonOpenDefault", resourceCulture);
             }
         }
         
@@ -165,6 +192,15 @@ namespace WinHAB.Desktop.Localization {
         public static string ButtonRestartToApply {
             get {
                 return ResourceManager.GetString("ButtonRestartToApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as.
+        /// </summary>
+        public static string ButtonSaveAs {
+            get {
+                return ResourceManager.GetString("ButtonSaveAs", resourceCulture);
             }
         }
         
@@ -432,11 +468,11 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete the selected icon?.
+        ///   Looks up a localized string similar to Delete {0} icon?.
         /// </summary>
-        public static string MessageQuestionDeleteCustomIcon {
+        public static string MessageQuestionDeleteIconFormat {
             get {
-                return ResourceManager.GetString("MessageQuestionDeleteCustomIcon", resourceCulture);
+                return ResourceManager.GetString("MessageQuestionDeleteIconFormat", resourceCulture);
             }
         }
         
@@ -477,6 +513,15 @@ namespace WinHAB.Desktop.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default icons.
+        /// </summary>
+        public static string TitleDefaultIcons {
+            get {
+                return ResourceManager.GetString("TitleDefaultIcons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit custom icon.
         /// </summary>
         public static string TitleEditIconDialog {
@@ -509,6 +554,15 @@ namespace WinHAB.Desktop.Localization {
         public static string TitleSettingsPage {
             get {
                 return ResourceManager.GetString("TitleSettingsPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User resources.
+        /// </summary>
+        public static string TitleUserResources {
+            get {
+                return ResourceManager.GetString("TitleUserResources", resourceCulture);
             }
         }
     }

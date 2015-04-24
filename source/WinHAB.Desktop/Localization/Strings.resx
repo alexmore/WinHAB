@@ -135,23 +135,35 @@
   <data name="ButtonConnect" xml:space="preserve">
     <value>Connect</value>
   </data>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ButtonEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="ButtonExit" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="ButtonExport" xml:space="preserve">
     <value>Export</value>
   </data>
-  <data name="ButtonExportXAML" xml:space="preserve">
-    <value>Export XAML</value>
-  </data>
   <data name="ButtonOK" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="ButtonOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="ButtonOpenDefault" xml:space="preserve">
+    <value>Open default</value>
   </data>
   <data name="ButtonResetBackground" xml:space="preserve">
     <value>Reset</value>
   </data>
   <data name="ButtonRestartToApply" xml:space="preserve">
     <value>Restart to apply</value>
+  </data>
+  <data name="ButtonSaveAs" xml:space="preserve">
+    <value>Save as</value>
   </data>
   <data name="ButtonSelectBackground" xml:space="preserve">
     <value>Choose image</value>
@@ -242,8 +254,8 @@ Details:</value>
     <value>There is no one custom icons.
 Click Add to create first one.</value>
   </data>
-  <data name="MessageQuestionDeleteCustomIcon" xml:space="preserve">
-    <value>Delete the selected icon?</value>
+  <data name="MessageQuestionDeleteIconFormat" xml:space="preserve">
+    <value>Delete {0} icon?</value>
   </data>
   <data name="TitleAbout" xml:space="preserve">
     <value>About</value>
@@ -257,6 +269,9 @@ Click Add to create first one.</value>
   <data name="TitleConnectionView" xml:space="preserve">
     <value>Connection</value>
   </data>
+  <data name="TitleDefaultIcons" xml:space="preserve">
+    <value>Default icons</value>
+  </data>
   <data name="TitleEditIconDialog" xml:space="preserve">
     <value>Edit custom icon</value>
   </data>
@@ -268,5 +283,8 @@ Click Add to create first one.</value>
   </data>
   <data name="TitleSettingsPage" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="TitleUserResources" xml:space="preserve">
+    <value>User resources</value>
   </data>
 </root>

@@ -12,13 +12,5 @@ namespace WinHAB.Desktop.Views.Pages.Settings
     {
       InitializeComponent();
     }
-
-    private void HorizontalScroll(object sender, MouseWheelEventArgs e)
-    {
-      var scrollViewer = (sender as ScrollViewer);
-      if (scrollViewer == null) return;
-
-      scrollViewer.ScrollToHorizontalOffset(scrollViewer.ContentHorizontalOffset + e.Delta * -1);
-    }
   }
 }

@@ -100,6 +100,9 @@
                         <DataTemplate DataType="{x:Type settings:SettingsIconsViewModel}">
                             <settings1:SettingsIconsView/>
                         </DataTemplate>
+                        <DataTemplate DataType="{x:Type settings:SettingsUserResourcesViewModel}">
+                            <settings1:SettingsUserResourcesView/>
+                        </DataTemplate>
                     </controls:TransitioningContentControl.Resources>
                 </controls:TransitioningContentControl>
             </Border>

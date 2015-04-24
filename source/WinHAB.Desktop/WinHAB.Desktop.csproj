@@ -97,6 +97,7 @@
     <Compile Include="Fx\Net\DesktopRestClientExtensions.cs" />
     <Compile Include="HostWindowModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsIconsAddIconDialogModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsUserResourcesViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsIconsViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsAppearanceViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsConnectionViewModel.cs" />
@@ -127,6 +128,9 @@
     </Compile>
     <Compile Include="Views\Pages\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\SettingsUserResourcesView.xaml.cs">
+      <DependentUpon>SettingsUserResourcesView.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\DefaultOpenHabIcons.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -228,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\Settings\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Settings\SettingsUserResourcesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

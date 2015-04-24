@@ -82,7 +82,7 @@
 
                 <Button Grid.Column="2" Grid.Row="2" Width="100" Height="56"  Margin="5" Command="{Binding BrowseBackgroundCommand}">
                     <StackPanel Orientation="Vertical">
-                        <Path Data="{StaticResource FolderOpen}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Button}}}"
+                        <Path Data="{StaticResource FolderOpenIcon}" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Button}}}"
                               Width="16" Height="16" Stretch="Uniform"/>
                         <TextBlock Text="{x:Static loc:Strings.LabelBrowse}" Margin="0,5,0,0"/>
                     </StackPanel>

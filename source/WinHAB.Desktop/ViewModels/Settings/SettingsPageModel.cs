@@ -19,7 +19,8 @@ namespace WinHAB.Desktop.ViewModels.Settings
       ViewModels = new ObservableCollection<ITitledViewModel>();
       ViewModels.Add(new SettingsConnectionViewModel(Navigation, config));
       ViewModels.Add(new SettingsAppearanceViewModel(Navigation, config));
-      ViewModels.Add(new SettingsIconsViewModel(Navigation, config));
+      ViewModels.Add(new SettingsUserResourcesViewModel(Navigation, config));
+      ViewModels.Add(new SettingsIconsViewModel());
     }
 
     public override async Task InitializeAsync(object parameter)
