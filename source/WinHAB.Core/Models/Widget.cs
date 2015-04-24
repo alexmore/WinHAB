@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using WinHAB.Core.Models.Converters;
+using WinHAB.Core.Models.JsonConverters;
 using WinHAB.Core.ViewModels;
 using WinHAB.Core.ViewModels.Widgets;
 

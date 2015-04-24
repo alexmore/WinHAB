@@ -1,27 +1,26 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using WinHAB.Core.ViewModels;
-using WinHAB.Core.ViewModels.Widgets;
 
-namespace WinHAB.Core.Models.Converters
+namespace WinHAB.Core.Models.JsonConverters
 {
-  public class WidgetTypeJsonConverter : JsonConverter
+  public class IconStringJsonConverter : JsonConverter
   {
     public override bool CanConvert(Type objectType)
     {
-      return (objectType == typeof(Widget));
+      return (objectType == typeof(string));
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
       JToken token = JToken.Load(reader);
 
-      if (token == null) return WidgetType.Unknown;
+      if (token == null) return null;
 
-      var typeString = token.ToObject<string>();
+      var iconString = token.ToObject<string>();
 
-      return Widget.GetWidgetType(typeString);
+      if (iconString.Trim().ToLower() == "none") return null;
+      return iconString;
     }
 
     public override bool CanWrite

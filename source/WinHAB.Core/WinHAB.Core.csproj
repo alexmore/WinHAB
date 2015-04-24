@@ -49,9 +49,9 @@
     <Compile Include="Fx\Mvvm\ViewModelAttribute.cs" />
     <Compile Include="Fx\ObjectExtensions.cs" />
     <Compile Include="Fx\StringExtensions.cs" />
-    <Compile Include="Models\Converters\IconStringJsonConverter.cs" />
-    <Compile Include="Models\Converters\SitemapHomepageLinkJsonConverter.cs" />
-    <Compile Include="Models\Converters\ItemTypeJsonConverter.cs" />
+    <Compile Include="Models\JsonConverters\IconStringJsonConverter.cs" />
+    <Compile Include="Models\JsonConverters\SitemapHomepageLinkJsonConverter.cs" />
+    <Compile Include="Models\JsonConverters\ItemTypeJsonConverter.cs" />
     <Compile Include="Models\ItemType.cs" />
     <Compile Include="Models\WidgetProperties.cs" />
     <Compile Include="Models\ModelExtensions.cs" />
@@ -70,9 +70,9 @@
     <Compile Include="Models\Mapping.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Sitemap.cs" />
-    <Compile Include="Models\Converters\ToListJsonConverter.cs" />
+    <Compile Include="Models\JsonConverters\ToListJsonConverter.cs" />
     <Compile Include="Models\Widget.cs" />
-    <Compile Include="Models\Converters\WidgetTypeJsonConverter.cs" />
+    <Compile Include="Models\JsonConverters\WidgetTypeJsonConverter.cs" />
     <Compile Include="Fx\Mvvm\NavigationServiceBase.cs" />
     <Compile Include="Fx\Mvvm\AsyncRelayCommand.cs" />
     <Compile Include="Fx\Mvvm\AsyncRelayCommandGeneric.cs" />

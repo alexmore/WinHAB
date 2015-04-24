@@ -1,27 +1,25 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using WinHAB.Core.ViewModels;
-using WinHAB.Core.ViewModels.Widgets;
 
-namespace WinHAB.Core.Models.Converters
+namespace WinHAB.Core.Models.JsonConverters
 {
-  public class ItemtTypeJsonConverter : JsonConverter
+  public class SitemapHomepageLinkJsonConverter : JsonConverter
   {
     public override bool CanConvert(Type objectType)
     {
-      return (objectType == typeof(Item));
+      return (objectType == typeof(Uri));
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-      JToken token = JToken.Load(reader);
+      var token = JToken.Load(reader);
 
-      if (token == null) return ItemType.Unknown;
+      if (token == null) return null;
 
-      var typeString = token.ToObject<string>();
+      if (token["link"] == null) return null;
 
-      return Item.GetItemType(typeString);
+      return new Uri(token["link"].ToString());
     }
 
     public override bool CanWrite

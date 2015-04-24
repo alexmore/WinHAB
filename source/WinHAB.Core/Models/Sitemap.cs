@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using WinHAB.Core.Models.Converters;
+using WinHAB.Core.Models.JsonConverters;
 
 namespace WinHAB.Core.Models
 {
