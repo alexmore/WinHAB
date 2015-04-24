@@ -40,7 +40,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
 
     public void Load()
     {
-      if (!File.Exists(AppConstants.CustomIconsFile)) return;
+      if (!File.Exists(_iconsFile)) return;
 
       CustomIcon[] icons = null;
 

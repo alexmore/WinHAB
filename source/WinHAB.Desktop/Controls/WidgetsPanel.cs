@@ -13,8 +13,41 @@ namespace WinHAB.Desktop.Controls
   {
     public WidgetsPanel() : base()
     {
-      MinHeight = AppConstants.WidgetLargeSize.Height + AppConstants.WidgetMarging;
+      MinHeight = WidgetLargeSize.Height + WidgetMarging;
     }
+    
+    #region Widget sizes
+    public static Size WidgetMediumSize { get { return new Size(120, 120); } }
+    public static double WidgetMediumWidth { get { return WidgetMediumSize.Width; } }
+    public static double WidgetMediumHeight { get { return WidgetMediumSize.Height; } }
+
+    public static Size WidgetWideSize { get { return new Size(250, 120); } }
+    public static double WidgetWideWidth { get { return WidgetWideSize.Width; } }
+    public static double WidgetWideHeight { get { return WidgetWideSize.Height; } }
+
+    public static Size WidgetLargeSize { get { return new Size(250, 250); } }
+    public static double WidgetLargeWidth { get { return WidgetLargeSize.Width; } }
+    public static double WidgetLargeHeight { get { return WidgetLargeSize.Height; } }
+
+    public static double WidgetMarging { get { return 10; } }
+    public static double WidgetMediumFullWidth { get { return WidgetMediumSize.Width + WidgetMarging; } }
+    public static double WidgetMediumFullHeight { get { return WidgetMediumSize.Height + WidgetMarging; } }
+
+    public static Size GetWidgetSize(WidgetSize size)
+    {
+      switch (size)
+      {
+        case WidgetSize.Meduim:
+          return WidgetMediumSize;
+        case WidgetSize.Wide:
+          return WidgetWideSize;
+        case WidgetSize.Large:
+          return WidgetLargeSize;
+        default:
+          throw new ArgumentOutOfRangeException("size");
+      }
+    }
+    #endregion
 
     protected override Size MeasureOverride(Size availableSize)
     {
@@ -24,7 +57,7 @@ namespace WinHAB.Desktop.Controls
       var map = GetWidgetsMap(rowsCount);
       var columnsCount = GetColumnsCount(map);
 
-      return new Size(columnsCount * (AppConstants.WidgetMediumFullWidth), availableSize.Height);
+      return new Size(columnsCount * (WidgetMediumFullWidth), availableSize.Height);
     }
     
     protected override Size ArrangeOverride(Size finalSize)
@@ -41,8 +74,8 @@ namespace WinHAB.Desktop.Controls
           if (map[row][column] != null && map[row][column].Content != null)
           {
             var mapItem = map[row][column].Content;
-            var rect = new Rect(new Point(column * AppConstants.WidgetMediumFullWidth, row * AppConstants.WidgetMediumFullHeight), AppConstants.GetWidgetSize(map[row][column].Size));
-            mapItem.RenderSize =AppConstants.GetWidgetSize(map[row][column].Size);
+            var rect = new Rect(new Point(column * WidgetMediumFullWidth, row * WidgetMediumFullHeight), GetWidgetSize(map[row][column].Size));
+            mapItem.RenderSize =GetWidgetSize(map[row][column].Size);
             mapItem.Arrange(rect);
           }
         }
@@ -72,7 +105,7 @@ namespace WinHAB.Desktop.Controls
 
     private int GetRowsCount(Size areaSize)
     {
-      return (int)Math.Truncate(areaSize.Height / AppConstants.WidgetMediumFullHeight);
+      return (int)Math.Truncate(areaSize.Height / WidgetMediumFullHeight);
     }
 
     void AddMapColumn(List<MapItem>[] map)

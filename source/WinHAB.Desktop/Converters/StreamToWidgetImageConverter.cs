@@ -5,6 +5,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WinHAB.Desktop.Configuration;
+using WinHAB.Desktop.Controls;
 
 namespace WinHAB.Desktop.Converters
 {
@@ -27,8 +28,8 @@ namespace WinHAB.Desktop.Converters
 
           double scale = 1;
 
-          var tileW = AppConstants.WidgetLargeWidth;
-          var tileH = AppConstants.WidgetLargeHeight;
+          var tileW = WidgetsPanel.WidgetLargeWidth;
+          var tileH = WidgetsPanel.WidgetLargeHeight;
 
           if (image.Height < image.Width)
             scale = tileH/image.Height;

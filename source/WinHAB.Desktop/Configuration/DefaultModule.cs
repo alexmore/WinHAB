@@ -21,6 +21,7 @@ namespace WinHAB.Desktop.Configuration
   public class DefaultModule : NinjectModule
   {
     private readonly HostWindow _hostWindow;
+    private readonly AppConstants _constants = new AppConstants();
 
     public DefaultModule(HostWindow hostWindow)
     {
@@ -29,16 +30,18 @@ namespace WinHAB.Desktop.Configuration
 
     public override void Load()
     {
+      Bind<AppConstants>().ToConstant(_constants).InSingletonScope();
+
       Bind<ITimer>().To<DesktopTimer>();
 
       Bind<HostWindow>().ToConstant(_hostWindow);
       Bind<INavigationHost>().ToConstant(_hostWindow).InSingletonScope();
 
-      Bind<string>().ToConstant(AppConstants.ConfigurationFile).WhenInjectedInto<JsonConfigurationProvider>();
+      Bind<string>().ToConstant(_constants.ConfigurationFile).WhenInjectedInto<JsonConfigurationProvider>();
       Bind<IConfigurationProvider>().To<JsonConfigurationProvider>();
       var config = Kernel.Get<DesktopConfiguration>();
-      Bind<AppConfiguration>().ToConstant(config);//.To<DesktopConfiguration>().InSingletonScope();
-      Bind<DesktopConfiguration>().ToConstant(config);//.ToSelf().InSingletonScope();
+      Bind<AppConfiguration>().ToConstant(config);
+      Bind<DesktopConfiguration>().ToConstant(config);
 
 
       Bind<string>().ToMethod(x => GetServerAddress(x.Kernel)).WhenInjectedInto<RestClientFactory>();

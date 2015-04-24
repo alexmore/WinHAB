@@ -30,21 +30,46 @@ namespace WinHAB.Desktop
   /// </summary>
   public partial class App : Application
   {
+
     private async void App_OnStartup(object sender, StartupEventArgs e)
     {
-      if (!Directory.Exists(AppConstants.ConfigurationFolder))
-        Directory.CreateDirectory(AppConstants.ConfigurationFolder);
-
       MainWindow = new HostWindow();
-      
       var kernel = new StandardKernel(new DefaultModule(MainWindow as HostWindow));
-
+      
+      // Configuration
       var cfg = kernel.Get<AppConfiguration>() as DesktopConfiguration;
+      if (cfg == null) throw new Exception("Can not create application configuration.");
+      cfg.InitConfigurationFolder();
       await cfg.LoadAsync();
+      
+      // Appearance
+      SetAccentAndBackground(cfg);
+      await SetCulture(cfg);
+      
+      // HostWindowModel
+      var hostWindowModel = kernel.Get<HostWindowModel>();
+      MainWindow.DataContext = hostWindowModel;
+      MainWindow.Show();
+      await hostWindowModel.InitializeAsync(null);
 
-      // Appearance settings
-      SetAppearance(cfg);
+      await kernel.Get<INavigationService>().NavigateAsync<BootstrapperPageModel>();
+    }
 
+    private void SetAccentAndBackground(DesktopConfiguration cfg)
+    {
+      AppearanceManager.Current.AccentColor = cfg.AccentColor.ToColor();
+      try
+      {
+        cfg.SetBackground(cfg.BackgroundImage);
+      }
+      catch
+      {
+        cfg.SetBackground(cfg.Constants.DefaultBackgroundImage);
+      }
+    }
+
+    private async Task SetCulture(DesktopConfiguration cfg)
+    {
       if (cfg.Language == null)
       {
         cfg.Language = "Auto";
@@ -57,28 +82,6 @@ namespace WinHAB.Desktop
         Thread.CurrentThread.CurrentCulture = ci;
         Thread.CurrentThread.CurrentUICulture = ci;
       }
-
-      var hostWindowModel = kernel.Get<HostWindowModel>();
-      MainWindow.DataContext = hostWindowModel;
-      MainWindow.Show();
-      await hostWindowModel.InitializeAsync(null);
-
-      var navigation = kernel.Get<INavigationService>();
-      await navigation.NavigateAsync<BootstrapperPageModel>();
-    }
-
-    private void SetAppearance(DesktopConfiguration cfg)
-    {
-      AppearanceManager.Current.AccentColor = cfg.AccentColor.ToColor();
-      try
-      {
-        cfg.SetBackground(cfg.BackgroundImage);
-      }
-      catch
-      {
-        cfg.SetBackground(AppConstants.DefaultBackgroundImage);
-      }
-      
     }
   }
 

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Media;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using WinHAB.Core.Configuration;
 using WinHAB.Core.Fx.Mvvm;
 using WinHAB.Desktop.Configuration;
 using WinHAB.Desktop.Fx.Windows;
@@ -19,7 +20,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
   {
     private readonly INavigationService _navigation;
 
-    public SettingsIconsViewModel(INavigationService navigation)
+    public SettingsIconsViewModel(INavigationService navigation, DesktopConfiguration config)
     {
       _navigation = navigation;
       Title = Strings.TitleIcons;
@@ -32,7 +33,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
           .Select(x => new KeyValuePair<string, Geometry>(x, (defaultIconsDictionary[x] as Geometry)));
       DefaultIcons = new ObservableCollection<KeyValuePair<string, Geometry>>(defaultIcons);
 
-      CustomIcons = new CustomIconsService(AppConstants.CustomIconsFile);
+      CustomIcons = new CustomIconsService(config.Constants.CustomIconsFile);
       CustomIcons.Load();
       
       AddCustomIconCommand = new RelayCommand(AddCustomIcon);

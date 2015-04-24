@@ -99,7 +99,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
       {
         _navigation.ShowMessage(Localization.Strings.MessageExceptionOnApplyImageToBackgroundTitle,
           Localization.Strings.MessageExceptionOnApplyImageToBackground + "\r\n" + ex.Message, () => { });
-        _appConfig.SetBackground(AppConstants.DefaultBackgroundImage);
+        _appConfig.SetBackground(_appConfig.Constants.DefaultBackgroundImage);
         BackgroundImageSource = _appConfig.BackgroundImage;
       }
     }
