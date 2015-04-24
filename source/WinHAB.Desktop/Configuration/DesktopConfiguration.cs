@@ -17,41 +17,21 @@ namespace WinHAB.Desktop.Configuration
     public DesktopConfiguration(IConfigurationProvider provider, HostWindow hostWindow) : base(provider)
     {
       _hostWindow = hostWindow;
-      
-      AccentColors = new[]
-      {
-       "#60A917", // Green
-       "#008A00", // Emerald
-       "#00ABA9", // Teal
-       "#1BA1E2", // Cyan
-       "#3E65FF", // Cobalt
-       "#6A00FF", // Indigo
-       "#AA00FF", // Violet
-       "#D80073", // Magenta
-       "#A20025", // Crimson
-       "#E51400", // Red
-       "#ff6600", // Orange
-       "#825A2C", // Brown
-       "#6D8764", // Olive
-       "#647687", // Steel
-       "#76608A", // Mauve
-       "#87794E", // Taupe
-      };
     }
 
     #region Appearance
 
-    public string[] AccentColors { get; private set; }
+    public string[] AccentColors { get { return AppConstants.AccentColors; } }
 
     public string AccentColor
     {
-      get { return Provider.Get(this.GetPropertyName(() => AccentColor)); }
+      get { return Provider.Get(this.GetPropertyName(() => AccentColor))??AppConstants.DefaultAccentColor; }
       set { Provider.Set(this.GetPropertyName(() => AccentColor), value); }
     }
     
     public string BackgroundImage
     {
-      get { return Provider.Get(this.GetPropertyName(() => BackgroundImage)); }
+      get { return Provider.Get(this.GetPropertyName(() => BackgroundImage))??AppConstants.DefaultBackgroundImage; }
       set { Provider.Set(this.GetPropertyName(() => BackgroundImage), value); }
     }
 
@@ -59,7 +39,6 @@ namespace WinHAB.Desktop.Configuration
     {
       if (!string.IsNullOrWhiteSpace(imageFileName))
       {
-
         var bitmap = new BitmapImage();
         bitmap.BeginInit();
         bitmap.UriSource = new Uri(imageFileName);
@@ -73,9 +52,8 @@ namespace WinHAB.Desktop.Configuration
       }
       else
         _hostWindow.BackgroundContent = null;
-      
+
       BackgroundImage = imageFileName;
-      Save();
     }
 
     #endregion

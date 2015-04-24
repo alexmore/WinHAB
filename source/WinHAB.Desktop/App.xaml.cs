@@ -69,27 +69,16 @@ namespace WinHAB.Desktop
 
     private void SetAppearance(DesktopConfiguration cfg)
     {
-      if (cfg.AccentColor.IsNullOrWhitespace() || cfg.AccentColor.ToColor().ToHexString() == "#00000000")
-      {
-        cfg.AccentColor = AppConstants.DefaultAccentColor.ToHexString();
-        cfg.Save();
-      }
-
       AppearanceManager.Current.AccentColor = cfg.AccentColor.ToColor();
-
-
-      if (cfg.BackgroundImage == null)
-      {
-        cfg.BackgroundImage = "pack://application:,,,/Assets/Backgrounds/Background-WetGlass.jpg";
-        cfg.Save();
-      }
       try
       {
         cfg.SetBackground(cfg.BackgroundImage);
       }
-      catch (Exception)
+      catch
       {
+        cfg.SetBackground(AppConstants.DefaultBackgroundImage);
       }
+      
     }
   }
 

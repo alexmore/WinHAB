@@ -92,12 +92,15 @@ namespace WinHAB.Desktop.ViewModels.Settings
       try
       {
         _appConfig.SetBackground(path);
+        _appConfig.Save();
         BackgroundImageSource = _appConfig.BackgroundImage;
       }
       catch (Exception ex)
       {
         _navigation.ShowMessage(Localization.Strings.MessageExceptionOnApplyImageToBackgroundTitle,
           Localization.Strings.MessageExceptionOnApplyImageToBackground + "\r\n" + ex.Message, () => { });
+        _appConfig.SetBackground(AppConstants.DefaultBackgroundImage);
+        BackgroundImageSource = _appConfig.BackgroundImage;
       }
     }
 
