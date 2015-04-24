@@ -32,9 +32,9 @@ namespace WinHAB.Desktop.ViewModels.Settings
       Title = Strings.TitleUserResources;
       ResourceFile = config.Constants.UserResourcesFile;
       
-      AddCustomIconCommand = new RelayCommand(AddCustomIcon);
-      EditCustomIconCommand = new RelayCommand<UserResourcesData.UserResourcesIcon>(EditCustomIcon);
-      DeleteCustomIconCommand = new RelayCommand<string>(DeleteCustomIcon);
+      AddIconCommand = new RelayCommand(AddIcon);
+      EditIconCommand = new RelayCommand<UserResourcesData.UserResourcesIcon>(EditIcon);
+      DeleteIconCommand = new RelayCommand<string>(DeleteIcon);
       
       OpenCommand = new AsyncRelayCommand(Open);
       SaveAsCommand = new AsyncRelayCommand(SaveAs);
@@ -50,9 +50,9 @@ namespace WinHAB.Desktop.ViewModels.Settings
     private UserResources _UserResources;
     public UserResources UserResources { get { return _UserResources; } set { _UserResources = value; RaisePropertyChanged(() => UserResources); } }
 
-    public RelayCommand AddCustomIconCommand { get; set; }
-    public RelayCommand<UserResourcesData.UserResourcesIcon> EditCustomIconCommand { get; set; }
-    public RelayCommand<string> DeleteCustomIconCommand { get; set; }
+    public RelayCommand AddIconCommand { get; set; }
+    public RelayCommand<UserResourcesData.UserResourcesIcon> EditIconCommand { get; set; }
+    public RelayCommand<string> DeleteIconCommand { get; set; }
     public AsyncRelayCommand SaveAsCommand { get; set; }
     public AsyncRelayCommand OpenCommand { get; set; }
     public AsyncRelayCommand OpenDefaultCommand { get; set; }
@@ -87,7 +87,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
       await new FileInfo(fileName).WriteAllTextAsync(UserResources.Data.ToString(), FileMode.Create, Encoding.UTF8);
     }
 
-    private async void AddCustomIcon()
+    private async void AddIcon()
     {
       string[] keys = null;
       if (UserResources.Data.Icons != null)
@@ -102,7 +102,7 @@ namespace WinHAB.Desktop.ViewModels.Settings
       }
     }
 
-    private async void EditCustomIcon(UserResourcesData.UserResourcesIcon icon)
+    private async void EditIcon(UserResourcesData.UserResourcesIcon icon)
     {
       if (icon == null) return;
 
@@ -120,8 +120,10 @@ namespace WinHAB.Desktop.ViewModels.Settings
       
     }
 
-    private async void DeleteCustomIcon(string key)
+    private async void DeleteIcon(string key)
     {
+      if (key.IsNullOrWhitespace()) return;
+      
       if (await _navigation.ShowQuestionAsync(Strings.TitleEditIconDialog, string.Format(Strings.MessageQuestionDeleteIconFormat, key)))
       {
         if (UserResources.Data.Icons == null) return;

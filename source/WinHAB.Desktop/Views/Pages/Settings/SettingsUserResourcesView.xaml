@@ -41,13 +41,13 @@
             <TextBlock Text="{Binding Source={x:Static loc:Strings.TitleIcons}, Converter={StaticResource ToUpperConverter}}" VerticalAlignment="Center" Style="{StaticResource HeaderH3}" Margin="0,10,10,5"/>
             <controls:IconLinkButton IconData="{StaticResource PlusIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonAdd}" Margin="5,10,5,5" VerticalAlignment="Center" 
                                      Style="{StaticResource WhiteIconLinkButton}" FontSize="14" 
-                                     Command="{Binding AddCustomIconCommand}"/>
+                                     Command="{Binding AddIconCommand}"/>
             <controls:IconLinkButton IconData="{StaticResource EditIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonEdit}" Margin="5,10,5,5" VerticalAlignment="Center" 
                                      Style="{StaticResource WhiteIconLinkButton}" FontSize="14" 
-                                     Command="{Binding EditCustomIconCommand}" CommandParameter="{Binding SelectedItem, ElementName=IconsListBox}"/>
+                                     Command="{Binding EditIconCommand}" CommandParameter="{Binding SelectedItem, ElementName=IconsListBox}"/>
             <controls:IconLinkButton IconData="{StaticResource DeleteIcon}" IconSize="14" Content="{x:Static loc:Strings.ButtonDelete}" Margin="5,10,5,5" VerticalAlignment="Center" 
                                      Style="{StaticResource WhiteIconLinkButton}" FontSize="14" 
-                                     Command="{Binding DeleteCustomIconCommand}" CommandParameter="{Binding SelectedItem.Key, ElementName=IconsListBox}"/>
+                                     Command="{Binding DeleteIconCommand}" CommandParameter="{Binding SelectedItem.Key, ElementName=IconsListBox}"/>
         </StackPanel>
 
         <Grid Grid.Row="3" Margin="0,0,10,0">
