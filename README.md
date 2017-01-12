@@ -1,5 +1,5 @@
 # WinHAB
-OpenHAB Windows Desktop Client
+[OpenHAB](https://github.com/openhab/openhab) Windows Desktop Client
 
 **DEPRECATED**
 
